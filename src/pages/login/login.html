@@ -1,0 +1,73 @@
+<ion-header>
+  <header [options]="{backEnabled:false, showTab:false, showHeader:true, logoEnabled:false, menuEnabled:true, sectionEnabled:true}"></header>
+</ion-header>
+<ion-content>
+  <content class="form-style">
+    <ion-row>
+      <ion-col offset-4 col-4 class="center logo-main">
+        <img class="logo-bigger" src="{{logo}}">
+      </ion-col>
+    </ion-row>
+    <form [formGroup]="loginForm">
+      <ion-row>
+        <ion-col col-12 class="center">
+          <span class="error center" [innerHTML]="errorLogin"></span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item>
+            <ion-icon item-left name="ios-contact-outline"></ion-icon>
+            <ion-input md-input formControlName="user" type="email" placeholder = "{{'USERNAME' | translate}}"></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="!loginForm.controls.user.valid  && (loginForm.controls.user.dirty || submitted)">
+            {{'INVALID_USERNAME' | translate}}
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item>
+            <ion-icon class="flip-icon" item-left name="ios-unlock-outline"></ion-icon>
+            <ion-input md-input formControlName="password" type="password" placeholder="{{'PASSWORD' | translate}}"></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="!loginForm.controls.password.valid  && (loginForm.controls.password.dirty || submitted)">
+            {{'INVALID_PASSWORD' | translate}}
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-1 col-10 class="center">
+          <button ion-button color="light" (click)="forgotPassword()" [disabled]="submitted">{{'FORGOT_PASSWORD' | translate}}</button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-1 col-10 class="center big-label">
+          {{'OR' | translate}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-1 col-10 class="center">
+          <ion-row>
+            <ion-col col-3 class="center in-table">
+              <button ion-fab (click)="loginFacebook()" [disabled]="submitted" class="login-facebook"><img src="assets/logos/facebook.svg" name="logo-facebook"/></button>
+            </ion-col>
+            <ion-col col-6 class="center in-table">
+              <button ion-fab (click)="loginLinkedin()" [disabled]="submitted" class="login-linkedin"><img src="assets/logos/linkedin.svg" name="logo-linkedin"/></button>
+            </ion-col>
+            <ion-col col-3 class="center in-table">
+              <button ion-fab (click)="loginGooglePlus()" [disabled]="submitted" class="login-google-plus"><img src="assets/logos/google-plus.svg" name="logo-google-plus"/></button>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 class="center middle bottom-space">
+            <span class='black'>{{'NOT_MEMBER' | translate}}</span>&nbsp;&nbsp;<button ion-button color="light" class="button-link" [disabled]="submitted" (click) = "register()">{{'CREATE_ACCOUNT' | translate}}</button>
+        </ion-col>
+      </ion-row>
+      <button ion-button class="next-login" (click)="login()" [disabled]="!loginForm.valid || submitted">{{'NEXT' | translate}}</button>
+
+    </form>
+  </content>
+</ion-content>

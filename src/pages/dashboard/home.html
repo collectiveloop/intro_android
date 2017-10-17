@@ -1,0 +1,19 @@
+<ion-header>
+  <header [options]="{backEnabled:false, showTab:true, showHeader:true, logoEnabled:false, menuEnabled:true, sectionEnabled:true}"></header>
+</ion-header>
+<ion-content padding>
+  <ion-list>
+   <ion-item class="clear-style list" *ngFor="let introduction of introductions" (click)="gotoDetail(introduction.id)">
+       <img class="images-collage-small" src="{{introduction.images}}" />
+       <img class="images-collage title" *ngIf=" introduction.type_title == 'image'"  src="{{introduction.title_image}}" />
+       <h2 class="images-collage title" *ngIf=" introduction.type_title == 'text'">{{introduction.name}}</h2>
+   </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="getMoreintroductions($event)">
+   <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="{{'MORE_introductionS' | translate}}"
+    ></ion-infinite-scroll-content>
+ </ion-infinite-scroll>
+</ion-content>

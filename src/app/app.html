@@ -1,0 +1,14 @@
+<ion-menu side="right" [content]="content">
+  <ion-header>
+    <ion-toolbar color="secondary">
+      <ion-title>{{'MENU' | translate}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <button ion-item (click)="closeSession()">{{'LOGOUT' | translate}}</button>
+    </ion-list>
+
+  </ion-content>
+</ion-menu>
+<ion-nav #content [root]="rootPage"></ion-nav>

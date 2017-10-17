@@ -1,0 +1,116 @@
+*{
+  font-family: "Helvetica";
+  text-decoration:none !important;
+}
+
+.logo-bigger{
+
+}
+
+/*barra de navegación*/
+.tabs-md .tabbar {
+  width: 100%;
+    margin-right: 0.5px;
+    border-radius: 0px 0px 2px 2px;
+}
+/*fin de barra de navegación*/
+
+.toolbar{
+  background-color: #ffffff;
+  padding:0px;
+}
+
+ .toolbar .toolbar-title, .toolbar .icon, .toolbar .back-button-text{
+   color: #FF3F1D !important;
+   text-decoration: none;
+   font-size:12px;
+ }
+
+ .toolbar .toolbar-background{
+   color:#cccccc;
+ }
+
+ .logo-main{
+   margin-top: 15px;
+   margin-bottom: 0px;
+ }
+
+ .item.item-block .item-inner {
+    padding-right: 0px;
+    margin-right: 0px;
+}
+
+.form-style .item.item-block{}
+
+.label {
+  margin: 0px;
+}
+
+.next-login{
+  color: #ffffff !important;
+  border-top: 1px solid #FF3F1D !Important;
+  background-color: #FF3F1D !important;
+  text-transform: uppercase !important;
+}
+
+.next-login .button-inner{
+  color: #ffffff !important;
+  text-transform: none;
+}
+
+.next-login.activated{
+  border-top: 1px solid #FD4D3E !important;
+  background-color: #FD4D3E !important;
+}
+
+.big-label{
+  font-weight: bold;
+}
+
+.button{
+    padding: 16px 0px 16px 0px;
+}
+
+.button.button-form{
+    transition: none;
+    border-radius: 10px;
+    width: 44%;
+}
+
+.button.button-form .button-inner{
+    font-weight: 100;
+}
+
+.image-setting{
+  float: left;
+    /* padding: 8px; */
+    margin: 16px 0px 8px 35px;
+    width: 80px;
+    height: 100px;
+}
+
+.image-setting .photo{
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  background-image: url("images/profile.png");
+  background-repeat: no-repeat;
+}
+
+.image-setting span{
+  -ms-transform: scaleY(1.2);
+  -moz-transform: scaleY(1.2);
+  -webkit-transform: scaleY(1.2);
+  -o-transform: scaleY(1.2);
+  transform: scaleY(1.3);
+  color: #FF3F1D;
+  letter-spacing: 0.4px;
+  display: inline-table;
+  margin: 25px auto;
+  text-align: center;
+}
+
+.image-setting img{
+  width:186px;
+}
