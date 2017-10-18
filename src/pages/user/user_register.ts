@@ -43,11 +43,11 @@ export class RegisterUserPage {
 
   private buildValidations(){
     this.registerForm = this.formBuilder.group({
-        first_name: ['JUAN', Validators.compose([Validators.minLength(2), Validators.required]) ] ,
-        last_name: ['gonzales', Validators.compose([Validators.minLength(2), Validators.required]) ] ,
-        email: ['renshocontact@gmail.com', Validators.compose([Validators.minLength(5),Validators.email, Validators.required]) ],
-        password: ['12345678', Validators.compose( [Validators.minLength(8),Validators.maxLength(15), Validators.required]) ],
-        confirm_password: ['12345678', Validators.compose([Validators.minLength(8),Validators.maxLength(15), Validators.required]) ]
+      first_name: ['', Validators.compose([Validators.minLength(2), Validators.required]) ] ,
+      last_name: ['', Validators.compose([Validators.minLength(2), Validators.required]) ] ,
+      email: ['', Validators.compose([Validators.minLength(5),Validators.email, Validators.required]) ],
+      password: ['', Validators.compose( [Validators.minLength(8),Validators.maxLength(15), Validators.required]) ],
+      confirm_password: ['', Validators.compose([Validators.minLength(8),Validators.maxLength(15), Validators.required]) ]
     });
   }
 
@@ -97,8 +97,15 @@ export class RegisterUserPage {
       this.errorRegister = response.data.message;
     }else{
       let id = response.data.user_id;
-      if(id !==0)
-        this.navCtrl.push(SettingUserPage,{email:this.registerForm.value.email,password : this.registerForm.value.password,user_id:id});
+      if(id !==0){
+        this.sessionService.initSession({
+          'token': response.data.token,
+          'mode_facebook': false,
+          'mode_linkedin': false,
+          'mode_google_plus': false
+        });
+        this.navCtrl.push(SettingUserPage,{user_id:id});
+      }
     }
   }
 

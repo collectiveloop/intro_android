@@ -28,7 +28,11 @@ export class SettingUserPage {
   ios:boolean = false;
 
   constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, private sessionService: SessionService, public navParams: NavParams, private platform: Platform, public messages: MessageService, private camera: Camera) {
-    this.params = { 'email': this.navParams.get('email'), 'password': this.navParams.get('password'), 'user_id': this.navParams.get('user_id') };
+    this.params = { 'show_signup': this.navParams.get('show_signup'), 'user_id': this.navParams.get('user_id') };
+
+    this.messages.showMessage({
+      content: this.loadingMessage
+    });
     this.buildValidations();
     this.configService.setSection('');
     this.translateService.get('SETTINGS').subscribe(
@@ -51,19 +55,51 @@ export class SettingUserPage {
     }else{
       this.ios = false;
     }
+
+    let paramsPut = {
+      url: 'user/setting',
+      urlParams: [
+        this.translateService.getDefaultLang()
+      ],
+      app: this.app,
+      success: this.callBackSettings,
+      error: this.callBackError,
+      context: this,
+    };
+
+    this.httpService.get(paramsPut);
   }
 
   ngAfterViewChecked() { }
 
   private buildValidations() {
     this.registerSetting = this.formBuilder.group({
-      full_name: ['jajajaj', Validators.compose([Validators.minLength(2), Validators.required])],
-      job_title: ['jejejeje', Validators.compose([Validators.minLength(2), Validators.required])],
-      company_name: ['jijijij', Validators.compose([Validators.minLength(3), Validators.required])],
-      job_description: ['jojojjoj', Validators.compose([Validators.minLength(3)])],
-      //email: [  this.params['email'], Validators.compose([Validators.minLength(5), Validators.email,
-      email: [  'jua@gmail.com', Validators.compose([Validators.minLength(5), Validators.email, Validators.required])]
+      full_name: ['', Validators.compose([Validators.minLength(2), Validators.required])],
+      job_title: ['', Validators.compose([Validators.minLength(2), Validators.required])],
+      company_name: ['', Validators.compose([Validators.minLength(3), Validators.required])],
+      job_description: ['', Validators.compose([Validators.minLength(3)])],
+      email: [  '', Validators.compose([Validators.minLength(5), Validators.email, Validators.required])]
     });
+  }
+
+  private callBackSettings(response: any): void {
+    this.submitted = false;
+    this.messages.closeMessage();
+    if (response !== undefined && response.status !== undefined && response.status === 'error') {
+      this.errorSetting = response.data.message;
+    } else {
+      let data = response.data.user;
+      this.registerSetting.controls['full_name'].patchValue(data.full_name);
+      this.registerSetting.controls['full_name'].setValue(data.full_name);
+      this.registerSetting.controls['job_title'].patchValue(data.job_title);
+      this.registerSetting.controls['job_title'].setValue(data.job_title);
+      this.registerSetting.controls['company_name'].patchValue(data.company_name);
+      this.registerSetting.controls['company_name'].setValue(data.company_name);
+      this.registerSetting.controls['job_description'].patchValue(data.job_description);
+      this.registerSetting.controls['job_description'].setValue(data.job_description);
+      this.registerSetting.controls['email'].patchValue(data.email);
+      this.registerSetting.controls['email'].setValue(data.email);
+    }
   }
 
   public makeImage(): void{
@@ -87,24 +123,19 @@ export class SettingUserPage {
     });
   }
 
-  public back(): void {
-    this.app.getRootNav().pop();
-  }
-
   public register(): void {
     this.errorSetting = '';
     this.submitted = true;
     let data = {
       full_name: this.registerSetting.value.full_name,
       job_title: this.registerSetting.value.job_title,
-      company_name: this.registerSetting.value.commpany_name,
+      company_name: this.registerSetting.value.company_name,
       job_description: this.registerSetting.value.job_description,
       email: this.registerSetting.value.email
     };
     let paramsPut = {
       url: 'user/setting',
       urlParams: [
-        this.params['user_id'],
         this.translateService.getDefaultLang()
       ],
       app: this.app,
@@ -124,46 +155,19 @@ export class SettingUserPage {
 
   private callBackRegister(response: any): void {
     this.submitted = false;
+    this.messages.closeMessage();
     if (response !== undefined && response.status !== undefined && response.status === 'error') {
-      this.messages.closeMessage();
       this.errorSetting = response.data.message;
     } else {
-      //aqui deberia ir un toast
-      let data = {
-        email: this.registerSetting.value.email,
-        password: this.params['password']
-      };
-      this.httpService.post({
-        url: 'login/authenticate',
-        urlParams: [
-          this.translateService.getDefaultLang()
-        ],
-        app: this.app,
-        inputs: data,
-        success: this.callBackLogin,
-        context: this,
-      });
+      //si parent es diferente de null venimos de una seleccion del tab, de lo contrario es por login y hacemos navegacion tradicional
+      if(this.navCtrl.parent!==undefined && this.navCtrl.parent!==null)
+        this.navCtrl.parent.select(0);
+      else
+        this.navCtrl.push(TabsPage);
     }
   }
 
   private callBackError(response: any): void {
     this.messages.closeMessage();
-  }
-
-  private callBackLogin(response: any): void {
-    this.messages.closeMessage();
-    this.submitted = false;
-    if (response !== undefined && response.status !== undefined && response.status === 'error') {
-      this.errorSetting = response.data.message;
-    } else {
-      this.sessionService.initSession({
-        'token': response.data.token,
-        'mode_facebook': false,
-        'mode_linkedin': false,
-        'mode_google_plus': false
-      });
-      this.httpService.setTokenProvider(response.data.token);
-      this.navCtrl.push(TabsPage);
-    }
   }
 }

@@ -1,114 +1,75 @@
 <ion-header>
-  <header class = "header-clean" [options]="{backEnabled:true, showTab:false, showHeader:true, logoEnabled:false}"></header>
+  <header [options]="{backEnabled:false, showTab:true, showHeader:true, logoEnabled:false, menuEnabled:true, sectionEnabled:true}"></header>
 </ion-header>
-<ion-content class="background-1">
+<ion-content>
   <content class="form-style" >
     <ion-row>
-      <ion-col offset-2 col-8 class="center">
-        <img (click) = "makeOptions()" src="{{image}}">
-        <span (click) = "makeOptions()" *ngIf="image==null">{{'TAKE_PHOTO' | translate}}</span>
+      <ion-col offset-4 col-4 class="center logo-main">
+        <img class="logo-bigger" src="{{logo}}">
       </ion-col>
     </ion-row>
     <form [formGroup]="updateForm">
       <ion-row>
-        <ion-col offset-1 col-10 class="center">
-          <ion-row>
-            <ion-col offset-1 col-10 class="center">
-              <span class="error center" *ngIf="errorUpdate!=''" [innerHTML]="errorUpdate"></span>
-            </ion-col>
-          </ion-row>
+        <ion-col col-12 class="center">
+          <span class="error center" *ngIf="successUpdate==''" [innerHTML]="errorUpdate"></span>
+          <span class="success center" *ngIf="successUpdate!=''" [innerHTML]="successUpdate"></span>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col offset-1 col-10 class="center">
-          <ion-row>
-            <ion-col offset-1 col-10 class="center">
-              <ion-item>
-                <ion-label floating class="small-label" floating primary>{{'EMAIL' | translate}}</ion-label>
-                <ion-input formControlName="email" md-input type="text"></ion-input>
-              </ion-item>
-            </ion-col>
-          </ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item>
+            <ion-icon item-left name="ios-contact-outline"></ion-icon>
+            <ion-input md-input formControlName="first_name" type="text" placeholder="{{'FIRST_NAME' | translate}}"></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="ready && !updateForm.controls.first_name.valid  && (updateForm.controls.first_name.dirty || submitted)">
+            {{'INVALID_NAME' | translate}}
+          </span>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col offset-1 col-10 class="center">
-          <ion-row>
-            <ion-col offset-1 col-10 class="center">
-              <ion-item>
-                <ion-label class="small-label" floating primary>{{'NAME' | translate}}</ion-label>
-                <ion-input md-input formControlName="name" type="text"></ion-input>
-              </ion-item>
-              <span class="error" *ngIf="ready && !updateForm.controls.name.valid  && (updateForm.controls.name.dirty || submitted)">
-                {{'INVALID_NAME' | translate}}
-              </span>
-            </ion-col>
-          </ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item>
+            <ion-icon item-left name="ios-contact-outline"></ion-icon>
+            <ion-input md-input formControlName="last_name" type="text" placeholder="{{'LAST_NAME' | translate}}"></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="ready && !updateForm.controls.last_name.valid  && (updateForm.controls.last_name.dirty || submitted)">
+            {{'INVALID_LAST_NAME' | translate}}
+          </span>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col offset-1 col-10 class="center">
-          <ion-row>
-            <ion-col offset-1 col-10 class="center">
-              <ion-item>
-                <ion-label floating class="small-label" floating primary>{{'LAST_NAME' | translate}}</ion-label>
-                <ion-input md-input formControlName="last_name" type="text"></ion-input>
-              </ion-item>
-              <span class="error" *ngIf="ready && !updateForm.controls.last_name.valid  && (updateForm.controls.last_name.dirty || submitted)">
-                {{'INVALID_LAST_NAME' | translate}}
-              </span>
-            </ion-col>
-          </ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item>
+            <ion-icon item-left name="ios-mail-outline"></ion-icon>
+            <ion-input formControlName="email" md-input type="text" placeholder="{{'EMAIL' | translate}}"></ion-input>
+          </ion-item>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col offset-1 col-10 class="center">
-          <ion-row>
-            <ion-col offset-1 col-10 class="center">
-              <ion-item>
-                <ion-label floating class="small-label" floating primary>{{'PHONE_NUMBERS' | translate}}</ion-label>
-                <ion-input md-input formControlName="number_phones" type="text"></ion-input>
-              </ion-item>
-              <span class="error" *ngIf="ready && !updateForm.controls.number_phones.valid  && (updateForm.controls.number_phones.dirty || submitted)">
-                {{'INVALID_NUMBER_PHONES' | translate}}
-              </span>
-            </ion-col>
-          </ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item>
+            <ion-icon class="flip-icon" item-left name="ios-unlock-outline"></ion-icon>
+            <ion-input md-input formControlName="password" type="password" placeholder="{{'PASSWORD' | translate}}"></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="ready && !updateForm.controls.password.valid  && (updateForm.controls.password.dirty || submitted)">
+            {{'INVALID_PASSWORD' | translate}}
+          </span>
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col offset-1 col-10 class="center">
-          <ion-row>
-            <ion-col offset-1 col-10 class="center">
-              <ion-item>
-                <ion-label floating class="small-label" floating primary>{{'PASSWORD' | translate}}</ion-label>
-                <ion-input md-input formControlName="password" type="password"></ion-input>
-              </ion-item>
-              <span class="error" *ngIf="ready && !updateForm.controls.password.valid  && (updateForm.controls.password.dirty || submitted)">
-                {{'INVALID_PASSWORD' | translate}}
-              </span>
-            </ion-col>
-          </ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item>
+            <ion-icon class="flip-icon" item-left name="ios-unlock-outline"></ion-icon>
+            <ion-input md-input formControlName="confirm_password" type="password" placeholder="{{'CONFIRM_PASSWORD' | translate}}"></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="ready && !updateForm.controls.confirm_password.valid  && (updateForm.controls.confirm_password.dirty || submitted)">
+            {{'INVALID_CONFIRM_PASSWORD' | translate}}
+          </span>
         </ion-col>
       </ion-row>
-      <ion-row>
-        <ion-col offset-1 col-10 class="center">
-          <ion-row>
-            <ion-col offset-1 col-10 class="center">
-              <ion-item>
-                <ion-label floating class="small-label" floating primary>{{'CONFIRM_PASSWORD' | translate}}</ion-label>
-                <ion-input md-input formControlName="confirm_password" type="password"></ion-input>
-              </ion-item>
-              <span class="error" *ngIf="ready && !updateForm.controls.confirm_password.valid  && (updateForm.controls.confirm_password.dirty || submitted)">
-                {{'INVALID_CONFIRM_PASSWORD' | translate}}
-              </span>
-            </ion-col>
-          </ion-row>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col offset-1 col-10 class="center">
-          <button outline ion-button class="large-red margin-top" (click)="update()" [disabled]="!updateForm.valid">{{'UPDATE' | translate}}</button>
+      <ion-row class="form-container-buttons">
+        <ion-col col-12 class="center">
+          <button outline ion-button class="button-form large-button shadow" (click)="update()" [disabled]="!updateForm.valid">{{'UPDATE' | translate}}</button>
         </ion-col>
       </ion-row>
       <ion-row>

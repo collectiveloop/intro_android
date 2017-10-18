@@ -6,6 +6,9 @@
   </ion-header>
   <ion-content>
     <ion-list>
+      <button ion-item (click)="updateUser()">{{'UPDATE' | translate}}</button>
+    </ion-list>
+    <ion-list>
       <button ion-item (click)="closeSession()">{{'LOGOUT' | translate}}</button>
     </ion-list>
 

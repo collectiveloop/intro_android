@@ -1,14 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
 import { Platform, NavController, App } from 'ionic-angular';
+import { MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Globalization } from '@ionic-native/globalization';
 import { TranslateService } from '@ngx-translate/core';
-import { LoginPage } from '../pages/login/login';
-import { UpdateUserPage } from '../pages/user/user_update';
 import { ConfigService } from '../lib/config.service';
 import { SessionService }   from '../lib/session.service';
-import { MenuController } from 'ionic-angular';
+
+import { LoginPage } from '../pages/login/login';
+import { UpdateUserPage } from '../pages/user/user_update';
 
 @Component({
   templateUrl: 'app.html'
@@ -36,7 +37,7 @@ export class MyApp {
     });
   }
 
-  public gotoUser(): void {
+  public updateUser(): void {
     this.menuCtrl.close();
     this.app.getRootNav().push(UpdateUserPage);
   }
