@@ -15,7 +15,7 @@ export const CONFIG = {
     GENERAL:{
         QUANTITY:5,
         LANGUAGE:'en',
-        FACEBOOK_ID:'1456822774399383',
+        FACEBOOK_ID:'1961950780725321',
         GOOGLE_APIKEY:'AIzaSyBz_QsRxbAr9SOf0djzPQSaK7HAfHs9o0I',
         CURRENT_PLAY_LIST: 'PLpOqH6AE0tNiPHU2BCm_ei3C2BmjN9IGt',
         CHANNEL: 'UCsfWVdGe5Gggv9U2YqXo5Dw',
