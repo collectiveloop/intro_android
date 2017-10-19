@@ -22,6 +22,7 @@ export class LoginPage {
   @ViewChild('password') password;
   @ViewChild('submit') submit;
   loginForm: FormGroup;
+  externalLogin:boolean;
   submitted: boolean;
   errorLogin: string;
   logo: string;
@@ -65,6 +66,7 @@ export class LoginPage {
   }
 
   private buildValidations() {
+    this.externalLogin = false;
     this.loginForm = this.formBuilder.group({
       user: ['', Validators.compose([Validators.minLength(5), Validators.required])],
       password: ['', Validators.compose([Validators.minLength(8), Validators.maxLength(15), Validators.required])],
@@ -75,6 +77,7 @@ export class LoginPage {
 
   public login(): void {
     this.errorLogin = '';
+    this.externalLogin = false;
     this.submitted = true;
     let data = {
       email: this.loginForm.value.user,
@@ -130,16 +133,19 @@ export class LoginPage {
 
   public loginFacebook(): void {
     this.errorLogin = '';
+    this.externalLogin = true;
     this.submitted = true;
     this.sessionService.loginByFacebook().then(function(result) {
       if(result!==false){
         this.getFacebookInfo();
       }else{
         this.submitted = false;
+        this.externalLogin = false;
       }
     }.bind(this), function(error) {
       this.errorLogin = error;
       this.submitted = false;
+      this.externalLogin = false;
       //cerramos sesion en facebook y cerramos sesion en la app
       this.sessionService.closeSession();
     }.bind(this));
@@ -175,6 +181,7 @@ export class LoginPage {
       .catch(error => {
         console.error(error);
         this.submitted = false;
+        this.externalLogin = false;
         //cerramos sesion en facebook y cerramos sesion en la app
         this.sessionService.closeSession();
       });
@@ -185,12 +192,14 @@ export class LoginPage {
     if(response.data!==undefined && response.data.message!==undefined)
       this.errorLogin = response.data.message;
     this.submitted = false;
+    this.externalLogin = false;
     //cerramos sesion
     this.sessionService.closeSession();
   }
 
   private callBackFacebook(response: any): void {
     this.submitted = false;
+    this.externalLogin = false;
     this.messages.closeMessage();
     if (response !== undefined && response.status !== undefined && response.status === 'error') {
       this.errorLogin = response.data.message;
@@ -211,15 +220,18 @@ export class LoginPage {
   public loginLinkedin(): void {
     this.errorLogin = '';
     this.submitted = true;
+    this.externalLogin = true;
     this.sessionService.loginByLinkedin().then(function(result) {
       if(result!==false){
         this.getLinkedinInfo();
       }else{
         this.submitted = false;
+        this.externalLogin = false;
       }
     }.bind(this), function(error) {
       this.errorLogin = error;
       this.submitted = false;
+      this.externalLogin = false;
       //cerramos sesion en facebook y cerramos sesion en la app
       this.sessionService.closeSession();
     }.bind(this));
@@ -268,6 +280,7 @@ export class LoginPage {
       .catch(error => {
         console.error(error);
         this.submitted = false;
+        this.externalLogin = false;
         //cerramos sesion en facebook y cerramos sesion en la app
         this.sessionService.closeSession();
       });
@@ -275,6 +288,7 @@ export class LoginPage {
 
   private callBackLikedin(response: any): void {
     this.submitted = false;
+    this.externalLogin = false;
     this.messages.closeMessage();
     if (response !== undefined && response.status !== undefined && response.status === 'error') {
       this.errorLogin = response.data.message;
@@ -294,6 +308,7 @@ export class LoginPage {
 
   public loginGooglePlus(): void {
     this.submitted = true;
+    this.externalLogin = true;
     this.errorLogin = '';
     this.sessionService.loginByGooglePlus().then(function(result) {
       if(result!==false){
@@ -328,6 +343,7 @@ export class LoginPage {
         });
       }else{
         this.submitted = false;
+        this.externalLogin = false;
       }
 
     }.bind(this), function(error) {
@@ -340,6 +356,7 @@ export class LoginPage {
 
   private callBackGooglePlus(response: any): void {
     this.submitted = false;
+    this.externalLogin = false;
     this.messages.closeMessage();
     if (response !== undefined && response.status !== undefined && response.status === 'error') {
       this.errorLogin = response.data.message;

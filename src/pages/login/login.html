@@ -20,7 +20,7 @@
             <ion-icon item-left name="ios-contact-outline"></ion-icon>
             <ion-input md-input formControlName="user" type="text" placeholder = "{{'EMAIL_USERNAME' | translate}}" (keyup.enter)="handleLogin('password')" #user></ion-input>
           </ion-item>
-          <span class="error" *ngIf="!loginForm.controls.user.valid  && (loginForm.controls.user.dirty || submitted)">
+          <span class="error" *ngIf="!loginForm.controls.user.valid  && (loginForm.controls.user.dirty || (submitted && !externalLogin))">
             {{'INVALID_EMAIL_USERNAME' | translate}}
           </span>
         </ion-col>
@@ -31,7 +31,7 @@
             <ion-icon class="flip-icon" item-left name="ios-unlock-outline"></ion-icon>
             <ion-input md-input formControlName="password" type="password" placeholder="{{'PASSWORD' | translate}}"  #password></ion-input>
           </ion-item>
-          <span class="error" *ngIf="!loginForm.controls.password.valid  && (loginForm.controls.password.dirty || submitted)">
+          <span class="error" *ngIf="!loginForm.controls.password.valid  && (loginForm.controls.password.dirty || (submitted && !externalLogin))">
             {{'INVALID_PASSWORD' | translate}}
           </span>
         </ion-col>

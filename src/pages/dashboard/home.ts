@@ -19,7 +19,14 @@ export class HomePage implements OnInit {
   infiniteScroll: any;
   loadingMessage:string = '';
 
-  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private configService: ConfigService, private utilService: UtilService, private tabService: TabService, private translateService: TranslateService, private loadingCtrl: LoadingController, public messages: MessageService) {}
+  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private configService: ConfigService, private utilService: UtilService, private tabService: TabService, private translateService: TranslateService, private loadingCtrl: LoadingController, public messages: MessageService) {
+    this.translateService.get('HOME').subscribe(
+      value => {
+        console.log(value);
+        this.configService.setSection(value);
+      }
+    );
+  }
 
   public ngOnInit(): void {
     /*

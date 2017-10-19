@@ -51,7 +51,7 @@
         "cordova-plugin-console": "^1.0.7",
         "cordova-plugin-datepicker": "^0.9.3",
         "cordova-plugin-device": "^1.1.6",
-        "cordova-plugin-facebook4": "^1.7.4",
+        "cordova-plugin-facebook4": "^1.9.1",
         "cordova-plugin-file": "^4.3.3",
         "cordova-plugin-file-transfer": "^1.6.3",
         "cordova-plugin-globalization": "^1.0.7",
@@ -93,10 +93,6 @@
             "cordova-plugin-globalization": {},
             "cordova-plugin-secure-storage": {},
             "cordova-plugin-x-toast": {},
-            "cordova-plugin-facebook4": {
-                "APP_ID": "1961950780725321",
-                "APP_NAME": "sappitotech.ionic.itspossible"
-            },
             "cordova-plugin-camera": {},
             "cordova-android-support-gradle-release": {
                 "ANDROID_SUPPORT_VERSION": "25.+"
@@ -114,6 +110,10 @@
             },
             "cordova-plugin-linkedin": {
                 "APP_ID": "770phhaoy4xzeu"
+            },
+            "cordova-plugin-facebook4": {
+                "APP_ID": "144792272803845",
+                "APP_NAME": "sappitotech.ionic.introapp"
             }
         },
         "platforms": [
