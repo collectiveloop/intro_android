@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 @Injectable()
 export class TabService {
-    tabsMenu:object ={'HOME':'HOME','CONTACTS':'CONTACTS','INTROS':'INTROS','MESSAGES':'MESSAGES','SETTINGS':'SETTINGS'};
+    tabsMenu:object ={'HOME':'HOME','CONTACTS':'CONTACTS','INTROS':'INTROS','MESSAGES':'MESSAGES','SETTINGS':'SETTINGS','MORE':'MORE'};
     showTab:boolean;
     constructor() {}
 

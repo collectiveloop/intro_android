@@ -175,10 +175,10 @@ ion-navbar.toolbar{
   padding: 0px;
   margin: 0px;
   border-radius: 0px;
-  position: fixed;
   bottom: 0px;
   border: 0px;
   font-weight: bold;
+  z-index:4;
 }
 
 .big-label{
@@ -241,6 +241,7 @@ ion-navbar.toolbar{
 }
 
 .form-style .login-linkedin img{
+  margin-left:1px;
   width:70%;
 }
 

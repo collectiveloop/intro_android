@@ -1,9 +1,9 @@
 <ion-header>
-  <header [options]="{backEnabled:true, showTab:false, showHeader:true, logoEnabled:false,menuEnabled:true, sectionEnabled:true}"></header>
+  <header [options]="{backEnabled:false, showTab:false, showHeader:true, logoEnabled:false,menuEnabled:false, sectionEnabled:true}"></header>
 </ion-header>
 <ion-content>
   <content class="form-style">
-    <ion-row *ngIf="ios">
+    <ion-row *ngIf="!ios">
       <ion-col col-12 class="center image-setting">
         <ion-icon class="big-icon" *ngIf="imageProfile==null" item-left name="md-person"></ion-icon>
         <img *ngIf="imageProfile!=null" src="{{imageProfile}}">
@@ -14,7 +14,7 @@
        </ion-fab>
       </ion-col>
     </ion-row>
-    <ion-row *ngIf="!ios">
+    <ion-row *ngIf="ios">
       <ion-col offset-4 col-4 class="center logo-main">
         <img class="logo-bigger" src="{{logo}}">
       </ion-col>
@@ -25,7 +25,7 @@
           <span class="error center" [innerHTML]="errorSetting"></span>
         </ion-col>
       </ion-row>
-      <div *ngIf="!ios" (click) = "makeImage()" class="image-setting">
+      <div *ngIf="ios" (click) = "makeImage()" class="image-setting">
         <div *ngIf="imageProfile==null" class="photo">
           <span>{{'PROFILE_PHOTO' | translate}}</span>
         </div>
@@ -83,8 +83,6 @@
       </ion-row>
       <ion-row class="form-container-buttons">
         <ion-col col-12 class="center">
-          <button  ion-button class="button-form shadow" (click)="back()" [disabled]="submitted">{{'SIGNUP' | translate}}</button>
-
           <button outline  ion-button class="button-form shadow" (click)="register()" [disabled]="!registerSetting.valid || submitted">{{'ACCEPT' | translate}}</button>
         </ion-col>
       </ion-row>

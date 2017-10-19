@@ -8,6 +8,7 @@ webpackJsonp([0],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__dashboard_home__ = __webpack_require__(222);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tabs_service__ = __webpack_require__(59);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_ionic_angular__ = __webpack_require__(14);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -20,21 +21,26 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var TabsPage = (function () {
-    function TabsPage(tabService) {
+    function TabsPage(tabService, menuCtrl) {
         this.tabService = tabService;
+        this.menuCtrl = menuCtrl;
         this.tab1Root = __WEBPACK_IMPORTED_MODULE_1__dashboard_home__["a" /* HomePage */];
         this.tab2Root = __WEBPACK_IMPORTED_MODULE_1__dashboard_home__["a" /* HomePage */];
         this.tab3Root = __WEBPACK_IMPORTED_MODULE_1__dashboard_home__["a" /* HomePage */];
         this.tab4Root = __WEBPACK_IMPORTED_MODULE_1__dashboard_home__["a" /* HomePage */];
-        this.tab5Root = __WEBPACK_IMPORTED_MODULE_1__dashboard_home__["a" /* HomePage */];
     }
+    TabsPage.prototype.openUserMenu = function () {
+        console.log('zxfsdfsd');
+        this.menuCtrl.open();
+    };
     return TabsPage;
 }());
 TabsPage = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"c:\xampp\htdocs\intro_app\ionic\src\pages\tabs\tabs.html"*/'<ion-tabs>\n\n  <ion-tab [root]="tab1Root" tabTitle="{{ tabService.getSection(\'HOME\') | translate }}" class="disable-ripple" tabIcon="home"></ion-tab>\n\n  <ion-tab [root]="tab2Root" tabTitle="{{ tabService.getSection(\'CONTACTS\') | translate }}" class="disable-ripple" tabIcon="contacts"></ion-tab>\n\n  <ion-tab [root]="tab3Root" tabTitle="{{ tabService.getSection(\'INTROS\') | translate }}" class="disable-ripple" tabIcon="intros"></ion-tab>\n\n  <ion-tab [root]="tab4Root" tabTitle="{{ tabService.getSection(\'MESSAGES\') | translate }}" class="disable-ripple" tabIcon="messages"></ion-tab>\n\n  <ion-tab [root]="tab5Root" tabTitle="{{ tabService.getSection(\'SETTINGS\') | translate }}" class="disable-ripple" tabIcon="settings"></ion-tab>\n\n</ion-tabs>\n\n'/*ion-inline-end:"c:\xampp\htdocs\intro_app\ionic\src\pages\tabs\tabs.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"c:\xampp\htdocs\intro_app\ionic\src\pages\tabs\tabs.html"*/'<ion-tabs>\n\n  <ion-tab [root]="tab1Root" tabTitle="{{ tabService.getSection(\'HOME\') | translate }}" class="disable-ripple" tabIcon="home"></ion-tab>\n\n  <ion-tab [root]="tab2Root" tabTitle="{{ tabService.getSection(\'CONTACTS\') | translate }}" class="disable-ripple" tabIcon="contacts"></ion-tab>\n\n  <ion-tab [root]="tab3Root" tabTitle="{{ tabService.getSection(\'INTROS\') | translate }}" class="disable-ripple" tabIcon="intros"></ion-tab>\n\n  <ion-tab [root]="tab4Root" tabTitle="{{ tabService.getSection(\'MESSAGES\') | translate }}" class="disable-ripple" tabIcon="messages"></ion-tab>\n\n  <ion-tab (ionSelect)=\'openUserMenu()\' tabTitle="{{ tabService.getSection(\'MORE\') | translate }}" class="disable-ripple" tabIcon="settings"></ion-tab>\n\n</ion-tabs>\n\n'/*ion-inline-end:"c:\xampp\htdocs\intro_app\ionic\src\pages\tabs\tabs.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__tabs_service__["a" /* TabService */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__tabs_service__["a" /* TabService */], __WEBPACK_IMPORTED_MODULE_3_ionic_angular__["g" /* MenuController */]])
 ], TabsPage);
 
 //# sourceMappingURL=tabs.js.map
@@ -251,6 +257,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var LoginPage = (function () {
     function LoginPage(navCtrl, app, formBuilder, configService, httpService, translateService, facebook, sessionService, platform, messages, googlePlus, linkedin) {
         var _this = this;
@@ -295,8 +302,8 @@ var LoginPage = (function () {
     };
     LoginPage.prototype.buildValidations = function () {
         this.loginForm = this.formBuilder.group({
-            user: ['renshocontact@gmail.com', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(5), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].email, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])],
-            password: ['2f6W9MPSo7', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(8), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(15), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])],
+            user: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(5), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])],
+            password: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(8), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(15), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])],
         });
     };
     LoginPage.prototype.login = function () {
@@ -334,8 +341,14 @@ var LoginPage = (function () {
                 'mode_google_plus': false
             });
             this.httpService.setTokenProvider(response.data.token);
+            //this.loginForm.reset();
+            this.loginForm.controls['password'].patchValue('');
+            this.loginForm.controls['password'].setValue('');
             this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_10__tabs_tabs__["a" /* TabsPage */]);
         }
+    };
+    LoginPage.prototype.handleLogin = function (action) {
+        this[action].setFocus();
     };
     LoginPage.prototype.forgotPassword = function () {
         //this.navCtrl.push(ForgotPasswordPage);
@@ -344,9 +357,15 @@ var LoginPage = (function () {
         this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_11__user_user_register__["a" /* RegisterUserPage */]);
     };
     LoginPage.prototype.loginFacebook = function () {
+        this.errorLogin = '';
         this.submitted = true;
-        this.sessionService.loginByFacebook().then(function () {
-            this.getFacebookInfo();
+        this.sessionService.loginByFacebook().then(function (result) {
+            if (result !== false) {
+                this.getFacebookInfo();
+            }
+            else {
+                this.submitted = false;
+            }
         }.bind(this), function (error) {
             this.errorLogin = error;
             this.submitted = false;
@@ -391,7 +410,8 @@ var LoginPage = (function () {
     };
     LoginPage.prototype.errorCallBack = function (response) {
         this.messages.closeMessage();
-        this.errorLogin = response.data.message;
+        if (response.data !== undefined && response.data.message !== undefined)
+            this.errorLogin = response.data.message;
         this.submitted = false;
         //cerramos sesion
         this.sessionService.closeSession();
@@ -416,9 +436,15 @@ var LoginPage = (function () {
         }
     };
     LoginPage.prototype.loginLinkedin = function () {
+        this.errorLogin = '';
         this.submitted = true;
-        this.sessionService.loginByLinkedin().then(function () {
-            this.getLinkedinInfo();
+        this.sessionService.loginByLinkedin().then(function (result) {
+            if (result !== false) {
+                this.getLinkedinInfo();
+            }
+            else {
+                this.submitted = false;
+            }
         }.bind(this), function (error) {
             this.errorLogin = error;
             this.submitted = false;
@@ -492,33 +518,39 @@ var LoginPage = (function () {
     };
     LoginPage.prototype.loginGooglePlus = function () {
         this.submitted = true;
+        this.errorLogin = '';
         this.sessionService.loginByGooglePlus().then(function (result) {
-            var names = result.displayName.split(' ');
-            var first_name = '';
-            var last_name = '';
-            if (names.length > 0)
-                first_name = names[0];
-            if (names.length > 1)
-                last_name = names[1];
-            var info = {
-                external_id: result.userId,
-                first_name: first_name,
-                last_name: last_name,
-                email: result.email,
-                platform: 'google_plus'
-            };
-            this.httpService.post({
-                url: 'user',
-                urlParams: [
-                    'external',
-                    this.translateService.getDefaultLang()
-                ],
-                app: this.app,
-                inputs: info,
-                success: this.callBackGooglePlus,
-                error: this.errorCallBack,
-                context: this,
-            });
+            if (result !== false) {
+                var names = result.displayName.split(' ');
+                var first_name = '';
+                var last_name = '';
+                if (names.length > 0)
+                    first_name = names[0];
+                if (names.length > 1)
+                    last_name = names[1];
+                var info = {
+                    external_id: result.userId,
+                    first_name: first_name,
+                    last_name: last_name,
+                    email: result.email,
+                    platform: 'google_plus'
+                };
+                this.httpService.post({
+                    url: 'user',
+                    urlParams: [
+                        'external',
+                        this.translateService.getDefaultLang()
+                    ],
+                    app: this.app,
+                    inputs: info,
+                    success: this.callBackGooglePlus,
+                    error: this.errorCallBack,
+                    context: this,
+                });
+            }
+            else {
+                this.submitted = false;
+            }
         }.bind(this), function (error) {
             this.errorLogin = error;
             this.submitted = false;
@@ -547,13 +579,26 @@ var LoginPage = (function () {
     };
     return LoginPage;
 }());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])('user'),
+    __metadata("design:type", Object)
+], LoginPage.prototype, "input", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])('password'),
+    __metadata("design:type", Object)
+], LoginPage.prototype, "password", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])('submit'),
+    __metadata("design:type", Object)
+], LoginPage.prototype, "submit", void 0);
 LoginPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-login',template:/*ion-inline-start:"c:\xampp\htdocs\intro_app\ionic\src\pages\login\login.html"*/'<ion-header>\n\n  <header [options]="{backEnabled:false, showTab:false, showHeader:true, logoEnabled:false, menuEnabled:true, sectionEnabled:true}"></header>\n\n</ion-header>\n\n<ion-content>\n\n  <content class="form-style">\n\n    <ion-row>\n\n      <ion-col offset-4 col-4 class="center logo-main">\n\n        <img class="logo-bigger" src="{{logo}}">\n\n      </ion-col>\n\n    </ion-row>\n\n    <form [formGroup]="loginForm">\n\n      <ion-row>\n\n        <ion-col col-12 class="center">\n\n          <span class="error center" [innerHTML]="errorLogin"></span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n            <ion-icon item-left name="ios-contact-outline"></ion-icon>\n\n            <ion-input md-input formControlName="user" type="email" placeholder = "{{\'USERNAME\' | translate}}"></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!loginForm.controls.user.valid  && (loginForm.controls.user.dirty || submitted)">\n\n            {{\'INVALID_USERNAME\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n            <ion-icon class="flip-icon" item-left name="ios-unlock-outline"></ion-icon>\n\n            <ion-input md-input formControlName="password" type="password" placeholder="{{\'PASSWORD\' | translate}}"></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!loginForm.controls.password.valid  && (loginForm.controls.password.dirty || submitted)">\n\n            {{\'INVALID_PASSWORD\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-10 class="center">\n\n          <button ion-button color="light" (click)="forgotPassword()" [disabled]="submitted">{{\'FORGOT_PASSWORD\' | translate}}</button>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-10 class="center big-label">\n\n          {{\'OR\' | translate}}\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-10 class="center">\n\n          <ion-row>\n\n            <ion-col col-3 class="center in-table">\n\n              <button ion-fab (click)="loginFacebook()" [disabled]="submitted" class="login-facebook"><img src="assets/logos/facebook.svg" name="logo-facebook"/></button>\n\n            </ion-col>\n\n            <ion-col col-6 class="center in-table">\n\n              <button ion-fab (click)="loginLinkedin()" [disabled]="submitted" class="login-linkedin"><img src="assets/logos/linkedin.svg" name="logo-linkedin"/></button>\n\n            </ion-col>\n\n            <ion-col col-3 class="center in-table">\n\n              <button ion-fab (click)="loginGooglePlus()" [disabled]="submitted" class="login-google-plus"><img src="assets/logos/google-plus.svg" name="logo-google-plus"/></button>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col col-12 class="center middle bottom-space">\n\n            <span class=\'black\'>{{\'NOT_MEMBER\' | translate}}</span>&nbsp;&nbsp;<button ion-button color="light" class="button-link" [disabled]="submitted" (click) = "register()">{{\'CREATE_ACCOUNT\' | translate}}</button>\n\n        </ion-col>\n\n      </ion-row>\n\n      <button ion-button class="next-login" (click)="login()" [disabled]="!loginForm.valid || submitted">{{\'NEXT\' | translate}}</button>\n\n\n\n    </form>\n\n  </content>\n\n</ion-content>\n\n'/*ion-inline-end:"c:\xampp\htdocs\intro_app\ionic\src\pages\login\login.html"*/
+        selector: 'page-login',template:/*ion-inline-start:"c:\xampp\htdocs\intro_app\ionic\src\pages\login\login.html"*/'<ion-header>\n\n  <header [options]="{backEnabled:false, showTab:false, showHeader:true, logoEnabled:false, menuEnabled:true, sectionEnabled:true}"></header>\n\n</ion-header>\n\n<ion-content>\n\n  <content class="form-style">\n\n    <ion-row>\n\n      <ion-col offset-4 col-4 class="center logo-main">\n\n        <img class="logo-bigger" src="{{logo}}">\n\n      </ion-col>\n\n    </ion-row>\n\n    <form [formGroup]="loginForm">\n\n      <ion-row>\n\n        <ion-col col-12 class="center">\n\n          <span class="error center" [innerHTML]="errorLogin"></span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n            <ion-icon item-left name="ios-contact-outline"></ion-icon>\n\n            <ion-input md-input formControlName="user" type="text" placeholder = "{{\'EMAIL_USERNAME\' | translate}}" (keyup.enter)="handleLogin(\'password\')" #user></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!loginForm.controls.user.valid  && (loginForm.controls.user.dirty || submitted)">\n\n            {{\'INVALID_EMAIL_USERNAME\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n            <ion-icon class="flip-icon" item-left name="ios-unlock-outline"></ion-icon>\n\n            <ion-input md-input formControlName="password" type="password" placeholder="{{\'PASSWORD\' | translate}}"  #password></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!loginForm.controls.password.valid  && (loginForm.controls.password.dirty || submitted)">\n\n            {{\'INVALID_PASSWORD\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-10 class="center">\n\n          <button ion-button color="light" (click)="forgotPassword()" [disabled]="submitted">{{\'FORGOT_PASSWORD\' | translate}}</button>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-10 class="center big-label">\n\n          {{\'OR\' | translate}}\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-10 class="center">\n\n          <ion-row>\n\n            <ion-col col-3 class="center in-table">\n\n              <button ion-fab (click)="loginFacebook()" [disabled]="submitted" class="login-facebook"><img src="assets/logos/facebook.svg" name="logo-facebook"/></button>\n\n            </ion-col>\n\n            <ion-col col-6 class="center in-table">\n\n              <button ion-fab (click)="loginLinkedin()" [disabled]="submitted" class="login-linkedin"><img src="assets/logos/linkedin.svg" name="logo-linkedin"/></button>\n\n            </ion-col>\n\n            <ion-col col-3 class="center in-table">\n\n              <button ion-fab (click)="loginGooglePlus()" [disabled]="submitted" class="login-google-plus"><img src="assets/logos/google-plus.svg" name="logo-google-plus"/></button>\n\n            </ion-col>\n\n          </ion-row>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col col-12 class="center middle bottom-space">\n\n            <span class=\'black\'>{{\'NOT_MEMBER\' | translate}}</span>&nbsp;&nbsp;<button ion-button color="light" class="button-link" [disabled]="submitted" (click) = "register()">{{\'CREATE_ACCOUNT\' | translate}}</button>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col col-12 class="center">\n\n          <button ion-button class="next-login" (click)="login()" [disabled]="!loginForm.valid || submitted" #submit>{{\'NEXT\' | translate}}</button>\n\n        </ion-col>\n\n      </ion-row>\n\n    </form>\n\n  </content>\n\n</ion-content>\n\n'/*ion-inline-end:"c:\xampp\htdocs\intro_app\ionic\src\pages\login\login.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_6__lib_config_service__["a" /* ConfigService */], __WEBPACK_IMPORTED_MODULE_8__lib_http_service__["a" /* HttpService */], __WEBPACK_IMPORTED_MODULE_12__ngx_translate_core__["c" /* TranslateService */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_facebook__["a" /* Facebook */], __WEBPACK_IMPORTED_MODULE_9__lib_session_service__["a" /* SessionService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_7__lib_messages_service__["a" /* MessageService */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_google_plus__["a" /* GooglePlus */], __WEBPACK_IMPORTED_MODULE_5__ionic_native_linkedin__["a" /* LinkedIn */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_6__lib_config_service__["a" /* ConfigService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__lib_config_service__["a" /* ConfigService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_8__lib_http_service__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__lib_http_service__["a" /* HttpService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_12__ngx_translate_core__["c" /* TranslateService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_12__ngx_translate_core__["c" /* TranslateService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_facebook__["a" /* Facebook */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_facebook__["a" /* Facebook */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_9__lib_session_service__["a" /* SessionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_9__lib_session_service__["a" /* SessionService */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_7__lib_messages_service__["a" /* MessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__lib_messages_service__["a" /* MessageService */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_4__ionic_native_google_plus__["a" /* GooglePlus */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__ionic_native_google_plus__["a" /* GooglePlus */]) === "function" && _l || Object, typeof (_m = typeof __WEBPACK_IMPORTED_MODULE_5__ionic_native_linkedin__["a" /* LinkedIn */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__ionic_native_linkedin__["a" /* LinkedIn */]) === "function" && _m || Object])
 ], LoginPage);
 
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
 //# sourceMappingURL=login.js.map
 
 /***/ }),
@@ -724,6 +769,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var RegisterUserPage = (function () {
     function RegisterUserPage(navCtrl, app, formBuilder, configService, httpService, translateService, sessionService, loadingCtrl, platform, messages) {
         var _this = this;
@@ -752,12 +798,16 @@ var RegisterUserPage = (function () {
     RegisterUserPage.prototype.ngAfterViewChecked = function () { };
     RegisterUserPage.prototype.buildValidations = function () {
         this.registerForm = this.formBuilder.group({
-            first_name: ['JUAN', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(2), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])],
-            last_name: ['gonzales', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(2), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])],
-            email: ['renshocontact@gmail.com', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(5), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].email, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])],
-            password: ['12345678', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(8), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(15), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])],
-            confirm_password: ['12345678', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(8), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(15), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])]
+            first_name: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(2), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])],
+            last_name: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(2), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])],
+            user_name: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(2), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])],
+            email: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(5), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].email, __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])],
+            password: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(8), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(15), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])],
+            confirm_password: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].minLength(8), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].maxLength(15), __WEBPACK_IMPORTED_MODULE_2__angular_forms__["f" /* Validators */].required])]
         });
+    };
+    RegisterUserPage.prototype.handleLogin = function (action) {
+        this[action].setFocus();
     };
     RegisterUserPage.prototype.back = function () {
         this.app.getRootNav().popToRoot();
@@ -779,6 +829,8 @@ var RegisterUserPage = (function () {
             email: this.registerForm.value.email,
             password: this.registerForm.value.password
         };
+        if (this.registerForm.value.user_name !== null && this.registerForm.value.user_name !== undefined && this.registerForm.value.user_name !== '')
+            data['user_name'] = this.registerForm.value.user_name;
         this.messages.showMessage({
             content: this.loadingMessage
         });
@@ -802,6 +854,13 @@ var RegisterUserPage = (function () {
             this.errorRegister = response.data.message;
         }
         else {
+            this.sessionService.initSession({
+                'token': response.data.token,
+                'mode_facebook': false,
+                'mode_linkedin': false,
+                'mode_google_plus': false
+            });
+            this.httpService.setTokenProvider(response.data.token);
             var id = response.data.user_id;
             if (id !== 0)
                 this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_8__user_user_setting__["a" /* SettingUserPage */], { email: this.registerForm.value.email, password: this.registerForm.value.password, user_id: id });
@@ -812,13 +871,38 @@ var RegisterUserPage = (function () {
     };
     return RegisterUserPage;
 }());
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])('firstName'),
+    __metadata("design:type", Object)
+], RegisterUserPage.prototype, "firstName", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])('lastName'),
+    __metadata("design:type", Object)
+], RegisterUserPage.prototype, "lastName", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])('userName'),
+    __metadata("design:type", Object)
+], RegisterUserPage.prototype, "userName", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])('email'),
+    __metadata("design:type", Object)
+], RegisterUserPage.prototype, "email", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])('password'),
+    __metadata("design:type", Object)
+], RegisterUserPage.prototype, "password", void 0);
+__decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])('confirmPassword'),
+    __metadata("design:type", Object)
+], RegisterUserPage.prototype, "confirmPassword", void 0);
 RegisterUserPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-user-register',template:/*ion-inline-start:"c:\xampp\htdocs\intro_app\ionic\src\pages\user\user_register.html"*/'<ion-header>\n\n  <header [options]="{backEnabled:true, showTab:false, showHeader:true, logoEnabled:false,menuEnabled:true, sectionEnabled:true}"></header>\n\n</ion-header>\n\n<ion-content>\n\n  <content class="form-style">\n\n    <ion-row>\n\n      <ion-col offset-4 col-4 class="center logo-main">\n\n        <img class="logo-bigger" src="{{logo}}">\n\n      </ion-col>\n\n    </ion-row>\n\n    <form [formGroup]="registerForm">\n\n      <ion-row>\n\n        <ion-col col-12 class="center">\n\n          <span class="error center" [innerHTML]="errorRegister"></span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n            <ion-icon item-left name="ios-contact-outline"></ion-icon>\n\n            <ion-input md-input formControlName="first_name" type="text" placeholder="{{\'FIRST_NAME\' | translate}}"></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!registerForm.controls.first_name.valid  && (registerForm.controls.first_name.dirty || submitted)">\n\n            {{\'INVALID_FIRST_NAME\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n              <ion-icon item-left name="ios-contact-outline"></ion-icon>\n\n              <ion-input md-input formControlName="last_name" type="text" placeholder="{{\'LAST_NAME\' | translate}}"></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!registerForm.controls.last_name.valid  && (registerForm.controls.last_name.dirty || submitted)">\n\n            {{\'INVALID_LAST_NAME\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n            <ion-icon item-left name="ios-mail-outline"></ion-icon>\n\n            <ion-input md-input formControlName="email" type="email" placeholder="{{\'EMAIL\' | translate}}"></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!registerForm.controls.email.valid  && (registerForm.controls.email.dirty || submitted)">\n\n            {{\'INVALID_EMAIL\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n            <ion-icon class="flip-icon" item-left name="ios-unlock-outline"></ion-icon>\n\n            <ion-input md-input formControlName="password" type="password" placeholder="{{\'PASSWORD\' | translate}}"></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!registerForm.controls.password.valid  && (registerForm.controls.password.dirty || submitted)">\n\n            {{\'INVALID_PASSWORD\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n            <ion-icon class="flip-icon" item-left name="ios-unlock-outline"></ion-icon>\n\n            <ion-input md-input formControlName="confirm_password" type="password" placeholder="{{\'CONFIRM_PASSWORD\' | translate}}"></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!registerForm.controls.confirm_password.valid  && (registerForm.controls.confirm_password.dirty || submitted)">\n\n            {{\'INVALID_CONFIRM_PASSWORD\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row class="form-container-buttons">\n\n        <ion-col col-12 class="center">\n\n          <button  ion-button class="button-form shadow" (click)="back()" [disabled]="submitted">{{\'LOG_IN\' | translate}}</button>\n\n\n\n          <button outline  ion-button class="button-form shadow" (click)="register()" [disabled]="!registerForm.valid || submitted">{{\'ACCEPT\' | translate}}</button>\n\n        </ion-col>\n\n      </ion-row>\n\n    </form>\n\n  </content>\n\n</ion-content>\n\n'/*ion-inline-end:"c:\xampp\htdocs\intro_app\ionic\src\pages\user\user_register.html"*/
+        selector: 'page-user-register',template:/*ion-inline-start:"c:\xampp\htdocs\intro_app\ionic\src\pages\user\user_register.html"*/'<ion-header>\n\n  <header [options]="{backEnabled:true, showTab:false, showHeader:true, logoEnabled:false,menuEnabled:true, sectionEnabled:true}"></header>\n\n</ion-header>\n\n<ion-content>\n\n  <content class="form-style">\n\n    <ion-row>\n\n      <ion-col offset-4 col-4 class="center logo-main">\n\n        <img class="logo-bigger" src="{{logo}}">\n\n      </ion-col>\n\n    </ion-row>\n\n    <form [formGroup]="registerForm">\n\n      <ion-row>\n\n        <ion-col col-12 class="center">\n\n          <span class="error center" [innerHTML]="errorRegister"></span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n            <ion-icon item-left name="ios-contact-outline"></ion-icon>\n\n            <ion-input md-input formControlName="first_name" type="text" placeholder="{{\'FIRST_NAME\' | translate}}" (keyup.enter)="handleLogin(\'lastName\')" #firstName></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!registerForm.controls.first_name.valid  && (registerForm.controls.first_name.dirty || submitted)">\n\n            {{\'INVALID_FIRST_NAME\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n              <ion-icon item-left name="ios-contact-outline"></ion-icon>\n\n              <ion-input md-input formControlName="last_name" type="text" placeholder="{{\'LAST_NAME\' | translate}}" (keyup.enter)="handleLogin(\'userName\')" #lastName></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!registerForm.controls.last_name.valid  && (registerForm.controls.last_name.dirty || submitted)">\n\n            {{\'INVALID_LAST_NAME\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n              <ion-icon item-left name="ios-contact-outline"></ion-icon>\n\n              <ion-input md-input formControlName="user_name" type="text" placeholder="{{\'USERNAME\' | translate}}" (keyup.enter)="handleLogin(\'email\')" #userName></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!registerForm.controls.user_name.valid  && (registerForm.controls.user_name.dirty || submitted)">\n\n            {{\'INVALID_USERNAME\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n            <ion-icon item-left name="ios-mail-outline"></ion-icon>\n\n            <ion-input md-input formControlName="email" type="email" placeholder="{{\'EMAIL\' | translate}}"  (keyup.enter)="handleLogin(\'password\')" #email></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!registerForm.controls.email.valid  && (registerForm.controls.email.dirty || submitted)">\n\n            {{\'INVALID_EMAIL\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n            <ion-icon class="flip-icon" item-left name="ios-unlock-outline"></ion-icon>\n\n            <ion-input md-input formControlName="password" type="password" placeholder="{{\'PASSWORD\' | translate}}" (keyup.enter)="handleLogin(\'confirmPassword\')" #password></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!registerForm.controls.password.valid  && (registerForm.controls.password.dirty || submitted)">\n\n            {{\'INVALID_PASSWORD\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n            <ion-icon class="flip-icon" item-left name="ios-unlock-outline"></ion-icon>\n\n            <ion-input md-input formControlName="confirm_password" type="password" placeholder="{{\'CONFIRM_PASSWORD\' | translate}}" #confirmPassword></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!registerForm.controls.confirm_password.valid  && (registerForm.controls.confirm_password.dirty || submitted)">\n\n            {{\'INVALID_CONFIRM_PASSWORD\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row class="form-container-buttons">\n\n        <ion-col col-12 class="center">\n\n          <button outline  ion-button class="button-form shadow" (click)="register()" [disabled]="!registerForm.valid || submitted">{{\'SIGNUP\' | translate}}</button>\n\n        </ion-col>\n\n      </ion-row>\n\n    </form>\n\n  </content>\n\n</ion-content>\n\n'/*ion-inline-end:"c:\xampp\htdocs\intro_app\ionic\src\pages\user\user_register.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */], __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_3__lib_config_service__["a" /* ConfigService */], __WEBPACK_IMPORTED_MODULE_6__lib_http_service__["a" /* HttpService */], __WEBPACK_IMPORTED_MODULE_7__ngx_translate_core__["c" /* TranslateService */], __WEBPACK_IMPORTED_MODULE_5__lib_session_service__["a" /* SessionService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_4__lib_messages_service__["a" /* MessageService */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormBuilder */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__lib_config_service__["a" /* ConfigService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__lib_config_service__["a" /* ConfigService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_6__lib_http_service__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__lib_http_service__["a" /* HttpService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_7__ngx_translate_core__["c" /* TranslateService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__ngx_translate_core__["c" /* TranslateService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_5__lib_session_service__["a" /* SessionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__lib_session_service__["a" /* SessionService */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* LoadingController */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_4__lib_messages_service__["a" /* MessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__lib_messages_service__["a" /* MessageService */]) === "function" && _k || Object])
 ], RegisterUserPage);
 
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
 //# sourceMappingURL=user_register.js.map
 
 /***/ }),
@@ -897,12 +981,12 @@ var SettingUserPage = (function () {
     SettingUserPage.prototype.ngAfterViewChecked = function () { };
     SettingUserPage.prototype.buildValidations = function () {
         this.registerSetting = this.formBuilder.group({
-            full_name: ['jajajaj', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(2), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required])],
-            job_title: ['jejejeje', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(2), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required])],
-            company_name: ['jijijij', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(3), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required])],
-            job_description: ['jojojjoj', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(3)])],
+            full_name: ['', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(2), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required])],
+            job_title: ['', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(2), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required])],
+            company_name: ['', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(3), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required])],
+            job_description: ['', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(3)])],
             //email: [  this.params['email'], Validators.compose([Validators.minLength(5), Validators.email,
-            email: ['jua@gmail.com', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(5), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].email, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required])]
+            email: ['', __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].compose([__WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].minLength(5), __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].email, __WEBPACK_IMPORTED_MODULE_3__angular_forms__["f" /* Validators */].required])]
         });
     };
     SettingUserPage.prototype.makeImage = function () {
@@ -941,7 +1025,6 @@ var SettingUserPage = (function () {
         var paramsPut = {
             url: 'user/setting',
             urlParams: [
-                this.params['user_id'],
                 this.translateService.getDefaultLang()
             ],
             app: this.app,
@@ -991,13 +1074,6 @@ var SettingUserPage = (function () {
             this.errorSetting = response.data.message;
         }
         else {
-            this.sessionService.initSession({
-                'token': response.data.token,
-                'mode_facebook': false,
-                'mode_linkedin': false,
-                'mode_google_plus': false
-            });
-            this.httpService.setTokenProvider(response.data.token);
             this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_9__tabs_tabs__["a" /* TabsPage */]);
         }
     };
@@ -1005,11 +1081,12 @@ var SettingUserPage = (function () {
 }());
 SettingUserPage = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'page-user-setting',template:/*ion-inline-start:"c:\xampp\htdocs\intro_app\ionic\src\pages\user\user_setting.html"*/'<ion-header>\n\n  <header [options]="{backEnabled:true, showTab:false, showHeader:true, logoEnabled:false,menuEnabled:true, sectionEnabled:true}"></header>\n\n</ion-header>\n\n<ion-content>\n\n  <content class="form-style">\n\n    <ion-row *ngIf="ios">\n\n      <ion-col col-12 class="center image-setting">\n\n        <ion-icon class="big-icon" *ngIf="imageProfile==null" item-left name="md-person"></ion-icon>\n\n        <img *ngIf="imageProfile!=null" src="{{imageProfile}}">\n\n        <ion-fab bottom right>\n\n         <button (click) = "makeImage()" ion-fab>\n\n           <ion-icon  name="md-camera"></ion-icon>\n\n         </button>\n\n       </ion-fab>\n\n      </ion-col>\n\n    </ion-row>\n\n    <ion-row *ngIf="!ios">\n\n      <ion-col offset-4 col-4 class="center logo-main">\n\n        <img class="logo-bigger" src="{{logo}}">\n\n      </ion-col>\n\n    </ion-row>\n\n    <form [formGroup]="registerSetting">\n\n      <ion-row>\n\n        <ion-col col-12 class="center">\n\n          <span class="error center" [innerHTML]="errorSetting"></span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <div *ngIf="!ios" (click) = "makeImage()" class="image-setting">\n\n        <div *ngIf="imageProfile==null" class="photo">\n\n          <span>{{\'PROFILE_PHOTO\' | translate}}</span>\n\n        </div>\n\n        <img *ngIf="imageProfile!=null" src="{{imageProfile}}">\n\n      </div>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n            <ion-input md-input formControlName="full_name" type="text" placeholder="{{\'FULL_NAME\' | translate}}"></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!registerSetting.controls.full_name.valid  && (registerSetting.controls.full_name.dirty || submitted)">\n\n            {{\'INVALID_FULL_NAME\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n              <ion-input md-input formControlName="job_title" type="text" placeholder="{{\'JOB_TITLE\' | translate}}"></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!registerSetting.controls.job_title.valid  && (registerSetting.controls.job_title.dirty || submitted)">\n\n            {{\'INVALID_JOB_TITLE\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n            <ion-input md-input formControlName="company_name" type="text" placeholder="{{\'COMPANY_NAME\' | translate}}"></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!registerSetting.controls.company_name.valid  && (registerSetting.controls.company_name.dirty || submitted)">\n\n            {{\'INVALID_COMPANY_NAME\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n            <ion-input md-input formControlName="job_description" type="text" placeholder="{{\'JOB_DESCRIPTION\' | translate}}"></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!registerSetting.controls.job_description.valid  && (registerSetting.controls.job_description.dirty || submitted)">\n\n            {{\'INVALID_JOB_DESCRIPTION\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n            <ion-input md-input formControlName="email" type="email" placeholder="{{\'EMAIL\' | translate}}"></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!registerSetting.controls.email.valid  && (registerSetting.controls.email.dirty || submitted)">\n\n            {{\'INVALID_EMAIL\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row class="form-container-buttons">\n\n        <ion-col col-12 class="center">\n\n          <button  ion-button class="button-form shadow" (click)="back()" [disabled]="submitted">{{\'SIGNUP\' | translate}}</button>\n\n\n\n          <button outline  ion-button class="button-form shadow" (click)="register()" [disabled]="!registerSetting.valid || submitted">{{\'ACCEPT\' | translate}}</button>\n\n        </ion-col>\n\n      </ion-row>\n\n    </form>\n\n  </content>\n\n</ion-content>\n\n'/*ion-inline-end:"c:\xampp\htdocs\intro_app\ionic\src\pages\user\user_setting.html"*/
+        selector: 'page-user-setting',template:/*ion-inline-start:"c:\xampp\htdocs\intro_app\ionic\src\pages\user\user_setting.html"*/'<ion-header>\n\n  <header [options]="{backEnabled:false, showTab:false, showHeader:true, logoEnabled:false,menuEnabled:false, sectionEnabled:true}"></header>\n\n</ion-header>\n\n<ion-content>\n\n  <content class="form-style">\n\n    <ion-row *ngIf="!ios">\n\n      <ion-col col-12 class="center image-setting">\n\n        <ion-icon class="big-icon" *ngIf="imageProfile==null" item-left name="md-person"></ion-icon>\n\n        <img *ngIf="imageProfile!=null" src="{{imageProfile}}">\n\n        <ion-fab bottom right>\n\n         <button (click) = "makeImage()" ion-fab>\n\n           <ion-icon  name="md-camera"></ion-icon>\n\n         </button>\n\n       </ion-fab>\n\n      </ion-col>\n\n    </ion-row>\n\n    <ion-row *ngIf="ios">\n\n      <ion-col offset-4 col-4 class="center logo-main">\n\n        <img class="logo-bigger" src="{{logo}}">\n\n      </ion-col>\n\n    </ion-row>\n\n    <form [formGroup]="registerSetting">\n\n      <ion-row>\n\n        <ion-col col-12 class="center">\n\n          <span class="error center" [innerHTML]="errorSetting"></span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <div *ngIf="ios" (click) = "makeImage()" class="image-setting">\n\n        <div *ngIf="imageProfile==null" class="photo">\n\n          <span>{{\'PROFILE_PHOTO\' | translate}}</span>\n\n        </div>\n\n        <img *ngIf="imageProfile!=null" src="{{imageProfile}}">\n\n      </div>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n            <ion-input md-input formControlName="full_name" type="text" placeholder="{{\'FULL_NAME\' | translate}}"></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!registerSetting.controls.full_name.valid  && (registerSetting.controls.full_name.dirty || submitted)">\n\n            {{\'INVALID_FULL_NAME\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n              <ion-input md-input formControlName="job_title" type="text" placeholder="{{\'JOB_TITLE\' | translate}}"></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!registerSetting.controls.job_title.valid  && (registerSetting.controls.job_title.dirty || submitted)">\n\n            {{\'INVALID_JOB_TITLE\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n            <ion-input md-input formControlName="company_name" type="text" placeholder="{{\'COMPANY_NAME\' | translate}}"></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!registerSetting.controls.company_name.valid  && (registerSetting.controls.company_name.dirty || submitted)">\n\n            {{\'INVALID_COMPANY_NAME\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n            <ion-input md-input formControlName="job_description" type="text" placeholder="{{\'JOB_DESCRIPTION\' | translate}}"></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!registerSetting.controls.job_description.valid  && (registerSetting.controls.job_description.dirty || submitted)">\n\n            {{\'INVALID_JOB_DESCRIPTION\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row>\n\n        <ion-col offset-1 col-11 class="center">\n\n          <ion-item>\n\n            <ion-input md-input formControlName="email" type="email" placeholder="{{\'EMAIL\' | translate}}"></ion-input>\n\n          </ion-item>\n\n          <span class="error" *ngIf="!registerSetting.controls.email.valid  && (registerSetting.controls.email.dirty || submitted)">\n\n            {{\'INVALID_EMAIL\' | translate}}\n\n          </span>\n\n        </ion-col>\n\n      </ion-row>\n\n      <ion-row class="form-container-buttons">\n\n        <ion-col col-12 class="center">\n\n          <button outline  ion-button class="button-form shadow" (click)="register()" [disabled]="!registerSetting.valid || submitted">{{\'ACCEPT\' | translate}}</button>\n\n        </ion-col>\n\n      </ion-row>\n\n    </form>\n\n  </content>\n\n</ion-content>\n\n'/*ion-inline-end:"c:\xampp\htdocs\intro_app\ionic\src\pages\user\user_setting.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */], __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */], __WEBPACK_IMPORTED_MODULE_4__lib_config_service__["a" /* ConfigService */], __WEBPACK_IMPORTED_MODULE_7__lib_http_service__["a" /* HttpService */], __WEBPACK_IMPORTED_MODULE_8__ngx_translate_core__["c" /* TranslateService */], __WEBPACK_IMPORTED_MODULE_6__lib_session_service__["a" /* SessionService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_5__lib_messages_service__["a" /* MessageService */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__["a" /* Camera */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormBuilder */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__lib_config_service__["a" /* ConfigService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__lib_config_service__["a" /* ConfigService */]) === "function" && _d || Object, typeof (_e = typeof __WEBPACK_IMPORTED_MODULE_7__lib_http_service__["a" /* HttpService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_7__lib_http_service__["a" /* HttpService */]) === "function" && _e || Object, typeof (_f = typeof __WEBPACK_IMPORTED_MODULE_8__ngx_translate_core__["c" /* TranslateService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_8__ngx_translate_core__["c" /* TranslateService */]) === "function" && _f || Object, typeof (_g = typeof __WEBPACK_IMPORTED_MODULE_6__lib_session_service__["a" /* SessionService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_6__lib_session_service__["a" /* SessionService */]) === "function" && _g || Object, typeof (_h = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* NavParams */]) === "function" && _h || Object, typeof (_j = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */]) === "function" && _j || Object, typeof (_k = typeof __WEBPACK_IMPORTED_MODULE_5__lib_messages_service__["a" /* MessageService */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_5__lib_messages_service__["a" /* MessageService */]) === "function" && _k || Object, typeof (_l = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__["a" /* Camera */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_camera__["a" /* Camera */]) === "function" && _l || Object])
 ], SettingUserPage);
 
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l;
 //# sourceMappingURL=user_setting.js.map
 
 /***/ }),
@@ -1545,8 +1622,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_4_ionic_angular__["e" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_22__app_component__["a" /* MyApp */], {
                 tabsPlacement: 'bottom',
                 scrollAssist: true,
-                autoFocusAssist: true,
-                scrollPadding: true,
+                autoFocusAssist: false,
+                scrollPadding: false,
                 platforms: {
                     android: { tabsPlacement: 'bottom' },
                     ios: { tabsPlacement: 'bottom' },
@@ -1666,8 +1743,10 @@ MessageService = __decorate([
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CONFIG; });
 var CONFIG = {
     ROUTES: {
-        DOMAIN_API: 'http://192.168.1.126/intro_app/api/public',
-        FOLDER_IMAGES: 'http://192.168.1.126/intro_app/api/public/images',
+        //DOMAIN_API:'http://192.168.1.126/intro_app/api/public',
+        //FOLDER_IMAGES:'http://192.168.1.126/intro_app/api/public/images',
+        DOMAIN_API: 'http://165.227.51.66/api/public/',
+        FOLDER_IMAGES: 'http://165.227.51.66/api/public/images'
     },
     PROFILE_IMAGE: 'assets/images/profile-picture.png',
     LOGOS: {
@@ -1679,7 +1758,7 @@ var CONFIG = {
     GENERAL: {
         QUANTITY: 5,
         LANGUAGE: 'en',
-        FACEBOOK_ID: '1456822774399383',
+        FACEBOOK_ID: '1961950780725321',
         GOOGLE_APIKEY: 'AIzaSyBz_QsRxbAr9SOf0djzPQSaK7HAfHs9o0I',
         CURRENT_PLAY_LIST: 'PLpOqH6AE0tNiPHU2BCm_ei3C2BmjN9IGt',
         CHANNEL: 'UCsfWVdGe5Gggv9U2YqXo5Dw',
@@ -1821,7 +1900,7 @@ __decorate([
     __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* NavController */])
 ], MyApp.prototype, "nav", void 0);
 MyApp = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"c:\xampp\htdocs\intro_app\ionic\src\app\app.html"*/'<ion-menu side="right" [content]="content">\n\n  <ion-header>\n\n    <ion-toolbar color="secondary">\n\n      <ion-title>{{\'MENU\' | translate}}</ion-title>\n\n    </ion-toolbar>\n\n  </ion-header>\n\n  <ion-content>\n\n    <ion-list>\n\n      <button ion-item (click)="closeSession()">{{\'LOGOUT\' | translate}}</button>\n\n    </ion-list>\n\n\n\n  </ion-content>\n\n</ion-menu>\n\n<ion-nav #content [root]="rootPage"></ion-nav>\n\n'/*ion-inline-end:"c:\xampp\htdocs\intro_app\ionic\src\app\app.html"*/
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({template:/*ion-inline-start:"c:\xampp\htdocs\intro_app\ionic\src\app\app.html"*/'<ion-menu side="right" [content]="content" [swipeEnabled]="false">\n\n  <ion-header>\n\n    <ion-toolbar color="secondary">\n\n      <ion-title>{{\'MORE\' | translate}}</ion-title>\n\n    </ion-toolbar>\n\n  </ion-header>\n\n  <ion-content>\n\n    <ion-list>\n\n      <button ion-item (click)="closeSession()">{{\'LOGOUT\' | translate}}</button>\n\n    </ion-list>\n\n  </ion-content>\n\n</ion-menu>\n\n<ion-nav #content [root]="rootPage"></ion-nav>\n\n'/*ion-inline-end:"c:\xampp\htdocs\intro_app\ionic\src\app\app.html"*/
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */], __WEBPACK_IMPORTED_MODULE_5__ngx_translate_core__["c" /* TranslateService */], __WEBPACK_IMPORTED_MODULE_4__ionic_native_globalization__["a" /* Globalization */], __WEBPACK_IMPORTED_MODULE_8__lib_config_service__["a" /* ConfigService */], __WEBPACK_IMPORTED_MODULE_9__lib_session_service__["a" /* SessionService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */]])
 ], MyApp);
@@ -1852,13 +1931,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-
 var HeaderComponent = (function () {
-    function HeaderComponent(tabService, configService, app, menuCtrl, platform) {
+    function HeaderComponent(tabService, configService, app, platform) {
         this.tabService = tabService;
         this.configService = configService;
         this.app = app;
-        this.menuCtrl = menuCtrl;
         this.platform = platform;
         this.options = { showTab: null, backEnabled: null, showHeader: null, logoEnabled: null, sectionEnabled: null, menuEnabled: null };
         this.menuIcon = '';
@@ -1881,25 +1958,23 @@ var HeaderComponent = (function () {
                 this.tabService.setShowTab(true); //cada vez que se cambie de pagina y no se indico showtab, conviene poerlo true para que lo ponga visible
         }
     };
-    HeaderComponent.prototype.openUserMenu = function (event) {
-        this.menuCtrl.open();
-    };
     HeaderComponent.prototype.ngDoCheck = function () {
         this.setTab();
     };
     HeaderComponent.prototype.ngAfterContentInit = function () {
-        //  console.log("ngAfterContentInit");
+        console.log("ngAfterContentInit");
     };
     HeaderComponent.prototype.ngAfterContentChecked = function () {
+        console.log("ngAfterContentChecked");
     };
     HeaderComponent.prototype.ngAfterViewInit = function () {
-        //console.log("ngAfterViewInit");
+        console.log("ngAfterViewInit");
     };
     HeaderComponent.prototype.ngAfterViewChecked = function () {
-        //console.log("ngAfterViewChecked");
+        console.log("ngAfterViewChecked");
     };
     HeaderComponent.prototype.ngOnDestroy = function () {
-        //  console.log("ngOnDestroy");
+        console.log("ngOnDestroy");
     };
     return HeaderComponent;
 }());
@@ -1909,9 +1984,9 @@ __decorate([
 ], HeaderComponent.prototype, "options", void 0);
 HeaderComponent = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
-        selector: 'header',template:/*ion-inline-start:"c:\xampp\htdocs\intro_app\ionic\src\pages\header\header.html"*/'<ion-toolbar *ngIf="options.showHeader!==false">\n\n  <ion-buttons  left>\n\n    <div *ngIf="!options.backEnabled" class="empty-back-button"></div>\n\n    <ion-navbar *ngIf="options.backEnabled"></ion-navbar>\n\n  </ion-buttons>\n\n\n\n  <ion-title *ngIf="!(options.sectionEnabled==false)" class="section">\n\n    {{configService.getSection()}}\n\n  </ion-title>\n\n\n\n  <ion-buttons end>\n\n    <button ion-button icon-only (click)="openUserMenu($event)">\n\n      <ion-icon *ngIf="options.menuEnabled" name="{{menuIcon}}"></ion-icon>\n\n    </button>\n\n  </ion-buttons>\n\n</ion-toolbar>\n\n'/*ion-inline-end:"c:\xampp\htdocs\intro_app\ionic\src\pages\header\header.html"*/
+        selector: 'header',template:/*ion-inline-start:"c:\xampp\htdocs\intro_app\ionic\src\pages\header\header.html"*/'<ion-toolbar *ngIf="options.showHeader!==false">\n\n  <ion-buttons  left>\n\n    <div *ngIf="!options.backEnabled" class="empty-back-button"></div>\n\n    <ion-navbar *ngIf="options.backEnabled"></ion-navbar>\n\n  </ion-buttons>\n\n\n\n  <ion-title *ngIf="!(options.sectionEnabled==false)" class="section">\n\n    {{configService.getSection()}}\n\n  </ion-title>\n\n\n\n  <ion-buttons end>\n\n  \n\n  </ion-buttons>\n\n</ion-toolbar>\n\n'/*ion-inline-end:"c:\xampp\htdocs\intro_app\ionic\src\pages\header\header.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__tabs_tabs_service__["a" /* TabService */], __WEBPACK_IMPORTED_MODULE_3__lib_config_service__["a" /* ConfigService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* MenuController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */]])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_2__tabs_tabs_service__["a" /* TabService */], __WEBPACK_IMPORTED_MODULE_3__lib_config_service__["a" /* ConfigService */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["b" /* App */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["j" /* Platform */]])
 ], HeaderComponent);
 
 //# sourceMappingURL=header.js.map
@@ -2543,7 +2618,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 var TabService = (function () {
     function TabService() {
-        this.tabsMenu = { 'HOME': 'HOME', 'CONTACTS': 'CONTACTS', 'INTROS': 'INTROS', 'MESSAGES': 'MESSAGES', 'SETTINGS': 'SETTINGS' };
+        this.tabsMenu = { 'HOME': 'HOME', 'CONTACTS': 'CONTACTS', 'INTROS': 'INTROS', 'MESSAGES': 'MESSAGES', 'SETTINGS': 'SETTINGS', 'MORE': 'MORE' };
     }
     TabService.prototype.getSection = function (section) {
         if (this.tabsMenu[section] !== undefined)

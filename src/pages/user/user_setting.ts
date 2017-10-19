@@ -57,12 +57,12 @@ export class SettingUserPage {
 
   private buildValidations() {
     this.registerSetting = this.formBuilder.group({
-      full_name: ['jajajaj', Validators.compose([Validators.minLength(2), Validators.required])],
-      job_title: ['jejejeje', Validators.compose([Validators.minLength(2), Validators.required])],
-      company_name: ['jijijij', Validators.compose([Validators.minLength(3), Validators.required])],
-      job_description: ['jojojjoj', Validators.compose([Validators.minLength(3)])],
+      full_name: ['', Validators.compose([Validators.minLength(2), Validators.required])],
+      job_title: ['', Validators.compose([Validators.minLength(2), Validators.required])],
+      company_name: ['', Validators.compose([Validators.minLength(3), Validators.required])],
+      job_description: ['', Validators.compose([Validators.minLength(3)])],
       //email: [  this.params['email'], Validators.compose([Validators.minLength(5), Validators.email,
-      email: [  'jua@gmail.com', Validators.compose([Validators.minLength(5), Validators.email, Validators.required])]
+      email: [  '', Validators.compose([Validators.minLength(5), Validators.email, Validators.required])]
     });
   }
 
@@ -104,7 +104,6 @@ export class SettingUserPage {
     let paramsPut = {
       url: 'user/setting',
       urlParams: [
-        this.params['user_id'],
         this.translateService.getDefaultLang()
       ],
       app: this.app,
@@ -156,13 +155,6 @@ export class SettingUserPage {
     if (response !== undefined && response.status !== undefined && response.status === 'error') {
       this.errorSetting = response.data.message;
     } else {
-      this.sessionService.initSession({
-        'token': response.data.token,
-        'mode_facebook': false,
-        'mode_linkedin': false,
-        'mode_google_plus': false
-      });
-      this.httpService.setTokenProvider(response.data.token);
       this.navCtrl.push(TabsPage);
     }
   }

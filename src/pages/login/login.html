@@ -18,10 +18,10 @@
         <ion-col offset-1 col-11 class="center">
           <ion-item>
             <ion-icon item-left name="ios-contact-outline"></ion-icon>
-            <ion-input md-input formControlName="user" type="email" placeholder = "{{'USERNAME' | translate}}"></ion-input>
+            <ion-input md-input formControlName="user" type="text" placeholder = "{{'EMAIL_USERNAME' | translate}}" (keyup.enter)="handleLogin('password')" #user></ion-input>
           </ion-item>
           <span class="error" *ngIf="!loginForm.controls.user.valid  && (loginForm.controls.user.dirty || submitted)">
-            {{'INVALID_USERNAME' | translate}}
+            {{'INVALID_EMAIL_USERNAME' | translate}}
           </span>
         </ion-col>
       </ion-row>
@@ -29,7 +29,7 @@
         <ion-col offset-1 col-11 class="center">
           <ion-item>
             <ion-icon class="flip-icon" item-left name="ios-unlock-outline"></ion-icon>
-            <ion-input md-input formControlName="password" type="password" placeholder="{{'PASSWORD' | translate}}"></ion-input>
+            <ion-input md-input formControlName="password" type="password" placeholder="{{'PASSWORD' | translate}}"  #password></ion-input>
           </ion-item>
           <span class="error" *ngIf="!loginForm.controls.password.valid  && (loginForm.controls.password.dirty || submitted)">
             {{'INVALID_PASSWORD' | translate}}
@@ -66,8 +66,11 @@
             <span class='black'>{{'NOT_MEMBER' | translate}}</span>&nbsp;&nbsp;<button ion-button color="light" class="button-link" [disabled]="submitted" (click) = "register()">{{'CREATE_ACCOUNT' | translate}}</button>
         </ion-col>
       </ion-row>
-      <button ion-button class="next-login" (click)="login()" [disabled]="!loginForm.valid || submitted">{{'NEXT' | translate}}</button>
-
+      <ion-row>
+        <ion-col col-12 class="center">
+          <button ion-button class="next-login" (click)="login()" [disabled]="!loginForm.valid || submitted" #submit>{{'NEXT' | translate}}</button>
+        </ion-col>
+      </ion-row>
     </form>
   </content>
 </ion-content>

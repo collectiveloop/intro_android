@@ -3,5 +3,5 @@
   <ion-tab [root]="tab2Root" tabTitle="{{ tabService.getSection('CONTACTS') | translate }}" class="disable-ripple" tabIcon="contacts"></ion-tab>
   <ion-tab [root]="tab3Root" tabTitle="{{ tabService.getSection('INTROS') | translate }}" class="disable-ripple" tabIcon="intros"></ion-tab>
   <ion-tab [root]="tab4Root" tabTitle="{{ tabService.getSection('MESSAGES') | translate }}" class="disable-ripple" tabIcon="messages"></ion-tab>
-  <ion-tab [root]="tab5Root" tabTitle="{{ tabService.getSection('SETTINGS') | translate }}" class="disable-ripple" tabIcon="settings"></ion-tab>
+  <ion-tab (ionSelect)='openUserMenu()' tabTitle="{{ tabService.getSection('MORE') | translate }}" class="disable-ripple" tabIcon="settings"></ion-tab>
 </ion-tabs>

@@ -18,7 +18,7 @@
         <ion-col offset-1 col-11 class="center">
           <ion-item>
             <ion-icon item-left name="ios-contact-outline"></ion-icon>
-            <ion-input md-input formControlName="first_name" type="text" placeholder="{{'FIRST_NAME' | translate}}"></ion-input>
+            <ion-input md-input formControlName="first_name" type="text" placeholder="{{'FIRST_NAME' | translate}}" (keyup.enter)="handleLogin('lastName')" #firstName></ion-input>
           </ion-item>
           <span class="error" *ngIf="!registerForm.controls.first_name.valid  && (registerForm.controls.first_name.dirty || submitted)">
             {{'INVALID_FIRST_NAME' | translate}}
@@ -29,7 +29,7 @@
         <ion-col offset-1 col-11 class="center">
           <ion-item>
               <ion-icon item-left name="ios-contact-outline"></ion-icon>
-              <ion-input md-input formControlName="last_name" type="text" placeholder="{{'LAST_NAME' | translate}}"></ion-input>
+              <ion-input md-input formControlName="last_name" type="text" placeholder="{{'LAST_NAME' | translate}}" (keyup.enter)="handleLogin('userName')" #lastName></ion-input>
           </ion-item>
           <span class="error" *ngIf="!registerForm.controls.last_name.valid  && (registerForm.controls.last_name.dirty || submitted)">
             {{'INVALID_LAST_NAME' | translate}}
@@ -39,8 +39,19 @@
       <ion-row>
         <ion-col offset-1 col-11 class="center">
           <ion-item>
+              <ion-icon item-left name="ios-contact-outline"></ion-icon>
+              <ion-input md-input formControlName="user_name" type="text" placeholder="{{'USERNAME' | translate}}" (keyup.enter)="handleLogin('email')" #userName></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="!registerForm.controls.user_name.valid  && (registerForm.controls.user_name.dirty || submitted)">
+            {{'INVALID_USERNAME' | translate}}
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item>
             <ion-icon item-left name="ios-mail-outline"></ion-icon>
-            <ion-input md-input formControlName="email" type="email" placeholder="{{'EMAIL' | translate}}"></ion-input>
+            <ion-input md-input formControlName="email" type="email" placeholder="{{'EMAIL' | translate}}"  (keyup.enter)="handleLogin('password')" #email></ion-input>
           </ion-item>
           <span class="error" *ngIf="!registerForm.controls.email.valid  && (registerForm.controls.email.dirty || submitted)">
             {{'INVALID_EMAIL' | translate}}
@@ -51,7 +62,7 @@
         <ion-col offset-1 col-11 class="center">
           <ion-item>
             <ion-icon class="flip-icon" item-left name="ios-unlock-outline"></ion-icon>
-            <ion-input md-input formControlName="password" type="password" placeholder="{{'PASSWORD' | translate}}"></ion-input>
+            <ion-input md-input formControlName="password" type="password" placeholder="{{'PASSWORD' | translate}}" (keyup.enter)="handleLogin('confirmPassword')" #password></ion-input>
           </ion-item>
           <span class="error" *ngIf="!registerForm.controls.password.valid  && (registerForm.controls.password.dirty || submitted)">
             {{'INVALID_PASSWORD' | translate}}
@@ -62,7 +73,7 @@
         <ion-col offset-1 col-11 class="center">
           <ion-item>
             <ion-icon class="flip-icon" item-left name="ios-unlock-outline"></ion-icon>
-            <ion-input md-input formControlName="confirm_password" type="password" placeholder="{{'CONFIRM_PASSWORD' | translate}}"></ion-input>
+            <ion-input md-input formControlName="confirm_password" type="password" placeholder="{{'CONFIRM_PASSWORD' | translate}}" #confirmPassword></ion-input>
           </ion-item>
           <span class="error" *ngIf="!registerForm.controls.confirm_password.valid  && (registerForm.controls.confirm_password.dirty || submitted)">
             {{'INVALID_CONFIRM_PASSWORD' | translate}}
@@ -71,9 +82,7 @@
       </ion-row>
       <ion-row class="form-container-buttons">
         <ion-col col-12 class="center">
-          <button  ion-button class="button-form shadow" (click)="back()" [disabled]="submitted">{{'LOG_IN' | translate}}</button>
-
-          <button outline  ion-button class="button-form shadow" (click)="register()" [disabled]="!registerForm.valid || submitted">{{'ACCEPT' | translate}}</button>
+          <button outline  ion-button class="button-form shadow" (click)="register()" [disabled]="!registerForm.valid || submitted">{{'SIGNUP' | translate}}</button>
         </ion-col>
       </ion-row>
     </form>

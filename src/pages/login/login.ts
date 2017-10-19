@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, App, Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ViewChild } from '@angular/core';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { LinkedIn } from '@ionic-native/linkedin';
@@ -17,6 +18,9 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: 'login.html'
 })
 export class LoginPage {
+  @ViewChild('user') input;
+  @ViewChild('password') password;
+  @ViewChild('submit') submit;
   loginForm: FormGroup;
   submitted: boolean;
   errorLogin: string;
@@ -60,11 +64,10 @@ export class LoginPage {
     }
   }
 
-
   private buildValidations() {
     this.loginForm = this.formBuilder.group({
-      user: ['renshocontact@gmail.com', Validators.compose([Validators.minLength(5), Validators.email, Validators.required])],
-      password: ['2f6W9MPSo7', Validators.compose([Validators.minLength(8), Validators.maxLength(15), Validators.required])],
+      user: ['', Validators.compose([Validators.minLength(5), Validators.required])],
+      password: ['', Validators.compose([Validators.minLength(8), Validators.maxLength(15), Validators.required])],
       //user: ['', Validators.compose( [Validators.minLength(5), Validators.email, Validators.required]) ] ,
       //password: ['', Validators.compose([Validators.minLength(8),Validators.maxLength(15), Validators.required]) ] ,
     });
@@ -106,8 +109,15 @@ export class LoginPage {
         'mode_google_plus': false
       });
       this.httpService.setTokenProvider(response.data.token);
+      //this.loginForm.reset();
+      this.loginForm.controls['password'].patchValue('');
+      this.loginForm.controls['password'].setValue('');
       this.navCtrl.push(TabsPage);
     }
+  }
+
+  public handleLogin(action:any):void {
+    this[action].setFocus();
   }
 
   public forgotPassword(): void {
@@ -119,9 +129,14 @@ export class LoginPage {
   }
 
   public loginFacebook(): void {
+    this.errorLogin = '';
     this.submitted = true;
-    this.sessionService.loginByFacebook().then(function() {
-      this.getFacebookInfo();
+    this.sessionService.loginByFacebook().then(function(result) {
+      if(result!==false){
+        this.getFacebookInfo();
+      }else{
+        this.submitted = false;
+      }
     }.bind(this), function(error) {
       this.errorLogin = error;
       this.submitted = false;
@@ -167,7 +182,8 @@ export class LoginPage {
 
   private errorCallBack(response: any): void {
     this.messages.closeMessage();
-    this.errorLogin = response.data.message;
+    if(response.data!==undefined && response.data.message!==undefined)
+      this.errorLogin = response.data.message;
     this.submitted = false;
     //cerramos sesion
     this.sessionService.closeSession();
@@ -193,9 +209,14 @@ export class LoginPage {
   }
 
   public loginLinkedin(): void {
+    this.errorLogin = '';
     this.submitted = true;
-    this.sessionService.loginByLinkedin().then(function() {
-      this.getLinkedinInfo();
+    this.sessionService.loginByLinkedin().then(function(result) {
+      if(result!==false){
+        this.getLinkedinInfo();
+      }else{
+        this.submitted = false;
+      }
     }.bind(this), function(error) {
       this.errorLogin = error;
       this.submitted = false;
@@ -273,36 +294,41 @@ export class LoginPage {
 
   public loginGooglePlus(): void {
     this.submitted = true;
+    this.errorLogin = '';
     this.sessionService.loginByGooglePlus().then(function(result) {
-      let names = result.displayName.split(' ');
-      let first_name = '';
-      let last_name = '';
+      if(result!==false){
+        let names = result.displayName.split(' ');
+        let first_name = '';
+        let last_name = '';
 
-      if (names.length > 0)
-        first_name = names[0];
+        if (names.length > 0)
+          first_name = names[0];
 
-      if (names.length > 1)
-        last_name = names[1];
+        if (names.length > 1)
+          last_name = names[1];
 
-      let info = {
-        external_id: result.userId,
-        first_name: first_name,
-        last_name: last_name,
-        email: result.email,
-        platform: 'google_plus'
-      };
-      this.httpService.post({
-        url: 'user',
-        urlParams: [
-          'external',
-          this.translateService.getDefaultLang()
-        ],
-        app: this.app,
-        inputs: info,
-        success: this.callBackGooglePlus,
-        error: this.errorCallBack,
-        context: this,
-      });
+        let info = {
+          external_id: result.userId,
+          first_name: first_name,
+          last_name: last_name,
+          email: result.email,
+          platform: 'google_plus'
+        };
+        this.httpService.post({
+          url: 'user',
+          urlParams: [
+            'external',
+            this.translateService.getDefaultLang()
+          ],
+          app: this.app,
+          inputs: info,
+          success: this.callBackGooglePlus,
+          error: this.errorCallBack,
+          context: this,
+        });
+      }else{
+        this.submitted = false;
+      }
 
     }.bind(this), function(error) {
       this.errorLogin = error;

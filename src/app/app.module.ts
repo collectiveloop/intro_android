@@ -51,8 +51,8 @@ import { UpdateUserPage } from '../pages/user/user_update';
     IonicModule.forRoot(MyApp,{
       tabsPlacement: 'bottom',
       scrollAssist: true,
-      autoFocusAssist: true,
-      scrollPadding: true,
+      autoFocusAssist: false,
+      scrollPadding: false,
       platforms:{
         android:{tabsPlacement: 'bottom'},
         ios:{tabsPlacement: 'bottom'},

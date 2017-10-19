@@ -35,6 +35,10 @@
    margin-bottom: 0px;
  }
 
+.menu-inner .item {
+    border: 0px !important;
+}
+
  .item.item-block .item-inner {
     padding-right: 0px;
     margin-right: 0px;

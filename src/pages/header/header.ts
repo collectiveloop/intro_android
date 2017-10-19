@@ -2,7 +2,7 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { App, Platform } from 'ionic-angular';
 import { TabService } from '../tabs/tabs.service';
 import { ConfigService }   from '../../lib/config.service';
-import { MenuController } from 'ionic-angular';
+
 
 @Component({
   selector: 'header',
@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Input() options: object = { showTab: null, backEnabled: null, showHeader: null , logoEnabled: null, sectionEnabled: null, menuEnabled:null };
   menuIcon:string='';
 
-  constructor(private tabService: TabService, private configService: ConfigService, private app: App, public menuCtrl: MenuController, public platform: Platform) {
+  constructor(private tabService: TabService, private configService: ConfigService, private app: App, public platform: Platform) {
     this.initElementsByVersion();
   }
 
@@ -35,33 +35,28 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
-
-  public openUserMenu(event: any): void {
-    this.menuCtrl.open();
-  }
-
   ngDoCheck() {
     this.setTab();
   }
 
   ngAfterContentInit() {
-  //  console.log("ngAfterContentInit");
+    console.log("ngAfterContentInit");
   }
 
   ngAfterContentChecked() {
-
+    console.log("ngAfterContentChecked");
   }
 
   ngAfterViewInit() {
-    //console.log("ngAfterViewInit");
+    console.log("ngAfterViewInit");
   }
 
   ngAfterViewChecked() {
-    //console.log("ngAfterViewChecked");
+    console.log("ngAfterViewChecked");
   }
 
   ngOnDestroy() {
-  //  console.log("ngOnDestroy");
+    console.log("ngOnDestroy");
   }
 
 
