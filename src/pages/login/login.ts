@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, App, Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ViewChild } from '@angular/core';
@@ -22,6 +22,7 @@ export class LoginPage {
   @ViewChild('password') password;
   @ViewChild('submit') submit;
   loginForm: FormGroup;
+  externalLogin:boolean;
   submitted: boolean;
   errorLogin: string;
   logo: string;
@@ -32,13 +33,6 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public facebook: Facebook, private sessionService: SessionService, private platform: Platform, public messages: MessageService, public googlePlus: GooglePlus, public linkedin: LinkedIn) {
     this.buildValidations();
-
-    this.translateService.get('LOGIN').subscribe(
-      value => {
-        console.log(value);
-        this.configService.setSection(value);
-      }
-    );
     this.logo = this.configService.getLogo('BIGGER');
     this.facebookLogo = this.configService.getLogo('FACEBOOK_BUTTON');
     this.sessionService.getSessionStatus().then(function(result) {
@@ -52,9 +46,9 @@ export class LoginPage {
         );
       }
     }.bind(this));
-
     this.initElementsByVersion();
   }
+
 
   public initElementsByVersion() {
     if (this.platform.is('ios')) {
@@ -65,6 +59,7 @@ export class LoginPage {
   }
 
   private buildValidations() {
+    this.externalLogin = false;
     this.loginForm = this.formBuilder.group({
       user: ['renshocontact@gmail.com', Validators.compose([Validators.minLength(5), Validators.required])],
       password: ['12345678', Validators.compose([Validators.minLength(8), Validators.maxLength(15), Validators.required])],
@@ -75,9 +70,10 @@ export class LoginPage {
 
   public login(): void {
     this.errorLogin = '';
+    this.externalLogin = false;
     this.submitted = true;
     let data = {
-      email: this.loginForm.value.user,
+      email: this.loginForm.value.user.toLowerCase(),
       password: this.loginForm.value.password
     };
     this.messages.showMessage({
@@ -109,9 +105,7 @@ export class LoginPage {
         'mode_google_plus': false
       });
       this.httpService.setTokenProvider(response.data.token);
-      //this.loginForm.reset();
-      this.loginForm.controls['password'].patchValue('');
-      this.loginForm.controls['password'].setValue('');
+      this.loginForm.reset();
       this.navCtrl.push(TabsPage);
     }
   }
@@ -125,21 +119,25 @@ export class LoginPage {
   }
 
   public register(): void {
+    this.loginForm.reset();
     this.navCtrl.push(RegisterUserPage);
   }
 
   public loginFacebook(): void {
     this.errorLogin = '';
+    this.externalLogin = true;
     this.submitted = true;
     this.sessionService.loginByFacebook().then(function(result) {
       if(result!==false){
         this.getFacebookInfo();
       }else{
         this.submitted = false;
+        this.externalLogin = false;
       }
     }.bind(this), function(error) {
       this.errorLogin = error;
       this.submitted = false;
+      this.externalLogin = false;
       //cerramos sesion en facebook y cerramos sesion en la app
       this.sessionService.closeSession();
     }.bind(this));
@@ -175,6 +173,7 @@ export class LoginPage {
       .catch(error => {
         console.error(error);
         this.submitted = false;
+        this.externalLogin = false;
         //cerramos sesion en facebook y cerramos sesion en la app
         this.sessionService.closeSession();
       });
@@ -185,12 +184,14 @@ export class LoginPage {
     if(response.data!==undefined && response.data.message!==undefined)
       this.errorLogin = response.data.message;
     this.submitted = false;
+    this.externalLogin = false;
     //cerramos sesion
     this.sessionService.closeSession();
   }
 
   private callBackFacebook(response: any): void {
     this.submitted = false;
+    this.externalLogin = false;
     this.messages.closeMessage();
     if (response !== undefined && response.status !== undefined && response.status === 'error') {
       this.errorLogin = response.data.message;
@@ -204,6 +205,7 @@ export class LoginPage {
         'mode_google_plus': false
       });
       this.httpService.setTokenProvider(response.data.token.token);
+      this.loginForm.reset();
       this.navCtrl.push(TabsPage);
     }
   }
@@ -211,15 +213,18 @@ export class LoginPage {
   public loginLinkedin(): void {
     this.errorLogin = '';
     this.submitted = true;
+    this.externalLogin = true;
     this.sessionService.loginByLinkedin().then(function(result) {
       if(result!==false){
         this.getLinkedinInfo();
       }else{
         this.submitted = false;
+        this.externalLogin = false;
       }
     }.bind(this), function(error) {
       this.errorLogin = error;
       this.submitted = false;
+      this.externalLogin = false;
       //cerramos sesion en facebook y cerramos sesion en la app
       this.sessionService.closeSession();
     }.bind(this));
@@ -268,6 +273,7 @@ export class LoginPage {
       .catch(error => {
         console.error(error);
         this.submitted = false;
+        this.externalLogin = false;
         //cerramos sesion en facebook y cerramos sesion en la app
         this.sessionService.closeSession();
       });
@@ -275,6 +281,7 @@ export class LoginPage {
 
   private callBackLikedin(response: any): void {
     this.submitted = false;
+    this.externalLogin = false;
     this.messages.closeMessage();
     if (response !== undefined && response.status !== undefined && response.status === 'error') {
       this.errorLogin = response.data.message;
@@ -288,12 +295,14 @@ export class LoginPage {
         'mode_google_plus': false
       });
       this.httpService.setTokenProvider(response.data.token.token);
+      this.loginForm.reset();
       this.navCtrl.push(TabsPage);
     }
   }
 
   public loginGooglePlus(): void {
     this.submitted = true;
+    this.externalLogin = true;
     this.errorLogin = '';
     this.sessionService.loginByGooglePlus().then(function(result) {
       if(result!==false){
@@ -314,6 +323,9 @@ export class LoginPage {
           email: result.email,
           platform: 'google_plus'
         };
+        this.messages.showMessage({
+          content: this.loadingMessage
+        });
         this.httpService.post({
           url: 'user',
           urlParams: [
@@ -328,6 +340,7 @@ export class LoginPage {
         });
       }else{
         this.submitted = false;
+        this.externalLogin = false;
       }
 
     }.bind(this), function(error) {
@@ -340,6 +353,7 @@ export class LoginPage {
 
   private callBackGooglePlus(response: any): void {
     this.submitted = false;
+    this.externalLogin = false;
     this.messages.closeMessage();
     if (response !== undefined && response.status !== undefined && response.status === 'error') {
       this.errorLogin = response.data.message;
@@ -353,6 +367,7 @@ export class LoginPage {
         'mode_google_plus': true
       });
       this.httpService.setTokenProvider(response.data.token.token);
+      this.loginForm.reset();
       this.navCtrl.push(TabsPage);
     }
   }

@@ -3,6 +3,8 @@ import { TabService } from './tabs.service';
 import { HomePage } from '../dashboard/home';
 import { MenuController } from 'ionic-angular';
 
+import { MenuController } from 'ionic-angular';
+
 @Component({
   templateUrl: 'tabs.html'
 })

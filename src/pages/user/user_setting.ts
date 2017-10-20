@@ -34,12 +34,6 @@ export class SettingUserPage {
       content: this.loadingMessage
     });
     this.buildValidations();
-    this.configService.setSection('');
-    this.translateService.get('SETTINGS').subscribe(
-      value => {
-        this.configService.setSection(value);
-      }
-    );
     this.translateService.get('LOADING').subscribe(
       value => {
         this.loadingMessage = value;
@@ -69,8 +63,6 @@ export class SettingUserPage {
 
     this.httpService.get(paramsPut);
   }
-
-  ngAfterViewChecked() { }
 
   private buildValidations() {
     this.registerSetting = this.formBuilder.group({

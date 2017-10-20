@@ -168,6 +168,18 @@ ion-navbar.toolbar{
 
 .text-input{}
 
+.lower-case input{
+  text-transform: lowercase;
+}
+
+.upper-case input{
+  text-transform: uppercase;
+}
+
+.capitalize-case input{
+  text-transform: capitalize;
+}
+
 .flip-icon {
   -moz-transform: scaleX(-1);
   -o-transform: scaleX(-1);

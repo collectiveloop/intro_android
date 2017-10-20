@@ -3,7 +3,6 @@ import { CONFIG } from '../config/config.data';
 
 @Injectable()
 export class ConfigService {
-
   section:string ='';
 
   public setSection(section:string): void {
@@ -13,6 +12,7 @@ export class ConfigService {
   public getSection(): string {
     return this.section;
   }
+
   public getAllConfig(): any {
     return CONFIG;
   }
