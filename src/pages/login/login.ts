@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, App, Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ViewChild } from '@angular/core';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { LinkedIn } from '@ionic-native/linkedin';
@@ -33,13 +32,6 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public facebook: Facebook, private sessionService: SessionService, private platform: Platform, public messages: MessageService, public googlePlus: GooglePlus, public linkedin: LinkedIn) {
     this.buildValidations();
-
-    this.translateService.get('LOGIN').subscribe(
-      value => {
-        console.log(value);
-        this.configService.setSection(value);
-      }
-    );
     this.logo = this.configService.getLogo('BIGGER');
     this.facebookLogo = this.configService.getLogo('FACEBOOK_BUTTON');
     this.sessionService.getSessionStatus().then(function(result) {
@@ -53,9 +45,9 @@ export class LoginPage {
         );
       }
     }.bind(this));
-
     this.initElementsByVersion();
   }
+
 
   public initElementsByVersion() {
     if (this.platform.is('ios')) {
@@ -80,7 +72,7 @@ export class LoginPage {
     this.externalLogin = false;
     this.submitted = true;
     let data = {
-      email: this.loginForm.value.user,
+      email: this.loginForm.value.user.toLowerCase(),
       password: this.loginForm.value.password
     };
     this.messages.showMessage({
@@ -112,9 +104,9 @@ export class LoginPage {
         'mode_google_plus': false
       });
       this.httpService.setTokenProvider(response.data.token);
-      //this.loginForm.reset();
-      this.loginForm.controls['password'].patchValue('');
-      this.loginForm.controls['password'].setValue('');
+      this.loginForm.reset();
+      /*this.loginForm.controls['password'].patchValue('');
+      this.loginForm.controls['password'].setValue('');*/
       this.navCtrl.push(TabsPage);
     }
   }
@@ -128,6 +120,7 @@ export class LoginPage {
   }
 
   public register(): void {
+    this.loginForm.reset();
     this.navCtrl.push(RegisterUserPage);
   }
 
@@ -213,6 +206,7 @@ export class LoginPage {
         'mode_google_plus': false
       });
       this.httpService.setTokenProvider(response.data.token.token);
+      this.loginForm.reset();
       this.navCtrl.push(TabsPage);
     }
   }
@@ -302,6 +296,7 @@ export class LoginPage {
         'mode_google_plus': false
       });
       this.httpService.setTokenProvider(response.data.token.token);
+      this.loginForm.reset();
       this.navCtrl.push(TabsPage);
     }
   }
@@ -329,6 +324,9 @@ export class LoginPage {
           email: result.email,
           platform: 'google_plus'
         };
+        this.messages.showMessage({
+          content: this.loadingMessage
+        });
         this.httpService.post({
           url: 'user',
           urlParams: [
@@ -370,6 +368,7 @@ export class LoginPage {
         'mode_google_plus': true
       });
       this.httpService.setTokenProvider(response.data.token.token);
+      this.loginForm.reset();
       this.navCtrl.push(TabsPage);
     }
   }

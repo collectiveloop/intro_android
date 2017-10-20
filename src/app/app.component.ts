@@ -44,7 +44,6 @@ export class MyApp {
   public closeSession(): void {
     this.menuCtrl.close();
     this.sessionService.closeSession();
-    //console.log(this.app.getRootNav());
     this.app.getRootNav().popToRoot();
   }
 

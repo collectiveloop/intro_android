@@ -1,5 +1,14 @@
 <ion-header>
   <header [options]="{backEnabled:false, showTab:false, showHeader:true, logoEnabled:false,menuEnabled:false, sectionEnabled:true}"></header>
+  <ion-toolbar>
+    <ion-buttons  left>
+      <div class="empty-back-button"></div>
+    </ion-buttons>
+    <ion-title class="section">
+      {{'SETTINGS' | translate}}
+    </ion-title>
+    <ion-buttons end></ion-buttons>
+  </ion-toolbar>
 </ion-header>
 <ion-content>
   <content class="form-style">

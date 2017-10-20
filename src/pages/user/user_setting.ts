@@ -30,12 +30,6 @@ export class SettingUserPage {
   constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, private sessionService: SessionService, public navParams: NavParams, private platform: Platform, public messages: MessageService, private camera: Camera) {
     this.params = { 'email': this.navParams.get('email'), 'password': this.navParams.get('password'), 'user_id': this.navParams.get('user_id') };
     this.buildValidations();
-    this.configService.setSection('');
-    this.translateService.get('SETTINGS').subscribe(
-      value => {
-        this.configService.setSection(value);
-      }
-    );
     this.translateService.get('LOADING').subscribe(
       value => {
         this.loadingMessage = value;
@@ -52,8 +46,6 @@ export class SettingUserPage {
       this.ios = false;
     }
   }
-
-  ngAfterViewChecked() { }
 
   private buildValidations() {
     this.registerSetting = this.formBuilder.group({

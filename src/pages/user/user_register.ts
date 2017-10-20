@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, App, LoadingController, Platform } from 'ionic-angular';
-import { ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfigService }   from '../../lib/config.service';
 import { MessageService } from '../../lib/messages.service';
@@ -10,6 +9,7 @@ import { HttpService }   from '../../lib/http.service';
 import { TranslateService } from '@ngx-translate/core';
 
 import { SettingUserPage } from '../user/user_setting';
+import { TabsPage } from '../tabs/tabs';
 import { LoginPage } from '../login/login';
 
 @Component({
@@ -32,13 +32,6 @@ export class RegisterUserPage {
 
   constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, private sessionService: SessionService, private loadingCtrl: LoadingController, private platform: Platform, public messages: MessageService) {
     this.buildValidations();
-    this.configService.setSection('');
-    this.translateService.get('SIGNUP').subscribe(
-      value=>{
-        console.log(value);
-        this.configService.setSection(value);
-      }
-    );
     this.translateService.get('LOADING').subscribe(
       value=>{
         this.loadingMessage = value;
@@ -46,8 +39,6 @@ export class RegisterUserPage {
       }
     );
   }
-
-  ngAfterViewChecked() {}
 
   private buildValidations(){
     this.registerForm = this.formBuilder.group({
@@ -83,12 +74,12 @@ export class RegisterUserPage {
     let data={
       first_name : this.registerForm.value.first_name,
       last_name : this.registerForm.value.last_name,
-      email : this.registerForm.value.email,
+      email : this.registerForm.value.email.toLowerCase(),
       password : this.registerForm.value.password
     };
 
     if(this.registerForm.value.user_name!==null && this.registerForm.value.user_name!==undefined && this.registerForm.value.user_name!=='')
-      data['user_name'] = this.registerForm.value.user_name;
+      data['user_name'] = this.registerForm.value.user_name.toLowerCase();
 
     this.messages.showMessage({
        content:this.loadingMessage
@@ -120,9 +111,7 @@ export class RegisterUserPage {
         'mode_google_plus': false
       });
       this.httpService.setTokenProvider(response.data.token);
-      let id = response.data.user_id;
-      if(id !==0)
-        this.navCtrl.push(SettingUserPage,{email:this.registerForm.value.email,password : this.registerForm.value.password,user_id:id});
+      this.navCtrl.push(TabsPage);
     }
   }
 

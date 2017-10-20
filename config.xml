@@ -88,6 +88,10 @@
     <plugin name="cordova-plugin-console" spec="^1.0.7" />
     <plugin name="cordova-plugin-datepicker" spec="^0.9.3" />
     <plugin name="cordova-plugin-device" spec="^1.1.6" />
+    <plugin name="cordova-plugin-facebook4" spec="^1.9.1">
+        <variable name="APP_ID" value="144792272803845" />
+        <variable name="APP_NAME" value="sappitotech.ionic.introapp" />
+    </plugin>
     <plugin name="cordova-plugin-file" spec="^4.3.3" />
     <plugin name="cordova-plugin-file-transfer" spec="^1.6.3" />
     <plugin name="cordova-plugin-globalization" spec="^1.0.7" />
@@ -107,8 +111,4 @@
     <plugin name="de.appplant.cordova.plugin.local-notification" spec="~0.8.5" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="phonegap-plugin-local-notification" spec="^1.0.1" />
-    <plugin name="cordova-plugin-facebook4" spec="^1.9.1">
-        <variable name="APP_ID" value="144792272803845" />
-        <variable name="APP_NAME" value="sappitotech.ionic.introapp" />
-    </plugin>
 </widget>
