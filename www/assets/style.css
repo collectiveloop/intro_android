@@ -30,11 +30,8 @@
 
 }
 
-element.style {
-}
-
-
-element.style {
+.list, .list-md, .list-ios {
+    margin: 0px;
 }
 
 .item-input-has-focus .label-md[stacked],

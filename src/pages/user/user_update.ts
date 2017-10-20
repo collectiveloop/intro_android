@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { NavController, App} from 'ionic-angular';
+
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { ConfigService } from '../../lib/config.service';
@@ -13,6 +14,12 @@ import { TranslateService } from '@ngx-translate/core';
   providers:[ImagePicker]
 })
 export class UpdateUserPage {
+  @ViewChild('firstName') firstName;
+  @ViewChild('lastName') lastName;
+  @ViewChild('userName') userName;
+  @ViewChild('email') email;
+  @ViewChild('password') password;
+  @ViewChild('confirmPassword') confirmPassword;
   updateForm: FormGroup;
   submitted: boolean;
   ready: boolean;
@@ -27,10 +34,15 @@ export class UpdateUserPage {
     this.ready = false;
   }
 
+  public handleLogin(action:any):void {
+    this[action].setFocus();
+  }
+
   private buildValidations(): void {
     this.updateForm = this.formBuilder.group({
       first_name: ['', Validators.compose([Validators.minLength(2), Validators.required]) ] ,
       last_name: ['', Validators.compose([Validators.minLength(2), Validators.required]) ] ,
+      user_name: ['', Validators.compose([Validators.minLength(2), Validators.required]) ] ,
       email: ['', Validators.compose([Validators.minLength(5),Validators.email, Validators.required]) ],
       password: ['', Validators.compose( [Validators.minLength(8),Validators.maxLength(15)]) ],
       confirm_password: ['', Validators.compose([Validators.minLength(8),Validators.maxLength(15)]) ]
@@ -62,6 +74,8 @@ export class UpdateUserPage {
         this.updateForm.controls['first_name'].setValue(data.first_name);
         this.updateForm.controls['last_name'].patchValue(data.last_name);
         this.updateForm.controls['last_name'].setValue(data.last_name);
+        this.updateForm.controls['user_name'].patchValue(data.user_name);
+        this.updateForm.controls['user_name'].setValue(data.user_name);
         this.updateForm.controls['email'].patchValue(data.email);
         this.updateForm.controls['email'].setValue(data.email);
         this.ready = true;
@@ -91,6 +105,7 @@ export class UpdateUserPage {
     let dataPut = {
       first_name: this.updateForm.value.first_name,
       last_name: this.updateForm.value.last_name,
+      user_name: this.updateForm.value.user_name,
       email: this.updateForm.value.email
     };
 

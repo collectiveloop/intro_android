@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, App, Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ViewChild } from '@angular/core';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { LinkedIn } from '@ionic-native/linkedin';
@@ -11,6 +10,7 @@ import { HttpService } from '../../lib/http.service';
 import { SessionService } from '../../lib/session.service';
 import { TabsPage } from '../tabs/tabs';
 import { RegisterUserPage } from '../user/user_register';
+import { ForgotPasswordPage } from '../login/forgot_password';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -115,7 +115,7 @@ export class LoginPage {
   }
 
   public forgotPassword(): void {
-    //this.navCtrl.push(ForgotPasswordPage);
+    this.navCtrl.push(ForgotPasswordPage);
   }
 
   public register(): void {

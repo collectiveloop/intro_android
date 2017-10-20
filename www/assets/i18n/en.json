@@ -24,6 +24,7 @@
   "PROFILE_PHOTO": "Profile photo",
   "COMPANY_NAME": "Company",
   "INVALID_COMPANY_NAME": "Company field is required",
+  "INDICATIONS": "Indicate your email or user, we will send your email the steps to follow to change your password",
   "OR": "or",
   "USER": "User data",
   "LOGOUT": "Log out",

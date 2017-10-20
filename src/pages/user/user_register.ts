@@ -1,6 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, App, LoadingController, Platform } from 'ionic-angular';
-import { ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfigService }   from '../../lib/config.service';
 import { MessageService } from '../../lib/messages.service';

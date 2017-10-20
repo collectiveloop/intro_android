@@ -24,6 +24,7 @@
   "PROFILE_PHOTO": "Imagen de perfil",
   "COMPANY_NAME": "Compañía",
   "INVALID_COMPANY_NAME": "El campo Compañía es requerido",
+  "INDICATIONS": "Indique su correo electrónico o usuario, le enviaremos  a su correo los pasos a seguir para cambiar su contraseña",
   "OR": "O",
   "USER": "Datos del usuario",
   "LOGOUT": "Cerrar sesión",

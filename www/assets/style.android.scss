@@ -1,0 +1,111 @@
+.android-theme{
+  *{
+    font-family: "Helvetica"
+  }
+
+  .logo-bigger{
+
+  }
+
+  .toolbar{
+    background-color: #FF3F1D;
+    padding:0px;
+  }
+
+   .toolbar .toolbar-title, .toolbar .icon, .toolbar .back-button-text{
+     color: #ffffff !important;
+     text-decoration: none;
+     font-size:16px;
+   }
+
+  .logo-main{
+    margin-top: 20px;
+    margin-bottom: 0px;
+  }
+
+  .big-label {
+      margin: auto;
+      text-align: center;
+      font-size: 20px;
+      text-transform: capitalize;
+  }
+
+  .next-login{
+    border-top: 1px solid #FF3F1D !important;
+    background-color: #ffffff !important;
+    min-height: 3.6em !important;
+  }
+
+  .next-login.activated{
+    border-top: 1px solid #FD4D3E !important;
+    background-color: #FD4D3E !important;
+  }
+
+  .next-login.activated .button-inner{
+    color:#ffffff !important;
+  }
+
+  .next-login .button-inner{
+    color: #FF3F1D !important;
+    text-transform: uppercase;
+  }
+
+  .button .button-inner{
+      text-transform: uppercase;
+  }
+
+  .button.button-form.shadow{
+      -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+  }
+
+  .button-outline.button-form{
+      border: 1px solid #FFFFFF;
+  }
+
+  .button-outline.button-form .button-inner{
+      text-transform: uppercase;
+  }
+
+  .form-style .item.item-block {
+      width:90%;
+  }
+
+  .image-setting{
+    position: relative;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
+    min-height: 186px;
+    background-color: #e7e7e7;
+  }
+
+  .image-setting .big-icon{
+    position: absolute;
+    bottom: -42px;
+    text-align: center;
+    width: 100%;
+    left: 0px;
+    font-size: 186px;
+    color: #d3d3d3;
+  }
+
+  .image-setting img{
+    max-width: 186px;
+    max-height: 186px;
+  }
+
+  .image-setting ion-fab{
+    padding: 0px;
+    margin-right:2%;
+    bottom:-28px;
+  }
+
+  .image-setting ion-fab button{
+    background-color: #6D6E71;
+  }
+
+  .image-setting ion-fab ion-icon{
+    color: #ffffff;
+  }
+}

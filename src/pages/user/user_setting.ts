@@ -30,14 +30,14 @@ export class SettingUserPage {
   constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, private sessionService: SessionService, public navParams: NavParams, private platform: Platform, public messages: MessageService, private camera: Camera) {
     this.params = { 'show_signup': this.navParams.get('show_signup'), 'user_id': this.navParams.get('user_id') };
 
-    this.messages.showMessage({
-      content: this.loadingMessage
-    });
     this.buildValidations();
     this.translateService.get('LOADING').subscribe(
       value => {
         this.loadingMessage = value;
         this.logo = this.configService.getLogo('BIGGER');
+        this.messages.showMessage({
+          content: this.loadingMessage
+        });
       }
     );
     if (this.params !== undefined && typeof this.params !== 'object') {

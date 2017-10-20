@@ -12,6 +12,8 @@ $font-path: "../assets/fonts";
 $app-direction: ltr;
 
 
+@import "../../www/assets/style.ios";
+@import "../../www/assets/style.android";
 @import "ionic.globals";
 
 

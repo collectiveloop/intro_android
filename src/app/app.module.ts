@@ -30,6 +30,8 @@ import { HeaderComponent } from '../pages/header/header';
 import { HomePage } from '../pages/dashboard/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
+import { ForgotPasswordPage } from '../pages/login/forgot_password';
+import { ResetPasswordPage } from '../pages/login/reset_password';
 import { RegisterUserPage } from '../pages/user/user_register';
 import { SettingUserPage } from '../pages/user/user_setting';
 import { UpdateUserPage } from '../pages/user/user_update';
@@ -39,6 +41,7 @@ import { UpdateUserPage } from '../pages/user/user_update';
     MyApp,
     HeaderComponent,
     LoginPage,
+    ForgotPasswordPage,
     RegisterUserPage,
     SettingUserPage,
     UpdateUserPage,
@@ -73,6 +76,7 @@ import { UpdateUserPage } from '../pages/user/user_update';
     MyApp,
     HeaderComponent,
     LoginPage,
+    ForgotPasswordPage,
     RegisterUserPage,
     SettingUserPage,
     UpdateUserPage,
