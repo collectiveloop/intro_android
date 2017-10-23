@@ -156,8 +156,12 @@ export class LoginPage {
           first_name: data.first_name,
           last_name: data.last_name,
           email: data.email,
+
           platform: 'facebook'
         };
+
+        if(data.id!==undefined)
+          info['image_profile'] = 'https://graph.facebook.com/'+data.id+'/picture?width=300&height=300';
         this.httpService.post({
           url: 'user',
           urlParams: [
@@ -236,7 +240,7 @@ export class LoginPage {
       content: this.loadingMessage
     });
     //https://api.linkedin.com/v1/people/~:(id,first-name,last-name)
-    this.linkedin.getRequest('people/~:(id,first-name,last-name,positions,email-address)?format=json')
+    this.linkedin.getRequest('people/~:(id,first-name,last-name,positions,email-address,picture-url,picture-urls::(original))?format=json')
       .then(data => {
         console.log(data);
         let info = {
@@ -257,6 +261,10 @@ export class LoginPage {
           if (data.positions.values[0].summary !== undefined)
             info['job_description'] = data.positions.values[0].summary;
         }
+
+        if (data.pictureUrls !== undefined && data.pictureUrls.values !== undefined && data.pictureUrls.values[0] !== undefined)
+          info['image_profile'] = data.pictureUrls.values[0];
+
         this.httpService.post({
           url: 'user',
           urlParams: [
@@ -316,7 +324,6 @@ export class LoginPage {
 
         if (names.length > 1)
           last_name = names[1];
-
         let info = {
           external_id: result.userId,
           first_name: first_name,
@@ -324,6 +331,11 @@ export class LoginPage {
           email: result.email,
           platform: 'google_plus'
         };
+
+        //imagen
+        if(result.imageUrl!==undefined && result.imageUrl!==null && result.imageUrl!=='')
+          info['image_profile'] = result.imageUrl;
+
         this.messages.showMessage({
           content: this.loadingMessage
         });
@@ -352,7 +364,7 @@ export class LoginPage {
     }.bind(this));
   }
 
-  private callBackGooglePlus(response: any): void {
+  public callBackGooglePlus(response: any): void {
     this.submitted = false;
     this.externalLogin = false;
     this.messages.closeMessage();

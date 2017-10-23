@@ -4,7 +4,6 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfigService } from '../../lib/config.service';
 import { MessageService } from '../../lib/messages.service';
-import { SessionService } from '../../lib/session.service';
 
 import { HttpService } from '../../lib/http.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -27,7 +26,7 @@ export class SettingUserPage {
   imageTaken:boolean = false;
   ios:boolean = false;
 
-  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, private sessionService: SessionService, public navParams: NavParams, private platform: Platform, public messages: MessageService, private camera: Camera) {
+  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public navParams: NavParams, private platform: Platform, public messages: MessageService, private camera: Camera) {
     this.params = { 'show_signup': this.navParams.get('show_signup'), 'user_id': this.navParams.get('user_id') };
 
     this.buildValidations();
@@ -91,6 +90,13 @@ export class SettingUserPage {
       this.registerSetting.controls['job_description'].setValue(data.job_description);
       this.registerSetting.controls['email'].patchValue(data.email);
       this.registerSetting.controls['email'].setValue(data.email);
+
+      if(data.image_profile!==undefined && data.image_profile!==null && data.image_profile!==''){
+        if(data.image_profile.indexOf('http')!==-1)
+          this.imageProfile = data.image_profile;
+        else
+          this.imageProfile = this.configService.getDomainImages()+'/profiles/'+data.image_profile;
+      }
     }
   }
 
