@@ -112,7 +112,7 @@
     <plugin name="ionic-plugin-deeplinks" spec="^1.0.15">
         <variable name="URL_SCHEME" value="introapp" />
         <variable name="DEEPLINK_SCHEME" value="http" />
-        <variable name="DEEPLINK_HOST" value="intropro.com" />
+        <variable name="DEEPLINK_HOST" value="165.227.51.66" />
         <variable name="ANDROID_PATH_PREFIX" value="/" />
         <variable name="ANDROID_2_PATH_PREFIX" value="/" />
         <variable name="ANDROID_3_PATH_PREFIX" value="/" />

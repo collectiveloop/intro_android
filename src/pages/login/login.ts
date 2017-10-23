@@ -9,6 +9,7 @@ import { MessageService } from '../../lib/messages.service';
 import { HttpService } from '../../lib/http.service';
 import { SessionService } from '../../lib/session.service';
 import { TabsPage } from '../tabs/tabs';
+import { SettingUserPage } from '../user/user_setting';
 import { RegisterUserPage } from '../user/user_register';
 import { ForgotPasswordPage } from '../login/forgot_password';
 import { TranslateService } from '@ngx-translate/core';
@@ -206,7 +207,7 @@ export class LoginPage {
       });
       this.httpService.setTokenProvider(response.data.token.token);
       this.loginForm.reset();
-      this.navCtrl.push(TabsPage);
+      this.navCtrl.push(SettingUserPage);
     }
   }
 
@@ -296,7 +297,7 @@ export class LoginPage {
       });
       this.httpService.setTokenProvider(response.data.token.token);
       this.loginForm.reset();
-      this.navCtrl.push(TabsPage);
+      this.navCtrl.push(SettingUserPage);
     }
   }
 
@@ -368,7 +369,7 @@ export class LoginPage {
       });
       this.httpService.setTokenProvider(response.data.token.token);
       this.loginForm.reset();
-      this.navCtrl.push(TabsPage);
+      this.navCtrl.push(SettingUserPage);
     }
   }
 }

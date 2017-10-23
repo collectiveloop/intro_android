@@ -7,8 +7,6 @@ import { SessionService }   from '../../lib/session.service';
 import { HttpService }   from '../../lib/http.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SettingUserPage } from '../user/user_setting';
-import { TabsPage } from '../tabs/tabs';
-import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-user-register',
@@ -114,7 +112,7 @@ export class RegisterUserPage {
         'mode_linkedin': false,
         'mode_google_plus': false
       });
-      this.navCtrl.push(TabsPage);
+      this.navCtrl.push(SettingUserPage);
 
     }
   }

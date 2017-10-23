@@ -159,6 +159,10 @@ export class SettingUserPage {
     }
   }
 
+  public backHome():void{
+    this.navCtrl.push(TabsPage);
+  }
+
   private callBackError(response: any): void {
     this.messages.closeMessage();
   }

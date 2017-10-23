@@ -37,6 +37,7 @@
   "NOT_MEMBER": "Not registered?",
   "CREATE_ACCOUNT": "Create an account",
   "SIGNIN": "Register",
+  "CHANGE_PASSWORD": "Change password",
   "SEND": "Send",
   "UPDATE": "Update Info",
   "INVALID_EMAIL_USERNAME": "Email or Username field is required",

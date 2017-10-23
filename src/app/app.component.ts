@@ -32,8 +32,9 @@ export class MyApp {
           let language = result.value.split('-')[0];//evitamos cosas como -US
           this.translateService.setDefaultLang(language);
 
-          this.deeplinks.route({
-            '/forgot-password/:remember-token': ResetPasswordPage
+          this.deeplinks.routeWithNavController(this.app.getRootNav(), {
+            '/api/public/remember-link/:token': ResetPasswordPage,
+            '/forgot-password/:token': ResetPasswordPage
           }).subscribe((match) => {
             // match.$route - the route we matched, which is the matched entry from the arguments to route()
             // match.$args - the args passed in the link

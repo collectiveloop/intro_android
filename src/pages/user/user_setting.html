@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons  left>
-      <ion-navbar></ion-navbar>
+      <div class="empty-back-button center">
+        <ion-icon item-left name="md-arrow-back" (click)="backHome()"></ion-icon>
+      </div>
     </ion-buttons>
     <ion-title class="section">
       {{'SETTINGS' | translate}}
