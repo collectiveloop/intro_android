@@ -8,13 +8,9 @@
 
   }
 
-  /*barra de navegación*/
-  .tabs-md .tabbar {
-    width: 100%;
-      margin-right: 0.5px;
-      border-radius: 0px 0px 2px 2px;
+  .header .toolbar{
+    height:64px !important;
   }
-  /*fin de barra de navegación*/
 
   .toolbar{
     background-color: #ffffff;
@@ -30,6 +26,14 @@
    .toolbar .toolbar-background{
      color:#cccccc;
    }
+
+  /*barra de navegación*/
+  .tabs-md .tabbar {
+    width: 100%;
+      margin-right: 0.5px;
+      border-radius: 0px 0px 2px 2px;
+  }
+  /*fin de barra de navegación*/
 
    .logo-main{
      margin-top: 15px;
@@ -118,5 +122,37 @@
 
   .image-setting img{
     width:186px;
+  }
+
+  @media (max-height: 658px) {
+    .header .toolbar{
+      height:44px !important;
+    }
+
+    .scroll-content {
+      margin-top: 50px !important;
+    }
+  }
+
+  @media (min-height: 658px) and (max-height: 736px) {
+    .header .toolbar .toolbar-title{
+      font-size: 20px !important;
+    }
+  }
+
+  @media (min-height: 900px) {
+    * {
+      font-size: 20px !important;
+    }
+  }
+
+  @media (min-height: 1024px) {
+    * {
+      font-size: 30px !important;
+    }
+
+    .header .toolbar{
+      height:88px !important;
+    }
   }
 }

@@ -84,6 +84,11 @@ export class UpdateUserPage {
     });
   }
 
+  public submitForm(){
+    if(this.updateForm.valid)
+      this.update();
+  }
+
   public update(): void {
     this.errorUpdate = '';
     this.successUpdate = '';

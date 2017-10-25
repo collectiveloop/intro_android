@@ -37,6 +37,11 @@ export class ForgotPasswordPage {
     });
   }
 
+  public submitForm(){
+    if(this.forgotPasswordForm.valid)
+      this.sendRequest();
+  }
+
   public sendRequest():void{
     this.errorPasswordForm='';
     this.successPasswordForm='';

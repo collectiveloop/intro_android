@@ -30,6 +30,10 @@
 
 }
 
+.margin-respect{
+  margin-top:25px;
+}
+
 .list, .list-md, .list-ios {
     margin: 0px;
 }
@@ -48,6 +52,12 @@
   background-color: #FF3F1D;
 }
 
+.footer .toolbar{
+  background: none;
+  display: initial;
+  min-height: 56px;
+}
+
 .tabs .tabbar .tab-button[aria-selected=true]{
   background-color: #FFFFFF;
   height:63px;
@@ -55,20 +65,20 @@
 
 .tabs .tabbar .tab-button[aria-selected=true] .tab-button-text{
   color: #FF3F1D;
+  font-size:12px;
 }
 
 .tabs .tabbar .tab-button .tab-button-text {
   color: #FFFFFF;
   -webkit-transition: none;
   transition: none;
-  transition: none;
-  transition: none;
+  font-size:12px;
+  transform: initial;
 }
 
 
-
 .tabs .tabbar .tab-button .tab-button-icon{
-  width:28px;
+  height:33px;
 }
 
 .tabs .tabbar .tab-button .ion-ios-home-outline,
@@ -83,13 +93,11 @@
 
 .tabs .tabbar .tab-button .ion-ios-intros-outline,
 .tabs .tabbar .tab-button .ion-md-intros{
-  width:48px;
   content: url('icon/intros.svg');
 }
 
 .tabs .tabbar .tab-button .ion-ios-messages-outline,
 .tabs .tabbar .tab-button .ion-md-messages{
-  width:36px;
   content: url('icon/messages.svg');
 }
 
@@ -110,13 +118,11 @@
 
 .tabs .tabbar .tab-button[aria-selected=true] .ion-ios-intros,
 .tabs .tabbar .tab-button[aria-selected=true] .ion-md-intros{
-  width:48px;
   content: url('icon/intros_active.svg');
 }
 
 .tabs .tabbar .tab-button[aria-selected=true] .ion-ios-messages,
 .tabs .tabbar .tab-button[aria-selected=true] .ion-md-messages{
-  width:36px;
   content: url('icon/messages_active.svg');
 }
 
@@ -207,7 +213,9 @@ ion-navbar.toolbar{
   padding: 0px;
   margin: 0px;
   border-radius: 0px;
+  position: inherit;
   bottom: 0px;
+  height: 56px !important;
   border: 0px;
   font-weight: bold;
   z-index:4;
@@ -225,6 +233,7 @@ ion-navbar.toolbar{
     text-shadow: initial !important;
     -webkit-box-shadow: none !important;
     box-shadow:none !important;
+    height:inherit;
 }
 
 .button-link{
@@ -384,4 +393,16 @@ ion-menu ion-list{
       height:55px;
       background-color: #FD4D3E;
     }
+}
+
+@media (min-width: 360px) {
+  .tabs .tabbar .tab-button .tab-button-text {
+    font-size:14px  !important;
+  }
+}
+
+@media (min-width: 480px) {
+  .tabs .tabbar .tab-button .tab-button-text {
+    font-size:16px !important;
+  }
 }

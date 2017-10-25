@@ -9,7 +9,7 @@ import { MessageService } from '../../lib/messages.service';
 import { HttpService } from '../../lib/http.service';
 import { SessionService } from '../../lib/session.service';
 import { TabsPage } from '../tabs/tabs';
-import { SettingUserPage } from '../user/user_setting';
+import { ProfileUserPage } from '../user/user_profile';
 import { RegisterUserPage } from '../user/user_register';
 import { ForgotPasswordPage } from '../login/forgot_password';
 import { TranslateService } from '@ngx-translate/core';
@@ -119,6 +119,11 @@ export class LoginPage {
     this.navCtrl.push(ForgotPasswordPage);
   }
 
+  public submitForm(){
+    if(this.loginForm.valid)
+      this.login();
+  }
+
   public register(): void {
     this.loginForm.reset();
     this.navCtrl.push(RegisterUserPage);
@@ -156,7 +161,6 @@ export class LoginPage {
           first_name: data.first_name,
           last_name: data.last_name,
           email: data.email,
-
           platform: 'facebook'
         };
 
@@ -211,7 +215,7 @@ export class LoginPage {
       });
       this.httpService.setTokenProvider(response.data.token.token);
       this.loginForm.reset();
-      this.navCtrl.push(SettingUserPage);
+      this.navCtrl.push(ProfileUserPage);
     }
   }
 
@@ -248,7 +252,6 @@ export class LoginPage {
           first_name: data.firstName,
           last_name: data.lastName,
           email: data.emailAddress,
-          full_name: data.firstName + ' ' + data.lastName,
           platform: 'linkedin'
         };
         if (data.positions !== undefined && data.positions.values !== undefined && data.positions.values.length > 0) {
@@ -305,7 +308,7 @@ export class LoginPage {
       });
       this.httpService.setTokenProvider(response.data.token.token);
       this.loginForm.reset();
-      this.navCtrl.push(SettingUserPage);
+      this.navCtrl.push(ProfileUserPage);
     }
   }
 
@@ -381,7 +384,7 @@ export class LoginPage {
       });
       this.httpService.setTokenProvider(response.data.token.token);
       this.loginForm.reset();
-      this.navCtrl.push(SettingUserPage);
+      this.navCtrl.push(ProfileUserPage);
     }
   }
 }

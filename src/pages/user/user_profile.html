@@ -1,0 +1,131 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons  left>
+      <div class="empty-back-button center">
+        <ion-icon item-left name="md-arrow-back" (click)="backHome()"></ion-icon>
+      </div>
+    </ion-buttons>
+    <ion-title class="section">
+      {{'UPDATE_PROFILE' | translate}}
+    </ion-title>
+    <ion-buttons end></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <content class="form-style">
+    <ion-row *ngIf="!ios">
+      <ion-col col-12 class="center image-setting">
+        <ion-icon class="big-icon" *ngIf="imageProfile==null" item-left name="md-person"></ion-icon>
+        <img *ngIf="imageProfile!=null" src="{{imageProfile}}">
+        <ion-fab bottom right>
+         <button (click) = "makeImage()" ion-fab>
+           <ion-icon  name="md-camera"></ion-icon>
+         </button>
+       </ion-fab>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="ios">
+      <ion-col offset-4 col-4 class="center logo-main">
+        <img class="logo-bigger" src="{{logo}}">
+      </ion-col>
+    </ion-row>
+    <form [formGroup]="updateProfile">
+      <ion-row>
+        <ion-col *ngIf="ios" col-12 class="center">
+          <span class="error center" [innerHTML]="errorProfile"></span>
+        </ion-col>
+        <ion-col *ngIf="!ios" col-12 class="center margin-respect">
+          <span class="error center" [innerHTML]="errorProfile"></span>
+        </ion-col>
+      </ion-row>
+      <div *ngIf="ios" (click) = "makeImage()" class="image-setting">
+        <div *ngIf="imageProfile==null" class="photo">
+          <span>{{'PROFILE_PHOTO' | translate}}</span>
+        </div>
+        <img *ngIf="imageProfile!=null" src="{{imageProfile}}">
+      </div>
+      <ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item>
+            <ion-icon item-left name="ios-contact-outline"></ion-icon>
+            <ion-input md-input formControlName="first_name" type="text" placeholder="{{'FIRST_NAME' | translate}}" (keyup.enter)="handleLogin('lastName')" #firstName></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="ready && !updateProfile.controls.first_name.valid  && (updateProfile.controls.first_name.dirty || submitted)">
+            {{'INVALID_NAME' | translate}}
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item>
+            <ion-icon item-left name="ios-contact-outline"></ion-icon>
+            <ion-input md-input formControlName="last_name" type="text" placeholder="{{'LAST_NAME' | translate}}" (keyup.enter)="handleLogin('userName')" #lastName></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="ready && !updateProfile.controls.last_name.valid  && (updateProfile.controls.last_name.dirty || submitted)">
+            {{'INVALID_LAST_NAME' | translate}}
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item>
+              <ion-icon item-left name="ios-contact-outline"></ion-icon>
+              <ion-input md-input formControlName="user_name" type="text" placeholder="{{'USERNAME' | translate}}" (keyup.enter)="handleLogin('email')" #userName></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="!updateProfile.controls.user_name.valid  && (updateProfile.controls.user_name.dirty || submitted)">
+            {{'INVALID_USERNAME' | translate}}
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item>
+            <ion-icon item-left name="ios-mail-outline"></ion-icon>
+            <ion-input md-input formControlName="email" type="email" placeholder="{{'EMAIL' | translate}}" (keyup.enter)="handleLogin('jobTitle')" #email></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="!updateProfile.controls.email.valid  && (updateProfile.controls.email.dirty || submitted)">
+            {{'INVALID_EMAIL' | translate}}
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item>
+            <ion-icon item-left name="ios-person-add-outline"></ion-icon>
+            <ion-input md-input formControlName="job_title" type="text" placeholder="{{'JOB_TITLE' | translate}}" (keyup.enter)="handleLogin('companyName')" #jobTitle></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="!updateProfile.controls.job_title.valid  && (updateProfile.controls.job_title.dirty || submitted)">
+            {{'INVALID_JOB_TITLE' | translate}}
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item>
+            <ion-icon item-left name="ios-ribbon-outline"></ion-icon>
+            <ion-input md-input formControlName="company_name" type="text" placeholder="{{'COMPANY_NAME' | translate}}" (keyup.enter)="handleLogin('jobDescription')" #companyName></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="!updateProfile.controls.company_name.valid  && (updateProfile.controls.company_name.dirty || submitted)">
+            {{'INVALID_COMPANY_NAME' | translate}}
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item>
+            <ion-icon item-left name="ios-text-outline"></ion-icon>
+            <ion-input md-input formControlName="job_description" type="text" placeholder="{{'JOB_DESCRIPTION' | translate}}" (keyup.enter)="submitForm()" #jobDescription></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="!updateProfile.controls.job_description.valid  && (updateProfile.controls.job_description.dirty || submitted)">
+            {{'INVALID_JOB_DESCRIPTION' | translate}}
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row class="form-container-buttons">
+        <ion-col col-12 class="center">
+          <button type="button" outline  ion-button class="button-form shadow" (click)="update()" [disabled]="!updateProfile.valid || submitted">{{'ACCEPT' | translate}}</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </content>
+</ion-content>

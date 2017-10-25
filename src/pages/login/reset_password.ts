@@ -52,6 +52,11 @@ export class ResetPasswordPage {
     this[action].setFocus();
   }
 
+  public submitForm(){
+    if(this.resetPasswordForm.valid)
+      this.sendRequest();
+  }
+
   public sendRequest():void{
     this.submitted = true;
     this.errorPasswordForm='';

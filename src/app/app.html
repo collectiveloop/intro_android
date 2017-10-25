@@ -5,12 +5,11 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-
     <ion-list>
-      <button ion-item (click)="updateUser()"><ion-icon item-left name="md-person"></ion-icon> {{'UPDATE' | translate}}</button>
+      <button ion-item (click)="profileUser()"><ion-icon item-left name="md-settings"></ion-icon> {{'UPDATE_PROFILE' | translate}}</button>
     </ion-list>
     <ion-list>
-      <button ion-item (click)="settingUser()"><ion-icon item-left name="md-settings"></ion-icon> {{'SETTINGS' | translate}}</button>
+      <button ion-item (click)="changePassword()"><ion-icon item-left name="md-person"></ion-icon> {{'CHANGE_PASSWORD' | translate}}</button>
     </ion-list>
     <ion-list>
       <button ion-item (click)="closeSession()"><ion-icon item-left name="md-log-out"></ion-icon> {{'LOGOUT' | translate}}</button>

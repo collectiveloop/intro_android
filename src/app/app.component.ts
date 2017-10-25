@@ -10,8 +10,8 @@ import { SessionService } from '../lib/session.service';
 import { SettingsProvider } from '../lib/settings';
 import { LoginPage } from '../pages/login/login';
 import { ResetPasswordPage } from '../pages/login/reset_password';
-import { UpdateUserPage } from '../pages/user/user_update';
-import { SettingUserPage } from '../pages/user/user_setting';
+import { ChangePasswordPage } from '../pages/login/change_password';
+import { ProfileUserPage } from '../pages/user/user_profile';
 import { Deeplinks } from '@ionic-native/deeplinks';
 
 @Component({
@@ -57,15 +57,15 @@ export class MyApp {
     });
   }
 
-  public updateUser(): void {
+  public changePassword(): void {
     this.menuCtrl.close();
-    this.app.getRootNav().push(UpdateUserPage);
+    this.app.getRootNav().push(ChangePasswordPage);
   }
 
-  public settingUser(): void {
+  public profileUser(): void {
     console.log("setting");
     this.menuCtrl.close();
-    this.app.getRootNav().push(SettingUserPage);
+    this.app.getRootNav().push(ProfileUserPage);
   }
 
   public closeSession(): void {
@@ -77,12 +77,14 @@ export class MyApp {
   public runDevice(): void {
     // Okay, so the platform is ready and our plugins are available.
     // Here you can do any higher level native things you might need.
-    //this.statusBar.styleDefault();
-    if (this.platform.is('ios'))
+    if (this.platform.is('ios')){
       this.settings.setActiveTheme('ios-theme');
-    else
+      this.statusBar.styleDefault();
+    } else{
       this.settings.setActiveTheme('android-theme');
-    this.statusBar.styleBlackOpaque();
+      this.statusBar.styleBlackOpaque();
+
+    }
     this.splashScreen.hide();
   }
 }
