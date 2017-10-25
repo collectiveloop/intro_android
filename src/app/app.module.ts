@@ -11,7 +11,6 @@ import { Globalization } from '@ionic-native/globalization';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { LinkedIn } from '@ionic-native/linkedin';
-import { Camera } from '@ionic-native/camera';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { DatePicker } from '@ionic-native/date-picker';
 
@@ -35,7 +34,6 @@ import { ResetPasswordPage } from '../pages/login/reset_password';
 import { ChangePasswordPage } from '../pages/login/change_password';
 import { RegisterUserPage } from '../pages/user/user_register';
 import { ProfileUserPage } from '../pages/user/user_profile';
-import { UpdateUserPage } from '../pages/user/user_update';
 
 @NgModule({
   declarations: [
@@ -47,7 +45,6 @@ import { UpdateUserPage } from '../pages/user/user_update';
     ChangePasswordPage,
     RegisterUserPage,
     ProfileUserPage,
-    UpdateUserPage,
     HomePage,
     TabsPage
   ],
@@ -84,7 +81,6 @@ import { UpdateUserPage } from '../pages/user/user_update';
     ChangePasswordPage,
     RegisterUserPage,
     ProfileUserPage,
-    UpdateUserPage,
     HomePage,
     TabsPage
   ],
@@ -102,7 +98,6 @@ import { UpdateUserPage } from '../pages/user/user_update';
     Facebook,
     GooglePlus,
     LinkedIn,
-    Camera,
     LocalNotifications,
     DatePicker,
     {provide: ErrorHandler, useClass: IonicErrorHandler}

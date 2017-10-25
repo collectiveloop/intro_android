@@ -1,7 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, App, LoadingController, Platform } from 'ionic-angular';
+import { NavController, App, LoadingController, Platform, ActionSheetController } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { File } from '@ionic-native/file';
+import { FilePath } from '@ionic-native/file-path';
+import { ImagePicker } from '@ionic-native/image-picker';
+import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
+
 import { ConfigService }   from '../../lib/config.service';
 import { MessageService } from '../../lib/messages.service';
 import { SessionService }   from '../../lib/session.service';
@@ -11,7 +16,14 @@ import { TabsPage } from '../tabs/tabs';
 
 @Component({
   selector: 'page-user-register',
-  templateUrl: 'user_register.html'
+  templateUrl: 'user_register.html',
+  providers:[
+    Camera,
+    File,
+    FilePath,
+    ImagePicker,
+    ImageResizer
+  ]
 })
 export class RegisterUserPage {
   @ViewChild('firstName') firstName;
@@ -33,13 +45,49 @@ export class RegisterUserPage {
   imageProfile: any;
   imageTaken:boolean = false;
   ios:boolean = false;
+  actionSheet: any;
+  optionsImage: any = [];
+  optionsCamera: CameraOptions = {
+    quality: 100,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.PNG,
+    sourceType: this.camera.PictureSourceType.CAMERA,
+    mediaType: this.camera.MediaType.PICTURE,
+    cameraDirection: this.camera.Direction.BACK, //CAMARA FRONTAL
+    targetWidth: 350,
+    targetHeight: 350
+  };
 
-  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, private sessionService: SessionService, private loadingCtrl: LoadingController, private platform: Platform, public messages: MessageService, private camera: Camera) {
+  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, private sessionService: SessionService, private loadingCtrl: LoadingController, private platform: Platform, public messages: MessageService, private camera: Camera, public actionSheetCtrl: ActionSheetController, private imagePicker: ImagePicker, private file: File, private filePath: FilePath, private imageResizer: ImageResizer) {
     this.buildValidations();
     this.translateService.get('LOADING').subscribe(
       value=>{
         this.loadingMessage = value;
         this.logo = this.configService.getLogo('BIGGER') ;
+      }
+    );
+
+    this.translateService.get('OPTIONS').subscribe(
+      value => {
+        this.optionsImage['OPTIONS'] = value;
+      }
+    );
+
+    this.translateService.get('FROM_CAMERA').subscribe(
+      value => {
+        this.optionsImage['FROM_CAMERA'] = value;
+      }
+    );
+
+    this.translateService.get('FROM_GALLERY').subscribe(
+      value => {
+        this.optionsImage['FROM_GALLERY'] = value;
+      }
+    );
+
+    this.translateService.get('CANCEL').subscribe(
+      value => {
+        this.optionsImage['CANCEL'] = value;
       }
     );
 
@@ -78,17 +126,34 @@ export class RegisterUserPage {
   }
 
   public makeImage(): void{
-    const options: CameraOptions = {
-      quality: 70,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.PNG,
-      sourceType: this.camera.PictureSourceType.CAMERA,
-      mediaType: this.camera.MediaType.PICTURE,
-      cameraDirection: this.camera.Direction.BACK, //CAMARA FRONTAL
-      targetWidth: 200,
-      targetHeight: 200
-    }
+    this.actionSheet = this.actionSheetCtrl.create({
+      title: this.optionsImage['OPTIONS'],
+      buttons: [
+        {
+          text: this.optionsImage['FROM_CAMERA'],
+          handler: () => {
+            this.takeCamera();
+          }
+        },
+        {
+          text: this.optionsImage['FROM_GALLERY'],
+          handler: () => {
+            this.takeGallery();
+          }
+        },
+        {
+          text: this.optionsImage['CANCEL'],
+          role: 'cancel',
+          handler: () => { }
+        }
+      ]
+    });
 
+    this.actionSheet.present();
+  }
+
+  public takeCamera(): void {
+    const options = this.optionsCamera;
     this.camera.getPicture(options).then((imageData) => {
       this.imageTaken = true;
       let base64Image = 'data:image/jpeg;base64,' + imageData;
@@ -96,6 +161,50 @@ export class RegisterUserPage {
     }, (err) => {
       // Handle error
     });
+  }
+
+  public takeGallery(): void {
+    this.imagePicker.hasReadPermission().then((result) => {
+      // if this is 'false' you probably want to call 'requestReadPermission' now
+      if (!result) {
+        this.imagePicker.requestReadPermission().then((permission) => {
+          this.getImage();
+        });
+      } else {
+        this.getImage();
+      }
+    }
+    );
+  }
+
+  public getImage(): void {
+    this.imagePicker.getPictures({ maximumImagesCount: 1, outputType: 0 }).then((results) => {
+      for (var i = 0; i < results.length; i++) {
+        console.log('Image URI: ' + results[i]);
+        let options: ImageResizerOptions = {
+          uri: results[i],
+          quality: 100,
+          width: 350,
+          height: 350
+        };
+
+        this.imageResizer
+          .resize(options)
+          .then((filePath: string) => {
+            console.log('FilePath', filePath);
+            this.imageTaken = true;
+            let split = filePath.split('/');
+            let path = filePath.substr(0, filePath.lastIndexOf('/'));
+            let image = split[split.length - 1];
+
+            this.file.readAsDataURL(path, image).then((result) => {
+              this.imageProfile = result;
+            });
+          })
+          .catch(e => console.log(e));
+
+      }
+    }, (err) => { });
   }
 
   public register():void{

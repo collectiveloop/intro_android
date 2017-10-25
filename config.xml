@@ -95,6 +95,7 @@
     </plugin>
     <plugin name="cordova-plugin-file" spec="^4.3.3" />
     <plugin name="cordova-plugin-file-transfer" spec="^1.6.3" />
+    <plugin name="cordova-plugin-filepath" spec="^1.1.0" />
     <plugin name="cordova-plugin-globalization" spec="^1.0.7" />
     <plugin name="cordova-plugin-googleplus" spec="^5.1.1">
         <variable name="REVERSED_CLIENT_ID" value="243179874931-beqb80o5867005il5jgpp64h1cigp1cv.apps.googleusercontent.com" />
@@ -110,6 +111,7 @@
     <plugin name="cordova-plugin-youtube-video-player" spec="^1.0.6" />
     <plugin name="cordova.plugins.diagnostic" spec="^3.7.1" />
     <plugin name="de.appplant.cordova.plugin.local-notification" spec="~0.8.5" />
+    <plugin name="info.protonet.imageresizer" spec="^0.1.1" />
     <plugin name="ionic-plugin-deeplinks" spec="^1.0.15">
         <variable name="URL_SCHEME" value="introapp" />
         <variable name="DEEPLINK_SCHEME" value="http" />

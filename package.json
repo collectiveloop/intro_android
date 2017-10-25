@@ -28,10 +28,13 @@
         "@ionic-native/deeplinks": "^4.3.2",
         "@ionic-native/facebook": "^4.2.1",
         "@ionic-native/file": "^4.3.0",
+        "@ionic-native/file-chooser": "^4.3.2",
+        "@ionic-native/file-path": "^4.3.2",
         "@ionic-native/file-transfer": "^4.3.0",
         "@ionic-native/globalization": "^4.2.1",
         "@ionic-native/google-plus": "^4.3.1",
-        "@ionic-native/image-picker": "^4.3.1",
+        "@ionic-native/image-picker": "^4.3.2",
+        "@ionic-native/image-resizer": "^4.3.2",
         "@ionic-native/linkedin": "^4.3.1",
         "@ionic-native/local-notifications": "^4.3.0",
         "@ionic-native/secure-storage": "^4.2.1",
@@ -55,6 +58,7 @@
         "cordova-plugin-facebook4": "^1.9.1",
         "cordova-plugin-file": "^4.3.3",
         "cordova-plugin-file-transfer": "^1.6.3",
+        "cordova-plugin-filepath": "^1.1.0",
         "cordova-plugin-globalization": "^1.0.7",
         "cordova-plugin-googleplus": "^5.1.1",
         "cordova-plugin-linkedin": "^1.2.1",
@@ -70,6 +74,7 @@
         "de.appplant.cordova.plugin.local-notification": "~0.8.5",
         "font-awesome": "^4.7.0",
         "gulp": "^3.9.1",
+        "info.protonet.imageresizer": "^0.1.1",
         "ionic-angular": "3.6.1",
         "ionic-plugin-deeplinks": "^1.0.15",
         "ionic-plugin-keyboard": "^2.2.1",
@@ -134,7 +139,9 @@
                 "DEEPLINK_4_HOST": " ",
                 "DEEPLINK_5_SCHEME": " ",
                 "DEEPLINK_5_HOST": " "
-            }
+            },
+            "cordova-plugin-filepath": {},
+            "info.protonet.imageresizer": {}
         },
         "platforms": [
             "android",
