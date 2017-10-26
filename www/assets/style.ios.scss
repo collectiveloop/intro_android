@@ -124,6 +124,102 @@
     width:186px;
   }
 
+  /*dashboard*/
+  .card-ios {
+    margin-top: 40px !important;
+    border-radius: 15px;
+    font-size: 15px;
+    -webkit-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .card-header-ios {
+    font-family: 'Helvetica Ltsd';
+    font-size: 13px;
+    font-weight: normal;
+    color: #7f7f7f;
+    padding: 20px;
+    border-bottom: 2px solid #EDEEF0;
+    text-transform: uppercase;
+  }
+
+  .card-ios {
+    margin-top: 40px !important;
+    border-radius: 20px;
+    font-size: 15px;
+    -webkit-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-ios .footer .label {
+    font-family: 'Helvetica Ltsd';
+    width: 100%;
+    color: #FF3F1D !important;
+    text-align: center;
+    font-size: 18px;
+    letter-spacing: 1px;
+    margin: 0px;
+    display: inline-block;
+  }
+
+  .card-content-ios {
+    margin: 20px 0px 0px 0px;
+    padding: 0px;
+    display: flex;
+  }
+
+  .card-content-ios .item {
+    padding: 0px;
+    margin: 0px;
+    margin: auto auto;
+    text-align: center;
+  }
+
+  .card-content-ios .item.reason {
+    width: 650px;
+  }
+
+  .card-content-ios .item.reason.received {
+    width: 850px;
+  }
+
+  .card-content-ios .item .label, .card-content-ios .item .label div {
+    color: #111111 !important;
+    white-space: inherit;
+    text-transform: capitalize;
+    font-size: 11px;
+  }
+
+  .card-content-ios .item.reason .label {
+    text-align: left;
+    text-transform: inherit;
+    font-size: 13px;
+
+  }
+
+  .card-content-ios .item .item-inner {
+    padding: 0px !important;
+  }
+
+  .card-content-ios .image {
+    display: inline-table;
+  }
+
+  .card-content-ios .image img {
+    max-width: 70px;
+    max-height: 70px;
+    border-radius: 50%;
+  }
+
+  .card-ios .footer {
+    width: 100%;
+    clear: both;
+    text-align: center;
+    text-transform: uppercase;
+    padding-bottom: 10px;
+  }
+  /*fin dashboard*/
+
   @media (max-height: 658px) {
     .header .toolbar{
       height:44px !important;
@@ -131,6 +227,12 @@
 
     .scroll-content {
       margin-top: 50px !important;
+    }
+
+    
+
+    .card-content-ios .item.reason .label {
+      margin-left:10px;
     }
   }
 

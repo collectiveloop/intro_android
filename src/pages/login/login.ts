@@ -65,7 +65,7 @@ export class LoginPage {
       //user: ['renshocontact@gmail.com', Validators.compose([Validators.minLength(5), Validators.required])],
       //password: ['12345678', Validators.compose([Validators.minLength(8), Validators.maxLength(15), Validators.required])],
       user: ['', Validators.compose( [Validators.minLength(5), Validators.email, Validators.required]) ] ,
-      password: ['', Validators.compose([Validators.minLength(8),Validators.maxLength(15), Validators.required]) ] ,
+      password: ['', Validators.compose([Validators.minLength(8),Validators.maxLength(15), Validators.required]) ] 
     });
   }
 

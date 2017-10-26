@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons  left>
+    <ion-buttons left>
       <div class="empty-back-button"></div>
     </ion-buttons>
     <ion-title class="section">
@@ -9,19 +9,57 @@
     <ion-buttons end></ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content padding>
-  <ion-list>
-   <ion-item class="clear-style list" *ngFor="let introduction of introductions" (click)="gotoDetail(introduction.id)">
-       <img class="images-collage-small" src="{{introduction.images}}" />
-       <img class="images-collage title" *ngIf=" introduction.type_title == 'image'"  src="{{introduction.title_image}}" />
-       <h2 class="images-collage title" *ngIf=" introduction.type_title == 'text'">{{introduction.name}}</h2>
-   </ion-item>
-  </ion-list>
+<ion-content padding class='grace'>
 
-  <ion-infinite-scroll (ionInfinite)="getMoreintroductions($event)">
-   <ion-infinite-scroll-content
-      loadingSpinner="bubbles"
-      loadingText="{{'MORE_introductionS' | translate}}"
-    ></ion-infinite-scroll-content>
- </ion-infinite-scroll>
+  <ion-card>
+    <ion-card-header>
+      {{'MADE_INTRODUCTIONS' | translate}}
+    </ion-card-header>
+    <ion-card-content *ngIf="dashboard.made!=undefined && dashboard.made!=null">
+      <ion-item>
+        <div class="image">
+          <img src="{{route+dashboard.made.friend_1_image_profile}}" />
+        </div>
+        <div>{{dashboard.made.friend_1_first_name}} {{dashboard.made.friend_1_last_name}}</div>
+      </ion-item>
+
+      <ion-item>
+        <div class="image"><img src="{{route+dashboard.made.friend_2_image_profile}}" /></div>
+        <div>{{dashboard.made.friend_2_first_name}} {{dashboard.made.friend_2_last_name}}</div>
+      </ion-item>
+
+      <ion-item class="reason">
+        {{dashboard.made.reason}}
+      </ion-item>
+    </ion-card-content>
+    <ion-card-content *ngIf="dashboard.made==undefined || dashboard.made==null">
+      {{'NOT_INTROS_RECEIVED' | translate}}
+    </ion-card-content>
+    <ion-item class="footer">
+      {{dashboard.count_made}} {{'INTROS_MADE' | translate}}
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      {{'INTRODUCTIONS_RECEIVED' | translate}}
+    </ion-card-header>
+    <ion-card-content *ngIf="dashboard.received!=undefined && dashboard.received!=null">
+      <ion-item class="full">
+        <div class="image" >
+          <img src="{{route+dashboard.received.friend_image_profile}}" />
+        </div>
+        <div>{{dashboard.received.friend_first_name}} {{dashboard.received.friend_last_name}}</div>
+      </ion-item>
+      <ion-item class="reason received">
+        {{dashboard.received.reason}}
+      </ion-item>
+    </ion-card-content>
+    <ion-card-content *ngIf="dashboard.received==undefined || dashboard.received==nul">
+      {{'NOT_INTROS_RECEIVED' | translate}}
+    </ion-card-content>
+    <ion-item class="footer">
+      {{dashboard.count_received}} {{'INTROS_RECEIVED' | translate}}
+    </ion-item>
+  </ion-card>
 </ion-content>

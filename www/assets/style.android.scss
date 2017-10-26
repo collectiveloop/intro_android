@@ -1,111 +1,195 @@
-.android-theme{
-  *{
-    font-family: "Helvetica"
+.android-theme {
+  * {
+    font-family: "Helvetica";
   }
 
-  .logo-bigger{
+  .logo-bigger {}
 
-  }
-
-  .toolbar{
+  .toolbar {
     background-color: #FF3F1D;
-    padding:0px;
+    padding: 0;
   }
 
-   .toolbar .toolbar-title, .toolbar .icon, .toolbar .back-button-text{
-     color: #ffffff !important;
-     text-decoration: none;
-     font-size:16px;
-   }
+  .toolbar .back-button-text,
+  .toolbar .icon,
+  .toolbar .toolbar-title {
+    color: #ffffff !important;
+    text-decoration: none;
+    font-size: 16px;
+  }
 
-  .logo-main{
+  .logo-main {
     margin-top: 20px;
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 
   .big-label {
-      margin: auto;
-      text-align: center;
-      font-size: 20px;
-      text-transform: capitalize;
+    margin: auto;
+    text-align: center;
+    font-size: 20px;
+    text-transform: capitalize;
   }
 
-  .next-login{
+  .next-login {
     border-top: 1px solid #FF3F1D !important;
     background-color: #ffffff !important;
     min-height: 3.6em !important;
   }
 
-  .next-login.activated{
+  .next-login.activated {
     border-top: 1px solid #FD4D3E !important;
     background-color: #FD4D3E !important;
   }
 
-  .next-login.activated .button-inner{
-    color:#ffffff !important;
+  .next-login.activated .button-inner {
+    color: #ffffff !important;
   }
 
-  .next-login .button-inner{
+  .next-login .button-inner {
     color: #FF3F1D !important;
     text-transform: uppercase;
   }
 
-  .button .button-inner{
-      text-transform: uppercase;
+  .button .button-inner {
+    text-transform: uppercase;
   }
 
-  .button.button-form.shadow{
-      -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+  .button.button-form.shadow {
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !important;
   }
 
-  .button-outline.button-form{
-      border: 1px solid #FFFFFF;
+  .button-outline.button-form {
+    border: 1px solid #FFFFFF;
   }
 
-  .button-outline.button-form .button-inner{
-      text-transform: uppercase;
+  .button-outline.button-form .button-inner {
+    text-transform: uppercase;
   }
 
   .form-style .item.item-block {
-      width:90%;
+    width: 90%;
   }
 
-  .image-setting{
+  .image-setting {
     position: relative;
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
     width: 100%;
     min-height: 186px;
     background-color: #e7e7e7;
   }
 
-  .image-setting .big-icon{
+  .image-setting .big-icon {
     position: absolute;
     bottom: -42px;
     text-align: center;
     width: 100%;
-    left: 0px;
+    left: 0;
     font-size: 186px;
     color: #d3d3d3;
   }
-  .image-setting img{
+
+  .image-setting img {
     max-width: 186px;
     vertical-align: bottom;
     max-height: 186px;
   }
 
-  .image-setting ion-fab{
-    padding: 0px;
-    margin-right:2%;
-    bottom:-28px;
+  .image-setting ion-fab {
+    padding: 0;
+    margin-right: 2%;
+    bottom: -28px;
   }
 
-  .image-setting ion-fab button{
+  .image-setting ion-fab button {
     background-color: #6D6E71;
   }
 
-  .image-setting ion-fab ion-icon{
+  .image-setting ion-fab ion-icon {
     color: #ffffff;
   }
+  /*dashboard*/
+  .card-md {
+    font-size: 15px;
+    margin-bottom: 20px;
+    -webkit-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  .card-header-md {
+    font-size: 18px;
+    font-weight: bold;
+    color: #4C4C4C;
+    padding: 20px;
+    border-bottom: 1.2px solid #6D6E71;
+  }
+
+  .card-md .footer {
+    width: 100%;
+    clear: both;
+    text-align: right;
+    text-transform: uppercase;
+    padding-bottom: 20px;
+  }
+
+  .card-md .footer .label {
+    font-family: 'Helvetica Bltsd';
+    width: 100%;
+    color: #FF3F1D !important;
+    font-size: 17px;
+    margin: 20px;
+    display: inline-block;
+    letter-spacing: 1px;
+  }
+
+  .card-content-md {
+    padding: 20px;
+    margin-top: 13px;
+  }
+
+  .card-content-md .item {
+    padding: 0px;
+    margin: auto auto;
+    text-align: center;
+    float: left;
+    width: 50%;
+  }
+
+  .card-content-md .item.full {
+    width: 100%
+  }
+
+  .card-content-md .item.reason {
+    width: 100%;
+  }
+
+  .card-content-md .item .label, .card-content-md .item .label div {
+    color: #111111 !important;
+    margin: 0px;
+    white-space: inherit;
+    text-transform: capitalize;
+  }
+
+  .card-content-md .item.reason .label {
+    margin: 0px 8px 0px 0px;
+    text-align: left;
+    text-transform: inherit;
+    font-size: 16px;
+  }
+
+  .card-content-md .item .item-inner {
+    padding: 0px !important;
+  }
+
+  .card-content-md .image {
+    display: inline-table;
+  }
+
+  .card-content-md .image img {
+    max-width: 80px;
+    max-height: 80px;
+    border-radius: 50%;
+  }
+  /*fin dashboard*/
 }

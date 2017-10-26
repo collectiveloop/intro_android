@@ -75,5 +75,12 @@
   "OPTIONS":"Options",
   "FROM_CAMERA":"From Camera",
   "FROM_GALLERY":"From Gallery",
-  "CANCEL":"Cancel"
+  "CANCEL":"Cancel",
+  "MADE_INTRODUCTIONS":"Made introductions",
+  "INTRODUCTIONS_RECEIVED":"Introductions received",
+  "INTROS_MADE":"Intros made",
+  "INTROS_RECEIVED":"Intros received",
+  "NOT_INTROS_MADE":"There is not intros made",
+  "NOT_INTROS_RECEIVED":"There is not Intros received"
+
 }

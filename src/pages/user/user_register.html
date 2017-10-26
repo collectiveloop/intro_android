@@ -11,18 +11,7 @@
 </ion-header>
 <ion-content>
   <content class="form-style">
-    <ion-row *ngIf="!ios">
-      <ion-col col-12 class="center image-setting">
-        <ion-icon class="big-icon" *ngIf="imageProfile==null" item-left name="md-person"></ion-icon>
-        <img *ngIf="imageProfile!=null" src="{{imageProfile}}">
-        <ion-fab bottom right>
-         <button (click) = "makeImage()" ion-fab>
-           <ion-icon  name="md-camera"></ion-icon>
-         </button>
-       </ion-fab>
-      </ion-col>
-    </ion-row>
-    <ion-row *ngIf="ios">
+    <ion-row>
       <ion-col offset-4 col-4 class="center logo-main">
         <img class="logo-bigger" src="{{logo}}">
       </ion-col>
