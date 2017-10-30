@@ -4,9 +4,7 @@
     text-decoration:none !important;
   }
 
-  .logo-bigger{
-
-  }
+  .logo-bigger{}
 
   .header .toolbar{
     height:64px !important;
@@ -234,10 +232,6 @@
   @media (max-height: 658px) {
     .header .toolbar{
       height:44px !important;
-    }
-
-    .logo-main {
-      margin-top: 10px;
     }
 
     .scroll-content {
