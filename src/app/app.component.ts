@@ -83,7 +83,6 @@ export class MyApp {
     } else{
       this.settings.setActiveTheme('android-theme');
       this.statusBar.styleBlackOpaque();
-
     }
     this.splashScreen.hide();
   }

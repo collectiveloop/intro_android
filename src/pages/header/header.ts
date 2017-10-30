@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
-import { App, Platform } from 'ionic-angular';
+import { Platform } from 'ionic-angular';
 import { TabService } from '../tabs/tabs.service';
 import { ConfigService }   from '../../lib/config.service';
 
@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   @Input() options: object = { showTab: null, backEnabled: null, showHeader: null , logoEnabled: null, sectionEnabled: null, menuEnabled:null };
   menuIcon:string='';
 
-  constructor(private tabService: TabService, private configService: ConfigService, private app: App, public platform: Platform) {
+  constructor(private tabService: TabService, private configService: ConfigService, public platform: Platform) {
     this.initElementsByVersion();
   }
 

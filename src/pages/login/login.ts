@@ -64,8 +64,8 @@ export class LoginPage {
     this.loginForm = this.formBuilder.group({
       //user: ['renshocontact@gmail.com', Validators.compose([Validators.minLength(5), Validators.required])],
       //password: ['12345678', Validators.compose([Validators.minLength(8), Validators.maxLength(15), Validators.required])],
-      user: ['', Validators.compose( [Validators.minLength(5), Validators.email, Validators.required]) ] ,
-      password: ['', Validators.compose([Validators.minLength(8),Validators.maxLength(15), Validators.required]) ] 
+      user: ['', Validators.compose( [Validators.minLength(5), Validators.required]) ] ,
+      password: ['', Validators.compose([Validators.minLength(8),Validators.maxLength(15), Validators.required]) ]
     });
   }
 
@@ -215,7 +215,7 @@ export class LoginPage {
       });
       this.httpService.setTokenProvider(response.data.token.token);
       this.loginForm.reset();
-      this.navCtrl.push(ProfileUserPage);
+      this.navegateLogin(response);
     }
   }
 
@@ -224,6 +224,7 @@ export class LoginPage {
     this.submitted = true;
     this.externalLogin = true;
     this.sessionService.loginByLinkedin().then(function(result) {
+      console.log(result);
       if(result!==false){
         this.getLinkedinInfo();
       }else{
@@ -308,7 +309,7 @@ export class LoginPage {
       });
       this.httpService.setTokenProvider(response.data.token.token);
       this.loginForm.reset();
-      this.navCtrl.push(ProfileUserPage);
+      this.navegateLogin(response);
     }
   }
 
@@ -384,7 +385,14 @@ export class LoginPage {
       });
       this.httpService.setTokenProvider(response.data.token.token);
       this.loginForm.reset();
-      this.navCtrl.push(ProfileUserPage);
+      this.navegateLogin(response);
     }
+  }
+
+  public navegateLogin(response:any):void{
+    if(response.data.created!=undefined && response.data.created!==null && response.data.created!=='' && (response.data.created===true || response.data.created==='true') )
+      this.navCtrl.push(ProfileUserPage);
+    else
+      this.navCtrl.push(TabsPage);
   }
 }

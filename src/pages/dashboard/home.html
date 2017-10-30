@@ -18,13 +18,15 @@
     <ion-card-content *ngIf="dashboard.made!=undefined && dashboard.made!=null">
       <ion-item>
         <div class="image">
-          <img src="{{route+dashboard.made.friend_1_image_profile}}" />
+          <img src="{{dashboard.made.friend_1_image_profile}}" />
         </div>
         <div>{{dashboard.made.friend_1_first_name}} {{dashboard.made.friend_1_last_name}}</div>
       </ion-item>
 
       <ion-item>
-        <div class="image"><img src="{{route+dashboard.made.friend_2_image_profile}}" /></div>
+        <div class="image">
+          <img src="{{dashboard.made.friend_2_image_profile}}" />
+        </div>
         <div>{{dashboard.made.friend_2_first_name}} {{dashboard.made.friend_2_last_name}}</div>
       </ion-item>
 
@@ -32,7 +34,7 @@
         {{dashboard.made.reason}}
       </ion-item>
     </ion-card-content>
-    <ion-card-content *ngIf="dashboard.made==undefined || dashboard.made==null">
+    <ion-card-content class="center" *ngIf="dashboard.made==undefined || dashboard.made==null">
       {{'NOT_INTROS_RECEIVED' | translate}}
     </ion-card-content>
     <ion-item class="footer">
@@ -46,8 +48,8 @@
     </ion-card-header>
     <ion-card-content *ngIf="dashboard.received!=undefined && dashboard.received!=null">
       <ion-item class="full">
-        <div class="image" >
-          <img src="{{route+dashboard.received.friend_image_profile}}" />
+        <div class="image">
+          <img src="{{dashboard.received.friend_image_profile}}" />
         </div>
         <div>{{dashboard.received.friend_first_name}} {{dashboard.received.friend_last_name}}</div>
       </ion-item>
@@ -55,7 +57,7 @@
         {{dashboard.received.reason}}
       </ion-item>
     </ion-card-content>
-    <ion-card-content *ngIf="dashboard.received==undefined || dashboard.received==nul">
+    <ion-card-content class="center" *ngIf="dashboard.received==undefined || dashboard.received==nul">
       {{'NOT_INTROS_RECEIVED' | translate}}
     </ion-card-content>
     <ion-item class="footer">

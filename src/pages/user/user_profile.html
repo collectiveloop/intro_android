@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons  left>
       <div class="empty-back-button center">
-        <ion-icon item-left name="md-arrow-back" (click)="backHome()"></ion-icon>
+        <ion-icon item-left name="md-arrow-back" (click)="backAction()"></ion-icon>
       </div>
     </ion-buttons>
     <ion-title class="section">
@@ -39,10 +39,10 @@
         </ion-col>
       </ion-row>
       <div *ngIf="ios" (click) = "makeImage()" class="image-setting">
-        <div *ngIf="imageProfile==null" class="photo">
+        <div *ngIf="imageProfile==null" class="no-photo">
           <span>{{'PROFILE_PHOTO' | translate}}</span>
         </div>
-        <img *ngIf="imageProfile!=null" src="{{imageProfile}}">
+        <img class="photo" *ngIf="imageProfile!=null" src="{{imageProfile}}">
       </div>
       <ion-row>
         <ion-col offset-1 col-11 class="center">
@@ -70,7 +70,7 @@
         <ion-col offset-1 col-11 class="center">
           <ion-item>
               <ion-icon item-left name="ios-contact-outline"></ion-icon>
-              <ion-input md-input formControlName="user_name" type="text" placeholder="{{'USERNAME' | translate}}" (keyup.enter)="handleLogin('email')" #userName></ion-input>
+              <ion-input md-input formControlName="user_name" type="text" placeholder="{{'USERNAME' | translate}}" (keyup.enter)="handleLogin('email')" class="lower-case" #userName></ion-input>
           </ion-item>
           <span class="error" *ngIf="!updateProfile.controls.user_name.valid  && (updateProfile.controls.user_name.dirty || submitted)">
             {{'INVALID_USERNAME' | translate}}
@@ -81,7 +81,7 @@
         <ion-col offset-1 col-11 class="center">
           <ion-item>
             <ion-icon item-left name="ios-mail-outline"></ion-icon>
-            <ion-input md-input formControlName="email" type="email" placeholder="{{'EMAIL' | translate}}" (keyup.enter)="handleLogin('jobTitle')" #email></ion-input>
+            <ion-input md-input formControlName="email" type="email" placeholder="{{'EMAIL' | translate}}" (keyup.enter)="handleLogin('jobTitle')" class="lower-case" #email></ion-input>
           </ion-item>
           <span class="error" *ngIf="!updateProfile.controls.email.valid  && (updateProfile.controls.email.dirty || submitted)">
             {{'INVALID_EMAIL' | translate}}

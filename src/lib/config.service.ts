@@ -95,9 +95,19 @@ export class ConfigService {
   }
 
   public getProfileImage(): any {
-    if (CONFIG.PROFILE_IMAGE === undefined || CONFIG.PROFILE_IMAGE === null || CONFIG.PROFILE_IMAGE === '')
+    if (CONFIG.PROFILE_IMAGE===undefined || CONFIG.PROFILE_IMAGE===null || CONFIG.PROFILE_IMAGE.DEFAULT_ICON === undefined || CONFIG.PROFILE_IMAGE.DEFAULT_ICON === null || CONFIG.PROFILE_IMAGE.DEFAULT_ICON === '')
       return false;
 
-    return CONFIG.PROFILE_IMAGE;
+    return CONFIG.PROFILE_IMAGE.DEFAULT_ICON;
+  }
+
+  public getProfileSize(): any {
+    if (CONFIG.PROFILE_IMAGE===undefined || CONFIG.PROFILE_IMAGE===null || CONFIG.PROFILE_IMAGE.WIDTH === undefined || CONFIG.PROFILE_IMAGE.WIDTH === null || isNaN(CONFIG.PROFILE_IMAGE.WIDTH) || CONFIG.PROFILE_IMAGE.HEIGHT === undefined || CONFIG.PROFILE_IMAGE.HEIGHT === null || isNaN(CONFIG.PROFILE_IMAGE.HEIGHT))
+      return false;
+
+    return {
+      WIDTH:CONFIG.PROFILE_IMAGE.WIDTH,
+      HEIGHT:CONFIG.PROFILE_IMAGE.HEIGHT
+    };
   }
 }

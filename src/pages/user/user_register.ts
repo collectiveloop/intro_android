@@ -20,9 +20,6 @@ export class RegisterUserPage {
   @ViewChild('password') password;
   @ViewChild('confirmPassword') confirmPassword;
   @ViewChild('fullName') fullName;
-  @ViewChild('jobTitle') jobTitle;
-  @ViewChild('companyName') companyName;
-  @ViewChild('jobDescription') jobDescription;
   registerForm: FormGroup;
   submitted: boolean;
   errorRegister: string;
@@ -45,13 +42,10 @@ export class RegisterUserPage {
     this.registerForm = this.formBuilder.group({
         first_name: ['', Validators.compose([Validators.minLength(2), Validators.required]) ] ,
         last_name: ['', Validators.compose([Validators.minLength(2), Validators.required]) ] ,
-        user_name: ['', Validators.compose([Validators.minLength(2), Validators.required]) ] ,
+        user_name: ['', Validators.compose([Validators.minLength(5), Validators.required]) ] ,
         email: ['', Validators.compose([Validators.minLength(5),Validators.email, Validators.required]) ],
         password: ['', Validators.compose( [Validators.minLength(8),Validators.maxLength(15), Validators.required]) ],
-        confirm_password: ['', Validators.compose([Validators.minLength(8),Validators.maxLength(15), Validators.required]) ],
-        job_title: ['', Validators.compose([Validators.minLength(2), Validators.required])],
-        company_name: ['', Validators.compose([Validators.minLength(3), Validators.required])],
-        job_description: ['', Validators.compose([Validators.minLength(3)])]
+        confirm_password: ['', Validators.compose([Validators.minLength(8),Validators.maxLength(15), Validators.required]) ]
     });
   }
 
@@ -84,14 +78,10 @@ export class RegisterUserPage {
       first_name : this.registerForm.value.first_name,
       last_name : this.registerForm.value.last_name,
       email : this.registerForm.value.email.toLowerCase(),
-      job_title: this.registerForm.value.job_title,
-      company_name: this.registerForm.value.company_name,
-      job_description: this.registerForm.value.job_description,
+      user_name : this.registerForm.value.user_name.toLowerCase(),
       password : this.registerForm.value.password
     };
 
-    if(this.registerForm.value.user_name!==null && this.registerForm.value.user_name!==undefined && this.registerForm.value.user_name!=='')
-      data['user_name'] = this.registerForm.value.user_name.toLowerCase();
     this.messages.showMessage({
        content:this.loadingMessage
     });

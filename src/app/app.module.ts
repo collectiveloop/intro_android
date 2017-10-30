@@ -34,6 +34,9 @@ import { ResetPasswordPage } from '../pages/login/reset_password';
 import { ChangePasswordPage } from '../pages/login/change_password';
 import { RegisterUserPage } from '../pages/user/user_register';
 import { ProfileUserPage } from '../pages/user/user_profile';
+import { ListContactsPage } from '../pages/contacts/list_contacts';
+import { ListMessagesPage } from '../pages/messages/list_messages';
+import { ListIntrosPage } from '../pages/intros/list_intros';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,9 @@ import { ProfileUserPage } from '../pages/user/user_profile';
     ChangePasswordPage,
     RegisterUserPage,
     ProfileUserPage,
+    ListContactsPage,
+    ListMessagesPage,
+    ListIntrosPage,
     HomePage,
     TabsPage
   ],
@@ -81,6 +87,9 @@ import { ProfileUserPage } from '../pages/user/user_profile';
     ChangePasswordPage,
     RegisterUserPage,
     ProfileUserPage,
+    ListContactsPage,
+    ListMessagesPage,
+    ListIntrosPage,
     HomePage,
     TabsPage
   ],

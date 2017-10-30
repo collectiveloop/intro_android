@@ -91,7 +91,7 @@
   }
 
   .image-setting img {
-    max-width: 186px;
+    max-width: 350px;
     vertical-align: bottom;
     max-height: 186px;
   }
@@ -144,8 +144,7 @@
   }
 
   .card-content-md {
-    padding: 20px;
-    margin-top: 13px;
+    padding: 20px !important;
   }
 
   .card-content-md .item {
@@ -173,7 +172,7 @@
 
   .card-content-md .item.reason .label {
     margin: 0px 8px 0px 0px;
-    text-align: left;
+    text-align: center;
     text-transform: inherit;
     font-size: 16px;
   }
@@ -184,6 +183,10 @@
 
   .card-content-md .image {
     display: inline-table;
+  }
+
+  .card-content-md .image ion-icon {
+    font-size:100px;
   }
 
   .card-content-md .image img {

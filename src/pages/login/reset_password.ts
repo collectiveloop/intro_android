@@ -18,7 +18,7 @@ export class ResetPasswordPage {
   @ViewChild('password') password;
   @ViewChild('confirmPassword') confirmPassword;
   resetPasswordForm: FormGroup;
-  submitted: boolean;
+  submitted: boolean = false;
   errorPasswordForm: string;
   logo: string;
   loader: any;

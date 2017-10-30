@@ -48,7 +48,7 @@
         <ion-col offset-1 col-11 class="center">
           <ion-item>
               <ion-icon item-left name="ios-contact-outline"></ion-icon>
-              <ion-input md-input formControlName="user_name" type="text" placeholder="{{'USERNAME' | translate}}" (keyup.enter)="handleLogin('email')" #userName></ion-input>
+              <ion-input md-input formControlName="user_name" type="text" placeholder="{{'USERNAME' | translate}}" (keyup.enter)="handleLogin('email')" class="lower-case" #userName></ion-input>
           </ion-item>
           <span class="error" *ngIf="!registerForm.controls.user_name.valid  && (registerForm.controls.user_name.dirty || submitted)">
             {{'INVALID_USERNAME' | translate}}
@@ -85,39 +85,6 @@
           </ion-item>
           <span class="error" *ngIf="!registerForm.controls.confirm_password.valid  && (registerForm.controls.confirm_password.dirty || submitted)">
             {{'INVALID_CONFIRM_PASSWORD' | translate}}
-          </span>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col offset-1 col-11 class="center">
-          <ion-item>
-            <ion-icon item-left name="ios-person-add-outline"></ion-icon>
-            <ion-input md-input formControlName="job_title" type="text" placeholder="{{'JOB_TITLE' | translate}}" (keyup.enter)="handleLogin('companyName')" #jobTitle></ion-input>
-          </ion-item>
-          <span class="error" *ngIf="!registerForm.controls.job_title.valid  && (registerForm.controls.job_title.dirty || submitted)">
-            {{'INVALID_JOB_TITLE' | translate}}
-          </span>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col offset-1 col-11 class="center">
-          <ion-item>
-            <ion-icon item-left name="ios-ribbon-outline"></ion-icon>
-            <ion-input md-input formControlName="company_name" type="text" placeholder="{{'COMPANY_NAME' | translate}}" (keyup.enter)="handleLogin('jobDescription')" #companyName></ion-input>
-          </ion-item>
-          <span class="error" *ngIf="!registerForm.controls.company_name.valid  && (registerForm.controls.company_name.dirty || submitted)">
-            {{'INVALID_COMPANY_NAME' | translate}}
-          </span>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col offset-1 col-11 class="center">
-          <ion-item>
-            <ion-icon item-left name="ios-text-outline"></ion-icon>
-            <ion-input md-input formControlName="job_description" type="text" placeholder="{{'JOB_DESCRIPTION' | translate}}" (keyup.enter)="submitForm()" #jobDescription></ion-input>
-          </ion-item>
-          <span class="error" *ngIf="!registerForm.controls.job_description.valid  && (registerForm.controls.job_description.dirty || submitted)">
-            {{'INVALID_JOB_DESCRIPTION' | translate}}
           </span>
         </ion-col>
       </ion-row>

@@ -3,11 +3,9 @@ import { NavController, App, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfigService }   from '../../lib/config.service';
 import { MessageService } from '../../lib/messages.service';
-import { SessionService } from '../../lib/session.service';
 import { HttpService }   from '../../lib/http.service';
 import { TranslateService } from '@ngx-translate/core';
 import { TabsPage } from '../tabs/tabs';
-import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-change-password',
@@ -25,7 +23,7 @@ export class ChangePasswordPage {
   loadingMessage:string = '';
   token:string = '';
 
-  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public messages: MessageService, public navParams: NavParams, private sessionService: SessionService) {
+  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public messages: MessageService, public navParams: NavParams) {
     this.buildValidations();
     this.submitted = false;
     this.translateService.get('LOADING').subscribe(

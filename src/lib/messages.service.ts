@@ -10,9 +10,15 @@ export class MessageService {
 
   public showMessage(params: any): void {
     let config = {
-      spinner: 'crescent',
       content:''
     };
+
+    console.log(params.spinner);
+    if (params.spinner === undefined || params.spinner === null || params.spinner === true)
+      config['spinner'] = 'crescent';
+    else
+      config['spinner'] = 'hide';
+
     if (params.content !== undefined)
       config['content'] = params.content;
 

@@ -14,6 +14,22 @@
   src: local("Helvetica Ltsd"), url("../assets/fonts/HelveticaLTStd-BoldCond.woff2") format("woff2"), url("../assets/fonts/HelveticaLTStd-BoldCond.woff") format("woff"), url("../assets/fonts/HelveticaLTStd-BoldCond.ttf") format("truetype");
 }
 
+::-webkit-input-placeholder {
+   text-transform: initial;
+}
+
+:-moz-placeholder {
+   text-transform: initial;
+}
+
+::-moz-placeholder {
+   text-transform: initial;
+}
+
+:-ms-input-placeholder {
+   text-transform: initial;
+}
+
 * {
   font-family: "Helvetica";
   color: #6D6E71;

@@ -5,7 +5,11 @@ export const CONFIG = {
       DOMAIN_API:'http://165.227.51.66/api/public/',
       FOLDER_IMAGES:'http://165.227.51.66/api/public/images'
     },
-    PROFILE_IMAGE:'assets/images/profile-picture.png',
+    PROFILE_IMAGE:{
+      DEFAULT_ICON:'assets/icon/person.svg',
+      WIDTH:350,
+      HEIGHT:350
+    },
     LOGOS:{
       BIGGER:'assets/logos/intro_bigger.png',
       SMALL:'assets/logos/intro_small.png',

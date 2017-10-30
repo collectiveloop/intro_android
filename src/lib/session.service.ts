@@ -157,23 +157,40 @@ export class SessionService {
 
     public loginByGooglePlus():any{
       return new Promise((resolve, reject) => {
-        this.googlePlus.login({'scopes':'profile email'})
-        .then(result => {
-            this.initSession({
-              'token':'',
-              'mode_facebook':false,
-              'mode_linkedin':false,
-              'mode_google_plus':true
-            });
-            resolve(result);
-        })
-        .catch(error =>{
-          console.error( error );//cuando se cancela
-          resolve(false);
+        this.googlePlus.logout()
+        .then(success => {
+          this.googlePlus.login({'scopes':'profile email'})
+          .then(result => {
+              this.initSession({
+                'token':'',
+                'mode_facebook':false,
+                'mode_linkedin':false,
+                'mode_google_plus':true
+              });
+              resolve(result);
+          })
+          .catch(error =>{
+            console.error( error );//cuando se cancela
+            resolve(false);
+          });
+        },(error) =>{
+          this.googlePlus.login({'scopes':'profile email'})
+          .then(result => {
+              this.initSession({
+                'token':'',
+                'mode_facebook':false,
+                'mode_linkedin':false,
+                'mode_google_plus':true
+              });
+              resolve(result);
+          })
+          .catch(error =>{
+            console.error( error );//cuando se cancela
+            resolve(false);
+          });
         });
       });
     }
-
 
     public initSession(params:any): void {
       this.storage.set('token', params.token);

@@ -36,7 +36,7 @@
   /*fin de barra de navegación*/
 
    .logo-main{
-     margin-top: 15px;
+     margin-top: 20px;
      margin-bottom: 0px;
    }
 
@@ -98,13 +98,21 @@
       height: 100px;
   }
 
-  .image-setting .photo{
+  .image-setting .no-photo{
     margin: 0px;
     padding: 0px;
     width: 100%;
     height: 100%;
     background-image: url("images/profile.png");
     background-repeat: no-repeat;
+  }
+
+  .image-setting .photo{
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
   }
 
   .image-setting span{
@@ -126,7 +134,7 @@
 
   /*dashboard*/
   .card-ios {
-    margin-top: 40px !important;
+    margin-bottom: 20px;
     border-radius: 15px;
     font-size: 15px;
     -webkit-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.05);
@@ -144,7 +152,6 @@
   }
 
   .card-ios {
-    margin-top: 40px !important;
     border-radius: 20px;
     font-size: 15px;
     -webkit-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
@@ -163,24 +170,24 @@
   }
 
   .card-content-ios {
-    margin: 20px 0px 0px 0px;
-    padding: 0px;
-    display: flex;
+    padding: 20px;
+    margin-top: 13px;
   }
 
   .card-content-ios .item {
     padding: 0px;
-    margin: 0px;
     margin: auto auto;
     text-align: center;
+    float: left;
+    width: 50%;
+  }
+
+  .card-content-ios .item.full {
+    width: 100%
   }
 
   .card-content-ios .item.reason {
-    width: 650px;
-  }
-
-  .card-content-ios .item.reason.received {
-    width: 850px;
+    width: 100%;
   }
 
   .card-content-ios .item .label, .card-content-ios .item .label div {
@@ -191,7 +198,7 @@
   }
 
   .card-content-ios .item.reason .label {
-    text-align: left;
+    text-align: center;
     text-transform: inherit;
     font-size: 13px;
 
@@ -203,6 +210,10 @@
 
   .card-content-ios .image {
     display: inline-table;
+  }
+
+  .card-content-ios .image ion-icon {
+    font-size:100px;
   }
 
   .card-content-ios .image img {
@@ -225,14 +236,12 @@
       height:44px !important;
     }
 
-    .scroll-content {
-      margin-top: 50px !important;
+    .logo-main {
+      margin-top: 10px;
     }
 
-    
-
-    .card-content-ios .item.reason .label {
-      margin-left:10px;
+    .scroll-content {
+      margin-top: 50px !important;
     }
   }
 
@@ -255,6 +264,10 @@
 
     .header .toolbar{
       height:88px !important;
+    }
+
+    .logo-main {
+      margin-top: 40px;
     }
   }
 }

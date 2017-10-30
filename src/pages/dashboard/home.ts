@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { App, NavController, LoadingController } from 'ionic-angular';
+import { App, NavController } from 'ionic-angular';
 import { HttpService } from '../../lib/http.service';
 import { MessageService } from '../../lib/messages.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,6 +13,7 @@ export class HomePage implements OnInit {
   dashboard: Array<object> = [];
   loadingMessage:string = '';
   route:string ='';
+  profileImages:string ='';
 
   constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService) {}
 
@@ -28,8 +29,6 @@ export class HomePage implements OnInit {
         this.getDashBoard();
       }
     );
-
-
   }
 
   private getDashBoard(): void {
@@ -47,7 +46,28 @@ export class HomePage implements OnInit {
   private callBackDashBoard(response): void {
     this.messages.closeMessage();
     this.dashboard = response.data.dashboard;
-    console.log(this.dashboard );
+    //validamos imagenes
+    if(this.dashboard['made']!==undefined && this.dashboard['made']['friend_1_image_profile']!==undefined && this.dashboard['made']['friend_1_image_profile']!==null && this.dashboard['made']['friend_1_image_profile']!==''){
+      if(this.dashboard['made']['friend_1_image_profile'].indexOf('http') === -1)
+        this.dashboard['made']['friend_1_image_profile'] = this.route+this.dashboard['made']['friend_1_image_profile'];
+    }else{
+      this.dashboard['made']['friend_1_image_profile'] = this.configService.getProfileImage();
+    }
+
+    if(this.dashboard['made']!==undefined && this.dashboard['made']['friend_2_image_profile']!==undefined && this.dashboard['made']['friend_2_image_profile']!==null && this.dashboard['made']['friend_2_image_profile']!==''){
+      if(this.dashboard['made']['friend_2_image_profile'].indexOf('http') === -1)
+        this.dashboard['made']['friend_2_image_profile'] = this.route+this.dashboard['made']['friend_2_image_profile'];
+    }else{
+      this.dashboard['made']['friend_2_image_profile'] = this.configService.getProfileImage();
+    }
+
+    if(this.dashboard['received']!==undefined && this.dashboard['received']['friend_image_profile']!==undefined && this.dashboard['received']['friend_image_profile']!==null && this.dashboard['received']['friend_image_profile']!==''){
+      if(this.dashboard['received']['friend_image_profile'].indexOf('http') === -1)
+        this.dashboard['received']['friend_image_profile'] = this.route+this.dashboard['received']['friend_image_profile'];
+    }else{
+      this.dashboard['made']['friend_image_profile'] = this.configService.getProfileImage();
+    }
+
   }
 
   public gotoDetail(id): void {

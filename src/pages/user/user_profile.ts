@@ -4,7 +4,6 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { FilePath } from '@ionic-native/file-path';
 import { ImagePicker } from '@ionic-native/image-picker';
-import { ImageResizer, ImageResizerOptions } from '@ionic-native/image-resizer';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfigService } from '../../lib/config.service';
@@ -22,8 +21,7 @@ import { TabsPage } from '../tabs/tabs';
     Camera,
     File,
     FilePath,
-    ImagePicker,
-    ImageResizer
+    ImagePicker
   ]
 })
 export class ProfileUserPage {
@@ -43,12 +41,14 @@ export class ProfileUserPage {
   logo: string;
   loader: any;
   loadingMessage: string = '';
+  requiredMessage: string = '';
   imageProfile: any;
   oldImageProfile: string = '';
   params: any;
   imageTaken: boolean = false;
   ios: boolean = false;
   actionSheet: any;
+  imageDefault:any;
   optionsImage: any = [];
   optionsCamera: CameraOptions = {
     quality: 100,
@@ -61,10 +61,19 @@ export class ProfileUserPage {
     targetHeight: 350
   };
 
-  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public navParams: NavParams, private platform: Platform, public messages: MessageService, private camera: Camera, public actionSheetCtrl: ActionSheetController, private imagePicker: ImagePicker, private file: File, private filePath: FilePath, private imageResizer: ImageResizer) {
+  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public navParams: NavParams, private platform: Platform, public messages: MessageService, private camera: Camera, public actionSheetCtrl: ActionSheetController, private imagePicker: ImagePicker, private file: File, private filePath: FilePath) {
     this.params = { 'show_signup': this.navParams.get('show_signup'), 'user_id': this.navParams.get('user_id') };
     this.ready = false;
     this.buildValidations();
+    this.imageDefault = this.configService.getProfileSize();
+    //SI NO HAY VALORS POR DEFECTO PONEMOS ALGO
+    if(this.imageDefault===false){
+       this.imageDefault.WIDTH = 100;
+       this.imageDefault.HEIGHT = 100;
+    }
+
+    this.optionsCamera.targetWidth = this.imageDefault.WIDTH;
+    this.optionsCamera.targetHeight = this.imageDefault.HEIGHT;
     this.translateService.get('LOADING').subscribe(
       value => {
         this.loadingMessage = value;
@@ -72,6 +81,12 @@ export class ProfileUserPage {
         this.messages.showMessage({
           content: this.loadingMessage
         });
+      }
+    );
+
+    this.translateService.get('INVALID_FORM').subscribe(
+      value => {
+        this.requiredMessage = value;
       }
     );
 
@@ -128,8 +143,8 @@ export class ProfileUserPage {
       first_name: ['', Validators.compose([Validators.minLength(2), Validators.required])],
       last_name: ['', Validators.compose([Validators.minLength(2), Validators.required])],
       user_name: ['', Validators.compose([Validators.minLength(2), Validators.required])],
-      job_title: ['', Validators.compose([Validators.minLength(2), Validators.required])],
-      company_name: ['', Validators.compose([Validators.minLength(3), Validators.required])],
+      job_title: ['', Validators.compose([Validators.minLength(2)])],
+      company_name: ['', Validators.compose([Validators.minLength(3)])],
       job_description: ['', Validators.compose([Validators.minLength(3)])],
       email: ['', Validators.compose([Validators.minLength(5), Validators.email, Validators.required])]
     });
@@ -221,31 +236,18 @@ export class ProfileUserPage {
   }
 
   public getImage(): void {
-    this.imagePicker.getPictures({ maximumImagesCount: 1, outputType: 0 }).then((results) => {
+    this.imagePicker.getPictures({ maximumImagesCount: 1, outputType: 0, width: this.imageDefault.WIDTH,
+	height: this.imageDefault.HEIGHT }).then((results) => {
       for (var i = 0; i < results.length; i++) {
         console.log('Image URI: ' + results[i]);
-        let options: ImageResizerOptions = {
-          uri: results[i],
-          quality: 100,
-          width: 350,
-          height: 350
-        };
+        let split = results[i].split('/');
+        let path = results[i].substr(0, results[i].lastIndexOf('/'));
+        let image = split[split.length - 1];
 
-        this.imageResizer
-          .resize(options)
-          .then((filePath: string) => {
-            console.log('FilePath', filePath);
-            this.imageTaken = true;
-            let split = filePath.split('/');
-            let path = filePath.substr(0, filePath.lastIndexOf('/'));
-            let image = split[split.length - 1];
-
-            this.file.readAsDataURL(path, image).then((result) => {
-              this.imageProfile = result;
-            });
-          })
-          .catch(e => console.log(e));
-
+        this.file.readAsDataURL(path, image).then((result) => {
+          this.imageTaken = true;
+          this.imageProfile = result;
+        });
       }
     }, (err) => { });
   }
@@ -266,11 +268,11 @@ export class ProfileUserPage {
     let data = {
       first_name: this.updateProfile.value.first_name,
       last_name: this.updateProfile.value.last_name,
-      user_name: this.updateProfile.value.user_name,
+      user_name: this.updateProfile.value.user_name.toLowerCase(),
       job_title: this.updateProfile.value.job_title,
       company_name: this.updateProfile.value.company_name,
       job_description: this.updateProfile.value.job_description,
-      email: this.updateProfile.value.email
+      email: this.updateProfile.value.email.toLowerCase()
     };
 
     if (this.imageTaken === true && this.oldImageProfile !== undefined && this.oldImageProfile != null && this.oldImageProfile !== '')
@@ -303,16 +305,29 @@ export class ProfileUserPage {
     if (response !== undefined && response.status !== undefined && response.status === 'error') {
       this.errorProfile = response.data.message;
     } else {
-      //si parent es diferente de null venimos de una seleccion del tab, de lo contrario es por login y hacemos navegacion tradicional
-      if (this.navCtrl.parent !== undefined && this.navCtrl.parent !== null)
-        this.navCtrl.parent.select(0);
-      else
-        this.navCtrl.push(TabsPage);
+      this.backHome();
+    }
+  }
+
+  public backAction(): void {
+    if (this.updateProfile.valid && !this.submitted){
+      this.update();
+    }else{
+      if(!this.updateProfile.valid && !this.submitted){
+        this.messages.showMessage({
+          content: this.requiredMessage,
+          spinner:false,
+          duration:2000
+        });
+      }
     }
   }
 
   public backHome(): void {
-    this.navCtrl.push(TabsPage);
+    if (this.navCtrl.parent !== undefined && this.navCtrl.parent !== null)
+      this.navCtrl.parent.select(0);
+    else
+      this.navCtrl.push(TabsPage);
   }
 
   private callBackError(response: any): void {
