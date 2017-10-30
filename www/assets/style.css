@@ -312,6 +312,10 @@ ion-navbar.toolbar {
   width: 80%;
 }
 
+.form-style .login-facebook, .form-style .login-google-plus, .form-style .login-linkedin{
+  font-size:8px !important;
+}
+
 .black {
   color: #000000;
 }
@@ -405,25 +409,7 @@ ion-menu ion-list {
   }
 }
 
-@media (max-width: 380px) {
-  /*
-  .form-style .login-facebook {
-    width: 55px;
-    height: 55px;
-    background-color: #23589C;
-  }
-  .form-style .login-linkedin {
-    width: 95px;
-    height: 95px;
-    background-color: #007BBD;
-  }
-  .form-style .login-google-plus {
-    width: 55px;
-    height: 55px;
-    background-color: #FD4D3E;
-  }
-  */
-}
+@media (max-width: 380px) {}
 
 @media (min-width: 360px) {
   .tabs .tabbar .tab-button .tab-button-text {
