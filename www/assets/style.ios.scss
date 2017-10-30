@@ -229,7 +229,7 @@
   }
   /*fin dashboard*/
 
-  @media (max-height: 658px) {
+  @media (max-width: 320px) {
     .header .toolbar{
       height:44px !important;
     }
@@ -239,19 +239,19 @@
     }
   }
 
-  @media (min-height: 658px) and (max-height: 736px) {
+  @media (min-width: 320px) and (max-width: 374px) {
     .header .toolbar .toolbar-title{
       font-size: 20px !important;
     }
   }
 
-  @media (min-height: 900px) {
+  @media (min-width: 375px) {
     * {
       font-size: 20px !important;
     }
   }
 
-  @media (min-height: 1024px) {
+  @media (min-width: 768px) {
     * {
       font-size: 30px !important;
     }
