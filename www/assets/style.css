@@ -406,6 +406,7 @@ ion-menu ion-list {
 }
 
 @media (max-width: 380px) {
+  /*
   .form-style .login-facebook {
     width: 55px;
     height: 55px;
@@ -421,6 +422,7 @@ ion-menu ion-list {
     height: 55px;
     background-color: #FD4D3E;
   }
+  */
 }
 
 @media (min-width: 360px) {
