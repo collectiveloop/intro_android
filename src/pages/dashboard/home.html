@@ -15,17 +15,19 @@
     <ion-card-header>
       {{'MADE_INTRODUCTIONS' | translate}}
     </ion-card-header>
-    <ion-card-content *ngIf="dashboard.made!=undefined && dashboard.made!=null">
+    <ion-card-content *ngIf="dashboard.made.is!==undefined && dashboard.made.is!==null &&dashboard.made.is==true">
       <ion-item>
         <div class="image">
-          <img src="{{dashboard.made.friend_1_image_profile}}" />
+          <img *ngIf="dashboard.made.friend_1.imageLoaded" src="{{dashboard.made.friend_1_image_profile}}" />
+          <ion-spinner *ngIf="!dashboard.made.friend_1.imageLoaded" name="circles"></ion-spinner>
         </div>
         <div>{{dashboard.made.friend_1_first_name}} {{dashboard.made.friend_1_last_name}}</div>
       </ion-item>
 
       <ion-item>
         <div class="image">
-          <img src="{{dashboard.made.friend_2_image_profile}}" />
+          <img *ngIf="dashboard.made.friend_2.imageLoaded" src="{{dashboard.made.friend_2_image_profile}}" />
+          <ion-spinner *ngIf="!dashboard.made.friend_2.imageLoaded" name="circles"></ion-spinner>
         </div>
         <div>{{dashboard.made.friend_2_first_name}} {{dashboard.made.friend_2_last_name}}</div>
       </ion-item>
@@ -34,7 +36,7 @@
         {{dashboard.made.reason}}
       </ion-item>
     </ion-card-content>
-    <ion-card-content class="center" *ngIf="dashboard.made==undefined || dashboard.made==null">
+    <ion-card-content class="center" *ngIf="dashboard.made.is!==undefined && dashboard.made.is!==null &&dashboard.made.is==false">
       {{'NOT_INTROS_RECEIVED' | translate}}
     </ion-card-content>
     <ion-item class="footer">
@@ -46,10 +48,11 @@
     <ion-card-header>
       {{'INTRODUCTIONS_RECEIVED' | translate}}
     </ion-card-header>
-    <ion-card-content *ngIf="dashboard.received!=undefined && dashboard.received!=null">
+    <ion-card-content *ngIf="dashboard.received.is!==undefined && dashboard.received.is!==null &&dashboard.received.is==true">
       <ion-item class="full">
         <div class="image">
-          <img src="{{dashboard.received.friend_image_profile}}" />
+          <img *ngIf="dashboard.received.friend.imageLoaded" src="{{dashboard.received.friend_image_profile}}" />
+          <ion-spinner *ngIf="!dashboard.received.friend.imageLoaded" name="circles"></ion-spinner>
         </div>
         <div>{{dashboard.received.friend_first_name}} {{dashboard.received.friend_last_name}}</div>
       </ion-item>
@@ -57,7 +60,7 @@
         {{dashboard.received.reason}}
       </ion-item>
     </ion-card-content>
-    <ion-card-content class="center" *ngIf="dashboard.received==undefined || dashboard.received==nul">
+    <ion-card-content class="center" *ngIf="dashboard.received.is!==undefined && dashboard.received.is!==null &&dashboard.received.is==false">
       {{'NOT_INTROS_RECEIVED' | translate}}
     </ion-card-content>
     <ion-item class="footer">

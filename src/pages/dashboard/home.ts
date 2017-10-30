@@ -10,7 +10,26 @@ import { ConfigService } from '../../lib/config.service';
   templateUrl: 'home.html'
 })
 export class HomePage implements OnInit {
-  dashboard: Array<object> = [];
+  dashboard: any = {
+    'made' : {
+      'friend_1': {
+        'imageLoaded' : false
+      },
+      'friend_2': {
+        'imageLoaded' : false
+      },
+      'reason':'',
+      'is':false
+    },
+    'received' :{
+      'friend': {
+        'imageLoaded' : false
+      },
+      'reason':'',
+      'is':false
+    }
+  };
+
   loadingMessage:string = '';
   route:string ='';
   profileImages:string ='';
@@ -45,29 +64,82 @@ export class HomePage implements OnInit {
 
   private callBackDashBoard(response): void {
     this.messages.closeMessage();
-    this.dashboard = response.data.dashboard;
+    let board = response.data.dashboard;
     //validamos imagenes
-    if(this.dashboard['made']!==undefined && this.dashboard['made']['friend_1_image_profile']!==undefined && this.dashboard['made']['friend_1_image_profile']!==null && this.dashboard['made']['friend_1_image_profile']!==''){
-      if(this.dashboard['made']['friend_1_image_profile'].indexOf('http') === -1)
-        this.dashboard['made']['friend_1_image_profile'] = this.route+this.dashboard['made']['friend_1_image_profile'];
-    }else{
-      this.dashboard['made']['friend_1_image_profile'] = this.configService.getProfileImage();
+
+    this.dashboard['count_made'] = board['count_made'];
+    if(board['made']!==undefined){
+      this.dashboard['made']['is'] = true;
+      this.dashboard['made']['reason'] = board['made']['reason'];
+
+      if(board['made']['friend_1_image_profile']!==undefined && board['made']['friend_1_image_profile']!==null && board['made']['friend_1_image_profile']!==''){
+        this.dashboard['made']['friend_1_image_profile'] = board['made']['friend_1_image_profile'];
+        if(board['made']['friend_1_image_profile'].indexOf('http') === -1)
+          this.dashboard['made']['friend_1_image_profile'] = this.route+this.dashboard['made']['friend_1_image_profile'];
+
+        this.dashboard['made']['friend_1']['url'] = this.dashboard['made']['friend_1_image_profile'];
+      }else{
+        this.dashboard['made']['friend_1']['imageLoaded'] = true;
+        this.dashboard['made']['friend_1_image_profile'] = this.configService.getProfileImage();
+      }
+      this.dashboard['made']['friend_1_first_name'] = board['made']['friend_1_first_name'];
+      this.dashboard['made']['friend_1_last_name'] = board['made']['friend_1_last_name'];
+
+      if(this.dashboard['made']['friend_1']['imageLoaded'] ===false)
+        this.loadImage(this.dashboard['made']['friend_1']);
+
+
+      if(board['made']['friend_2_image_profile']!==undefined && board['made']['friend_2_image_profile']!==null && board['made']['friend_2_image_profile']!==''){
+        this.dashboard['made']['friend_2_image_profile'] = board['made']['friend_2_image_profile'];
+        if(this.dashboard['made']['friend_2_image_profile'].indexOf('http') === -1)
+          this.dashboard['made']['friend_2_image_profile'] = this.route+this.dashboard['made']['friend_2_image_profile'];
+
+        this.dashboard['made']['friend_2']['url'] = this.dashboard['made']['friend_2_image_profile'];
+      }else{
+        this.dashboard['made']['friend_2']['imageLoaded'] = true;
+        this.dashboard['made']['friend_2_image_profile'] = this.configService.getProfileImage();
+      }
+      this.dashboard['made']['friend_2_first_name'] = board['made']['friend_2_first_name'];
+      this.dashboard['made']['friend_2_last_name'] = board['made']['friend_2_last_name'];
+
+      if(this.dashboard['made']['friend_2']['imageLoaded'] ===false)
+        this.loadImage(this.dashboard['made']['friend_2']);
     }
 
-    if(this.dashboard['made']!==undefined && this.dashboard['made']['friend_2_image_profile']!==undefined && this.dashboard['made']['friend_2_image_profile']!==null && this.dashboard['made']['friend_2_image_profile']!==''){
-      if(this.dashboard['made']['friend_2_image_profile'].indexOf('http') === -1)
-        this.dashboard['made']['friend_2_image_profile'] = this.route+this.dashboard['made']['friend_2_image_profile'];
-    }else{
-      this.dashboard['made']['friend_2_image_profile'] = this.configService.getProfileImage();
-    }
 
-    if(this.dashboard['received']!==undefined && this.dashboard['received']['friend_image_profile']!==undefined && this.dashboard['received']['friend_image_profile']!==null && this.dashboard['received']['friend_image_profile']!==''){
-      if(this.dashboard['received']['friend_image_profile'].indexOf('http') === -1)
+    this.dashboard['count_received'] = board['count_received'];
+    if(board['received']!==undefined){
+      this.dashboard['received']['is'] = true;
+      this.dashboard['received']['reason'] = board['received']['reason'];
+      if(board['received']['friend_image_profile']!==undefined && board['received']['friend_image_profile']!==null && board['received']['friend_image_profile']!==''){
+        this.dashboard['received']['friend_image_profile'] = board['received']['friend_image_profile'];
+        if(board['received']['friend_image_profile'].indexOf('http') === -1)
         this.dashboard['received']['friend_image_profile'] = this.route+this.dashboard['received']['friend_image_profile'];
-    }else{
-      this.dashboard['made']['friend_image_profile'] = this.configService.getProfileImage();
+
+        this.dashboard['received']['friend']['url'] = this.dashboard['received']['friend_image_profile'];
+      }else{
+        this.dashboard['received']['friend']['imageLoaded'] = true;
+        this.dashboard['received']['friend_image_profile'] = this.configService.getProfileImage();
+      }
+      this.dashboard['received']['friend_first_name'] = board['received']['friend_first_name'];
+      this.dashboard['received']['friend_last_name'] = board['received']['friend_last_name'];
+
+      if(this.dashboard['received']['friend']['imageLoaded'] ===false)
+      this.loadImage(this.dashboard['received']['friend']);
     }
 
+  }
+
+  private loadImage(image:any):void{
+    let img = new Image();
+    /// set handler and url
+    img.onload = this.onloadHandler.bind({'image':image});
+    img.src = image.url;
+  }
+
+  private onloadHandler(data):void{
+    if(this['image']!==undefined)
+      this['image'].imageLoaded = true;
   }
 
   public gotoDetail(id): void {

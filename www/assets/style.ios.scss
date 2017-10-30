@@ -1,118 +1,118 @@
-.ios-theme{
-  *{
+.ios-theme {
+  * {
     font-family: "Helvetica";
-    text-decoration:none !important;
+    text-decoration: none !important;
   }
 
-  .logo-bigger{}
+  .logo-bigger {}
 
-  .header .toolbar{
-    height:64px !important;
+  .header .toolbar {
+    height: 64px !important;
   }
 
-  .toolbar{
+  .toolbar {
     background-color: #ffffff;
-    padding:0px;
+    padding: 0;
   }
 
-   .toolbar .toolbar-title, .toolbar .icon, .toolbar .back-button-text{
-     color: #FF3F1D !important;
-     text-decoration: none;
-   }
+  .toolbar .back-button-text,
+  .toolbar .icon,
+  .toolbar .toolbar-title {
+    color: #FF3F1D !important;
+    text-decoration: none;
+  }
 
-   .toolbar .toolbar-background{
-     color:#cccccc;
-   }
-
+  .toolbar .toolbar-background {
+    color: #cccccc;
+  }
   /*barra de navegación*/
   .tabs-md .tabbar {
     width: 100%;
-      margin-right: 0.5px;
-      border-radius: 0px 0px 2px 2px;
+    margin-right: 0.5px;
+    border-radius: 0 0 2px 2px;
   }
   /*fin de barra de navegación*/
-
-   .logo-main{
-     margin-top: 20px;
-     margin-bottom: 0px;
-   }
+  .logo-main {
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
 
   .menu-inner .item {
-      border: 0px !important;
+    border: 0 !important;
   }
 
-   .item.item-block .item-inner {
-      padding-right: 0px;
-      margin-right: 0px;
+  .item.item-block .item-inner {
+    padding-right: 0;
+    margin-right: 0;
   }
 
-  .form-style .item.item-block{}
+  .form-style .item.item-block {}
 
   .label {
-    margin: 0px;
+    margin: 0;
   }
 
-  .next-login{
+  .next-login {
     color: #ffffff !important;
     border-top: 1px solid #FF3F1D !important;
     background-color: #FF3F1D !important;
     text-transform: uppercase !important;
   }
 
-  .next-login .button-inner{
+  .next-login .button-inner {
     color: #ffffff !important;
     text-transform: none;
   }
 
-  .next-login.activated{
+  .next-login.activated {
     border-top: 1px solid #FD4D3E !important;
     background-color: #FD4D3E !important;
   }
 
-  .big-label{
+  .big-label {
     font-weight: bold;
   }
 
-  .button{
-      padding: 16px 0px 16px 0px;
+  .button {
+    padding: 16px 0;
   }
 
-  .button.button-form{
-      transition: none;
-      border-radius: 10px;
-      width: 44%;
+  .button.button-form {
+    transition: none;
+    border-radius: 10px;
+    width: 44%;
   }
 
-  .button.button-form .button-inner{
-      font-weight: 100;
+  .button.button-form .button-inner {
+    font-weight: 100;
   }
 
-  .image-setting{
+  .image-setting {
     float: left;
-      /* padding: 8px; */
-      margin: 16px 0px 8px 35px;
-      width: 80px;
-      height: 100px;
+    /* padding: 8px; */
+    margin: 40px 0 8px 35px;
+    width: 100px;
+    height: 100px;
   }
 
-  .image-setting .no-photo{
-    margin: 0px;
-    padding: 0px;
+  .image-setting .no-photo {
+    margin: 0;
+    padding: 0;
     width: 100%;
     height: 100%;
-    background-image: url("images/profile.png");
+    background-image: url("../assets/images/profile.png");
     background-repeat: no-repeat;
   }
 
-  .image-setting .photo{
-    margin: 0px;
-    padding: 0px;
+  .image-setting .photo {
+    margin: 0;
+    padding: 0;
     width: 100%;
     height: 100%;
     border-radius: 50%;
   }
 
-  .image-setting span{
+  .image-setting span {
     -ms-transform: scaleY(1.2);
     -moz-transform: scaleY(1.2);
     -webkit-transform: scaleY(1.2);
@@ -125,10 +125,9 @@
     text-align: center;
   }
 
-  .image-setting img{
-    width:186px;
+  .image-setting img {
+    width: 186px;
   }
-
   /*dashboard*/
   .card-ios {
     margin-bottom: 20px;
@@ -162,7 +161,7 @@
     text-align: center;
     font-size: 18px;
     letter-spacing: 1px;
-    margin: 0px;
+    margin: 0;
     display: inline-block;
   }
 
@@ -172,37 +171,35 @@
   }
 
   .card-content-ios .item {
-    padding: 0px;
-    margin: auto auto;
+    padding: 0;
+    margin: auto;
     text-align: center;
     float: left;
     width: 50%;
   }
 
   .card-content-ios .item.full {
-    width: 100%
+    width: 100%;
   }
 
   .card-content-ios .item.reason {
     width: 100%;
   }
 
-  .card-content-ios .item .label, .card-content-ios .item .label div {
+  .card-content-ios .item .label,
+  .card-content-ios .item .label div {
     color: #111111 !important;
     white-space: inherit;
     text-transform: capitalize;
-    font-size: 11px;
   }
 
   .card-content-ios .item.reason .label {
     text-align: center;
     text-transform: inherit;
-    font-size: 13px;
-
   }
 
   .card-content-ios .item .item-inner {
-    padding: 0px !important;
+    padding: 0 !important;
   }
 
   .card-content-ios .image {
@@ -210,7 +207,11 @@
   }
 
   .card-content-ios .image ion-icon {
-    font-size:100px;
+    font-size: 100px;
+  }
+
+  .card-content-ios .image ion-spinner {
+    height: 70px;
   }
 
   .card-content-ios .image img {
@@ -227,40 +228,46 @@
     padding-bottom: 10px;
   }
   /*fin dashboard*/
-
   @media (max-width: 320px) {
-    .header .toolbar{
-      height:44px !important;
+    .header .toolbar {
+      height: 44px !important;
     }
 
     .scroll-content {
       margin-top: 50px !important;
     }
   }
-
   @media (min-width: 320px) and (max-width: 374px) {
-    .header .toolbar .toolbar-title{
+    .header .toolbar .toolbar-title {
       font-size: 20px !important;
     }
-  }
 
-  @media (min-width: 375px) {
-    * {
-      font-size: 20px !important;
-    }
-  }
-
-  @media (min-width: 768px) {
-    * {
+    .item > ion-icon,
+    .item-inner > ion-icon {
       font-size: 30px !important;
     }
+  }
+  @media (min-width: 768px) {
+    * {
+      font-size: 25px !important;
+    }
 
-    .header .toolbar{
-      height:88px !important;
+    .item > ion-icon,
+    .item-inner > ion-icon {
+      font-size: 40px !important;
+    }
+
+    .header .toolbar {
+      height: 88px !important;
     }
 
     .logo-main {
       margin-top: 40px;
+    }
+
+    .card-content-ios .item .label,
+    .card-content-ios .item.reason .label {
+      font-size: 20px !important;
     }
   }
 }

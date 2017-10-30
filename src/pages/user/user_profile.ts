@@ -41,7 +41,7 @@ export class ProfileUserPage {
   logo: string;
   loader: any;
   loadingMessage: string = '';
-  requiredMessage: string = '';
+  requiredMessages: any = {};
   imageProfile: any;
   oldImageProfile: string = '';
   params: any;
@@ -86,7 +86,31 @@ export class ProfileUserPage {
 
     this.translateService.get('INVALID_FORM').subscribe(
       value => {
-        this.requiredMessage = value;
+        this.requiredMessages['INVALID_FORM'] = value;
+      }
+    );
+
+    this.translateService.get('INVALID_NAME').subscribe(
+      value => {
+        this.requiredMessages['INVALID_NAME']  = value;
+      }
+    );
+
+    this.translateService.get('INVALID_LAST_NAME').subscribe(
+      value => {
+        this.requiredMessages['INVALID_LAST_NAME']  = value;
+      }
+    );
+
+    this.translateService.get('INVALID_USERNAME').subscribe(
+      value => {
+        this.requiredMessages['INVALID_USERNAME']  = value;
+      }
+    );
+
+    this.translateService.get('INVALID_EMAIL').subscribe(
+      value => {
+        this.requiredMessages['INVALID_EMAIL']  = value;
       }
     );
 
@@ -157,20 +181,34 @@ export class ProfileUserPage {
       this.errorProfile = response.data.message;
     } else {
       let data = response.data.user;
-      this.updateProfile.controls['first_name'].patchValue(data.first_name);
-      this.updateProfile.controls['first_name'].setValue(data.first_name);
-      this.updateProfile.controls['last_name'].patchValue(data.last_name);
-      this.updateProfile.controls['last_name'].setValue(data.last_name);
-      this.updateProfile.controls['user_name'].patchValue(data.user_name);
-      this.updateProfile.controls['user_name'].setValue(data.user_name);
-      this.updateProfile.controls['email'].patchValue(data.email);
-      this.updateProfile.controls['email'].setValue(data.email);
-      this.updateProfile.controls['job_title'].patchValue(data.job_title);
-      this.updateProfile.controls['job_title'].setValue(data.job_title);
-      this.updateProfile.controls['company_name'].patchValue(data.company_name);
-      this.updateProfile.controls['company_name'].setValue(data.company_name);
-      this.updateProfile.controls['job_description'].patchValue(data.job_description);
-      this.updateProfile.controls['job_description'].setValue(data.job_description);
+      if(data.first_name!==undefined && data.first_name!==null){
+        this.updateProfile.controls['first_name'].patchValue(data.first_name);
+        this.updateProfile.controls['first_name'].setValue(data.first_name);
+      }
+      if(data.last_name!==undefined && data.last_name!==null){
+        this.updateProfile.controls['last_name'].patchValue(data.last_name);
+        this.updateProfile.controls['last_name'].setValue(data.last_name);
+      }
+      if(data.user_name!==undefined && data.user_name!==null){
+        this.updateProfile.controls['user_name'].patchValue(data.user_name);
+        this.updateProfile.controls['user_name'].setValue(data.user_name);
+      }
+      if(data.email!==undefined && data.email!==null){
+        this.updateProfile.controls['email'].patchValue(data.email);
+        this.updateProfile.controls['email'].setValue(data.email);
+      }
+      if(data.job_title!==undefined && data.job_title!==null){
+        this.updateProfile.controls['job_title'].patchValue(data.job_title);
+        this.updateProfile.controls['job_title'].setValue(data.job_title);
+      }
+      if(data.company_name!==undefined && data.company_name!==null){
+        this.updateProfile.controls['company_name'].patchValue(data.company_name);
+        this.updateProfile.controls['company_name'].setValue(data.company_name);
+      }
+      if(data.job_description!==undefined && data.job_description!==null){
+        this.updateProfile.controls['job_description'].patchValue(data.job_description);
+        this.updateProfile.controls['job_description'].setValue(data.job_description);
+      }
       this.ready = true;
       if (data.image_profile !== undefined && data.image_profile !== null && data.image_profile !== '') {
         if (data.image_profile.indexOf('http') !== -1){
@@ -269,11 +307,17 @@ export class ProfileUserPage {
       first_name: this.updateProfile.value.first_name,
       last_name: this.updateProfile.value.last_name,
       user_name: this.updateProfile.value.user_name.toLowerCase(),
-      job_title: this.updateProfile.value.job_title,
-      company_name: this.updateProfile.value.company_name,
-      job_description: this.updateProfile.value.job_description,
       email: this.updateProfile.value.email.toLowerCase()
     };
+
+    if(this.updateProfile.value.job_title!==null && this.updateProfile.value.job_title!=='')
+      data['job_title'] =  this.updateProfile.value.job_title;
+
+    if(this.updateProfile.value.company_name!==null && this.updateProfile.value.company_name!=='')
+      data['company_name'] =  this.updateProfile.value.company_name;
+
+    if(this.updateProfile.value.job_description!==null && this.updateProfile.value.job_description!=='')
+      data['job_description'] =  this.updateProfile.value.job_description;
 
     if (this.imageTaken === true && this.oldImageProfile !== undefined && this.oldImageProfile != null && this.oldImageProfile !== '')
       data['old_image_profile'] = this.oldImageProfile;
@@ -310,12 +354,26 @@ export class ProfileUserPage {
   }
 
   public backAction(): void {
+    console.log(this.updateProfile.controls.email.status);
     if (this.updateProfile.valid && !this.submitted){
       this.update();
     }else{
       if(!this.updateProfile.valid && !this.submitted){
+        let message = '';
+        if(this.updateProfile.controls.first_name.status =='INVALID')
+          message = this.requiredMessages['INVALID_NAME'];
+
+        if(this.updateProfile.controls.last_name.status =='INVALID')
+          message = this.requiredMessages['INVALID_LAST_NAME'];
+
+        if(this.updateProfile.controls.user_name.status =='INVALID')
+          message = this.requiredMessages['INVALID_USERNAME'];
+
+        if(this.updateProfile.controls.email.status =='INVALID')
+          message = this.requiredMessages['INVALID_EMAIL'];
+
         this.messages.showMessage({
-          content: this.requiredMessage,
+          content: message,
           spinner:false,
           duration:2000
         });
@@ -324,10 +382,8 @@ export class ProfileUserPage {
   }
 
   public backHome(): void {
-    if (this.navCtrl.parent !== undefined && this.navCtrl.parent !== null)
-      this.navCtrl.parent.select(0);
-    else
-      this.navCtrl.push(TabsPage);
+    //this.updateProfile.reset();
+    this.navCtrl.pop(TabsPage);
   }
 
   private callBackError(response: any): void {
