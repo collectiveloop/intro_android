@@ -60,6 +60,7 @@ export class ProfileUserPage {
     targetWidth: 350,
     targetHeight: 350
   };
+  formInitialState:string = '';
 
   constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public navParams: NavParams, private platform: Platform, public messages: MessageService, private camera: Camera, public actionSheetCtrl: ActionSheetController, private imagePicker: ImagePicker, private file: File, private filePath: FilePath) {
     this.params = { 'show_signup': this.navParams.get('show_signup'), 'user_id': this.navParams.get('user_id') };
@@ -111,6 +112,24 @@ export class ProfileUserPage {
     this.translateService.get('INVALID_EMAIL').subscribe(
       value => {
         this.requiredMessages['INVALID_EMAIL']  = value;
+      }
+    );
+
+    this.translateService.get('INVALID_JOB_TITLE').subscribe(
+      value => {
+        this.requiredMessages['INVALID_JOB_TITLE']  = value;
+      }
+    );
+
+    this.translateService.get('INVALID_COMPANY_NAME').subscribe(
+      value => {
+        this.requiredMessages['INVALID_COMPANY_NAME']  = value;
+      }
+    );
+
+    this.translateService.get('INVALID_JOB_DESCRIPTION').subscribe(
+      value => {
+        this.requiredMessages['INVALID_JOB_DESCRIPTION']  = value;
       }
     );
 
@@ -184,31 +203,45 @@ export class ProfileUserPage {
       if(data.first_name!==undefined && data.first_name!==null){
         this.updateProfile.controls['first_name'].patchValue(data.first_name);
         this.updateProfile.controls['first_name'].setValue(data.first_name);
+        this.formInitialState=this.formInitialState+data.first_name.toString().trim();
       }
+
       if(data.last_name!==undefined && data.last_name!==null){
         this.updateProfile.controls['last_name'].patchValue(data.last_name);
         this.updateProfile.controls['last_name'].setValue(data.last_name);
+        this.formInitialState=this.formInitialState+data.last_name.toString().trim();
       }
+
       if(data.user_name!==undefined && data.user_name!==null){
         this.updateProfile.controls['user_name'].patchValue(data.user_name);
         this.updateProfile.controls['user_name'].setValue(data.user_name);
+        this.formInitialState=this.formInitialState+data.user_name.toLowerCase().toString().trim();
       }
+
       if(data.email!==undefined && data.email!==null){
         this.updateProfile.controls['email'].patchValue(data.email);
         this.updateProfile.controls['email'].setValue(data.email);
+        this.formInitialState=this.formInitialState+data.email.toLowerCase().toString().trim();
       }
+
       if(data.job_title!==undefined && data.job_title!==null){
         this.updateProfile.controls['job_title'].patchValue(data.job_title);
         this.updateProfile.controls['job_title'].setValue(data.job_title);
+        this.formInitialState=this.formInitialState+data.job_title.toString().trim();
       }
+
       if(data.company_name!==undefined && data.company_name!==null){
         this.updateProfile.controls['company_name'].patchValue(data.company_name);
         this.updateProfile.controls['company_name'].setValue(data.company_name);
+        this.formInitialState=this.formInitialState+data.company_name.toString().trim();
       }
+
       if(data.job_description!==undefined && data.job_description!==null){
         this.updateProfile.controls['job_description'].patchValue(data.job_description);
         this.updateProfile.controls['job_description'].setValue(data.job_description);
+        this.formInitialState=this.formInitialState+data.job_description.toString().trim();
       }
+
       this.ready = true;
       if (data.image_profile !== undefined && data.image_profile !== null && data.image_profile !== '') {
         if (data.image_profile.indexOf('http') !== -1){
@@ -274,8 +307,7 @@ export class ProfileUserPage {
   }
 
   public getImage(): void {
-    this.imagePicker.getPictures({ maximumImagesCount: 1, outputType: 0, width: this.imageDefault.WIDTH,
-	height: this.imageDefault.HEIGHT }).then((results) => {
+    this.imagePicker.getPictures({ maximumImagesCount: 1, outputType: 0, width: this.imageDefault.WIDTH, height: this.imageDefault.HEIGHT }).then((results) => {
       for (var i = 0; i < results.length; i++) {
         console.log('Image URI: ' + results[i]);
         let split = results[i].split('/');
@@ -354,9 +386,14 @@ export class ProfileUserPage {
   }
 
   public backAction(): void {
-    console.log(this.updateProfile.controls.email.status);
     if (this.updateProfile.valid && !this.submitted){
-      this.update();
+      //si hay un cambio en el formulario lo sabremos por medio de esto, si e sel caso actualizamos, si no volvemos
+      console.log(this.formInitialState);
+      console.log((this.updateProfile.value.first_name.toString().trim()+this.updateProfile.value.last_name.toString().trim()+this.updateProfile.value.user_name.toLowerCase().toString().trim()+this.updateProfile.value.email.toString().toLowerCase().trim()+this.updateProfile.value.job_title.toString().trim()+this.updateProfile.value.company_name.toString().trim()+this.updateProfile.value.job_description.toString().trim()));
+      if(this.formInitialState!==(this.updateProfile.value.first_name.toString().trim()+this.updateProfile.value.last_name.toString().trim()+this.updateProfile.value.user_name.toString().trim()+this.updateProfile.value.email.toString().trim()+this.updateProfile.value.job_title.toString().trim()+this.updateProfile.value.company_name.toString().trim()+this.updateProfile.value.job_description.toString().trim()) || this.imageTaken===true)
+        this.update();
+      else
+        this.backHome();
     }else{
       if(!this.updateProfile.valid && !this.submitted){
         let message = '';
@@ -371,6 +408,15 @@ export class ProfileUserPage {
 
         if(this.updateProfile.controls.email.status =='INVALID')
           message = this.requiredMessages['INVALID_EMAIL'];
+
+        if(this.updateProfile.controls.job_title.status =='INVALID')
+          message = this.requiredMessages['INVALID_JOB_TITLE'];
+
+        if(this.updateProfile.controls.company_name.status =='INVALID')
+          message = this.requiredMessages['INVALID_COMPANY_NAME'];
+
+        if(this.updateProfile.controls.job_description.status =='INVALID')
+          message = this.requiredMessages['INVALID_JOB_DESCRIPTION'];
 
         this.messages.showMessage({
           content: message,
