@@ -15,7 +15,6 @@
   .toolbar .toolbar-title {
     color: #ffffff !important;
     text-decoration: none;
-    font-size: 16px;
   }
 
   .logo-main {
@@ -182,7 +181,7 @@
     padding: 0px !important;
   }
 
-  .card-content-md .image {
+  .card-content-md .image, .list .image {
     display: inline-table;
   }
 
@@ -200,4 +199,26 @@
     border-radius: 50%;
   }
   /*fin dashboard*/
+
+  /*contacts*/
+
+  .header .toolbar-segment {
+    height: inherit !important;
+    min-height: inherit !important;
+  }
+
+  .header .toolbar-segment .segment-button{
+    font-weight: bold;
+    font-size:inherit !important;
+    border-color:#FF3F1D;
+    border-bottom-width: 3px;
+    color: #ffffff;
+  }
+
+  .header .toolbar-segment .segment-button.segment-activated{
+    border-color:#ffffff;
+    color: #ffffff;
+  }
+
+  /*Fin de contacts*/
 }

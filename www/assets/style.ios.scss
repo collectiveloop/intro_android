@@ -229,6 +229,37 @@
     padding-bottom: 10px;
   }
   /*fin dashboard*/
+
+  /*contacts*/
+  .header .toolbar-segment {
+    height: inherit !important;
+  }
+
+  .header .toolbar-segment .segment-button{
+    border-color:#FF3F1D;
+    color: #FF3F1D;
+    background-color: #ffffff;
+  }
+
+  .header .toolbar-segment .segment-button.segment-activated{
+    background-color: #FF3F1D !important;
+    color: #ffffff;
+  }
+
+  .grace.list-ios.has-infinite-scroll  .scroll-content {
+    padding-right: 0px !important;
+  }
+
+  .grace .list-ios > .item-block:first-child, .grace .list-ios > .item-block:last-child{
+      border:0px !important;
+  }
+
+  .list-format.item-block .item-inner{
+    border-bottom: 1px solid #FF3F1D !important;
+  }
+
+  /*Fin de contacts*/
+
   @media (max-width: 320px) {
     .header .toolbar {
       height: 44px !important;

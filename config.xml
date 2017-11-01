@@ -88,6 +88,9 @@
     </plugin>
     <plugin name="cordova-plugin-camera" spec="^2.4.1" />
     <plugin name="cordova-plugin-console" spec="^1.0.7" />
+    <plugin name="cordova-plugin-contacts" spec="^2.3.1">
+        <variable name="CONTACTS_USAGE_DESCRIPTION" value="Get contacts for connect with them" />
+    </plugin>
     <plugin name="cordova-plugin-datepicker" spec="^0.9.3" />
     <plugin name="cordova-plugin-device" spec="^1.1.6" />
     <plugin name="cordova-plugin-facebook4" spec="^1.9.1">

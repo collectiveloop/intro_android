@@ -83,6 +83,12 @@
   "INTROS_MADE":"Intros made",
   "INTROS_RECEIVED":"Intros received",
   "NOT_INTROS_MADE":"There is not intros made",
-  "NOT_INTROS_RECEIVED":"There is not Intros received"
-
+  "NOT_INTROS_RECEIVED":"There is not Intros received",
+  "SEARCH": "Search",
+  "INVITATIONS": "Invitations",
+  "DELETE": "Delete",
+  "NOT_CONTACTS": "You do not have contacts",
+  "NOT_INVITATIONS": "You do not have invitations",
+  "ACCEPTED_INVITATIONS": "Accepted invitation",
+  "REJECTED_INVITATION": "Rejected invitation"
 }

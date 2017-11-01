@@ -35,6 +35,7 @@ import { ChangePasswordPage } from '../pages/login/change_password';
 import { RegisterUserPage } from '../pages/user/user_register';
 import { ProfileUserPage } from '../pages/user/user_profile';
 import { ListContactsPage } from '../pages/contacts/list_contacts';
+import { ListContactsPendingPage } from '../pages/contacts/list_contacts_pending';
 import { ListMessagesPage } from '../pages/messages/list_messages';
 import { ListIntrosPage } from '../pages/intros/list_intros';
 
@@ -48,6 +49,7 @@ import { ListIntrosPage } from '../pages/intros/list_intros';
     ChangePasswordPage,
     RegisterUserPage,
     ProfileUserPage,
+    ListContactsPendingPage,
     ListContactsPage,
     ListMessagesPage,
     ListIntrosPage,
@@ -87,6 +89,7 @@ import { ListIntrosPage } from '../pages/intros/list_intros';
     ChangePasswordPage,
     RegisterUserPage,
     ProfileUserPage,
+    ListContactsPendingPage,
     ListContactsPage,
     ListMessagesPage,
     ListIntrosPage,

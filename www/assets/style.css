@@ -36,6 +36,12 @@
   font-size: 14px;
 }
 
+h3 ion-icon{
+  margin: 0px 4px 0px 0px !important;
+  padding: 0px;
+  vertical-align: middle;
+}
+
 .center {
   text-align: center;
 }
@@ -50,6 +56,10 @@
 
 .in-table {
   display: inline-table;
+}
+
+.no-border, .no-border .item-inner{
+  border:0px !important;
 }
 
 .logo-bigger {}
@@ -160,8 +170,21 @@ ion-navbar.toolbar {
   color: inherit !important;
 }
 
+.toolbar .bar-button{
+  border-width: 0px;
+  margin-right: 20px;
+}
+
+.toolbar .bar-button ion-icon{
+  font-size: 30px !important;
+}
+
 .empty-back-button {
   width: 56px;
+}
+
+.list .item {
+  background: none ;
 }
 
 .item-inner {
@@ -378,10 +401,6 @@ ion-menu ion-list {
   background-color: #EDEEF0;
 }
 
-.grace .scroll-content {
-  padding: 8px !important;
-}
-
 /*dashboard*/
 
 .card {
@@ -390,6 +409,45 @@ ion-menu ion-list {
   width: 100%;
 }
 /*fin dashboard*/
+
+.list ion-thumbnail{
+  text-align: center;
+  width: 60px;
+  height: 60px;
+  min-width: 60px;
+  min-height: 60px;
+}
+
+.list .image {
+  display: inline-table;
+}
+
+.list .image ion-spinner {
+  height: 60px;
+}
+
+.list .image img{
+  max-width: 60px;
+  max-height: 60px;
+  border-radius: 50%;
+}
+
+.list .image div {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position-y: center;
+}
+
+.list-format.item-block .item-inner button {
+    width: auto;
+    float: right;
+}
+
+.list-format.item-block .item-inner button .button-inner {
+    color: #ffffff;
+}
 
 @media (min-width: 600px) {
   .form-style .login-facebook {

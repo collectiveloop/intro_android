@@ -4,7 +4,7 @@
       <div class="empty-back-button"></div>
     </ion-buttons>
     <ion-title class="section">
-      {{'CONTACTS' | translate}}
+      {{'INVITATIONS' | translate}}
     </ion-title>
     <ion-buttons end>
       <button type="button" outline class="button-form shadow" ion-button (click)="sendRequest()">
@@ -14,10 +14,10 @@
   </ion-toolbar>
   <ion-toolbar class="toolbar-segment">
     <ion-segment [(ngModel)]="section">
-      <ion-segment-button value="contacts">
+      <ion-segment-button value="contacts" (click)="goContacts()">
         {{'CONTACTS' | translate}}
       </ion-segment-button>
-      <ion-segment-button value="invitations" (click)="goInvitations()">
+      <ion-segment-button value="invitations">
         {{'INVITATIONS' | translate}}
       </ion-segment-button>
       <ion-segment-button value="search" (click)="goSearch()">
@@ -28,19 +28,19 @@
 </ion-header>
 <ion-content padding class="grace list-ios">
   <ion-list>
-    <ion-item class="center no-border" *ngIf="maxContacts==0">
-      {{'NOT_CONTACTS' | translate}}
+    <ion-item class="center no-border" *ngIf="maxContactsPending==0">
+      {{'NOT_INVITATIONS' | translate}}
     </ion-item>
-    <ion-item class="list-format" *ngFor="let contact of listContacts" (click)="loadContact(contact)">
+    <ion-item class="list-format" *ngFor="let pending of listContactsPending" (click)="loadContact(pending)">
       <ion-thumbnail item-start>
         <div class="image">
-          <img *ngIf="contact.imageLoaded" src="{{contact.image_profile}}" />
-          <ion-spinner *ngIf="!contact.imageLoaded" name="circles"></ion-spinner>
+          <div *ngIf="pending.imageLoaded"  [style.background-image]="pending.image_profile" ></div>
+          <ion-spinner *ngIf="!pending.imageLoaded" name="circles"></ion-spinner>
         </div>
       </ion-thumbnail>
-      <h2>{{contact.first_name}} {{contact.last_name}}</h2>
-      <h3>{{contact.user_name}}</h3>
-      <h3><ion-icon item-left name="ios-mail"></ion-icon>{{contact.email}}</h3>
+      <h2>{{pending.full_name}}</h2>
+      <button (click)="deleteInvitation($event,pending)" ion-button color="danger">{{'DELETE' | translate}}</button>
+      <button (click)="acceptInvitation($event,pending)" ion-button>{{'ACCEPT' | translate}}</button>
     </ion-item>
   </ion-list>
 
