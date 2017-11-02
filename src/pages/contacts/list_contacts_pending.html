@@ -39,8 +39,8 @@
         </div>
       </ion-thumbnail>
       <h2>{{pending.full_name}}</h2>
-      <button (click)="deleteInvitation($event,pending)" ion-button color="danger">{{'DELETE' | translate}}</button>
-      <button (click)="acceptInvitation($event,pending)" ion-button>{{'ACCEPT' | translate}}</button>
+      <button (click)="rejectInvitation($event,pending)" [disabled]="submitted" ion-button color="danger">{{'DELETE' | translate}}</button>
+      <button (click)="acceptInvitation($event,pending)" [disabled]="submitted" ion-button>{{'ACCEPT' | translate}}</button>
     </ion-item>
   </ion-list>
 

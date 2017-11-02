@@ -12,39 +12,25 @@ import { LoginPage } from '../pages/login/login';
 import { ResetPasswordPage } from '../pages/login/reset_password';
 import { ChangePasswordPage } from '../pages/login/change_password';
 import { ProfileUserPage } from '../pages/user/user_profile';
-import { Deeplinks } from '@ionic-native/deeplinks';
 
 @Component({
   templateUrl: 'app.html',
-  providers: [SettingsProvider, Deeplinks]
+  providers: [SettingsProvider]
 })
 
 export class MyApp {
   @ViewChild('rootNavController') nav: NavController;
   rootPage: any = LoginPage;
   selectedTheme: String;
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private translateService: TranslateService, private globalization: Globalization, public configService: ConfigService, private sessionService: SessionService, private app: App, public menuCtrl: MenuController, private settings: SettingsProvider, private deeplinks: Deeplinks) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private translateService: TranslateService, private globalization: Globalization, public configService: ConfigService, private sessionService: SessionService, private app: App, public menuCtrl: MenuController, private settings: SettingsProvider) {
     this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
+    //cordova plugin add branch-cordova-sdk --variable BRANCH_KEY=key_live_ndqptlgXNE4LHqIahH1WIpbiyFlb62J3 --variable URI_SCHEME=introapp
     this.platform.ready().then(() => {
       //Language
       if (this.platform.is('cordova')) {
         this.globalization.getPreferredLanguage().then(result => {
           let language = result.value.split('-')[0];//evitamos cosas como -US
           this.translateService.setDefaultLang(language);
-
-          this.deeplinks.routeWithNavController(this.app.getRootNav(), {
-            '/api/public/remember-link/:token': ResetPasswordPage,
-            '/forgot-password/:token': ResetPasswordPage
-          }).subscribe((match) => {
-            // match.$route - the route we matched, which is the matched entry from the arguments to route()
-            // match.$args - the args passed in the link
-            // match.$link - the full link data
-            console.log('Successfully matched route', match);
-          }, (nomatch) => {
-            // nomatch.$link - the full link data
-            console.error('Got a deeplink that didn\'t match', nomatch);
-          });
-
           this.runDevice();
         });
       } else {
@@ -85,5 +71,42 @@ export class MyApp {
       this.statusBar.styleBlackOpaque();
     }
     this.splashScreen.hide();
+    this.branchInit();
+     // Branch initialization
+     this.platform.resume.subscribe(() => {
+       console.log("gffgd");
+      this.branchInit();
+     });
+  }
+
+  // Branch initialization
+  public branchInit():void {
+    // only on devices
+    if (!this.platform.is('cordova')) { return }
+    const Branch = window['Branch'];
+    Branch.initSession(data => {
+      console.log(data);
+      let link:string ='';
+      if(data['+clicked_branch_link']!==undefined && data['+clicked_branch_link']!==null && data['+clicked_branch_link']!==false){
+        link = data['+clicked_branch_link'];
+      }else{
+        if(data['+non_branch_link']!==undefined && data['+non_branch_link']!==null && data['+non_branch_link']!==false)
+          link = data['+non_branch_link'];
+      }
+      //api/public/remember-link/:token: ResetPasswordPage
+      ///forgot-password/:token: ResetPasswordPage
+      if (link!=='') {
+        let verify = '/remember-link/';
+        let token:number;
+        token = link.indexOf(verify);
+        if(token===-1){
+          verify = '/forgot-password/';
+          token = link.indexOf(verify);
+        }
+
+        if(token!==-1)
+          this.app.getRootNav().push(ResetPasswordPage,{token:link.substring(token+verify.length,link.length)});
+      }
+    });
   }
 }

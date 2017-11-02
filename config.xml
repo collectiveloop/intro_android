@@ -88,6 +88,10 @@
     <allow-navigation href="http://192.168.1.126:8101" />
     <engine name="android" spec="^6.2.3" />
     <engine name="browser" spec="^4.1.0" />
+    <plugin name="branch-cordova-sdk" spec="~2.6.16">
+        <variable name="BRANCH_KEY" value="key_live_ndqptlgXNE4LHqIahH1WIpbiyFlb62J3" />
+        <variable name="URI_SCHEME" value="introapp" />
+    </plugin>
     <plugin name="com.synconset.imagepicker" spec="~2.1.8" />
     <plugin name="cordova-android-support-gradle-release" spec="^1.1.1">
         <variable name="ANDROID_SUPPORT_VERSION" value="25.+" />

@@ -84,7 +84,8 @@
         "phonegap-plugin-local-notification": "^1.0.1",
         "rxjs": "5.4.0",
         "sw-toolbox": "3.6.0",
-        "zone.js": "0.8.12"
+        "zone.js": "0.8.12",
+        "branch-cordova-sdk": "~2.6.16"
     },
     "devDependencies": {
         "@ionic/app-scripts": "2.1.4",
@@ -127,6 +128,10 @@
             "cordova-plugin-filepath": {},
             "cordova-plugin-contacts": {
                 "CONTACTS_USAGE_DESCRIPTION": "Get contacts for connect with them"
+            },
+            "branch-cordova-sdk": {
+                "BRANCH_KEY": "key_live_ndqptlgXNE4LHqIahH1WIpbiyFlb62J3",
+                "URI_SCHEME": "introapp"
             }
         },
         "platforms": [

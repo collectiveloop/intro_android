@@ -190,24 +190,6 @@ export class ListContactsPendingPage implements OnInit {
     this.navCtrl.push(ListContactsPage);
   }
 
-  public deleteInvitation(event:Event,invitation:any){
-    event.stopPropagation();
-    console.log(invitation);
-    this.currentInvitation = invitation;
-    this.submitted = true;
-    this.httpService.put({
-      url: 'contacts',
-      urlParams: [
-        this.translateService.getDefaultLang(),
-        'rejected',
-        invitation.id
-      ],
-      app: this.app,
-      success: this.callBackRejected,
-      context: this
-    });
-  }
-
   public acceptInvitation(event:Event,invitation:any){
     event.stopPropagation();
     console.log(invitation);
@@ -226,33 +208,38 @@ export class ListContactsPendingPage implements OnInit {
     });
   }
 
+  public rejectInvitation(event:Event,invitation:any){
+    event.stopPropagation();
+    console.log(invitation);
+    this.currentInvitation = invitation;
+    this.submitted = true;
+    this.httpService.put({
+      url: 'contacts',
+      urlParams: [
+        this.translateService.getDefaultLang(),
+        'reject',
+        invitation.id
+      ],
+      app: this.app,
+      success: this.callBackRejected,
+      context: this
+    });
+  }
+
   private callBackAccept(response): void {
-    this.submitted = false;
-    if (response.status==='success'){
-      let data = response.data.invitation_pending;
-      this.messages.showMessage({
-        content: this.acceptedMessage,
-        spinner:false,
-        duration:3000
-      });
-      let index = this.listContactsPending.indexOf(this.currentInvitation);
-      if(index > -1)
-        this.listContactsPending.splice(index, 1);
-    }else{
-      this.messages.showMessage({
-        content: response.data.message,
-        spinner:false,
-        duration:3000
-      });
-    }
+    this.proccessCallBack(response,this.acceptedMessage);
   }
 
   private callBackRejected(response): void {
+    this.proccessCallBack(response,this.rejectedMessage);
+  }
+
+  private proccessCallBack(response:any,message:string):void{
     this.submitted = false;
     if (response.status==='success'){
       let data = response.data.invitation_pending;
       this.messages.showMessage({
-        content: this.rejectedMessage,
+        content: message,
         spinner:false,
         duration:3000
       });
