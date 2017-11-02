@@ -124,24 +124,6 @@
                 "APP_ID": "144792272803845",
                 "APP_NAME": "sappitotech.ionic.introapp"
             },
-            "ionic-plugin-deeplinks": {
-                "URL_SCHEME": "introapp",
-                "DEEPLINK_SCHEME": "http",
-                "DEEPLINK_HOST": "165.227.51.66",
-                "ANDROID_PATH_PREFIX": "/",
-                "ANDROID_2_PATH_PREFIX": "/",
-                "ANDROID_3_PATH_PREFIX": "/",
-                "ANDROID_4_PATH_PREFIX": "/",
-                "ANDROID_5_PATH_PREFIX": "/",
-                "DEEPLINK_2_SCHEME": " ",
-                "DEEPLINK_2_HOST": " ",
-                "DEEPLINK_3_SCHEME": " ",
-                "DEEPLINK_3_HOST": " ",
-                "DEEPLINK_4_SCHEME": " ",
-                "DEEPLINK_4_HOST": " ",
-                "DEEPLINK_5_SCHEME": " ",
-                "DEEPLINK_5_HOST": " "
-            },
             "cordova-plugin-filepath": {},
             "cordova-plugin-contacts": {
                 "CONTACTS_USAGE_DESCRIPTION": "Get contacts for connect with them"

@@ -12,6 +12,12 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <branch-config>
+        <branch-key value="key_live_igERykWTo3tqRjil9POlKlikEAn1GuhY" />
+        <uri-scheme value="introapp" />
+        <link-domain value="intropro.app.link" />
+        <ios-team-release value="PW4Q8885U7" />
+    </branch-config>
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
@@ -115,24 +121,6 @@
     <plugin name="cordova-plugin-youtube-video-player" spec="^1.0.6" />
     <plugin name="cordova.plugins.diagnostic" spec="^3.7.1" />
     <plugin name="de.appplant.cordova.plugin.local-notification" spec="~0.8.5" />
-    <plugin name="ionic-plugin-deeplinks" spec="^1.0.15">
-        <variable name="URL_SCHEME" value="introapp" />
-        <variable name="DEEPLINK_SCHEME" value="http" />
-        <variable name="DEEPLINK_HOST" value="165.227.51.66" />
-        <variable name="ANDROID_PATH_PREFIX" value="/" />
-        <variable name="ANDROID_2_PATH_PREFIX" value="/" />
-        <variable name="ANDROID_3_PATH_PREFIX" value="/" />
-        <variable name="ANDROID_4_PATH_PREFIX" value="/" />
-        <variable name="ANDROID_5_PATH_PREFIX" value="/" />
-        <variable name="DEEPLINK_2_SCHEME" value=" " />
-        <variable name="DEEPLINK_2_HOST" value=" " />
-        <variable name="DEEPLINK_3_SCHEME" value=" " />
-        <variable name="DEEPLINK_3_HOST" value=" " />
-        <variable name="DEEPLINK_4_SCHEME" value=" " />
-        <variable name="DEEPLINK_4_HOST" value=" " />
-        <variable name="DEEPLINK_5_SCHEME" value=" " />
-        <variable name="DEEPLINK_5_HOST" value=" " />
-    </plugin>
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="phonegap-plugin-local-notification" spec="^1.0.1" />
 </widget>
