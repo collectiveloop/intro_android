@@ -445,8 +445,20 @@ ion-menu ion-list {
     float: right;
 }
 
+.list-format.item-block .item-inner button.button-default {
+    background-color: #FF3F1D;
+}
+
+.list-format.item-block .item-inner button.button-default.button-md-danger, .list-format.item-block .item-inner button.button-default.button-ios-danger {
+    background-color: #999999;
+}
+
 .list-format.item-block .item-inner button .button-inner {
     color: #ffffff;
+}
+
+.list-format .label {
+    margin: 0px 20px 0px 0px;
 }
 
 @media (min-width: 600px) {

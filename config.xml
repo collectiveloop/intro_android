@@ -30,6 +30,7 @@
     <preference name="SplashScreenDelay" value="2000" />
     <preference name="YouTubeDataApiKey" value="AIzaSyBz_QsRxbAr9SOf0djzPQSaK7HAfHs9o0I" />
     <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="KeyboardShrinksView" value="true" />
     <platform name="android">
         <allow-intent href="market:*" />
         <icon density="ldpi" src="resources/android/icon/drawable-ldpi-icon.png" />

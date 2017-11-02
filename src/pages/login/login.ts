@@ -34,6 +34,10 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public facebook: Facebook, private sessionService: SessionService, private platform: Platform, public messages: MessageService, public googlePlus: GooglePlus, public linkedin: LinkedIn) {
     this.buildValidations();
+    this.submitted = false;
+    this.errorLogin ='';
+    this.externalLogin = false;
+    
     this.logo = this.configService.getLogo('BIGGER');
     this.facebookLogo = this.configService.getLogo('FACEBOOK_BUTTON');
     this.sessionService.getSessionStatus().then(function(result) {
@@ -47,16 +51,6 @@ export class LoginPage {
         );
       }
     }.bind(this));
-    this.initElementsByVersion();
-  }
-
-
-  public initElementsByVersion() {
-    if (this.platform.is('ios')) {
-
-    } else {
-
-    }
   }
 
   private buildValidations() {
