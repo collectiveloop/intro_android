@@ -31,7 +31,7 @@
     <ion-item class="center no-border" *ngIf="maxContactsPending==0">
       {{'NOT_INVITATIONS' | translate}}
     </ion-item>
-    <ion-item class="list-format" *ngFor="let pending of listContactsPending" (click)="loadContact(pending)">
+    <ion-item class="list-format" *ngFor="let pending of listContactsPending" (click)="detailContact(pending)">
       <ion-thumbnail item-start>
         <div class="image">
           <div *ngIf="pending.imageLoaded"  [style.background-image]="pending.image_profile" ></div>

@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons  left>
+      <div class="empty-back-button center">
+        <ion-icon item-left name="md-arrow-back" (click)="backAction()"></ion-icon>
+      </div>
+    </ion-buttons>
+    <ion-title class="section">
+      {{'ADD_CONTACT' | translate}}
+    </ion-title>
+    <ion-buttons end></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <content class="form-style profile">
+    <form [formGroup]="registerForm">
+      <ion-row *ngIf="!ios">
+        <ion-col col-12 class="center image-setting">
+          <ion-icon class="big-icon" *ngIf="imageProfile==null || imageProfile== ''" item-left name="md-person"></ion-icon>
+          <img *ngIf="imageProfile!=null && imageProfile!= ''" src="{{imageProfile}}">
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="ios">
+        <ion-col offset-4 col-4 class="center logo-main">
+          <img class="logo-bigger" src="{{logo}}">
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="errorProfile!=''">
+        <ion-col col-12 class="center">
+          <span class="error center" [innerHTML]="errorProfile"></span>
+        </ion-col>
+      </ion-row>
+      <div *ngIf="ios" class="image-setting">
+        <div *ngIf="imageProfile==null || imageProfile== ''" class="no-photo">
+          <span>{{'PROFILE_PHOTO' | translate}}</span>
+        </div>
+        <img class="photo" *ngIf="imageProfile!=null && imageProfile!= ''" src="{{imageProfile}}">
+      </div>
+      <ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item>
+            <ion-icon item-left name="ios-mail-outline"></ion-icon>
+            <ion-input md-input type="mail" formControlName="email" placeholder="{{'EMAIL' | translate}}" (keyup.enter)="handleLogin('fullName')" #email></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="!registerForm.controls.first_name.valid  && (registerForm.controls.first_name.dirty || submitted)">
+            {{'INVALID_email' | translate}}
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item>
+            <ion-icon item-left name="ios-contact-outline"></ion-icon>
+            <ion-input md-input formControlName="full_name" type="text" placeholder="{{'FULL_NAME' | translate}}" (keyup.enter)="submitForm()" #fullName></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="!registerForm.controls.first_name.valid  && (registerForm.controls.first_name.dirty || submitted)">
+            {{'INVALID_FULL_NAME' | translate}}
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row class="form-container-buttons">
+        <ion-col col-12 class="center">
+          <button type="button" outline  ion-button class="button-form shadow" (click)="addContact()" [disabled]="!registerForm.valid || submitted">{{'SIGNUP' | translate}}</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </content>
+</ion-content>

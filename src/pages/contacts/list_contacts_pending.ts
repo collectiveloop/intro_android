@@ -7,7 +7,7 @@ import { MessageService } from '../../lib/messages.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../lib/config.service';
 import { ListContactsPage } from './list_contacts';
-
+import { ProfileContactsPage } from './profile_contact';
 
 @Component({
   selector: 'list-contacts-pending',
@@ -246,6 +246,7 @@ export class ListContactsPendingPage implements OnInit {
       let index = this.listContactsPending.indexOf(this.currentInvitation);
       if(index > -1)
         this.listContactsPending.splice(index, 1);
+      this.maxContactsPending--;
     }else{
       this.messages.showMessage({
         content: response.data.message,
@@ -255,8 +256,12 @@ export class ListContactsPendingPage implements OnInit {
     }
   }
 
-  public goSearch(): void {
-    //this.navCtrl.push(DetailAboutPage, { id: id });
+  public detailContact(contact):void{
+    this.navCtrl.push(ProfileContactsPage, { contactId: contact.id_user, destiny:'pending_contacts' });
+  }
+
+  public goSearch(contact): void {
+    //this.navCtrl.push(DetailAboutPage);
   }
 
   private refreshScroll(): void {

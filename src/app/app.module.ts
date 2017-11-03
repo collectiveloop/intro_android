@@ -35,9 +35,12 @@ import { ChangePasswordPage } from '../pages/login/change_password';
 import { RegisterUserPage } from '../pages/user/user_register';
 import { ProfileUserPage } from '../pages/user/user_profile';
 import { ListContactsPage } from '../pages/contacts/list_contacts';
+import { ProfileContactsPage } from '../pages/contacts/profile_contact';
+import { AddContactsPage } from '../pages/contacts/add_contact';
 import { ListContactsPendingPage } from '../pages/contacts/list_contacts_pending';
 import { ListMessagesPage } from '../pages/messages/list_messages';
 import { ListIntrosPage } from '../pages/intros/list_intros';
+
 
 @NgModule({
   declarations: [
@@ -51,6 +54,8 @@ import { ListIntrosPage } from '../pages/intros/list_intros';
     ProfileUserPage,
     ListContactsPendingPage,
     ListContactsPage,
+    ProfileContactsPage,
+    AddContactsPage,
     ListMessagesPage,
     ListIntrosPage,
     HomePage,
@@ -91,6 +96,8 @@ import { ListIntrosPage } from '../pages/intros/list_intros';
     ProfileUserPage,
     ListContactsPendingPage,
     ListContactsPage,
+    ProfileContactsPage,
+    AddContactsPage,
     ListMessagesPage,
     ListIntrosPage,
     HomePage,

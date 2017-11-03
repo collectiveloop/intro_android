@@ -167,7 +167,7 @@ export class ProfileUserPage {
       this.ios = false;
     }
 
-    let paramsPut = {
+    let paramsGet = {
       url: 'user',
       urlParams: [
         this.translateService.getDefaultLang()
@@ -178,7 +178,7 @@ export class ProfileUserPage {
       context: this,
     };
 
-    this.httpService.get(paramsPut);
+    this.httpService.get(paramsGet);
   }
 
   private buildValidations() {

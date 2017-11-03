@@ -31,7 +31,7 @@
     <ion-item class="center no-border" *ngIf="maxContacts==0">
       {{'NOT_CONTACTS' | translate}}
     </ion-item>
-    <ion-item class="list-format" *ngFor="let contact of listContacts" (click)="loadContact(contact)">
+    <ion-item class="list-format" *ngFor="let contact of listContacts" (click)="detailContact(contact)">
       <ion-thumbnail item-start>
         <div class="image">
           <img *ngIf="contact.imageLoaded" src="{{contact.image_profile}}" />

@@ -81,7 +81,7 @@
         <ion-col offset-1 col-11 class="center">
           <ion-item>
             <ion-icon class="flip-icon" item-left name="ios-unlock-outline"></ion-icon>
-            <ion-input md-input formControlName="confirm_password" type="password" placeholder="{{'CONFIRM_PASSWORD' | translate}}" (keyup.enter)="handleLogin('jobTitle')" #confirmPassword ></ion-input>
+            <ion-input md-input formControlName="confirm_password" type="password" placeholder="{{'CONFIRM_PASSWORD' | translate}}" (keyup.enter)="submitForm()" #confirmPassword ></ion-input>
           </ion-item>
           <span class="error" *ngIf="!registerForm.controls.confirm_password.valid  && (registerForm.controls.confirm_password.dirty || submitted)">
             {{'INVALID_CONFIRM_PASSWORD' | translate}}
