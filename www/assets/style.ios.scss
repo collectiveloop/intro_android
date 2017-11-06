@@ -90,10 +90,19 @@
 
   .image-setting {
     float: left;
+    position:relative;
     /* padding: 8px; */
     margin: 40px 0 8px 35px;
     width: 100px;
     height: 100px;
+  }
+
+  .image-setting ion-spinner{
+    margin: auto auto;
+    text-align: center;
+    position: absolute;
+    top: 30px;
+    width: 100%;
   }
 
   .image-setting .no-photo {

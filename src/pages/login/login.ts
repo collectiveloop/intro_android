@@ -37,12 +37,18 @@ export class LoginPage {
     this.submitted = false;
     this.errorLogin ='';
     this.externalLogin = false;
-    
+
     this.logo = this.configService.getLogo('BIGGER');
     this.facebookLogo = this.configService.getLogo('FACEBOOK_BUTTON');
+    this.translateService.get('LOADING').subscribe(
+      value => {
+        this.loadingMessage = value;
+      }
+    );
     this.sessionService.getSessionStatus().then(function(result) {
       if (result !== false) {
-        this.navCtrl.push(TabsPage);
+        if(!this.sessionService.getIgnoreSession())
+          this.navCtrl.push(TabsPage);
       } else {
         this.translateService.get('LOADING').subscribe(
           value => {

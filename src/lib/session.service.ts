@@ -7,6 +7,7 @@ import { LinkedIn } from '@ionic-native/linkedin';
 
 @Injectable()
 export class SessionService {
+    ignoreSession:boolean = false;
     constructor(private storage: Storage, private facebook: Facebook,public googlePlus: GooglePlus, public linkedin: LinkedIn, public messages: MessageService) {}
     //this.storage.set('name', 'Maddddx');
     //this.storage.remove('name');
@@ -111,6 +112,14 @@ export class SessionService {
           }.bind(this)
         );
       });
+    }
+
+    public setIgnoreSession(ignoreSession:boolean):void{
+      this.ignoreSession = ignoreSession;
+    }
+
+    public getIgnoreSession():boolean{
+      return this.ignoreSession;
     }
 
     public loginByFacebook():any{

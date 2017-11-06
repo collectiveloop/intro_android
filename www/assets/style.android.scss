@@ -79,6 +79,10 @@
     background-color: #e7e7e7;
   }
 
+  .image-setting ion-spinner {
+    height:100%;
+  }
+
   .image-setting .big-icon {
     position: absolute;
     bottom: -42px;
@@ -92,7 +96,7 @@
   .image-setting img {
     max-width: 350px;
     vertical-align: bottom;
-    max-height: 186px;
+    height: 186px;
   }
 
   .image-setting ion-fab {

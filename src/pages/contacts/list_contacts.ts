@@ -6,6 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../lib/config.service';
 import { ListContactsPendingPage } from './list_contacts_pending';
 import { ProfileContactsPage } from './profile_contact';
+import { AddContactsPage } from './add_contact';
 
 @Component({
   selector: 'list-contacts',
@@ -129,12 +130,16 @@ export class ListContactsPage implements OnInit {
     this.navCtrl.push(ListContactsPendingPage);
   }
 
+  public addContact():void{
+    this.app.getRootNav().push(AddContactsPage, {destiny:'list_contacts' });
+  }
+
   public goSearch(): void {
     //this.navCtrl.push(DetailAboutPage, { id: id });
   }
 
   public detailContact(contact):void{
-    this.navCtrl.push(ProfileContactsPage, { contactId: contact.id_user, destiny:'list_contacts' });
+    this.app.getRootNav().push(ProfileContactsPage, { contactId: contact.id_user, destiny:'list_contacts' });
   }
 
   private refreshScroll(): void {

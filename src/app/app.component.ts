@@ -10,6 +10,7 @@ import { SessionService } from '../lib/session.service';
 import { SettingsProvider } from '../lib/settings';
 import { LoginPage } from '../pages/login/login';
 import { ResetPasswordPage } from '../pages/login/reset_password';
+import { ListContactsPendingPage } from '../pages/contacts/list_contacts_pending';
 import { ChangePasswordPage } from '../pages/login/change_password';
 import { ProfileUserPage } from '../pages/user/user_profile';
 
@@ -71,6 +72,7 @@ export class MyApp {
       this.statusBar.styleBlackOpaque();
     }
     this.splashScreen.hide();
+    this.sessionService.setIgnoreSession(false);
     this.branchInit();
      // Branch initialization
      this.platform.resume.subscribe(() => {
@@ -85,6 +87,7 @@ export class MyApp {
     if (!this.platform.is('cordova')) { return }
     const Branch = window['Branch'];
     Branch.initSession(data => {
+      this.sessionService.setIgnoreSession(true);
       console.log(data);
       let link:string ='';
       if(data['+clicked_branch_link']!==undefined && data['+clicked_branch_link']!==null && data['+clicked_branch_link']!==false){
@@ -96,17 +99,23 @@ export class MyApp {
       //api/public/remember-link/:token: ResetPasswordPage
       ///forgot-password/:token: ResetPasswordPage
       if (link!=='') {
-        let verify = '/remember-link/';
-        let token:number;
-        token = link.indexOf(verify);
-        if(token===-1){
-          verify = '/forgot-password/';
+        if(link.indexOf('invitation-contact')!==-1){
+          this.app.getRootNav().push(ListContactsPendingPage);
+        }else{
+          let verify = '/remember-link/';
+          let token:number;
           token = link.indexOf(verify);
-        }
+          if(token===-1){
+            verify = '/forgot-password/';
+            token = link.indexOf(verify);
+          }
 
-        if(token!==-1)
-          this.app.getRootNav().push(ResetPasswordPage,{token:link.substring(token+verify.length,link.length)});
+          if(token!==-1)
+            this.app.getRootNav().push(ResetPasswordPage,{token:link.substring(token+verify.length,link.length)});
+        }
       }
+
+
     });
   }
 }

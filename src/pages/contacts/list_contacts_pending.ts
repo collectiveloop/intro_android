@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../lib/config.service';
 import { ListContactsPage } from './list_contacts';
 import { ProfileContactsPage } from './profile_contact';
+import { AddContactsPage } from './add_contact';
 
 @Component({
   selector: 'list-contacts-pending',
@@ -186,10 +187,6 @@ export class ListContactsPendingPage implements OnInit {
     }
   }
 
-  public goContacts(): void {
-    this.navCtrl.push(ListContactsPage);
-  }
-
   public acceptInvitation(event:Event,invitation:any){
     event.stopPropagation();
     console.log(invitation);
@@ -256,8 +253,16 @@ export class ListContactsPendingPage implements OnInit {
     }
   }
 
+  public goContacts(): void {
+    this.navCtrl.push(ListContactsPage);
+  }
+
   public detailContact(contact):void{
-    this.navCtrl.push(ProfileContactsPage, { contactId: contact.id_user, destiny:'pending_contacts' });
+    this.app.getRootNav().push(ProfileContactsPage, { contactId: contact.id_user, destiny:'pending_contacts' });
+  }
+
+  public addContact():void{
+    this.app.getRootNav().push(AddContactsPage, { destiny:'pending_contacts' });
   }
 
   public goSearch(contact): void {

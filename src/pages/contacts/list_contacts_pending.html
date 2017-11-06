@@ -7,7 +7,7 @@
       {{'INVITATIONS' | translate}}
     </ion-title>
     <ion-buttons end>
-      <button type="button" outline class="button-form shadow" ion-button (click)="sendRequest()">
+      <button type="button" outline class="button-form shadow" ion-button (click)="addContact()">
         <ion-icon item-left name="md-add-circle"></ion-icon>
       </button>
     </ion-buttons>
@@ -38,7 +38,7 @@
           <ion-spinner *ngIf="!pending.imageLoaded" name="circles"></ion-spinner>
         </div>
       </ion-thumbnail>
-      <h2>{{pending.full_name}}</h2>
+      <h2>{{pending.first_name}} {{pending.last_name}}</h2>
       <button (click)="rejectInvitation($event,pending)" [disabled]="submitted" ion-button color="danger">{{'DELETE' | translate}}</button>
       <button (click)="acceptInvitation($event,pending)" [disabled]="submitted" ion-button>{{'ACCEPT' | translate}}</button>
     </ion-item>
