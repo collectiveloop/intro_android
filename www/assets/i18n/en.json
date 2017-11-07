@@ -89,9 +89,12 @@
   "NOT_INTROS_RECEIVED":"There is not Intros received",
   "SEARCH": "Search",
   "INVITATIONS": "Invitations",
+  "SEARCH_CONTACT": "Search contact",
   "DELETE": "Delete",
   "NOT_CONTACTS": "You do not have contacts",
   "NOT_INVITATIONS": "You do not have invitations",
   "ACCEPTED_INVITATIONS": "Accepted invitation",
-  "REJECTED_INVITATION": "Rejected invitation"
+  "REJECTED_INVITATION": "Rejected invitation",
+  "REJECTED": "Rejected",
+  "PENDING": "Pending"
 }

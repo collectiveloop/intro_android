@@ -6,7 +6,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../lib/config.service';
 import { ListContactsPendingPage } from './list_contacts_pending';
 import { ProfileContactsPage } from './profile_contact';
-import { AddContactsPage } from './add_contact';
+import { AddContactsPage } from './add_contacts';
+import { SearchContactsPage } from './search_contacts';
 
 @Component({
   selector: 'list-contacts',
@@ -135,7 +136,7 @@ export class ListContactsPage implements OnInit {
   }
 
   public goSearch(): void {
-    //this.navCtrl.push(DetailAboutPage, { id: id });
+    this.navCtrl.push(SearchContactsPage);
   }
 
   public detailContact(contact):void{

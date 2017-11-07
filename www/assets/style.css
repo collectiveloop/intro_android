@@ -68,7 +68,7 @@ h3 ion-icon {
   margin-top: 25px;
 }
 
-.list, .list-md, .list-ios {
+.list{
   margin: 0px;
 }
 
@@ -193,9 +193,35 @@ ion-navbar.toolbar {
   margin-left: 0px !important;
 }
 
-.form-style .item.item-block {
+.form-style .item.item-block, .searchbar {
+  padding: 0px;
+  min-height: initial;
+  border-top: 0px;
+  background: none;
   border-bottom: 1px solid;
   border-bottom-color: #FF3F1D;
+}
+
+.searchbar-toolbar{
+  background-color: #EDEEF0 !important;
+    z-index: 4;
+    width: 100%;
+}
+
+.searchbar-toolbar .searchbar-input-container{
+  padding: 5px;
+}
+
+.searchbar input{
+  background: none;
+  background-color: inherit !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+.searchbar .searchbar-search-icon{
+  top: 15px;
+
 }
 
 .form-style .row .col {
@@ -471,7 +497,11 @@ ion-menu ion-list {
 }
 
 .list-format .label {
-  margin: 0px 20px 0px 0px;
+  margin: 0px 0px 0px 0px;
+}
+
+.list-format button.contact{
+  background-color: #0EA8F2 !important;
 }
 
 .profile .text-input[disabled] {

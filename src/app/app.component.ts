@@ -13,6 +13,7 @@ import { ResetPasswordPage } from '../pages/login/reset_password';
 import { ListContactsPendingPage } from '../pages/contacts/list_contacts_pending';
 import { ChangePasswordPage } from '../pages/login/change_password';
 import { ProfileUserPage } from '../pages/user/user_profile';
+import { ContactService } from '../lib/contacts.service';
 
 @Component({
   templateUrl: 'app.html',
@@ -23,7 +24,7 @@ export class MyApp {
   @ViewChild('rootNavController') nav: NavController;
   rootPage: any = LoginPage;
   selectedTheme: String;
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private translateService: TranslateService, private globalization: Globalization, public configService: ConfigService, private sessionService: SessionService, private app: App, public menuCtrl: MenuController, private settings: SettingsProvider) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private translateService: TranslateService, private globalization: Globalization, public configService: ConfigService, private sessionService: SessionService, private app: App, public menuCtrl: MenuController, private settings: SettingsProvider, public contacts: ContactService) {
     this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
     //cordova plugin add branch-cordova-sdk --variable BRANCH_KEY=key_live_ndqptlgXNE4LHqIahH1WIpbiyFlb62J3 --variable URI_SCHEME=introapp
     this.platform.ready().then(() => {
@@ -32,6 +33,7 @@ export class MyApp {
         this.globalization.getPreferredLanguage().then(result => {
           let language = result.value.split('-')[0];//evitamos cosas como -US
           this.translateService.setDefaultLang(language);
+          this.contacts.getContacts();
           this.runDevice();
         });
       } else {

@@ -13,7 +13,7 @@ import { ListContactsPendingPage } from './list_contacts_pending';
 
 @Component({
   selector: 'page-add-contact',
-  templateUrl: 'add_contact.html',
+  templateUrl: 'add_contacts.html',
   providers:[Contacts]
 })
 export class AddContactsPage {

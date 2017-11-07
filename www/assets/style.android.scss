@@ -224,5 +224,31 @@
     color: #ffffff;
   }
 
+  .list-md {
+    margin: 0px;
+  }
+
+
+  .searchbar input{
+    padding: 6px 35px;
+    line-height: 0 !important;
+  }
+
+  .searchbar .searchbar-search-icon {
+    top: 11px;
+  }
+
+  .searchbar-toolbar{
+    margin: 98px 0px;
+  }
+
+  .searchbar-list{
+    margin-top: 40px;
+  }
+
+  .searchbar-list .scroll-content{
+    margin-bottom: 90px !important;
+  }
+
   /*Fin de contacts*/
 }

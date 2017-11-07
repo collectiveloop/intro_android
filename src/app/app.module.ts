@@ -13,6 +13,7 @@ import { GooglePlus } from '@ionic-native/google-plus';
 import { LinkedIn } from '@ionic-native/linkedin';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { DatePicker } from '@ionic-native/date-picker';
+import { Contacts } from '@ionic-native/contacts';
 
 import { IonicStorageModule  } from '@ionic/storage';
 
@@ -22,6 +23,7 @@ import { UtilService }   from '../lib/utils.service';
 import { NavigationService }   from '../lib/navigation.service';
 import { HttpService }    from '../lib/http.service';
 import { SessionService }   from '../lib/session.service';
+import { ContactService } from '../lib/contacts.service';
 
 import { MyApp } from './app.component';
 import { TabService } from '../pages/tabs/tabs.service';
@@ -36,7 +38,8 @@ import { RegisterUserPage } from '../pages/user/user_register';
 import { ProfileUserPage } from '../pages/user/user_profile';
 import { ListContactsPage } from '../pages/contacts/list_contacts';
 import { ProfileContactsPage } from '../pages/contacts/profile_contact';
-import { AddContactsPage } from '../pages/contacts/add_contact';
+import { AddContactsPage } from '../pages/contacts/add_contacts';
+import { SearchContactsPage } from '../pages/contacts/search_contacts';
 import { ListContactsPendingPage } from '../pages/contacts/list_contacts_pending';
 import { ListMessagesPage } from '../pages/messages/list_messages';
 import { ListIntrosPage } from '../pages/intros/list_intros';
@@ -56,6 +59,7 @@ import { ListIntrosPage } from '../pages/intros/list_intros';
     ListContactsPage,
     ProfileContactsPage,
     AddContactsPage,
+    SearchContactsPage,
     ListMessagesPage,
     ListIntrosPage,
     HomePage,
@@ -98,6 +102,7 @@ import { ListIntrosPage } from '../pages/intros/list_intros';
     ListContactsPage,
     ProfileContactsPage,
     AddContactsPage,
+    SearchContactsPage,
     ListMessagesPage,
     ListIntrosPage,
     HomePage,
@@ -111,6 +116,7 @@ import { ListIntrosPage } from '../pages/intros/list_intros';
     NavigationService,
     HttpService,
     SessionService,
+    ContactService,
     StatusBar,
     SplashScreen,
     Globalization,
@@ -119,6 +125,7 @@ import { ListIntrosPage } from '../pages/intros/list_intros';
     LinkedIn,
     LocalNotifications,
     DatePicker,
+    Contacts,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

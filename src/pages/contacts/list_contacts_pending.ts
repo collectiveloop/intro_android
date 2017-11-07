@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { App, NavController, LoadingController } from 'ionic-angular';
-import { Contacts } from '@ionic-native/contacts';
+import { App, NavController, LoadingController, Platform } from 'ionic-angular';
+
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpService } from '../../lib/http.service';
 import { MessageService } from '../../lib/messages.service';
@@ -8,12 +8,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../lib/config.service';
 import { ListContactsPage } from './list_contacts';
 import { ProfileContactsPage } from './profile_contact';
-import { AddContactsPage } from './add_contact';
+import { AddContactsPage } from './add_contacts';
+import { SearchContactsPage } from './search_contacts';
+import { ContactService } from '../../lib/contacts.service';
 
 @Component({
   selector: 'list-contacts-pending',
-  templateUrl: 'list_contacts_pending.html',
-  providers:[Contacts]
+  templateUrl: 'list_contacts_pending.html'
 })
 export class ListContactsPendingPage implements OnInit {
   page: number = 1;
@@ -21,7 +22,6 @@ export class ListContactsPendingPage implements OnInit {
   quantity: number = 0;
   infiniteScroll: any;
   listContactsPending: Array<object> = [];
-  searchPending:any = [];
   contactsDevice: Array<object> = [];
   section:string='invitations';
   loadingMessage: string = '';
@@ -31,10 +31,30 @@ export class ListContactsPendingPage implements OnInit {
   submitted:boolean = false;
   currentInvitation:any;
 
-  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public contacts: Contacts, public sanitizer: DomSanitizer) { }
+  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public contactsService: ContactService, public sanitizer: DomSanitizer,  private platform: Platform) { }
   public ngOnInit(): void {
     this.submitted = false;
-    this.getContactsDevice();
+    if (this.platform.is('cordova')) {
+      this.contactsService.getContactsDevice().then((contacts)=>{
+        this.contactsDevice = contacts;
+        this.loadInitialContent();
+      });
+    }else{
+      this.loadInitialContent();
+    }
+  }
+
+  public loadInitialContent():void{
+    this.translateService.get('LOADING').subscribe(
+      value => {
+        this.loadingMessage = value;
+        this.quantity = this.configService.getQuantity();
+        this.route = this.configService.getDomainImages() + '/profiles/';
+        this.page = 1;
+        this.getCountContactsPending();
+      }
+    );
+
     this.translateService.get('ACCEPTED_INVITATIONS').subscribe(
       value => {
         this.acceptedMessage = value;
@@ -44,16 +64,6 @@ export class ListContactsPendingPage implements OnInit {
     this.translateService.get('REJECTED_INVITATION').subscribe(
       value => {
         this.rejectedMessage = value;
-      }
-    );
-
-    this.translateService.get('LOADING').subscribe(
-      value => {
-        this.loadingMessage = value;
-        this.quantity = this.configService.getQuantity();
-        this.route = this.configService.getDomainImages() + '/profiles/';
-        this.page = 1;
-        this.getCountContactsPending();
       }
     );
   }
@@ -112,14 +122,16 @@ export class ListContactsPendingPage implements OnInit {
           pending[i]['image_profile'] = this.route + pending[i]['image_profile'];
 
         pending[i]['url'] = pending[i]['image_profile'];
-        pending[i]['image_profile'] = this.sanitizer.  bypassSecurityTrustStyle('url('+pending[i]['image_profile']+')');
+        pending[i]['image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+pending[i]['image_profile']+')');
         this.loadImage(pending[i]);
       } else {
         if(this.contactsDevice.length>0){
           this.getFilterContact(pending[i]);
         }else{
-          this.searchPending.push(pending[i]);
+          pending[i]['imageLoaded'] = true;
+          pending[i]['image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+this.configService.getProfileImage()+')');
         }
+
       }
 
       this.listContactsPending.push(pending[i]);
@@ -127,26 +139,14 @@ export class ListContactsPendingPage implements OnInit {
     this.refreshScroll();
   }
 
-  public getContactsDevice():void{
-    this.contacts.find(['displayName', 'name', 'emails'], {filter: '',multiple : true}).then((contacts)=>{
-      this.contactsDevice = contacts;
-      if(this.searchPending.length>0){
-        for(let a=0;a<this.searchPending.length;a++){
-          this.getFilterContact(this.searchPending[a]);
-        }
-      }
-    },(error)=>{
-      console.log(error);
-    });
-  }
-
   public getFilterContact(pending:any):void{
     let founded = false;
     let max = this.contactsDevice.length;
     for(let i=0;i<max;i++) {
+      console.log(this.contactsDevice[i]['emails'],pending['email']);
       if (this.contactsDevice[i]['emails']!==undefined && this.contactsDevice[i]['emails']!==null && this.contactsDevice[i]['emails'].length>0 && this.contactsDevice[i]['emails'][0].value===pending['email'] && this.contactsDevice[i]['photos']!==undefined && this.contactsDevice[i]['photos']!==null && this.contactsDevice[i]['photos'].length>0 && this.contactsDevice[i]['photos'][0].value!==undefined && this.contactsDevice[i]['photos'][0].value!==null && this.contactsDevice[i]['photos'][0].value!==''){
         pending['imageLoaded'] = true;
-        pending['image_profile'] = this.sanitizer.  bypassSecurityTrustStyle('url('+this.contactsDevice[i]['photos'][0].value+')');
+        pending['image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+this.contactsDevice[i]['photos'][0].value+')');
         founded =  true;
         break;
       }
@@ -154,7 +154,7 @@ export class ListContactsPendingPage implements OnInit {
 
     if(!founded){
       pending['imageLoaded'] = true;
-      pending['image_profile'] = this.sanitizer.  bypassSecurityTrustStyle('url('+this.configService.getProfileImage()+')');
+      pending['image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+this.configService.getProfileImage()+')');
     }
   }
 
@@ -169,7 +169,7 @@ export class ListContactsPendingPage implements OnInit {
   private onErrorHandler(data): void {
     console.log(data);
     this['image'].imageLoaded = true;
-    this['image'].image_profile = this.sanitizer.  bypassSecurityTrustStyle('url('+this['config'].getProfileImage()+')');
+    this['image'].image_profile = this.sanitizer.bypassSecurityTrustStyle('url('+this['config'].getProfileImage()+')');
   }
 
   private onloadHandler(data): void {
@@ -266,7 +266,7 @@ export class ListContactsPendingPage implements OnInit {
   }
 
   public goSearch(contact): void {
-    //this.navCtrl.push(DetailAboutPage);
+    this.navCtrl.push(SearchContactsPage);
   }
 
   private refreshScroll(): void {

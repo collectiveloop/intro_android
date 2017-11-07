@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons left>
+      <div class="empty-back-button"></div>
+    </ion-buttons>
+    <ion-title class="section">
+      {{'SEARCH_CONTACT' | translate}}
+    </ion-title>
+    <ion-buttons end>
+      <button type="button" outline class="button-form shadow" ion-button (click)="addContact()">
+        <ion-icon item-left name="md-add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar class="toolbar-segment">
+    <ion-segment [(ngModel)]="section">
+      <ion-segment-button value="contacts" (click)="goContacts()">
+        {{'CONTACTS' | translate}}
+      </ion-segment-button>
+      <ion-segment-button value="invitations" (click)="goInvitations()">
+        {{'INVITATIONS' | translate}}
+      </ion-segment-button>
+      <ion-segment-button value="search">
+        {{'SEARCH' | translate}}
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-searchbar class="searchbar-toolbar"
+  [(ngModel)]="search.textField"
+  [showCancelButton]="search.cancel"
+  (ionInput)="onInput($event)"
+  (ionCancel)="onCancel($event)">
+</ion-searchbar>
+<ion-content padding class="grace list-ios searchbar-list">
+  <ion-list>
+    <ion-item class="center no-border" *ngIf="maxContacts==0">
+      {{'NOT_CONTACTS' | translate}}
+    </ion-item>
+    <ion-item class="list-format" *ngFor="let search of listSearch" (click)="detailContact(search)">
+      <ion-thumbnail item-start>
+        <div class="image">
+          <img *ngIf="search.imageLoaded" src="{{search.image_profile}}" />
+          <ion-spinner *ngIf="!search.imageLoaded" name="circles"></ion-spinner>
+        </div>
+      </ion-thumbnail>
+      <h2>{{search.first_name}} {{search.last_name}}</h2>
+      <h3>{{search.user_name}}</h3>
+      <button *ngIf="search.type_query=='contacts_pending' && search.status==0" (click)="rejectInvitation($event,search)" [disabled]="submitted" ion-button color="danger">{{'DELETE' | translate}}</button>
+      <button *ngIf="search.type_query=='contacts_pending' && search.status==0" (click)="acceptInvitation($event,search)" [disabled]="submitted" ion-button>{{'ACCEPT' | translate}}</button>
+      <button *ngIf="search.type_query=='contacts_invited' && search.status==0" [disabled]="true" ion-button>{{'PENDING' | translate}}</button>
+      <button *ngIf="search.type_query=='contacts_pending' && search.status==2" [disabled]="true" color="danger" ion-button>{{'REJECTED' | translate}}</button>
+      <button *ngIf="search.type_query=='users_friends'" [disabled]="true" ion-button class="contact">{{'CONTACT' | translate}}</button>
+      <button *ngIf="search.type_query=='users_not_contacts'" (click)="sendInvitation($event,search)" [disabled]="submitted" ion-button>{{'ADD' | translate}}</button>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="moreSearch($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{'LOADING' | translate}}"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>
