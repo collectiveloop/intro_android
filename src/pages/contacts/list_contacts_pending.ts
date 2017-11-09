@@ -11,6 +11,7 @@ import { ProfileContactsPage } from './profile_contact';
 import { AddContactsPage } from './add_contacts';
 import { SearchContactsPage } from './search_contacts';
 import { ContactService } from '../../lib/contacts.service';
+import { SessionService } from '../../lib/session.service';
 
 @Component({
   selector: 'list-contacts-pending',
@@ -31,17 +32,23 @@ export class ListContactsPendingPage implements OnInit {
   submitted:boolean = false;
   currentInvitation:any;
 
-  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public contactsService: ContactService, public sanitizer: DomSanitizer,  private platform: Platform) { }
+  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public contactsService: ContactService, public sanitizer: DomSanitizer,  private platform: Platform, private sessionService: SessionService) { }
   public ngOnInit(): void {
     this.submitted = false;
-    if (this.platform.is('cordova')) {
-      this.contactsService.getContactsDevice().then((contacts)=>{
-        this.contactsDevice = contacts;
-        this.loadInitialContent();
-      });
-    }else{
-      this.loadInitialContent();
-    }
+    this.sessionService.getSessionStatus().then(function(result) {
+      if (result === false) {
+          this.navCtrl.popToRoot();
+      } else {
+        if (this.platform.is('cordova')) {
+          this.contactsService.getContactsDevice().then((contacts)=>{
+            this.contactsDevice = contacts;
+            this.loadInitialContent();
+          });
+        }else{
+          this.loadInitialContent();
+        }
+      }
+    }.bind(this));
   }
 
   public loadInitialContent():void{

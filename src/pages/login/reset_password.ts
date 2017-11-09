@@ -27,6 +27,11 @@ export class ResetPasswordPage {
 
   constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public messages: MessageService, public navParams: NavParams, private sessionService: SessionService) {
     this.buildValidations();
+    this.sessionService.getSessionStatus().then(function(result) {
+      if (result !== false)
+        this.navCtrl.push(TabsPage);
+    }.bind(this));
+    this.sessionService.cleanDestinySession();
     this.token = this.navParams.get('token');
     if(this.token ===undefined || this.token ===null || this.token ==='')
       this.navCtrl.push(LoginPage);

@@ -37,7 +37,6 @@ export class LoginPage {
     this.submitted = false;
     this.errorLogin ='';
     this.externalLogin = false;
-
     this.logo = this.configService.getLogo('BIGGER');
     this.facebookLogo = this.configService.getLogo('FACEBOOK_BUTTON');
     this.translateService.get('LOADING').subscribe(
@@ -46,10 +45,14 @@ export class LoginPage {
       }
     );
     this.sessionService.getSessionStatus().then(function(result) {
+      let destiny = this.sessionService.getDestinySession();
       if (result !== false) {
-        if(!this.sessionService.getIgnoreSession())
-          this.navCtrl.push(TabsPage);
+        this.navCtrl.push(destiny.target,destiny.params);
       } else {
+        //RESET PASSWORD O SECCIONES DONDE NO HAY SESION
+        if(destiny.target!==undefined && destiny.target!==null )
+          this.navCtrl.push(destiny.target);
+
         this.translateService.get('LOADING').subscribe(
           value => {
             this.loadingMessage = value;

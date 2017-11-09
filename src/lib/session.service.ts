@@ -8,6 +8,7 @@ import { LinkedIn } from '@ionic-native/linkedin';
 @Injectable()
 export class SessionService {
     ignoreSession:boolean = false;
+    destiny:any = {};
     constructor(private storage: Storage, private facebook: Facebook,public googlePlus: GooglePlus, public linkedin: LinkedIn, public messages: MessageService) {}
     //this.storage.set('name', 'Maddddx');
     //this.storage.remove('name');
@@ -120,6 +121,19 @@ export class SessionService {
 
     public getIgnoreSession():boolean{
       return this.ignoreSession;
+    }
+
+    public setDestinySession(destiny:any,params:any):void{
+      this.destiny.target = destiny;
+      this.destiny.params = params;
+    }
+
+    public cleanDestinySession():void{
+      this.destiny = {};
+    }
+
+    public getDestinySession():any{
+      return this.destiny;
     }
 
     public loginByFacebook():any{

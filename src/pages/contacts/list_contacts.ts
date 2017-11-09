@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { App, NavController, LoadingController } from 'ionic-angular';
+import { App, NavController, LoadingController, NavParams } from 'ionic-angular';
 import { HttpService } from '../../lib/http.service';
 import { MessageService } from '../../lib/messages.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -8,6 +8,7 @@ import { ListContactsPendingPage } from './list_contacts_pending';
 import { ProfileContactsPage } from './profile_contact';
 import { AddContactsPage } from './add_contacts';
 import { SearchContactsPage } from './search_contacts';
+import { SessionService } from '../../lib/session.service';
 
 @Component({
   selector: 'list-contacts',
@@ -23,8 +24,14 @@ export class ListContactsPage implements OnInit {
   loadingMessage: string = '';
   route: string = '';
 
-  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService) { }
+  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public navParams: NavParams, private sessionService: SessionService) { }
   public ngOnInit(): void {
+    if(this.navParams.get('target')!==undefined && this.navParams.get('target')!==null){
+      if(ListContactsPendingPage===this.navParams.get('target'))
+        this.goInvitations();
+      this.sessionService.cleanDestinySession();
+    }
+
     this.translateService.get('LOADING').subscribe(
       value => {
         this.loadingMessage = value;

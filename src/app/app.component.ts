@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, NgZone } from '@angular/core';
 import { Platform, NavController, App } from 'ionic-angular';
 import { MenuController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -21,12 +21,29 @@ import { ContactService } from '../lib/contacts.service';
   providers: [SettingsProvider]
 })
 
+
+
 export class MyApp {
   @ViewChild('rootNavController') nav: NavController;
   rootPage: any = LoginPage;
   selectedTheme: String;
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private translateService: TranslateService, private globalization: Globalization, public configService: ConfigService, private sessionService: SessionService, private app: App, public menuCtrl: MenuController, private settings: SettingsProvider, public contacts: ContactService) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private translateService: TranslateService, private globalization: Globalization, public configService: ConfigService, private sessionService: SessionService, private app: App, public menuCtrl: MenuController, private settings: SettingsProvider, public contacts: ContactService, private ngZone: NgZone) {
     this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
+    this.sessionService.setDestinySession(TabsPage,{});
+    // override open handler to navigate on further custom url scheme actions
+    if (typeof  window['handleOpenURL'] !== 'undefined') {
+      (window as any).handleOpenURL = (url) => {
+         // this context is called outside of angular zone!
+         setTimeout(() => {
+           // so we need to get back into the zone..
+           this.ngZone.run(() => {
+              // this is in the zone again..
+              this.handleOpenURL(url);
+           });
+         }, 0);
+       };
+    }
+
     //cordova plugin add branch-cordova-sdk --variable BRANCH_KEY=key_live_ndqptlgXNE4LHqIahH1WIpbiyFlb62J3 --variable URI_SCHEME=introapp
     this.platform.ready().then(() => {
       //Language
@@ -35,12 +52,14 @@ export class MyApp {
           let language = result.value.split('-')[0];//evitamos cosas como -US
           this.translateService.setDefaultLang(language);
           this.contacts.getContacts();
+          this.checkHandleURL();
+          // check if app was opened by custom url scheme
+          this.platform.resume.subscribe(() => {
+            this.execHandleURL();
+          });
           this.runDevice();
         });
       } else {
-        // You're testing in browser, do nothing or mock the plugins' behaviour.
-        //
-        // var url: string = 'assets/mock-images/image.jpg';
         this.translateService.setDefaultLang(this.configService.getLanguage());
         this.runDevice();
       }
@@ -76,50 +95,45 @@ export class MyApp {
     }
     this.splashScreen.hide();
     this.sessionService.setIgnoreSession(false);
-    this.branchInit();
-     // Branch initialization
-     this.platform.resume.subscribe(() => {
-      this.branchInit();
-     });
   }
 
-  // Branch initialization
-  public branchInit():void {
-    // only on devices
-    if (!this.platform.is('cordova')) { return }
-    const Branch = window['Branch'];
-    Branch.initSession(data => {
+  public checkHandleURL():void{
+    const lastUrl: string = (window as any).handleOpenURL_LastURL || '';
+    if (lastUrl && lastUrl !== '') {
+      delete (window as any).handleOpenURL_LastURL;
+      this.handleOpenURL(lastUrl);
+    }
+  }
+
+  public execHandleURL():void{
+    this.checkHandleURL();
+    let destiny = this.sessionService.getDestinySession();
+    if(destiny.target!==undefined && destiny.target!==null)
+      this.app.getRootNav().push(destiny.target,destiny.params);
+  }
+
+  public handleOpenURL(url) {
+    console.log('received url: ' + url);
+    if (url!=='') {
       this.sessionService.setIgnoreSession(true);
-      console.log(data);
-      let link:string ='';
-      if(data['+clicked_branch_link']!==undefined && data['+clicked_branch_link']!==null && data['+clicked_branch_link']!==false){
-        link = data['+clicked_branch_link'];
+      if(url.indexOf('intros')!==-1 || url.indexOf('intros-link')!==-1){
+        this.sessionService.setDestinySession(TabsPage,{});
       }else{
-        if(data['+non_branch_link']!==undefined && data['+non_branch_link']!==null && data['+non_branch_link']!==false)
-          link = data['+non_branch_link'];
-      }
-      //api/public/remember-link/:token: ResetPasswordPage
-      ///forgot-password/:token: ResetPasswordPage
-      console.log(link);
-      if (link!=='') {
-        if(link.indexOf('intros')!==-1){
-            this.app.getRootNav().push(TabsPage);
+        if(url.indexOf('invitation-contact')!==-1 || url.indexOf('invitations-link')!==-1){
+          this.sessionService.setDestinySession(TabsPage,{section:ListContactsPendingPage,index:1});//el index es para el tab
         }else{
-          if(link.indexOf('invitation-contact')!==-1){
-          this.app.getRootNav().push(ListContactsPendingPage);
-          }else{
-            let verify = '/remember-link/';
-            let token:number;
-            token = link.indexOf(verify);
-            if(token===-1){
-              verify = '/forgot-password/';
-              token = link.indexOf(verify);
-            }
-            if(token!==-1)
-              this.app.getRootNav().push(ResetPasswordPage,{token:link.substring(token+verify.length,link.length)});
+          let verify = '/remember-link/';
+          let token:number;
+          token = url.indexOf(verify);
+          if(token===-1){
+            verify = '/forgot-password/';
+            token = url.indexOf(verify);
+          }
+          if(token!==-1){
+            this.sessionService.setDestinySession(ResetPasswordPage,{token:url.substring(token+verify.length,url.length)});
           }
         }
       }
-    });
+    }
   }
 }

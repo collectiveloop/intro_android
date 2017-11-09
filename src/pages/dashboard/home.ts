@@ -4,6 +4,8 @@ import { HttpService } from '../../lib/http.service';
 import { MessageService } from '../../lib/messages.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../lib/config.service';
+import { TabsPage } from '../../pages/tabs/tabs';
+import { SessionService } from '../../lib/session.service';
 
 @Component({
   selector: 'home',
@@ -34,10 +36,9 @@ export class HomePage implements OnInit {
   route:string ='';
   profileImages:string ='';
 
-  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService) {}
+  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, private sessionService: SessionService) {}
 
   public ngOnInit(): void {
-
     this.translateService.get('LOADING').subscribe(
       value=>{
         this.loadingMessage = value;
