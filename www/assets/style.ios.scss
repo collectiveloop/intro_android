@@ -53,19 +53,19 @@
     margin: 0;
   }
 
-  .next-login {
+  .button-footer {
     color: #ffffff !important;
     border-top: 1px solid #FF3F1D !important;
     background-color: #FF3F1D !important;
     text-transform: uppercase !important;
   }
 
-  .next-login .button-inner {
+  .button-footer .button-inner {
     color: #ffffff !important;
     text-transform: none;
   }
 
-  .next-login.activated {
+  .button-footer.activated {
     border-top: 1px solid #FD4D3E !important;
     background-color: #FD4D3E !important;
   }
@@ -296,6 +296,10 @@
     .searchbar-list .scroll-content{
       margin-bottom: 95px !important;
     }
+
+    .form-intros .label-ios.margin{
+      margin-top:0px !important;
+    }
   }
 
   @media (min-height: 667px) {
@@ -310,6 +314,10 @@
 
     .searchbar-list .scroll-content{
       margin-bottom: 69px !important;
+    }
+
+    .form-intros .label-ios.margin{
+      margin-top:20px !important;
     }
   }
 

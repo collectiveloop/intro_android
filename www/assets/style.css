@@ -42,9 +42,14 @@ h3 ion-icon {
   vertical-align: middle;
 }
 
+.no-margin-top {
+  margin-top:0px !important;
+}
+
 .center {
   text-align: center;
 }
+
 
 .left {
   text-align: left;
@@ -272,7 +277,7 @@ ion-navbar.toolbar {
   color: #059BDD;
 }
 
-.next-login {
+.button-footer {
   width: 100% !important;
   padding: 0px;
   margin: 0px;
@@ -506,6 +511,56 @@ ion-menu ion-list {
 
 .profile .text-input[disabled] {
   opacity: 1;
+}
+
+.form-intros .label, .form-intros label{
+  color: #4C4C4C;
+  font-size: 1.2rem;
+  display: inline-grid;
+}
+
+.form-intros .text-input {
+  margin-top: 20px !important;
+}
+
+.checkbox-item{
+  border-bottom:0px !important;
+}
+
+.intros::before{
+  background: none;
+}
+
+.intros .toolbar {
+  background: none;
+  display: initial;
+  height: 45px;
+  min-height:45px;
+}
+
+.intros .button-intro {
+  border-radius: 0px;
+  width:100%;
+  margin:0px;
+  padding:0px;
+  border-top: 1px solid #FF3F1D !important;
+  background-color: #ffffff !important;
+  height: 45px;
+}
+
+.intros .button-intro.activated {
+  border-top: 1px solid #FD4D3E !important;
+  background-color: #FD4D3E !important;
+}
+
+.intros  .button-intro.activated .button-inner {
+  color: #ffffff !important;
+}
+
+.intros  .button-intro .button-inner {
+  color: #FF3F1D !important;
+  text-transform: initial;
+  font-size:18px;
 }
 
 @media (min-width: 600px) {

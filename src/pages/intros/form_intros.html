@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons left>
+      <ion-navbar></ion-navbar>
+    </ion-buttons>
+    <ion-title class="section">
+      {{'SIGNUP' | translate}}
+    </ion-title>
+    <ion-buttons end></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <content class="form-style">
+    <form [formGroup]="introsForm" class="form-intros">
+      <ion-row *ngIf="errorForm!=null && errorForm!=''">
+        <ion-col col-12 class="center">
+          <span class="error center" [innerHTML]="errorForm"></span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item>
+            <ion-label stacked class="margin">{{'QUESTION_1_INTRO' | translate}} {{intros.friend_1.first_name}} {{intros.friend_1.last_name}}?</ion-label>
+            <ion-input md-input formControlName="question_friend_1" type="text" placeholder="{{'WRITE_YOUR_COMMENTS' | translate}}" (keyup.enter)="handleLogin('questionFriend2')" #questionFriend1></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="!introsForm.controls.question_friend_1.valid  && (introsForm.controls.question_friend_1.dirty || submitted)">
+            {{'INVALID_QUESTION_INTRO' | translate}}
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item>
+            <ion-label stacked class="margin">{{'QUESTION_2_INTRO' | translate}} {{intros.friend_2.first_name}} {{intros.friend_2.last_name}}?</ion-label>
+            <ion-input md-input formControlName="question_friend_2" type="text" placeholder="{{'WRITE_YOUR_COMMENTS' | translate}}" (keyup.enter)="handleLogin('reason')" #questionFriend2></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="!introsForm.controls.question_friend_2.valid  && (introsForm.controls.question_friend_2.dirty || submitted)">
+            {{'INVALID_QUESTION_INTRO' | translate}}
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item>
+            <ion-label stacked class="margin">{{'REASON_INTRO' | translate}}</ion-label>
+            <ion-input md-input formControlName="reason" type="text" placeholder="{{'WRITE_YOUR_COMMENTS' | translate}}" #reason></ion-input>
+          </ion-item>
+          <span class="error" *ngIf="!introsForm.controls.reason.valid  && (introsForm.controls.reason.dirty || submitted)">
+            {{'INVALID_REASON_INTRO' | translate}}
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item class="checkbox-item">
+            <label class="margin">{{'GAIN_INTRO' | translate}}</label>
+            <span class="error" *ngIf="!gainSelected">
+              {{'INVALID_GAIN' | translate}}
+            </span>
+            <ion-row>
+              <ion-col *ngFor="let gain of gainings" col-6 class="center">
+                <ion-item class="checkbox-item">
+                   <ion-label>{{gain.option}}</ion-label>
+                    <ion-checkbox (ionChange)="check(gain)" [(ngModel)]="gain.value" [ngModelOptions]="{standalone:true}"></ion-checkbox>
+                 </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </form>
+  </content>
+</ion-content>
+<ion-footer class="intros">
+  <ion-toolbar>
+    <button type="button" ion-button class="button-intro" (click)="register()" [disabled]="(!introsForm.valid || !gainSelected) || submitted">{{'TO_ACCEPT' | translate}}</button>
+  </ion-toolbar>
+</ion-footer>

@@ -43,16 +43,7 @@
       <button (click)="acceptInvitation($event,pending)" [disabled]="submitted" ion-button>{{'ACCEPT' | translate}}</button>
     </ion-item>
   </ion-list>
-
   <ion-infinite-scroll (ionInfinite)="moreContacts($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{'LOADING' | translate}}"></ion-infinite-scroll-content>
   </ion-infinite-scroll>
-  <!--
- <ion-searchbar
-   [(ngModel)]="myInput"
-   [showCancelButton]="shouldShowCancel"
-   (ionInput)="onInput($event)"
-   (ionCancel)="onCancel($event)">
- </ion-searchbar>
- -->
 </ion-content>

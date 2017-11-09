@@ -85,6 +85,7 @@
   "MADE_INTRODUCTIONS":"Introducciones realizadas",
   "INTRODUCTIONS_RECEIVED":"Introducciones recibidas",
   "INTROS_MADE":"Intros realizadas",
+  "LOAD_INTROS":"Cargar Intro",
   "INTROS_RECEIVED":"Intros recibidas",
   "NOT_INTROS_MADE":"No hay intros realizadas",
   "NOT_INTROS_RECEIVED":"No hay Intros recibidas",
@@ -97,5 +98,14 @@
   "ACCEPTED_INVITATIONS": "invitación aceptada",
   "REJECTED_INVITATION": "invitación rechazada",
   "REJECTED": "Rechazado",
-  "PENDING": "Pendiente"
+  "PENDING": "Pendiente",
+  "QUESTION_1_INTRO":"¿Cómo conoces a ",
+  "QUESTION_2_INTRO":"¿Cómo conoces a ",
+  "REASON_INTRO":"¿Cuál es la razón de tu introducción?",
+  "GAIN_INTRO":"¿Que esperas obtener de esta introducción?",
+  "INVALID_QUESTION_INTRO": "La pregunta es requerida",
+  "INVALID_REASON_INTRO": "La razón es requerida",
+  "INVALID_GAIN": "Debes seleccionar al menos una opción",
+  "TO_ACCEPT": "Aceptar",
+  "WRITE_YOUR_COMMENTS":"Escribe tus comentarios"
 }

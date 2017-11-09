@@ -13,6 +13,7 @@ import { ResetPasswordPage } from '../pages/login/reset_password';
 import { ListContactsPendingPage } from '../pages/contacts/list_contacts_pending';
 import { ChangePasswordPage } from '../pages/login/change_password';
 import { ProfileUserPage } from '../pages/user/user_profile';
+import { TabsPage } from '../pages/tabs/tabs';
 import { ContactService } from '../lib/contacts.service';
 
 @Component({
@@ -78,7 +79,6 @@ export class MyApp {
     this.branchInit();
      // Branch initialization
      this.platform.resume.subscribe(() => {
-       console.log("gffgd");
       this.branchInit();
      });
   }
@@ -100,24 +100,26 @@ export class MyApp {
       }
       //api/public/remember-link/:token: ResetPasswordPage
       ///forgot-password/:token: ResetPasswordPage
+      console.log(link);
       if (link!=='') {
-        if(link.indexOf('invitation-contact')!==-1){
-          this.app.getRootNav().push(ListContactsPendingPage);
+        if(link.indexOf('intros')!==-1){
+            this.app.getRootNav().push(TabsPage);
         }else{
-          let verify = '/remember-link/';
-          let token:number;
-          token = link.indexOf(verify);
-          if(token===-1){
-            verify = '/forgot-password/';
+          if(link.indexOf('invitation-contact')!==-1){
+          this.app.getRootNav().push(ListContactsPendingPage);
+          }else{
+            let verify = '/remember-link/';
+            let token:number;
             token = link.indexOf(verify);
+            if(token===-1){
+              verify = '/forgot-password/';
+              token = link.indexOf(verify);
+            }
+            if(token!==-1)
+              this.app.getRootNav().push(ResetPasswordPage,{token:link.substring(token+verify.length,link.length)});
           }
-
-          if(token!==-1)
-            this.app.getRootNav().push(ResetPasswordPage,{token:link.substring(token+verify.length,link.length)});
         }
       }
-
-
     });
   }
 }

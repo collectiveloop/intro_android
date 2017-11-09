@@ -24,25 +24,32 @@ import { NavigationService }   from '../lib/navigation.service';
 import { HttpService }    from '../lib/http.service';
 import { SessionService }   from '../lib/session.service';
 import { ContactService } from '../lib/contacts.service';
+import { TabService } from '../pages/tabs/tabs.service';
 
 import { MyApp } from './app.component';
-import { TabService } from '../pages/tabs/tabs.service';
 import { HeaderComponent } from '../pages/header/header';
 import { HomePage } from '../pages/dashboard/home';
 import { TabsPage } from '../pages/tabs/tabs';
+
 import { LoginPage } from '../pages/login/login';
 import { ForgotPasswordPage } from '../pages/login/forgot_password';
 import { ResetPasswordPage } from '../pages/login/reset_password';
 import { ChangePasswordPage } from '../pages/login/change_password';
 import { RegisterUserPage } from '../pages/user/user_register';
 import { ProfileUserPage } from '../pages/user/user_profile';
+
 import { ListContactsPage } from '../pages/contacts/list_contacts';
+import { PickContactsPage } from '../pages/contacts/pick_contacts';
 import { ProfileContactsPage } from '../pages/contacts/profile_contact';
 import { AddContactsPage } from '../pages/contacts/add_contacts';
+
 import { SearchContactsPage } from '../pages/contacts/search_contacts';
 import { ListContactsPendingPage } from '../pages/contacts/list_contacts_pending';
 import { ListMessagesPage } from '../pages/messages/list_messages';
 import { ListIntrosPage } from '../pages/intros/list_intros';
+import { AddIntrosPage } from '../pages/intros/add_intros';
+import { FormIntrosPage } from '../pages/intros/form_intros';
+
 
 
 @NgModule({
@@ -57,11 +64,14 @@ import { ListIntrosPage } from '../pages/intros/list_intros';
     ProfileUserPage,
     ListContactsPendingPage,
     ListContactsPage,
+    PickContactsPage,
     ProfileContactsPage,
     AddContactsPage,
     SearchContactsPage,
     ListMessagesPage,
     ListIntrosPage,
+    AddIntrosPage,
+    FormIntrosPage,
     HomePage,
     TabsPage
   ],
@@ -100,11 +110,14 @@ import { ListIntrosPage } from '../pages/intros/list_intros';
     ProfileUserPage,
     ListContactsPendingPage,
     ListContactsPage,
+    PickContactsPage,
     ProfileContactsPage,
     AddContactsPage,
     SearchContactsPage,
     ListMessagesPage,
     ListIntrosPage,
+    AddIntrosPage,
+    FormIntrosPage,
     HomePage,
     TabsPage
   ],

@@ -29,22 +29,22 @@
     text-transform: capitalize;
   }
 
-  .next-login {
+  .button-footer {
     border-top: 1px solid #FF3F1D !important;
     background-color: #ffffff !important;
     min-height: 3.6em !important;
   }
 
-  .next-login.activated {
+  .button-footer.activated {
     border-top: 1px solid #FD4D3E !important;
     background-color: #FD4D3E !important;
   }
 
-  .next-login.activated .button-inner {
+  .button-footer.activated .button-inner {
     color: #ffffff !important;
   }
 
-  .next-login .button-inner {
+  .button-footer .button-inner {
     color: #FF3F1D !important;
     text-transform: uppercase;
   }
@@ -251,4 +251,26 @@
   }
 
   /*Fin de contacts*/
+
+  /*intros*/
+
+  .form-intros .item-input-has-focus .label-md[stacked], .form-intros .item-input-has-focus .label-md[floating] {
+    color: #FF3F1D !important;
+  }
+
+  .checkbox-md{
+    margin: 9px;
+  }
+
+  .checkbox-md .checkbox-icon{
+    border-radius:50%;
+    width: 20px;
+    height: 20px;
+  }
+
+  .checkbox-md .checkbox-icon .checkbox-inner{
+    left: 5px;
+    top: 2px;
+  }
+  /*Fin de intros*/
 }

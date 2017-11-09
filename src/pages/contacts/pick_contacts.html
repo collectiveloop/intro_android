@@ -1,37 +1,19 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons left>
-      <div class="empty-back-button"></div>
+      <ion-navbar></ion-navbar>
     </ion-buttons>
     <ion-title class="section">
       {{'CONTACTS' | translate}}
     </ion-title>
-    <ion-buttons end>
-      <button type="button" outline class="button-form shadow" ion-button (click)="addContact()">
-        <ion-icon item-left name="md-add-circle"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
-  <ion-toolbar class="toolbar-segment">
-    <ion-segment [(ngModel)]="section">
-      <ion-segment-button value="contacts">
-        {{'CONTACTS' | translate}}
-      </ion-segment-button>
-      <ion-segment-button value="invitations" (click)="goInvitations()">
-        {{'INVITATIONS' | translate}}
-      </ion-segment-button>
-      <ion-segment-button value="search" (click)="goSearch()">
-        {{'SEARCH' | translate}}
-      </ion-segment-button>
-    </ion-segment>
   </ion-toolbar>
 </ion-header>
 <ion-content padding class="grace list-ios">
-  <ion-list>
+  <ion-list class="no-margin-top">
     <ion-item class="center no-border" *ngIf="maxContacts==0">
       {{'NOT_CONTACTS' | translate}}
     </ion-item>
-    <ion-item class="list-format" *ngFor="let contact of listContacts" (click)="detailContact(contact)">
+    <ion-item class="list-format" *ngFor="let contact of listContacts" (click)="returnContact(contact)">
       <ion-thumbnail item-start>
         <div class="image">
           <img *ngIf="contact.imageLoaded" src="{{contact.image_profile}}" />
@@ -43,7 +25,6 @@
       <h3><ion-icon item-left name="ios-mail"></ion-icon>{{contact.email}}</h3>
     </ion-item>
   </ion-list>
-
   <ion-infinite-scroll (ionInfinite)="moreContacts($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{'LOADING' | translate}}"></ion-infinite-scroll-content>
   </ion-infinite-scroll>

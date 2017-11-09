@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons left>
+      <div class="empty-back-button"></div>
+    </ion-buttons>
+    <ion-title class="section">
+      {{'INTROS' | translate}}
+    </ion-title>
+    <ion-buttons end></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding class="grace">
+  <ion-card>
+    <ion-card-header>
+      {{'INTROS' | translate}}
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <div class="image" (click)="addContact('friend_1')">
+          <img *ngIf="intros.friend_1.image_loaded" src="{{intros.friend_1.image_profile}}" />
+          <ion-spinner *ngIf="!intros.friend_1.image_loaded" name="circles"></ion-spinner>
+        </div>
+        <div>{{intros.friend_1.first_name}} {{intros.friend_1.last_name}}</div>
+      </ion-item>
+
+      <ion-item>
+        <div class="image" (click)="addContact('friend_2')">
+          <img *ngIf="intros.friend_2.image_loaded" src="{{intros.friend_2.image_profile}}" />
+          <ion-spinner *ngIf="!intros.friend_2.image_loaded" name="circles"></ion-spinner>
+        </div>
+        <div>{{intros.friend_2.first_name}} {{intros.friend_2.last_name}}</div>
+      </ion-item>
+
+    </ion-card-content>
+    <ion-item class="footer">
+      {{'LOAD_INTROS' | translate}}
+    </ion-item>
+  </ion-card>
+</ion-content>
+<ion-footer class="intros">
+  <ion-toolbar>
+    <button type="button" ion-button class="button-intro" (click)="nextStep()" [disabled]="!intros.friend_1.friend_loaded || !intros.friend_2.friend_loaded">{{'NEXT' | translate}}</button>
+  </ion-toolbar>
+</ion-footer>

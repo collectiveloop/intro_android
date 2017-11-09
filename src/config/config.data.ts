@@ -1,7 +1,7 @@
 export const CONFIG = {
     ROUTES:{
-      //DOMAIN_API:'http://192.168.1.126/intro_app/api/public',
-      //FOLDER_IMAGES:'http://192.168.1.126/intro_app/api/public/images',
+      //DOMAIN_API:'http://192.168.1.143/intro_app/api/public',
+      //FOLDER_IMAGES:'http://192.168.1.143/intro_app/api/public/images',
       DOMAIN_API:'http://165.227.51.66/api/public/',
       FOLDER_IMAGES:'http://165.227.51.66/api/public/images'
     },

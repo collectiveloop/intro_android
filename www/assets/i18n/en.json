@@ -84,6 +84,7 @@
   "MADE_INTRODUCTIONS":"Made introductions",
   "INTRODUCTIONS_RECEIVED":"Introductions received",
   "INTROS_MADE":"Intros made",
+  "LOAD_INTROS":"Load Intro",
   "INTROS_RECEIVED":"Intros received",
   "NOT_INTROS_MADE":"There is not intros made",
   "NOT_INTROS_RECEIVED":"There is not Intros received",
@@ -96,5 +97,14 @@
   "ACCEPTED_INVITATIONS": "Accepted invitation",
   "REJECTED_INVITATION": "Rejected invitation",
   "REJECTED": "Rejected",
-  "PENDING": "Pending"
+  "PENDING": "Pending",
+  "QUESTION_1_INTRO":"How do you know ",
+  "QUESTION_2_INTRO":"How do you know ",
+  "REASON_INTRO":"What is the reason for your intro?",
+  "GAIN_INTRO":"What do you hope to gain from this intro?",
+  "INVALID_QUESTION_INTRO": "Question is required",
+  "INVALID_REASON_INTRO": "Reason is required",
+  "INVALID_GAIN": "You must select an option at teast",
+  "TO_ACCEPT": "To Accept",
+  "WRITE_YOUR_COMMENTS":"Write your comments"
 }
