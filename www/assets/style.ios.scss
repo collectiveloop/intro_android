@@ -264,8 +264,9 @@
     color: #ffffff;
   }
 
-  .grace.list-ios.has-infinite-scroll  .scroll-content {
+  .grace.list-ios.has-infinite-scroll .scroll-content {
     padding-right: 0px !important;
+    padding-top: 0px !important;
   }
 
   .grace .list-ios > .item-block:first-child, .grace .list-ios > .item-block:last-child{
@@ -284,16 +285,14 @@
     margin: 0px;
   }
 
-  .ios, .ios .scroll-content {
-    padding: 0px 16px !important;
-  }
+
 
   /*Fin de contacts*/
   @media (max-height: 667px) {
-    .list-ios {
-      margin-top: 15px;
-    }
 /*
+.list-ios {
+margin-top: 15px;
+}
     .searchbar-toolbar{
       margin: 88px 0px;
     }
