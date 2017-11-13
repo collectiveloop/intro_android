@@ -350,7 +350,7 @@ export class HttpService {
     } catch (e) { }
 
     if ((errorDetail !== null && errorDetail !== undefined && (errorDetail.status === 'error' && errorDetail.data.type === 'session') ) || errorDetail===undefined  ) {
-      //this.storage.remove('token');
+      this.storage.remove('token');
       this.messages.closeMessage();
       this.app.getRootNav().setRoot(this.getLogin());
     }

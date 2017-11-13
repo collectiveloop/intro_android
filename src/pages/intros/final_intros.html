@@ -11,27 +11,27 @@
 </ion-header>
 <ion-content padding class="grace">
   <div class="list final-card">
-        <div class="image left">
-          <img *ngIf="final.friend_1.image_loaded" src="{{final.friend_1.image_profile}}" />
-          <ion-spinner *ngIf="!final.friend_1.image_loaded" name="circles"></ion-spinner>
-          <div class="green-icon"></div>
-        </div>
+    <div class="image top">
+      <img *ngIf="final.user.image_loaded" src="{{final.user.image_profile}}" />
+      <ion-spinner *ngIf="!final.user.image_loaded" name="circles"></ion-spinner>
+    </div>
+    <div class="image left">
+      <img *ngIf="final.friend_1.image_loaded" src="{{final.friend_1.image_profile}}" />
+      <ion-spinner *ngIf="!final.friend_1.image_loaded" name="circles"></ion-spinner>
+      <div class="green-icon"></div>
+    </div>
 
-        <div class="image right">
-          <img *ngIf="final.friend_1.image_loaded" src="{{final.friend_1.image_profile}}" />
-          <ion-spinner *ngIf="!final.friend_1.image_loaded" name="circles"></ion-spinner>
-          <div class="green-icon"></div>
-        </div>
+    <div class="image right">
+      <img *ngIf="final.friend_2.image_loaded" src="{{final.friend_2.image_profile}}" />
+      <ion-spinner *ngIf="!final.friend_2.image_loaded" name="circles"></ion-spinner>
+      <div class="green-icon"></div>
+    </div>
 
-        <div class="image top">
-          <img *ngIf="final.friend_2.image_loaded" src="{{final.friend_2.image_profile}}" />
-          <ion-spinner *ngIf="!final.friend_2.image_loaded" name="circles"></ion-spinner>
-        </div>
-        <div class="message">{{'MADE_INTRODUCTION_BETWEEN' | translate}}</div>
+    <div class="message">{{'MADE_INTRODUCTION_BETWEEN' | translate}}</div>
   </div>
 </ion-content>
 <ion-footer class="intros">
   <ion-toolbar>
-    <button type="button" ion-button class="button-intro" (click)="nextStep()" >{{'TO_ACCEPT' | translate}}</button>
+    <button type="button" ion-button class="button-intro" (click)="nextStep()">{{'DONE' | translate}}</button>
   </ion-toolbar>
 </ion-footer>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { App, NavController, Platform } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpService } from '../../lib/http.service';
@@ -16,13 +16,12 @@ import { SessionService } from '../../lib/session.service';
   selector: 'list-contacts-pending',
   templateUrl: 'list_contacts_pending.html'
 })
-export class ListContactsPendingPage implements OnInit {
+export class ListContactsPendingPage {
   page: number = 1;
   maxContactsPending: number = -1;
   quantity: number = 0;
   infiniteScroll: any;
   listContactsPending: Array<object> = [];
-  contactsDevice: Array<object> = [];
   section:string='invitations';
   loadingMessage: string = '';
   acceptedMessage:string='';
@@ -31,21 +30,13 @@ export class ListContactsPendingPage implements OnInit {
   submitted:boolean = false;
   currentInvitation:any;
 
-  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public contactsService: ContactService, public sanitizer: DomSanitizer,  public platform: Platform, private sessionService: SessionService) { }
-  public ngOnInit(): void {
+  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService,  public sanitizer: DomSanitizer,  public platform: Platform, private sessionService: SessionService) {
     this.submitted = false;
     this.sessionService.getSessionStatus().then(function(result) {
       if (result === false) {
           this.navCtrl.popToRoot();
       } else {
-        if (this.platform.is('cordova')) {
-          this.contactsService.getContactsDevice().then((contacts)=>{
-            this.contactsDevice = contacts;
-            this.loadInitialContent();
-          });
-        }else{
-          this.loadInitialContent();
-        }
+        this.loadInitialContent();
       }
     }.bind(this));
   }
@@ -132,37 +123,16 @@ export class ListContactsPendingPage implements OnInit {
         pending[i]['image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+pending[i]['image_profile']+')');
         this.loadImage(pending[i]);
       } else {
-        if(this.contactsDevice.length>0){
-          this.getFilterContact(pending[i]);
-        }else{
+
           pending[i]['imageLoaded'] = true;
           pending[i]['image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+this.configService.getProfileImage()+')');
-        }
+
 
       }
 
       this.listContactsPending.push(pending[i]);
     }
     this.refreshScroll();
-  }
-
-  public getFilterContact(pending:any):void{
-    let founded = false;
-    let max = this.contactsDevice.length;
-    for(let i=0;i<max;i++) {
-      console.log(this.contactsDevice[i]['emails'],pending['email']);
-      if (this.contactsDevice[i]['emails']!==undefined && this.contactsDevice[i]['emails']!==null && this.contactsDevice[i]['emails'].length>0 && this.contactsDevice[i]['emails'][0].value===pending['email'] && this.contactsDevice[i]['photos']!==undefined && this.contactsDevice[i]['photos']!==null && this.contactsDevice[i]['photos'].length>0 && this.contactsDevice[i]['photos'][0].value!==undefined && this.contactsDevice[i]['photos'][0].value!==null && this.contactsDevice[i]['photos'][0].value!==''){
-        pending['imageLoaded'] = true;
-        pending['image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+this.contactsDevice[i]['photos'][0].value+')');
-        founded =  true;
-        break;
-      }
-    }
-
-    if(!founded){
-      pending['imageLoaded'] = true;
-      pending['image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+this.configService.getProfileImage()+')');
-    }
   }
 
   private loadImage(image: any): void {

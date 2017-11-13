@@ -46,6 +46,7 @@
         "@ionic/storage": "2.0.1",
         "@ngx-translate/core": "^8.0.0",
         "@ngx-translate/http-loader": "^0.1.0",
+        "branch-cordova-sdk": "^2.6.18",
         "com.synconset.imagepicker": "~2.1.8",
         "cordova-android": "^6.2.3",
         "cordova-android-support-gradle-release": "^1.1.1",
@@ -55,7 +56,6 @@
         "cordova-plugin-compat": "^1.1.0",
         "cordova-plugin-console": "^1.0.7",
         "cordova-plugin-contacts": "^2.3.1",
-        "cordova-plugin-customurlscheme": "^4.3.0",
         "cordova-plugin-datepicker": "^0.9.3",
         "cordova-plugin-device": "^1.1.6",
         "cordova-plugin-facebook4": "^1.9.1",
@@ -128,11 +128,9 @@
                 "CONTACTS_USAGE_DESCRIPTION": "Get contacts for connect with them"
             },
             "cordova-plugin-inappbrowser": {},
-            "cordova-plugin-customurlscheme": {
-                "URL_SCHEME": "introapp",
-                "ANDROID_SCHEME": " ",
-                "ANDROID_HOST": " ",
-                "ANDROID_PATHPREFIX": "/"
+            "branch-cordova-sdk": {
+                "BRANCH_KEY": "key_live_igERykWTo3tqRjil9POlKlikEAn1GuhY",
+                "URI_SCHEME": "introapp"
             }
         },
         "platforms": [

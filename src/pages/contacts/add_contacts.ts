@@ -209,7 +209,7 @@ export class AddContactsPage {
       this.errorProfile = response.data.message;
     } else {
       this.contactForm.reset();
-      this.navCtrl.push(ListContactsPendingPage);
+      this.navCtrl.pop();
     }
   }
 
