@@ -1,9 +1,9 @@
 export const CONFIG = {
     ROUTES:{
-      DOMAIN_API:'http://localhost/intro_app/api/public',
-      FOLDER_IMAGES:'http://localhost/intro_app/api/public/images',
-      //DOMAIN_API:'http://165.227.51.66/api/public/',
-      //FOLDER_IMAGES:'http://165.227.51.66/api/public/images'
+      //DOMAIN_API:'http://localhost/intro_app/api/public',
+      //FOLDER_IMAGES:'http://localhost/intro_app/api/public/images',
+      DOMAIN_API:'http://165.227.51.66/api/public/',
+      FOLDER_IMAGES:'http://165.227.51.66/api/public/images'
     },
     PROFILE_IMAGE:{
       DEFAULT_ICON:'assets/icon/person.svg',
