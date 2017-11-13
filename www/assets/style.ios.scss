@@ -26,6 +26,15 @@
   .toolbar .toolbar-background {
     color: #cccccc;
   }
+
+  .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block {
+      border-bottom: 0px;
+  }
+
+  ion-item-sliding ion-item-options{
+      border-bottom: 1px solid #FD4D3E !important;
+  }
+
   /*barra de navegación*/
   .tabs-md .tabbar {
     width: 100%;
@@ -225,8 +234,8 @@
   }
 
   .card-content-ios .image img {
-    max-width: 70px;
-    max-height: 70px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
   }
 
@@ -322,7 +331,6 @@
   }
 
   @media (min-height: 1024px) {
-
     .searchbar-toolbar{
       margin: 172px 0px;
     }

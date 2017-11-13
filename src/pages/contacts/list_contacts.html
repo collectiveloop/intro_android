@@ -31,17 +31,26 @@
     <ion-item class="center no-border" *ngIf="maxContacts==0">
       {{'NOT_CONTACTS' | translate}}
     </ion-item>
-    <ion-item class="list-format" *ngFor="let contact of listContacts" (click)="detailContact(contact)">
-      <ion-thumbnail item-start>
-        <div class="image">
-          <img *ngIf="contact.imageLoaded" src="{{contact.image_profile}}" />
-          <ion-spinner *ngIf="!contact.imageLoaded" name="circles"></ion-spinner>
-        </div>
-      </ion-thumbnail>
-      <h2>{{contact.first_name}} {{contact.last_name}}</h2>
-      <h3>{{contact.user_name}}</h3>
-      <h3><ion-icon item-left name="ios-mail"></ion-icon>{{contact.email}}</h3>
-    </ion-item>
+    <ion-item-sliding #item *ngFor="let contact of listContacts">
+      <ion-item (click)="detailContact(contact)" class="contact list-format">
+        <ion-thumbnail item-start>
+          <div class="image">
+            <img *ngIf="contact.imageLoaded" src="{{contact.image_profile}}" />
+            <ion-spinner *ngIf="!contact.imageLoaded" name="circles"></ion-spinner>
+          </div>
+        </ion-thumbnail>
+        <h2>{{contact.first_name}} {{contact.last_name}}</h2>
+        <h3>{{contact.user_name}}</h3>
+        <h3><ion-icon item-left name="ios-mail"></ion-icon>{{contact.email}}</h3>
+
+      </ion-item>
+      <ion-item-options side="right">
+          <button class="button-absolute" (click)="confirmDelete($event,contact)" [disabled]="submitted" color="danger" ion-button>
+              <ion-icon item-left name="ios-trash"></ion-icon>
+              {{'DELETE' | translate}}
+          </button>
+      </ion-item-options>
+  </ion-item-sliding>
   </ion-list>
 
   <ion-infinite-scroll (ionInfinite)="moreContacts($event)">

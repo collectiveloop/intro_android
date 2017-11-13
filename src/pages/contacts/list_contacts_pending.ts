@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { App, NavController, LoadingController, Platform } from 'ionic-angular';
-
+import { App, NavController, Platform } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
 import { HttpService } from '../../lib/http.service';
 import { MessageService } from '../../lib/messages.service';
@@ -32,7 +31,7 @@ export class ListContactsPendingPage implements OnInit {
   submitted:boolean = false;
   currentInvitation:any;
 
-  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public contactsService: ContactService, public sanitizer: DomSanitizer,  private platform: Platform, private sessionService: SessionService) { }
+  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public contactsService: ContactService, public sanitizer: DomSanitizer,  public platform: Platform, private sessionService: SessionService) { }
   public ngOnInit(): void {
     this.submitted = false;
     this.sessionService.getSessionStatus().then(function(result) {
@@ -52,6 +51,7 @@ export class ListContactsPendingPage implements OnInit {
   }
 
   public loadInitialContent():void{
+     this.sessionService.cleanDestinySession();
     this.translateService.get('LOADING').subscribe(
       value => {
         this.loadingMessage = value;
@@ -241,7 +241,6 @@ export class ListContactsPendingPage implements OnInit {
   private proccessCallBack(response:any,message:string):void{
     this.submitted = false;
     if (response.status==='success'){
-      let data = response.data.invitation_pending;
       this.messages.showMessage({
         content: message,
         spinner:false,

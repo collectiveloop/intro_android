@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { App, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { App, NavController, NavParams } from 'ionic-angular';
 import { HttpService } from '../../lib/http.service';
 import { MessageService } from '../../lib/messages.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../lib/config.service';
-import { ListContactsPendingPage } from './list_contacts_pending';
-import { ProfileContactsPage } from './profile_contact';
-import { AddContactsPage } from './add_contacts';
-import { SearchContactsPage } from './search_contacts';
 
 @Component({
   selector: 'pick-contacts',

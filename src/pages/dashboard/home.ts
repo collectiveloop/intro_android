@@ -4,7 +4,7 @@ import { HttpService } from '../../lib/http.service';
 import { MessageService } from '../../lib/messages.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../lib/config.service';
-import { TabsPage } from '../../pages/tabs/tabs';
+import { LoginPage } from '../../pages/login/login';
 import { SessionService } from '../../lib/session.service';
 
 @Component({
@@ -36,22 +36,52 @@ export class HomePage implements OnInit {
   route:string ='';
   profileImages:string ='';
 
-  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, private sessionService: SessionService) {}
+  constructor(public app: App, public navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, private sessionService: SessionService) {
+  }
 
   public ngOnInit(): void {
     this.translateService.get('LOADING').subscribe(
       value=>{
         this.loadingMessage = value;
-        this.messages.showMessage({
-           content:this.loadingMessage
-        });
         this.route = this.configService.getDomainImages() + '/profiles/';
-        this.getDashBoard();
       }
     );
   }
 
-  private getDashBoard(): void {
+  public dashBoardInit():void{
+      this.dashboard['made']['friend_1']['imageLoaded'] = false;
+      this.dashboard['made']['friend_2']['imageLoaded'] = false;
+      this.dashboard['made']['reason'] = '';
+      this.dashboard['made']['is'] = false;
+      this.dashboard['received']['friend']['imageLoaded'] = false;
+      this.dashboard['received']['reason'] = '';
+      this.dashboard['received']['is'] = false;
+  }
+
+    ionViewWillEnter():void{
+        console.log("ionViewWillEnter");
+        this.sessionService.getSessionStatus().then(function(result) {
+          if (result !== false){
+            //evaluamos a donde vamos a ir, si nos han pedido redireccion desde el app.component
+            let destiny = this.sessionService.getDestinySession();
+            if(destiny.params!==undefined && destiny.params.section!==undefined && destiny.params.section!==null && destiny.params.index!==undefined && destiny.params.index!==null){
+              this.navCtrl.parent.select(destiny.params.index);
+              return;
+          }else{
+              this.sessionService.cleanDestinySession();
+              this.getDashBoard();
+          }
+         }else{
+             this.navCtrl.setRoot(LoginPage);
+         }
+        }.bind(this));
+    }
+
+  public getDashBoard(): void {
+    this.dashBoardInit();
+    this.messages.showMessage({
+       content:this.loadingMessage
+    });
     this.httpService.get({
       url: 'intros/dashboard',
       urlParams: [

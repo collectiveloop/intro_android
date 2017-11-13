@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { App, NavController, LoadingController } from 'ionic-angular';
+import { App, NavController } from 'ionic-angular';
 import { HttpService } from '../../lib/http.service';
 import { MessageService } from '../../lib/messages.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -191,6 +191,24 @@ export class SearchContactsPage implements OnInit {
     });
   }
 
+  public rejectOwnInvitation(event:Event,invitation:any){
+    event.stopPropagation();
+    console.log(invitation);
+    this.currentChoice = invitation;
+    this.submitted = true;
+    this.httpService.put({
+      url: 'contacts',
+      urlParams: [
+        this.translateService.getDefaultLang(),
+        'own-reject',
+        invitation.id
+      ],
+      app: this.app,
+      success: this.callBackRejected,
+      context: this
+    });
+  }
+
   private callBackAccept(response): void {
     this.currentChoice.type_query ='users_friends';
     this.currentChoice.status =0;
@@ -208,7 +226,6 @@ export class SearchContactsPage implements OnInit {
   private proccessCallBack(response:any,message:string):void{
     this.submitted = false;
     if (response.status==='success'){
-      let data = response.data.invitation_pending;
       this.messages.showMessage({
         content: message,
         spinner:false,

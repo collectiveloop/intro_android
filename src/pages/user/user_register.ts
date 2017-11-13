@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, App, LoadingController, Platform, ActionSheetController } from 'ionic-angular';
+import { NavController, App } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfigService }   from '../../lib/config.service';
 import { MessageService } from '../../lib/messages.service';
@@ -28,7 +28,7 @@ export class RegisterUserPage {
   loadingMessage:string = '';
   actionSheet: any;
 
-  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, private sessionService: SessionService, private loadingCtrl: LoadingController, private platform: Platform, public messages: MessageService) {
+  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, private sessionService: SessionService, public messages: MessageService) {
     this.buildValidations();
     this.translateService.get('LOADING').subscribe(
       value=>{
@@ -56,10 +56,6 @@ export class RegisterUserPage {
   public submitForm(){
     if(this.registerForm.valid)
       this.register();
-  }
-
-  private back(): void {
-    this.app.getRootNav().popToRoot();
   }
 
   public register():void{

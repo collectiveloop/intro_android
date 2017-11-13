@@ -31,10 +31,13 @@ export class ResetPasswordPage {
       if (result !== false)
         this.navCtrl.push(TabsPage);
     }.bind(this));
+    let data = this.sessionService.getDestinySession();
     this.sessionService.cleanDestinySession();
-    this.token = this.navParams.get('token');
-    if(this.token ===undefined || this.token ===null || this.token ==='')
+    if(data.params!==undefined && data.params.token!==undefined){
+      this.token = data.params.token;
+    }else{
       this.navCtrl.push(LoginPage);
+    }
     this.submitted = false;
     console.log(this.token );
     this.translateService.get('LOADING').subscribe(

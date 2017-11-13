@@ -49,6 +49,7 @@
       <button *ngIf="search.type_query=='contacts_pending' && search.status==0" (click)="rejectInvitation($event,search)" [disabled]="submitted" ion-button color="danger">{{'DELETE' | translate}}</button>
       <button *ngIf="search.type_query=='contacts_pending' && search.status==0" (click)="acceptInvitation($event,search)" [disabled]="submitted" ion-button>{{'ACCEPT' | translate}}</button>
       <button *ngIf="search.type_query=='contacts_invited' && search.status==0" [disabled]="true" ion-button>{{'PENDING' | translate}}</button>
+      <button *ngIf="search.type_query=='contacts_invited' && search.status==0" (click)="rejectOwnInvitation($event,search)" [disabled]="submitted" color="danger" ion-button>{{'REJECT' | translate}}</button>
       <button *ngIf="search.type_query=='contacts_pending' && search.status==2" [disabled]="true" color="danger" ion-button>{{'REJECTED' | translate}}</button>
       <button *ngIf="search.type_query=='users_friends'" [disabled]="true" ion-button class="contact">{{'CONTACT' | translate}}</button>
       <button *ngIf="search.type_query=='users_not_contacts'" (click)="sendInvitation($event,search)" [disabled]="submitted" ion-button>{{'ADD' | translate}}</button>

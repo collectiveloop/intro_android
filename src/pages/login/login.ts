@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, App, Platform } from 'ionic-angular';
+import { NavController, App } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
@@ -32,7 +32,7 @@ export class LoginPage {
   loader: any;
   loadingMessage: string = '';
 
-  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public facebook: Facebook, private sessionService: SessionService, private platform: Platform, public messages: MessageService, public googlePlus: GooglePlus, public linkedin: LinkedIn) {
+  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public facebook: Facebook, private sessionService: SessionService, public messages: MessageService, public googlePlus: GooglePlus, public linkedin: LinkedIn) {
     this.buildValidations();
     this.submitted = false;
     this.errorLogin ='';
@@ -44,22 +44,10 @@ export class LoginPage {
         this.loadingMessage = value;
       }
     );
-    this.sessionService.getSessionStatus().then(function(result) {
-      let destiny = this.sessionService.getDestinySession();
-      if (result !== false) {
-        this.navCtrl.push(destiny.target,destiny.params);
-      } else {
-        //RESET PASSWORD O SECCIONES DONDE NO HAY SESION
-        if(destiny.target!==undefined && destiny.target!==null )
-          this.navCtrl.push(destiny.target);
+  }
 
-        this.translateService.get('LOADING').subscribe(
-          value => {
-            this.loadingMessage = value;
-          }
-        );
-      }
-    }.bind(this));
+  public ionViewWillEnter():void{
+
   }
 
   private buildValidations() {

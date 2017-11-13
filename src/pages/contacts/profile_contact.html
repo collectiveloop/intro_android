@@ -19,11 +19,6 @@
         <img *ngIf="imageProfile!=null && imageProfile!= ''" src="{{imageProfile}}">
       </ion-col>
     </ion-row>
-    <ion-row *ngIf="ios">
-      <ion-col offset-4 col-4 class="center logo-main">
-        <img class="logo-bigger" src="{{logo}}">
-      </ion-col>
-    </ion-row>
     <ion-row *ngIf="errorProfile!=''">
       <ion-col col-12 class="center">
         <span class="error center" [innerHTML]="errorProfile"></span>
@@ -38,8 +33,7 @@
     <ion-row *ngIf="firstName!='' && ready">
       <ion-col offset-1 col-11 class="center">
         <ion-item>
-          <ion-label>{{'FIRST_NAME' | translate}}</ion-label>
-          <ion-icon item-left name="ios-contact-outline"></ion-icon>
+          <ion-label stacked>{{'FIRST_NAME' | translate}}</ion-label>
           <ion-input md-input [(ngModel)]="firstName" type="text" disabled></ion-input>
         </ion-item>
       </ion-col>
@@ -47,8 +41,7 @@
     <ion-row *ngIf="lastName!='' && ready">
       <ion-col offset-1 col-11 class="center">
         <ion-item>
-          <ion-label>{{'LAST_NAME' | translate}}</ion-label>
-          <ion-icon item-left name="ios-contact-outline"></ion-icon>
+          <ion-label stacked>{{'LAST_NAME' | translate}}</ion-label>
           <ion-input md-input [(ngModel)]="lastName" type="text" disabled></ion-input>
         </ion-item>
       </ion-col>
@@ -56,8 +49,7 @@
     <ion-row *ngIf="userName!='' && ready">
       <ion-col offset-1 col-11 class="center">
         <ion-item>
-          <ion-label>{{'USERNAME' | translate}}</ion-label>
-            <ion-icon item-left name="ios-contact-outline"></ion-icon>
+          <ion-label stacked>{{'USERNAME' | translate}}</ion-label>
             <ion-input md-input [(ngModel)]="userName" type="text" disabled></ion-input>
         </ion-item>
       </ion-col>
@@ -65,8 +57,7 @@
     <ion-row *ngIf="email!='' && ready">
       <ion-col offset-1 col-11 class="center">
         <ion-item>
-          <ion-label>{{'EMAIL' | translate}}</ion-label>
-          <ion-icon item-left name="ios-mail-outline"></ion-icon>
+          <ion-label stacked>{{'EMAIL' | translate}}</ion-label>
           <ion-input md-input [(ngModel)]="email" type="text" disabled></ion-input>
         </ion-item>
       </ion-col>
@@ -74,7 +65,7 @@
     <ion-row *ngIf="jobTitle!='' && ready">
       <ion-col offset-1 col-11 class="center">
         <ion-item>
-          <ion-label>{{'JOB_TITLE' | translate}}</ion-label>
+          <ion-label stacked>{{'JOB_TITLE' | translate}}</ion-label>
           <ion-icon item-left name="ios-person-add-outline"></ion-icon>
           <ion-input md-input [(ngModel)]="jobTitle" type="text" disabled></ion-input>
         </ion-item>
@@ -83,7 +74,7 @@
     <ion-row *ngIf="companyName!='' && ready">
       <ion-col offset-1 col-11 class="center">
         <ion-item>
-          <ion-label>{{'COMPANY_NAME' | translate}}</ion-label>
+          <ion-label stacked>{{'COMPANY_NAME' | translate}}</ion-label>
           <ion-icon item-left name="ios-ribbon-outline"></ion-icon>
           <ion-input md-input [(ngModel)]="companyName" type="text" disabled></ion-input>
         </ion-item>
@@ -92,7 +83,7 @@
     <ion-row *ngIf="jobDescription!='' && ready">
       <ion-col offset-1 col-11 class="center">
         <ion-item>
-          <ion-label>{{'JOB_DESCRIPTION' | translate}}</ion-label>
+          <ion-label stacked>{{'JOB_DESCRIPTION' | translate}}</ion-label>
           <ion-icon item-left name="ios-text-outline"></ion-icon>
           <ion-input md-input [(ngModel)]="jobDescription" type="text" disabled></ion-input>
         </ion-item>

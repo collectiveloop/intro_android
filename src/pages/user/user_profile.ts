@@ -2,7 +2,6 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, App, Platform, ActionSheetController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
-import { FilePath } from '@ionic-native/file-path';
 import { ImagePicker } from '@ionic-native/image-picker';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -20,7 +19,6 @@ import { TabsPage } from '../tabs/tabs';
   providers: [
     Camera,
     File,
-    FilePath,
     ImagePicker
   ]
 })
@@ -62,7 +60,7 @@ export class ProfileUserPage {
   };
   formInitialState:string = '';
 
-  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public navParams: NavParams, private platform: Platform, public messages: MessageService, private camera: Camera, public actionSheetCtrl: ActionSheetController, private imagePicker: ImagePicker, private file: File, private filePath: FilePath) {
+  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public navParams: NavParams, private platform: Platform, public messages: MessageService, private camera: Camera, public actionSheetCtrl: ActionSheetController, private imagePicker: ImagePicker, private file: File) {
     this.params = { 'show_signup': this.navParams.get('show_signup'), 'user_id': this.navParams.get('user_id') };
     this.ready = false;
     this.buildValidations();

@@ -56,7 +56,7 @@ export class SessionService {
                                   if(session){
                                     resolve('linkedin'); // hay sesion en la app y en linkedin
                                   }else{
-                                      //hubo sesión previa por facebook (mode_facebook no los indica) pero ya no lo está enconces debemos quitar el token y todas las variables del storage
+                                      //hubo sesión previa por linkedin pero ya no lo está enconces debemos quitar el token y todas las variables del storage
                                     this.storage.remove('token');
                                     this.storage.remove('mode_facebook');
                                     this.storage.remove('mode_linkedin');

@@ -27,7 +27,6 @@ import { ContactService } from '../lib/contacts.service';
 import { TabService } from '../pages/tabs/tabs.service';
 
 import { MyApp } from './app.component';
-import { HeaderComponent } from '../pages/header/header';
 import { HomePage } from '../pages/dashboard/home';
 import { TabsPage } from '../pages/tabs/tabs';
 
@@ -49,13 +48,11 @@ import { ListMessagesPage } from '../pages/messages/list_messages';
 import { ListIntrosPage } from '../pages/intros/list_intros';
 import { AddIntrosPage } from '../pages/intros/add_intros';
 import { FormIntrosPage } from '../pages/intros/form_intros';
-
-
+import { FinalIntrosPage } from '../pages/intros/final_intros';
 
 @NgModule({
   declarations: [
     MyApp,
-    HeaderComponent,
     LoginPage,
     ForgotPasswordPage,
     ResetPasswordPage,
@@ -72,6 +69,7 @@ import { FormIntrosPage } from '../pages/intros/form_intros';
     ListIntrosPage,
     AddIntrosPage,
     FormIntrosPage,
+    FinalIntrosPage,
     HomePage,
     TabsPage
   ],
@@ -101,7 +99,6 @@ import { FormIntrosPage } from '../pages/intros/form_intros';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HeaderComponent,
     LoginPage,
     ForgotPasswordPage,
     ResetPasswordPage,
@@ -118,6 +115,7 @@ import { FormIntrosPage } from '../pages/intros/form_intros';
     ListIntrosPage,
     AddIntrosPage,
     FormIntrosPage,
+    FinalIntrosPage,
     HomePage,
     TabsPage
   ],

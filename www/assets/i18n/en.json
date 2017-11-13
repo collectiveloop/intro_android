@@ -96,7 +96,9 @@
   "NOT_INVITATIONS": "You do not have invitations",
   "ACCEPTED_INVITATIONS": "Accepted invitation",
   "REJECTED_INVITATION": "Rejected invitation",
+  "DELETED_CONTACT": "Contact deleted",
   "REJECTED": "Rejected",
+  "REJECT": "Reject",
   "PENDING": "Pending",
   "QUESTION_1_INTRO":"How do you know ",
   "QUESTION_2_INTRO":"How do you know ",
@@ -106,5 +108,7 @@
   "INVALID_REASON_INTRO": "Reason is required",
   "INVALID_GAIN": "You must select an option at teast",
   "TO_ACCEPT": "To Accept",
-  "WRITE_YOUR_COMMENTS":"Write your comments"
+  "WRITE_YOUR_COMMENTS":"Write your comments",
+  "CONFIRM_DELETE_CONTACT":"Are you sure yo want to delete ",
+  "MADE_INTRODUCTION_BETWEEN":"You made the introduction between"
 }

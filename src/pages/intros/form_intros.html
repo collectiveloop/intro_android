@@ -51,10 +51,10 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <ion-col offset-1 col-11 class="center">
+        <ion-col offset-1 col-10 class="center">
           <ion-item class="checkbox-item">
             <label class="margin">{{'GAIN_INTRO' | translate}}</label>
-            <span class="error" *ngIf="!gainSelected">
+            <span class="error" *ngIf="!gainSelected && optionClicked">
               {{'INVALID_GAIN' | translate}}
             </span>
             <ion-row>

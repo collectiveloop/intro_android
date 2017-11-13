@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { App, NavController, LoadingController } from 'ionic-angular';
-import { HttpService } from '../../lib/http.service';
-import { MessageService } from '../../lib/messages.service';
+import { App } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../lib/config.service';
 
@@ -14,18 +12,13 @@ export class ListMessagesPage implements OnInit {
   loadingMessage:string = '';
   route:string ='';
 
-  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService) {}
+  constructor(public app: App, private translateService: TranslateService, private configService: ConfigService) {}
 
   public ngOnInit(): void {
 
     this.translateService.get('LOADING').subscribe(
       value=>{
         this.loadingMessage = value;
-        /*
-        this.messages.showMessage({
-           content:this.loadingMessage
-        });
-        */
         this.route = this.configService.getDomainImages() + '/profiles/';
         this.getMessages();
       }
@@ -35,22 +28,7 @@ export class ListMessagesPage implements OnInit {
   }
 
   private getMessages(): void {
-    /*
-    this.httpService.get({
-      url: 'intros/dashboard',
-      urlParams: [
-        this.translateService.getDefaultLang()
-      ],
-      app: this.app,
-      success: this.callBackMessages,
-      context: this
-    });
-    */
-  }
 
-  private callBackMessages(response): void {
-    this.messages.closeMessage();
-    this.listMessages = response.data.listMessages;
   }
 
   public gotoDetail(id): void {

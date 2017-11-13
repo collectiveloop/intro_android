@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { App, NavController, LoadingController, NavParams } from 'ionic-angular';
+import { App, NavController, NavParams, AlertController  } from 'ionic-angular';
 import { HttpService } from '../../lib/http.service';
 import { MessageService } from '../../lib/messages.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -22,14 +22,24 @@ export class ListContactsPage implements OnInit {
   listContacts: Array<object> = [];
   section:string='contacts';
   loadingMessage: string = '';
+  deletedMessage:string='';
+  deletedQuestion:string='';
+  delete: string ='';
+  cancel: string ='';
   route: string = '';
+  submitted:boolean;
+  currentChoice:any;
 
-  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public navParams: NavParams, private sessionService: SessionService) { }
+  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public navParams: NavParams, private sessionService: SessionService, private alertCtrl: AlertController) { }
   public ngOnInit(): void {
-    if(this.navParams.get('target')!==undefined && this.navParams.get('target')!==null){
-      if(ListContactsPendingPage===this.navParams.get('target'))
+    this.submitted = false;
+    let destiny = this.sessionService.getDestinySession();
+    this.sessionService.cleanDestinySession();
+
+    if(destiny.params!==undefined && destiny.params!==null && destiny.params.section!==undefined && destiny.params.section!==null){
+      if(ListContactsPendingPage===destiny.params.section)
         this.goInvitations();
-      this.sessionService.cleanDestinySession();
+        return;
     }
 
     this.translateService.get('LOADING').subscribe(
@@ -41,6 +51,32 @@ export class ListContactsPage implements OnInit {
         this.getCountContacts();
       }
     );
+
+    this.translateService.get('DELETED_CONTACT').subscribe(
+      value => {
+        this.deletedMessage = value;
+      }
+    );
+
+    this.translateService.get('CANCEL').subscribe(
+      value => {
+        this.cancel = value;
+      }
+    );
+
+    this.translateService.get('DELETE').subscribe(
+      value => {
+        this.delete = value;
+      }
+    );
+
+    this.translateService.get('CONFIRM_DELETE_CONTACT').subscribe(
+      value => {
+        this.deletedQuestion = value;
+      }
+    );
+
+
   }
 
   private getCountContacts(): void {
@@ -82,6 +118,7 @@ export class ListContactsPage implements OnInit {
       context: this
     });
   }
+
 
   private callBackContacts(response): void {
     this.messages.closeMessage();
@@ -134,6 +171,75 @@ export class ListContactsPage implements OnInit {
     }
   }
 
+  public confirmDelete(event:Event,contact:any):void {
+    event.stopPropagation();
+    let title = this.deletedQuestion+contact.first_name+' '+contact.last_name+'?';
+    let alert = this.alertCtrl.create({
+      title: title,
+      buttons: [
+        {
+          text: this.delete.toUpperCase(),
+          cssClass:'delete',
+          handler: () => {
+            this.sendInvitation(contact);
+          }
+        },
+        {
+          text: this.cancel.toUpperCase(),
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    alert.present();
+}
+
+  public sendInvitation(contact:any):void{
+    this.currentChoice = contact;
+    this.submitted = true;
+
+    let params = {
+      url: 'contacts',
+      urlParams: [
+        this.translateService.getDefaultLang(),
+        contact.id_user_friend
+      ],
+      app: this.app,
+      success: this.callBackRegister,
+      error: this.callBackError,
+      context: this,
+    };
+
+    this.messages.showMessage({
+      content: this.loadingMessage
+    });
+    this.httpService.delete(params);
+  }
+
+  private callBackRegister(response: any): void {
+    this.submitted = false;
+    this.messages.closeMessage();
+    if (response !== undefined && response.status !== undefined && response.status === 'error') {
+      this.messages.showMessage({
+        content: response.data.message,
+        spinner:false,
+        duration:3000
+      });
+    }else{
+      let index = this.listContacts.indexOf(this.currentChoice);
+      if(index > -1)
+      this.listContacts.splice(index, 1);
+      this.maxContacts--;
+      this.messages.showMessage({
+        content: this.deletedMessage,
+        spinner:false,
+        duration:3000
+      });
+    }
+  }
+
   public goInvitations(): void {
     this.navCtrl.push(ListContactsPendingPage);
   }
@@ -159,5 +265,10 @@ export class ListContactsPage implements OnInit {
     console.log("disabled");
     if (this.infiniteScroll !== undefined)
       this.infiniteScroll.enable(false);
+  }
+
+  private callBackError(response: any): void {
+    this.submitted = false;
+    this.messages.closeMessage();
   }
 }

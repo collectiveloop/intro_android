@@ -21,16 +21,12 @@
           <ion-spinner *ngIf="!imageLoaded" name="circles"></ion-spinner>
         </ion-col>
       </ion-row>
-      <ion-row *ngIf="ios">
-        <ion-col offset-4 col-4 class="center logo-main">
-          <img class="logo-bigger" src="{{logo}}">
-        </ion-col>
-      </ion-row>
       <ion-row *ngIf="errorProfile!=''">
-        <ion-col col-12 class="center">
+        <ion-col offset-1 col-10 class="center">
           <span class="error center" [innerHTML]="errorProfile"></span>
         </ion-col>
       </ion-row>
+      <!--
       <div *ngIf="ios" class="image-setting">
         <div *ngIf="imageProfile==null || imageProfile== ''" class="no-photo">
           <span>{{'PROFILE_PHOTO' | translate}}</span>
@@ -38,6 +34,7 @@
         <img class="photo" *ngIf="imageLoaded && imageProfile!=null && imageProfile!= ''" [src]="imageProfile">
         <ion-spinner *ngIf="!imageLoaded" name="circles"></ion-spinner>
       </div>
+      -->
       <ion-row>
         <ion-col offset-1 col-11 class="center">
           <ion-item>

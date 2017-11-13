@@ -16,7 +16,6 @@ import { ListContactsPendingPage } from './list_contacts_pending';
 })
 export class ProfileContactsPage {
   ready: boolean;
-  logo: string;
   errorProfile:string='';
   loadingMessage: string = '';
   contactNotFound: any = {};
@@ -55,7 +54,6 @@ export class ProfileContactsPage {
     this.translateService.get('LOADING').subscribe(
       value => {
         this.loadingMessage = value;
-        this.logo = this.configService.getLogo('BIGGER');
         this.messages.showMessage({
           content: this.loadingMessage
         });

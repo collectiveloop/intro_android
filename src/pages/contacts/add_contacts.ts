@@ -22,7 +22,6 @@ export class AddContactsPage {
   contactForm: FormGroup;
   ready: boolean;
   submitted: boolean;
-  logo: string;
   imageLoaded:boolean;
   route: string = '';
   errorProfile:string='';
@@ -65,7 +64,6 @@ export class AddContactsPage {
     this.translateService.get('LOADING').subscribe(
       value => {
         this.loadingMessage = value;
-        this.logo = this.configService.getLogo('BIGGER');
       }
     );
   }
@@ -119,7 +117,6 @@ export class AddContactsPage {
 
           if(data.last_name!==undefined && data.last_name!==null && data.last_name.trim()!=='')
             last_name = data.last_name.trim();
-
           this.contactForm.controls['full_name'].patchValue(first_name+' '+last_name);
           this.contactForm.controls['full_name'].setValue(first_name+' '+last_name);
 
@@ -131,7 +128,7 @@ export class AddContactsPage {
             this.imageProfile = data['image_profile'];
             this.loadImage();
           } else {
-            this.cleanForm();
+            this.cleanImageForm();
           }
         }else{
           this.cleanForm();
@@ -144,9 +141,13 @@ export class AddContactsPage {
   }
 
   private cleanForm():void{
-    this.imageLoaded = true;
     this.contactForm.controls['full_name'].patchValue('');
     this.contactForm.controls['full_name'].setValue('');
+    this.cleanImageForm();
+  }
+
+  private cleanImageForm():void{
+    this.imageLoaded = true;
     this.imageProfile ='';
   }
 

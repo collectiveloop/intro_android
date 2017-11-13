@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { App, NavController, LoadingController } from 'ionic-angular';
-import { HttpService } from '../../lib/http.service';
+import { App } from 'ionic-angular';
 import { MessageService } from '../../lib/messages.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../lib/config.service';
@@ -14,7 +13,7 @@ export class ListIntrosPage implements OnInit {
   loadingMessage:string = '';
   route:string ='';
 
-  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService) {}
+  constructor(public app: App, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService) {}
 
   public ngOnInit(): void {
     this.translateService.get('LOADING').subscribe(
@@ -32,22 +31,6 @@ export class ListIntrosPage implements OnInit {
   }
 
   private getIntros(): void {
-    /*
-    this.httpService.get({
-      url: 'intros/dashboard',
-      urlParams: [
-        this.translateService.getDefaultLang()
-      ],
-      app: this.app,
-      success: this.callBackIntros,
-      context: this
-    });
-    */
-  }
-
-  private callBackIntros(response): void {
-    this.messages.closeMessage();
-    this.listIntros = response.data.intros;
   }
 
   public gotoDetail(id): void {

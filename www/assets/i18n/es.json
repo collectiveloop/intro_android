@@ -97,7 +97,9 @@
   "NOT_INVITATIONS": "Usted no tiene invitaciones",
   "ACCEPTED_INVITATIONS": "invitación aceptada",
   "REJECTED_INVITATION": "invitación rechazada",
+  "DELETED_CONTACT": "Contacto eliminado",
   "REJECTED": "Rechazado",
+  "REJECT": "Rechazar",
   "PENDING": "Pendiente",
   "QUESTION_1_INTRO":"¿Cómo conoces a ",
   "QUESTION_2_INTRO":"¿Cómo conoces a ",
@@ -107,5 +109,7 @@
   "INVALID_REASON_INTRO": "La razón es requerida",
   "INVALID_GAIN": "Debes seleccionar al menos una opción",
   "TO_ACCEPT": "Aceptar",
-  "WRITE_YOUR_COMMENTS":"Escribe tus comentarios"
+  "WRITE_YOUR_COMMENTS":"Escribe tus comentarios",
+  "CONFIRM_DELETE_CONTACT":"¿Está seguro que desea eliminar a ",
+  "MADE_INTRODUCTION_BETWEEN":"Tu Has hecho una introducción entre"
 }

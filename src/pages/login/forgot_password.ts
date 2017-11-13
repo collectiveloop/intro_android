@@ -1,9 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, App, LoadingController, Platform } from 'ionic-angular';
+import { NavController, App } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfigService }   from '../../lib/config.service';
 import { MessageService } from '../../lib/messages.service';
-import { SessionService }   from '../../lib/session.service';
 import { HttpService }   from '../../lib/http.service';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -21,7 +20,7 @@ export class ForgotPasswordPage {
   loader: any;
   loadingMessage:string = '';
 
-  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, private sessionService: SessionService, private loadingCtrl: LoadingController, private platform: Platform, public messages: MessageService) {
+  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public messages: MessageService) {
     this.buildValidations();
     this.translateService.get('LOADING').subscribe(
       value=>{

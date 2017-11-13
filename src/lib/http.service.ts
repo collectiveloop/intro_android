@@ -70,6 +70,7 @@ export class HttpService {
   private headers: any;
   private search: any;
   private app: App;
+  private login:any;
 
   constructor(private http: Http, private configService: ConfigService, private storage: Storage, public messages: MessageService) { }
 
@@ -148,7 +149,8 @@ export class HttpService {
             error: this.error.bind(this.context),
             app: this.app,
             storage: this.storage,
-            messages: this.messages
+            messages: this.messages,
+            getLogin: this.getLogin.bind(this)
           }), this.finallyCallBack.bind(
             {
               finally: this.finally
@@ -198,7 +200,8 @@ export class HttpService {
             error: this.error.bind(this.context),
             app: this.app,
             storage: this.storage,
-            messages: this.messages
+            messages: this.messages,
+            getLogin: this.getLogin.bind(this)
           }), this.finallyCallBack.bind(
             {
               finally: this.finally
@@ -249,7 +252,8 @@ export class HttpService {
             error: this.error.bind(this.context),
             app: this.app,
             storage: this.storage,
-            messages: this.messages
+            messages: this.messages,
+            getLogin: this.getLogin.bind(this)
           }), this.finallyCallBack.bind(
             {
               finally: this.finally
@@ -270,7 +274,8 @@ export class HttpService {
             error: this.error.bind(this.context),
             app: this.app,
             storage: this.storage,
-            messages: this.messages
+            messages: this.messages,
+            getLogin: this.getLogin.bind(this)
           }), this.finallyCallBack.bind(
             {
               finally: this.finally
@@ -301,7 +306,8 @@ export class HttpService {
             error: this.error.bind(this.context),
             app: this.app,
             storage: this.storage,
-            messages: this.messages
+            messages: this.messages,
+            getLogin: this.getLogin.bind(this)
           }), this.finallyCallBack.bind(
             {
               finally: this.finally
@@ -338,16 +344,15 @@ export class HttpService {
   }
 
   private errorCallBack(error: any): void {
-    console.log(error);
     var errorDetail;
     try {
       errorDetail = JSON.parse(error._body);
     } catch (e) { }
 
     if ((errorDetail !== null && errorDetail !== undefined && (errorDetail.status === 'error' && errorDetail.data.type === 'session') ) || errorDetail===undefined  ) {
-      this.storage.remove('token');
+      //this.storage.remove('token');
       this.messages.closeMessage();
-      this.app.getRootNav().popToRoot();
+      this.app.getRootNav().setRoot(this.getLogin());
     }
 
     this.error(error);
@@ -365,5 +370,19 @@ export class HttpService {
     if (this.tokenProvider === undefined || this.tokenProvider === null || this.tokenProvider === '')
       return '';
     return this.tokenProvider;
+  }
+
+  public setLogin(login:any): void {
+    console.log("asignnado");
+    console.log(login);
+    this.login = login;
+  }
+
+  public getLogin(): any {
+    console.log(this.login);
+    if (this.login === undefined || this.login === null)
+      return {};
+
+    return this.login;
   }
 }

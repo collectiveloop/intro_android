@@ -1,11 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, App, LoadingController, NavParams } from 'ionic-angular';
+import { NavController, App, NavParams } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from '../../lib/messages.service';
-import { SessionService }   from '../../lib/session.service';
 import { HttpService }   from '../../lib/http.service';
 import { TranslateService } from '@ngx-translate/core';
-import { TabsPage } from '../tabs/tabs';
+import { FinalIntrosPage } from './final_intros';
 
 @Component({
   selector: 'form-intros',
@@ -17,24 +16,57 @@ export class FormIntrosPage {
   @ViewChild('reason') reason;
   introsForm: FormGroup;
   intros:any;
+  optionClicked:boolean = false;
   gainings:any;
   submitted: boolean;
   errorForm: string;
   gainSelected:boolean = false;
   loadingMessage:string = '';
 
-  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private httpService: HttpService, private translateService: TranslateService, private loadingCtrl: LoadingController, public messages: MessageService, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, public httpService: HttpService, private translateService: TranslateService, public messages: MessageService, public navParams: NavParams) {
     if(this.navParams.get('intros')===undefined || this.navParams.get('intros')===null)
       this.navCtrl.pop();
     this.intros = this.navParams.get('intros');
-    console.log(this.intros);
     this.buildValidations();
     this.translateService.get('LOADING').subscribe(
       value=>{
         this.loadingMessage = value;
+        this.getDataUser();
         this.initForm();
       }
     );
+  }
+
+  public getDataUser():void{
+    this.messages.showMessage({
+       content:this.loadingMessage
+    });
+    let params = {
+        url:'user',
+        urlParams:[
+          this.translateService.getDefaultLang(),
+          'basic'
+        ],
+        app: this.app,
+        success: this.callBackUser,
+        error: this.callBackError,
+        context:this,
+    };
+
+    this.httpService.get(params);
+  }
+
+  private callBackUser(response:any):void{
+    this.messages.closeMessage();
+    let user = response.data.user;
+    this.intros['user']= {
+      'id_user':user.id,
+      'email':user.email,
+      'first_name':user.first_name,
+      'last_name':user.last_name,
+      'image_loaded' :false,
+      'image_profile': user.image_profile
+    };
   }
 
   public initForm():void{
@@ -66,9 +98,9 @@ export class FormIntrosPage {
 
   private buildValidations(){
     this.introsForm = this.formBuilder.group({
-        question_friend_1: ['', Validators.compose([Validators.minLength(5), Validators.required]) ] ,
-        question_friend_2: ['', Validators.compose([Validators.minLength(5), Validators.required]) ] ,
-        reason: ['', Validators.compose([Validators.minLength(5), Validators.required]) ]
+        question_friend_1: ['', Validators.compose([Validators.minLength(2), Validators.required]) ] ,
+        question_friend_2: ['', Validators.compose([Validators.minLength(2), Validators.required]) ] ,
+        reason: ['', Validators.compose([Validators.minLength(2), Validators.required]) ]
     });
   }
 
@@ -79,10 +111,6 @@ export class FormIntrosPage {
   public submitForm(){
     if(this.introsForm.valid)
       this.register();
-  }
-
-  private back(): void {
-    this.app.getRootNav().popToRoot();
   }
 
   public register():void{
@@ -121,10 +149,11 @@ export class FormIntrosPage {
   }
 
   public check(gain:any):void{
-    console.log(gain);
     let length = this.gainings.length;
     for(let i=0;i<length;i++){
       if(this.gainings[i].value!==undefined && this.gainings[i].value!==null && this.gainings[i].value===true){
+        if(!this.optionClicked)
+          this.optionClicked=true;
         this.gainSelected = true;
         return;
       }
@@ -139,7 +168,7 @@ export class FormIntrosPage {
     if(response!==undefined && response.status!==undefined && response.status==='error'){
       this.errorForm = response.data.message;
     }else{
-      this.navCtrl.push(TabsPage);
+      this.navCtrl.push(FinalIntrosPage,{final:this.intros});
     }
   }
 

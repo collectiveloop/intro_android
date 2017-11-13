@@ -198,8 +198,8 @@
   }
 
   .card-content-md .image img {
-    max-width: 80px;
-    max-height: 80px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
   }
   /*fin dashboard*/
@@ -228,6 +228,9 @@
     margin: 0px;
   }
 
+  ion-item-sliding ion-item-options{
+      border-bottom: 0px;
+  }
 
   .searchbar input{
     padding: 6px 35px;

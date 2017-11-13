@@ -7,6 +7,7 @@ import { Globalization } from '@ionic-native/globalization';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../lib/config.service';
 import { SessionService } from '../lib/session.service';
+import { HttpService } from '../lib/http.service';
 import { SettingsProvider } from '../lib/settings';
 import { LoginPage } from '../pages/login/login';
 import { ResetPasswordPage } from '../pages/login/reset_password';
@@ -24,12 +25,11 @@ import { ContactService } from '../lib/contacts.service';
 
 
 export class MyApp {
-  @ViewChild('rootNavController') nav: NavController;
-  rootPage: any = LoginPage;
+  @ViewChild('content') nav: NavController;
+  rootPage: any;
   selectedTheme: String;
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private translateService: TranslateService, private globalization: Globalization, public configService: ConfigService, private sessionService: SessionService, private app: App, public menuCtrl: MenuController, private settings: SettingsProvider, public contacts: ContactService, private ngZone: NgZone) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private translateService: TranslateService, private globalization: Globalization, public configService: ConfigService, private sessionService: SessionService, private app: App, public menuCtrl: MenuController, private settings: SettingsProvider, public contacts: ContactService, private httpService:HttpService, private ngZone: NgZone) {
     this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
-    this.sessionService.setDestinySession(TabsPage,{});
     // override open handler to navigate on further custom url scheme actions
     if (typeof  window['handleOpenURL'] !== 'undefined') {
       (window as any).handleOpenURL = (url) => {
@@ -44,18 +44,17 @@ export class MyApp {
        };
     }
 
-    //cordova plugin add branch-cordova-sdk --variable BRANCH_KEY=key_live_ndqptlgXNE4LHqIahH1WIpbiyFlb62J3 --variable URI_SCHEME=introapp
     this.platform.ready().then(() => {
+        this.httpService.setLogin(LoginPage);
       //Language
       if (this.platform.is('cordova')) {
         this.globalization.getPreferredLanguage().then(result => {
           let language = result.value.split('-')[0];//evitamos cosas como -US
           this.translateService.setDefaultLang(language);
           this.contacts.getContacts();
-          this.checkHandleURL();
           // check if app was opened by custom url scheme
           this.platform.resume.subscribe(() => {
-            this.execHandleURL();
+            this.checkHandleURL();
           });
           this.runDevice();
         });
@@ -80,7 +79,7 @@ export class MyApp {
   public closeSession(): void {
     this.menuCtrl.close();
     this.sessionService.closeSession();
-    this.app.getRootNav().popToRoot();
+    this.app.getRootNav().setRoot(LoginPage);
   }
 
   public runDevice(): void {
@@ -93,6 +92,7 @@ export class MyApp {
       this.settings.setActiveTheme('android-theme');
       this.statusBar.styleBlackOpaque();
     }
+    this.checkHandleURL();
     this.splashScreen.hide();
     this.sessionService.setIgnoreSession(false);
   }
@@ -102,14 +102,10 @@ export class MyApp {
     if (lastUrl && lastUrl !== '') {
       delete (window as any).handleOpenURL_LastURL;
       this.handleOpenURL(lastUrl);
+      this.loadPage();
+    }else{
+      this.loadPage();
     }
-  }
-
-  public execHandleURL():void{
-    this.checkHandleURL();
-    let destiny = this.sessionService.getDestinySession();
-    if(destiny.target!==undefined && destiny.target!==null)
-      this.app.getRootNav().push(destiny.target,destiny.params);
   }
 
   public handleOpenURL(url) {
@@ -135,5 +131,26 @@ export class MyApp {
         }
       }
     }
+  }
+
+  public loadPage():void{
+
+    this.sessionService.getSessionStatus().then(function(result) {
+      let destiny = this.sessionService.getDestinySession();
+      if (result !== false) {
+        if(destiny.target!==undefined && destiny.target !==ResetPasswordPage)
+          this.rootPage = destiny.target;
+        else
+          this.rootPage = TabsPage;
+      } else {
+        //RESET PASSWORD O SECCIONES DONDE NO HAY SESION
+        if(result === false  && destiny.target!==undefined && destiny.target!==null && destiny.target ===ResetPasswordPage ){
+          this.rootPage = destiny.target;
+        }else{
+          this.rootPage = LoginPage;
+        }
+      }
+    }.bind(this));
+
   }
 }
