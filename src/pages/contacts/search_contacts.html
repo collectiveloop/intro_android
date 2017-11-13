@@ -26,13 +26,13 @@
     </ion-segment>
   </ion-toolbar>
 </ion-header>
-<ion-searchbar class="searchbar-toolbar"
-  [(ngModel)]="search.textField"
-  [showCancelButton]="search.cancel"
-  (ionInput)="onInput($event)"
-  (ionCancel)="onCancel($event)">
-</ion-searchbar>
 <ion-content padding class="grace list-ios searchbar-list">
+  <ion-searchbar class="searchbar-toolbar"
+    [(ngModel)]="search.textField"
+    [showCancelButton]="search.cancel"
+    (ionInput)="onInput($event)"
+    (ionCancel)="onCancel($event)">
+  </ion-searchbar>
   <ion-list>
     <ion-item class="center no-border" *ngIf="maxContacts==0">
       {{'NOT_CONTACTS' | translate}}

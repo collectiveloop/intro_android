@@ -693,8 +693,6 @@ ion-alert .delete .button-inner{
     width: 100%;
 }
 
-@media (max-width: 380px) {}
-
 @media (min-width: 360px) {
   .tabs .tabbar .tab-button .tab-button-text {
     font-size: 14px !important;
