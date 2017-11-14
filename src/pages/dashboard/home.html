@@ -18,7 +18,7 @@
     <ion-card-content *ngIf="dashboard.made.is!==undefined && dashboard.made.is!==null &&dashboard.made.is==true">
       <ion-item>
         <div class="image">
-          <img *ngIf="dashboard.made.friend_1.imageLoaded" src="{{dashboard.made.friend_1_image_profile}}" />
+          <div *ngIf="dashboard.made.friend_1.imageLoaded" [style.background-image]="dashboard.made.friend_1_image_profile" ></div>
           <ion-spinner *ngIf="!dashboard.made.friend_1.imageLoaded" name="circles"></ion-spinner>
         </div>
         <div>{{dashboard.made.friend_1_first_name}} {{dashboard.made.friend_1_last_name}}</div>
@@ -26,7 +26,7 @@
 
       <ion-item>
         <div class="image">
-          <img *ngIf="dashboard.made.friend_2.imageLoaded" src="{{dashboard.made.friend_2_image_profile}}" />
+          <div *ngIf="dashboard.made.friend_2.imageLoaded" [style.background-image]="dashboard.made.friend_2_image_profile" ></div>
           <ion-spinner *ngIf="!dashboard.made.friend_2.imageLoaded" name="circles"></ion-spinner>
         </div>
         <div>{{dashboard.made.friend_2_first_name}} {{dashboard.made.friend_2_last_name}}</div>
@@ -51,7 +51,7 @@
     <ion-card-content *ngIf="dashboard.received.is!==undefined && dashboard.received.is!==null &&dashboard.received.is==true">
       <ion-item class="full">
         <div class="image">
-          <img *ngIf="dashboard.received.friend.imageLoaded" src="{{dashboard.received.friend_image_profile}}" />
+          <div *ngIf="dashboard.received.friend.imageLoaded" [style.background-image]="dashboard.received.friend_image_profile" ></div>
           <ion-spinner *ngIf="!dashboard.received.friend.imageLoaded" name="circles"></ion-spinner>
         </div>
         <div>{{dashboard.received.friend_first_name}} {{dashboard.received.friend_last_name}}</div>

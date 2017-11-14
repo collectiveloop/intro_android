@@ -2,7 +2,7 @@ import { Component, ViewChild, } from '@angular/core';
 import { TabService } from './tabs.service';
 import { HomePage } from '../dashboard/home';
 import { ListContactsPage } from '../contacts/list_contacts';
-import { ListMessagesPage } from '../messages/list_messages';
+import { MadeMessagesPage } from '../messages/made_messages';
 import { AddIntrosPage } from '../intros/add_intros';
 import { LoginPage } from '../login/login';
 import { MenuController, NavController, NavParams } from 'ionic-angular';
@@ -17,7 +17,7 @@ import { SessionService } from '../../lib/session.service';
   tab1Root = HomePage;
   tab2Root = ListContactsPage;
   tab3Root = AddIntrosPage;
-  tab4Root = ListMessagesPage;
+  tab4Root = MadeMessagesPage;
   currentTab:any = 0;
 
   constructor(public tabService: TabService, public menuCtrl: MenuController, private sessionService: SessionService, public navCtrl: NavController, public navParams: NavParams) {//translateService si queremos cambia el idioma en esta pagina

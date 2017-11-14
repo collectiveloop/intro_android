@@ -34,7 +34,7 @@
     <ion-item class="list-format" *ngFor="let pending of listContactsPending" (click)="detailContact(pending)">
       <ion-thumbnail item-start>
         <div class="image">
-          <div *ngIf="pending.imageLoaded"  [style.background-image]="pending.image_profile" ></div>
+          <div *ngIf="pending.imageLoaded" [style.background-image]="pending.image_profile" ></div>
           <ion-spinner *ngIf="!pending.imageLoaded" name="circles"></ion-spinner>
         </div>
       </ion-thumbnail>

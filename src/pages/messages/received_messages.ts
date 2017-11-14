@@ -4,10 +4,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../lib/config.service';
 
 @Component({
-  selector: 'list-messages',
-  templateUrl: 'list_messages.html'
+  selector: 'received-messages',
+  templateUrl: 'received_messages.html'
 })
-export class ListMessagesPage implements OnInit {
+export class ReceivedMessagesPage implements OnInit {
   listMessages: Array<object> = [];
   loadingMessage:string = '';
   route:string ='';

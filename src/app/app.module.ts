@@ -44,7 +44,8 @@ import { AddContactsPage } from '../pages/contacts/add_contacts';
 
 import { SearchContactsPage } from '../pages/contacts/search_contacts';
 import { ListContactsPendingPage } from '../pages/contacts/list_contacts_pending';
-import { ListMessagesPage } from '../pages/messages/list_messages';
+import { MadeMessagesPage } from '../pages/messages/made_messages';
+import { ReceivedMessagesPage } from '../pages/messages/received_messages';
 import { ListIntrosPage } from '../pages/intros/list_intros';
 import { AddIntrosPage } from '../pages/intros/add_intros';
 import { FormIntrosPage } from '../pages/intros/form_intros';
@@ -65,7 +66,8 @@ import { FinalIntrosPage } from '../pages/intros/final_intros';
     ProfileContactsPage,
     AddContactsPage,
     SearchContactsPage,
-    ListMessagesPage,
+    MadeMessagesPage,
+    ReceivedMessagesPage,
     ListIntrosPage,
     AddIntrosPage,
     FormIntrosPage,
@@ -111,7 +113,8 @@ import { FinalIntrosPage } from '../pages/intros/final_intros';
     ProfileContactsPage,
     AddContactsPage,
     SearchContactsPage,
-    ListMessagesPage,
+    MadeMessagesPage,
+    ReceivedMessagesPage,
     ListIntrosPage,
     AddIntrosPage,
     FormIntrosPage,

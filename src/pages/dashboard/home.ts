@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { App, NavController } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
 import { HttpService } from '../../lib/http.service';
 import { MessageService } from '../../lib/messages.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -36,7 +37,7 @@ export class HomePage implements OnInit {
   route:string ='';
   profileImages:string ='';
 
-  constructor(public app: App, public navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, private sessionService: SessionService) {
+  constructor(public app: App, public navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, private sessionService: SessionService, public sanitizer: DomSanitizer) {
   }
 
   public ngOnInit(): void {
@@ -108,10 +109,10 @@ export class HomePage implements OnInit {
         if(board['made']['friend_1_image_profile'].indexOf('http') === -1)
           this.dashboard['made']['friend_1_image_profile'] = this.route+this.dashboard['made']['friend_1_image_profile'];
 
-        this.dashboard['made']['friend_1']['url'] = this.dashboard['made']['friend_1_image_profile'];
+        this.dashboard['made']['friend_1']['url'] = this.dashboard['made']['friend_1_image_profile']; this.dashboard['made']['friend_1_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+this.dashboard['made']['friend_1_image_profile']+')');
       }else{
         this.dashboard['made']['friend_1']['imageLoaded'] = true;
-        this.dashboard['made']['friend_1_image_profile'] = this.configService.getProfileImage();
+        this.dashboard['made']['friend_1_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+this.configService.getProfileImage()+')');
       }
       this.dashboard['made']['friend_1_first_name'] = board['made']['friend_1_first_name'];
       this.dashboard['made']['friend_1_last_name'] = board['made']['friend_1_last_name'];
@@ -126,9 +127,10 @@ export class HomePage implements OnInit {
           this.dashboard['made']['friend_2_image_profile'] = this.route+this.dashboard['made']['friend_2_image_profile'];
 
         this.dashboard['made']['friend_2']['url'] = this.dashboard['made']['friend_2_image_profile'];
+        this.dashboard['made']['friend_2_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+this.dashboard['made']['friend_2_image_profile']+')');
       }else{
         this.dashboard['made']['friend_2']['imageLoaded'] = true;
-        this.dashboard['made']['friend_2_image_profile'] = this.configService.getProfileImage();
+        this.dashboard['made']['friend_2_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+this.configService.getProfileImage()+')');
       }
       this.dashboard['made']['friend_2_first_name'] = board['made']['friend_2_first_name'];
       this.dashboard['made']['friend_2_last_name'] = board['made']['friend_2_last_name'];
@@ -146,11 +148,11 @@ export class HomePage implements OnInit {
         this.dashboard['received']['friend_image_profile'] = board['received']['friend_image_profile'];
         if(board['received']['friend_image_profile'].indexOf('http') === -1)
         this.dashboard['received']['friend_image_profile'] = this.route+this.dashboard['received']['friend_image_profile'];
-
         this.dashboard['received']['friend']['url'] = this.dashboard['received']['friend_image_profile'];
+        this.dashboard['received']['friend_2_ifriend_image_profilemage_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+this.dashboard['received']['friend_image_profile']+')');
       }else{
         this.dashboard['received']['friend']['imageLoaded'] = true;
-        this.dashboard['received']['friend_image_profile'] = this.configService.getProfileImage();
+        this.dashboard['received']['friend_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+this.configService.getProfileImage()+')');
       }
       this.dashboard['received']['friend_first_name'] = board['received']['friend_first_name'];
       this.dashboard['received']['friend_last_name'] = board['received']['friend_last_name'];

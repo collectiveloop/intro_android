@@ -30,7 +30,7 @@ export class ListContactsPendingPage {
   submitted:boolean = false;
   currentInvitation:any;
 
-  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService,  public sanitizer: DomSanitizer,  public platform: Platform, private sessionService: SessionService) {
+  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public sanitizer: DomSanitizer,  public platform: Platform, private sessionService: SessionService) {
     this.submitted = false;
     this.sessionService.getSessionStatus().then(function(result) {
       if (result === false) {
