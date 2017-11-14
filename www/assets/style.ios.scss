@@ -144,8 +144,13 @@
     text-align: center;
   }
 
-  .image-setting img {
+  .image-setting img, .image-setting div {
     width: 186px;
+  }
+
+  .image-setting .image-container{
+    background-size: 100%;
+    background-position: center;
   }
   /*dashboard*/
   .card-ios {
@@ -233,10 +238,15 @@
     height: 70px;
   }
 
-  .card-content-ios .image img {
+  .card-content-ios .image img, .card-content-ios .image .image-container  {
     width: 70px;
     height: 70px;
     border-radius: 50%;
+  }
+
+  .card-content-ios .image .image-container{
+    background-size: 100%;
+    background-position: center;
   }
 
   .card-ios .footer {
@@ -368,10 +378,6 @@ margin-top: 15px;
   @media (max-width: 320px) {
     .header .toolbar {
       height: 44px !important;
-    }
-
-    .scroll-content {
-      margin-top: 50px !important;
     }
   }
   @media (min-width: 320px) and (max-width: 374px) {

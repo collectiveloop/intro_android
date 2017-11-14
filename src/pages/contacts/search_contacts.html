@@ -40,7 +40,7 @@
     <ion-item class="list-format" *ngFor="let search of listSearch" (click)="detailContact(search)">
       <ion-thumbnail item-start>
         <div class="image">
-          <img *ngIf="search.imageLoaded" src="{{search.image_profile}}" />
+          <div class="image-container" *ngIf="search.imageLoaded" [style.background-image]="search.image_profile" ></div>
           <ion-spinner *ngIf="!search.imageLoaded" name="circles"></ion-spinner>
         </div>
       </ion-thumbnail>

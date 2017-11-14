@@ -114,6 +114,10 @@ h3 ion-icon {
   min-height: inherit;
 }
 
+.tabs .tabbar .tab-button[disabled] {
+  opacity:1 !important;
+}
+
 .tabs .tabbar .tab-button[aria-selected=true] .tab-button-text {
   color: #FF3F1D;
   font-size: 12px;
@@ -439,12 +443,6 @@ ion-menu ion-list {
   padding: 8px;
 }
 
-ion-item-sliding .item{
-    padding-left: 16px;
-}
-
-
-
 ion-item-sliding .button-ios-danger, ion-item-sliding .button-md-danger, ion-item-sliding .button-danger{
     background-color: #FD4D3E;
     padding: 8px !important;
@@ -651,8 +649,10 @@ ion-alert .delete .button-inner{
     position: absolute;
 }
 
-.final-card .image img{
+.final-card .image .image-container{
     border: 2px solid #FF3F1D !important;
+    background-size: 100%;
+    background-position: center;
 }
 
 .final-card .image.right{
@@ -670,9 +670,9 @@ ion-alert .delete .button-inner{
     left:25%;
 }
 
-.final-card .image.top img{
-    min-width: 150px;
-    min-height: 150px;
+.final-card .image.top .image-container{
+    width: 150px;
+    height: 150px;
 }
 
 .final-card .image .green-icon{

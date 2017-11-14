@@ -42,7 +42,7 @@
         <div *ngIf="imageProfile==null" class="no-photo">
           <span>{{'PROFILE_PHOTO' | translate}}</span>
         </div>
-        <img class="photo" *ngIf="imageProfile!=null" src="{{imageProfile}}">
+        <div class="photo image-container" *ngIf="imageProfile!=null" [style.background-image]="imageProfile" ></div>
       </div>
       <ion-row>
         <ion-col offset-1 col-11 class="center">

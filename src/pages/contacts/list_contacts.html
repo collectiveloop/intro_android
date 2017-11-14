@@ -35,7 +35,7 @@
       <ion-item (click)="detailContact(contact)" class="contact list-format">
         <ion-thumbnail item-start>
           <div class="image">
-            <img *ngIf="contact.imageLoaded" src="{{contact.image_profile}}" />
+            <div class="image-container" *ngIf="contact.imageLoaded" [style.background-image]="contact.image_profile" ></div>
             <ion-spinner *ngIf="!contact.imageLoaded" name="circles"></ion-spinner>
           </div>
         </ion-thumbnail>

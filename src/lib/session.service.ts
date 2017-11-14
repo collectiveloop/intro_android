@@ -79,7 +79,7 @@ export class SessionService {
                                         console.log(data);
                                           if(data!==null && data!==undefined && data!==false){
                                             //una sesión usando facebook, vemos si hubo sesión
-                                            this.googlePlus.login({'scopes':'profile email'})
+                                            this.googlePlus.trySilentLogin({'scopes':'profile email'})
                                             .then(result => {
                                               resolve('google_plus'); // hay sesion en la app y en google_plus
                                             },function(error){

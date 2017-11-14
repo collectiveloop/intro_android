@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { App, NavController } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
 import { HttpService } from '../../lib/http.service';
 import { MessageService } from '../../lib/messages.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -31,7 +32,7 @@ export class SearchContactsPage implements OnInit {
   loadingMessage: string = '';
   route: string = '';
 
-  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService) { }
+  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public sanitizer: DomSanitizer) { }
   public ngOnInit(): void {
     this.submitted = false;
     this.translateService.get('ACCEPTED_INVITATIONS').subscribe(
@@ -58,6 +59,9 @@ export class SearchContactsPage implements OnInit {
   }
 
   private getSearch(): void {
+    this.messages.showMessage({
+      content: this.loadingMessage
+    });
     let params = [
       this.translateService.getDefaultLang(),
       'search',
@@ -98,9 +102,10 @@ export class SearchContactsPage implements OnInit {
           search[i]['image_profile'] = this.route + search[i]['image_profile'];
 
         search[i]['url'] = search[i]['image_profile'];
+      search[i]['image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+search[i]['image_profile']+')');
       } else {
         search[i]['imageLoaded'] = true;
-        search[i]['image_profile'] = this.configService.getProfileImage();
+        search[i]['image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+this.configService.getProfileImage()+')');
       }
       if (search[i]['imageLoaded'] === false)
         this.loadImage(search[i]);

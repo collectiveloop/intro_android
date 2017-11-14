@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { App, NavController, NavParams, AlertController  } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
 import { HttpService } from '../../lib/http.service';
 import { MessageService } from '../../lib/messages.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -30,7 +31,7 @@ export class ListContactsPage implements OnInit {
   submitted:boolean;
   currentChoice:any;
 
-  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public navParams: NavParams, private sessionService: SessionService, private alertCtrl: AlertController) { }
+  constructor(public app: App, private navCtrl: NavController, private httpService: HttpService, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public navParams: NavParams, private sessionService: SessionService, private alertCtrl: AlertController, public sanitizer: DomSanitizer) { }
   public ngOnInit(): void {
     this.submitted = false;
     let destiny = this.sessionService.getDestinySession();
@@ -132,9 +133,10 @@ export class ListContactsPage implements OnInit {
           contacts[i]['image_profile'] = this.route + contacts[i]['image_profile'];
 
         contacts[i]['url'] = contacts[i]['image_profile'];
+        contacts[i]['image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+contacts[i]['image_profile']+')');
       } else {
         contacts[i]['imageLoaded'] = true;
-        contacts[i]['image_profile'] = this.configService.getProfileImage();
+        contacts[i]['image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+this.configService.getProfileImage()+')');
       }
       if (contacts[i]['imageLoaded'] === false)
         this.loadImage(contacts[i]);
@@ -153,7 +155,7 @@ export class ListContactsPage implements OnInit {
 
   private onErrorHandler(data): void {
       this['image'].imageLoaded = true;
-      this['image'].image_profile = this['config'].getProfileImage();
+      this['image'].image_profile = this.sanitizer.bypassSecurityTrustStyle('url('+this['config'].getProfileImage()+')');
   }
 
   private onloadHandler(data): void {

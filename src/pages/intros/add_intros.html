@@ -17,7 +17,7 @@
     <ion-card-content>
       <ion-item>
         <div class="image" (click)="addContact('friend_1')">
-          <img *ngIf="intros.friend_1.image_loaded" src="{{intros.friend_1.image_profile}}" />
+          <div class="image-container" *ngIf="intros.friend_1.image_loaded" [style.background-image]="intros.friend_1.image_profile" ></div>
           <ion-spinner *ngIf="!intros.friend_1.image_loaded" name="circles"></ion-spinner>
         </div>
         <div>{{intros.friend_1.first_name}} {{intros.friend_1.last_name}}</div>
@@ -25,7 +25,7 @@
 
       <ion-item>
         <div class="image" (click)="addContact('friend_2')">
-          <img *ngIf="intros.friend_2.image_loaded" src="{{intros.friend_2.image_profile}}" />
+          <div class="image-container" *ngIf="intros.friend_2.image_loaded" [style.background-image]="intros.friend_2.image_profile" ></div>
           <ion-spinner *ngIf="!intros.friend_2.image_loaded" name="circles"></ion-spinner>
         </div>
         <div>{{intros.friend_2.first_name}} {{intros.friend_2.last_name}}</div>

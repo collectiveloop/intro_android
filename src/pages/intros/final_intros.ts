@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { App, NavController, NavParams } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
 import { MessageService } from '../../lib/messages.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../lib/config.service';
@@ -15,7 +16,7 @@ export class FinalIntrosPage{
   loadingMessage:string = '';
   route:string ='';
 
-  constructor(public app: App, private navCtrl: NavController, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public navParams: NavParams) {
+  constructor(public app: App, private navCtrl: NavController, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public navParams: NavParams, public sanitizer: DomSanitizer) {
       if(this.navParams.get('final')===undefined || this.navParams.get('final')===null)
         this.navCtrl.pop();
        this.final = this.navParams.get('final');
@@ -40,42 +41,13 @@ export class FinalIntrosPage{
           this.final['user']['image_profile'] = this.route+this.final['user']['image_profile'];
 
         this.final['user']['url'] = this.final['user']['image_profile'];
+        this.final['user']['image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+this.final['user']['image_profile']+')');
       }else{
         this.final['user']['image_loaded'] = true;
-        this.final['user']['image_profile'] = this.configService.getProfileImage();
+        this.final['user']['image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+this.configService.getProfileImage()+')');
       }
       if(this.final['user']['image_loaded'] ===false){
           this.loadImage(this.final['user']);
-      }
-    }
-
-    if(this.final['friend_1']!==undefined){
-      if(this.final['friend_1']['image_profile']!==undefined && this.final['friend_1']['image_profile']!==null && this.final['friend_1']['image_profile']!==''){
-        if(this.final['friend_1']['image_profile'].indexOf('http') === -1)
-          this.final['friend_1']['image_profile'] = this.route+this.final['friend_1']['image_profile'];
-
-        this.final['friend_1']['url'] = this.final['friend_1']['image_profile'];
-      }else{
-        this.final['friend_1']['image_loaded'] = true;
-        this.final['friend_1']['image_profile'] = this.configService.getProfileImage();
-      }
-      if(this.final['friend_1']['image_loaded'] ===false){
-          this.loadImage(this.final['friend_1']);
-      }
-    }
-
-    if(this.final['friend_2']!==undefined){
-      if(this.final['friend_2']['image_profile']!==undefined && this.final['friend_2']['image_profile']!==null && this.final['friend_2']['image_profile']!==''){
-        if(this.final['friend_2']['image_profile'].indexOf('http') === -1)
-          this.final['friend_2']['image_profile'] = this.route+this.final['friend_2']['image_profile'];
-
-        this.final['friend_2']['url'] = this.final['friend_2']['image_profile'];
-      }else{
-        this.final['friend_2']['image_loaded'] = true;
-        this.final['friend_2']['image_profile'] = this.configService.getProfileImage();
-      }
-      if(this.final['friend_2']['image_loaded'] ===false){
-          this.loadImage(this.final['friend_2']);
       }
     }
   }

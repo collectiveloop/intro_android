@@ -1,5 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { NavController, NavParams, App, Platform, ActionSheetController } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { File } from '@ionic-native/file';
 import { ImagePicker } from '@ionic-native/image-picker';
@@ -44,6 +45,7 @@ export class ProfileUserPage {
   oldImageProfile: string = '';
   params: any;
   imageTaken: boolean = false;
+  imageOriginal: string = '';
   ios: boolean = false;
   actionSheet: any;
   imageDefault:any;
@@ -60,7 +62,7 @@ export class ProfileUserPage {
   };
   formInitialState:string = '';
 
-  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public navParams: NavParams, private platform: Platform, public messages: MessageService, private camera: Camera, public actionSheetCtrl: ActionSheetController, private imagePicker: ImagePicker, private file: File) {
+  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public navParams: NavParams, private platform: Platform, public messages: MessageService, private camera: Camera, public actionSheetCtrl: ActionSheetController, private imagePicker: ImagePicker, private file: File, public sanitizer: DomSanitizer) {
     this.params = { 'show_signup': this.navParams.get('show_signup'), 'user_id': this.navParams.get('user_id') };
     this.ready = false;
     this.buildValidations();
@@ -248,6 +250,8 @@ export class ProfileUserPage {
           this.imageProfile = this.configService.getDomainImages() + '/profiles/' + data.image_profile;
           this.oldImageProfile = data.image_profile;
         }
+        if(this.ios)
+          this.imageProfile = this.sanitizer.bypassSecurityTrustStyle('url('+this.imageProfile+')');
       }
     }
   }
@@ -285,6 +289,10 @@ export class ProfileUserPage {
       this.imageTaken = true;
       let base64Image = 'data:image/jpeg;base64,' + imageData;
       this.imageProfile = base64Image;
+      console.log(base64Image);
+      this.imageOriginal = this.imageProfile;
+      if(this.ios)
+        this.imageProfile = this.sanitizer.bypassSecurityTrustStyle('url('+this.imageProfile+')');
     }, (err) => {
       // Handle error
     });
@@ -315,6 +323,9 @@ export class ProfileUserPage {
         this.file.readAsDataURL(path, image).then((result) => {
           this.imageTaken = true;
           this.imageProfile = result;
+          this.imageOriginal = this.imageProfile;
+          if(this.ios)
+            this.imageProfile = this.sanitizer.bypassSecurityTrustStyle('url('+this.imageProfile+')');
         });
       }
     }, (err) => { });
@@ -363,8 +374,8 @@ export class ProfileUserPage {
       error: this.callBackError,
       context: this,
     };
-    if (this.imageTaken === true && this.imageProfile !== undefined && this.imageProfile != null && this.imageProfile !== '')
-      paramsPut['files'] = { 'image_profile': this.imageProfile };
+    if (this.imageTaken === true && this.imageOriginal !== undefined && this.imageOriginal != null && this.imageOriginal !== '')
+      paramsPut['files'] = { 'image_profile': this.imageOriginal };
 
     this.messages.showMessage({
       content: this.loadingMessage

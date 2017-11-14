@@ -147,9 +147,10 @@ export class HomePage implements OnInit {
       if(board['received']['friend_image_profile']!==undefined && board['received']['friend_image_profile']!==null && board['received']['friend_image_profile']!==''){
         this.dashboard['received']['friend_image_profile'] = board['received']['friend_image_profile'];
         if(board['received']['friend_image_profile'].indexOf('http') === -1)
-        this.dashboard['received']['friend_image_profile'] = this.route+this.dashboard['received']['friend_image_profile'];
+          this.dashboard['received']['friend_image_profile'] = this.route+this.dashboard['received']['friend_image_profile'];
+
         this.dashboard['received']['friend']['url'] = this.dashboard['received']['friend_image_profile'];
-        this.dashboard['received']['friend_2_ifriend_image_profilemage_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+this.dashboard['received']['friend_image_profile']+')');
+        this.dashboard['received']['friend_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+this.dashboard['received']['friend_image_profile']+')');
       }else{
         this.dashboard['received']['friend']['imageLoaded'] = true;
         this.dashboard['received']['friend_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url('+this.configService.getProfileImage()+')');

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { App, NavController } from 'ionic-angular';
+import { DomSanitizer } from '@angular/platform-browser';
 import { MessageService } from '../../lib/messages.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../lib/config.service';
@@ -18,7 +19,7 @@ export class AddIntrosPage implements OnInit {
   loadingMessage:string = '';
   route:string ='';
 
-  constructor(public app: App, private navCtrl: NavController, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService) {
+  constructor(public app: App, private navCtrl: NavController, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public sanitizer: DomSanitizer) {
     this.translateService.get('LOADING').subscribe(
       value=>{
         this.loadingMessage = value;
@@ -33,7 +34,7 @@ export class AddIntrosPage implements OnInit {
       'last_name':'',
       'image_loaded' : true,
       'friend_loaded' : false,
-      'image_profile': this.configService.getProfileImage()
+      'image_profile': this.sanitizer.bypassSecurityTrustStyle('url('+this.configService.getProfileImage()+')')
     };
     this.intros['friend_2']= {
       'id_user':'',
@@ -42,7 +43,7 @@ export class AddIntrosPage implements OnInit {
       'last_name':'',
       'image_loaded' : true,
       'friend_loaded' : false,
-      'image_profile': this.configService.getProfileImage()
+      'image_profile': this.sanitizer.bypassSecurityTrustStyle('url('+this.configService.getProfileImage()+')')
     };
   }
 

@@ -34,7 +34,7 @@
         "@ionic-native/file-transfer": "^4.3.0",
         "@ionic-native/globalization": "^4.2.1",
         "@ionic-native/google-plus": "^4.3.1",
-        "@ionic-native/image-picker": "^4.3.2",
+        "@ionic-native/image-picker": "^4.4.0",
         "@ionic-native/image-resizer": "^4.3.2",
         "@ionic-native/linkedin": "^4.3.1",
         "@ionic-native/local-notifications": "^4.3.0",
@@ -47,7 +47,6 @@
         "@ngx-translate/core": "^8.0.0",
         "@ngx-translate/http-loader": "^0.1.0",
         "branch-cordova-sdk": "^2.6.18",
-        "com.synconset.imagepicker": "~2.1.8",
         "cordova-android": "^6.2.3",
         "cordova-android-support-gradle-release": "^1.1.1",
         "cordova-browser": "^4.1.0",
@@ -70,7 +69,6 @@
         "cordova-plugin-secure-storage": "^2.6.8",
         "cordova-plugin-splashscreen": "^4.0.3",
         "cordova-plugin-statusbar": "^2.2.3",
-        "cordova-plugin-telerik-imagepicker": "^2.1.8",
         "cordova-plugin-whitelist": "^1.3.2",
         "cordova-plugin-x-toast": "^2.6.0",
         "cordova-sqlite-storage": "^2.0.4",
@@ -112,7 +110,6 @@
             "cordova-plugin-file": {},
             "cordova-plugin-file-transfer": {},
             "cordova.plugins.diagnostic": {},
-            "com.synconset.imagepicker": {},
             "cordova-plugin-googleplus": {
                 "REVERSED_CLIENT_ID": "243179874931-beqb80o5867005il5jgpp64h1cigp1cv.apps.googleusercontent.com"
             },

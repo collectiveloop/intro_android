@@ -197,11 +197,17 @@
     height: 80px;
   }
 
-  .card-content-md .image img {
+  .card-content-md .image img, .card-content-md .image .image-container {
     width: 80px;
     height: 80px;
     border-radius: 50%;
   }
+
+  .card-content-md .image .image-container{
+    background-size: 100%;
+    background-position: center;
+  }
+
   /*fin dashboard*/
 
   /*contacts*/
