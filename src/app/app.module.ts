@@ -50,6 +50,9 @@ import { ListIntrosPage } from '../pages/intros/list_intros';
 import { AddIntrosPage } from '../pages/intros/add_intros';
 import { FormIntrosPage } from '../pages/intros/form_intros';
 import { FinalIntrosPage } from '../pages/intros/final_intros';
+import { DetailIntrosPage } from '../pages/intros/detail_intros';
+import { MadeIntrosPage } from '../pages/intros/made_intros';
+import { ReceivedIntrosPage } from '../pages/intros/received_intros';
 
 @NgModule({
   declarations: [
@@ -72,6 +75,9 @@ import { FinalIntrosPage } from '../pages/intros/final_intros';
     AddIntrosPage,
     FormIntrosPage,
     FinalIntrosPage,
+    DetailIntrosPage,
+    MadeIntrosPage,
+    ReceivedIntrosPage,
     HomePage,
     TabsPage
   ],
@@ -119,6 +125,9 @@ import { FinalIntrosPage } from '../pages/intros/final_intros';
     AddIntrosPage,
     FormIntrosPage,
     FinalIntrosPage,
+    DetailIntrosPage,
+    MadeIntrosPage,
+    ReceivedIntrosPage,
     HomePage,
     TabsPage
   ],

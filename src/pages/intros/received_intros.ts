@@ -9,12 +9,11 @@ import { DetailIntrosPage } from '../intros/detail_intros';
 import { MadeMessagesPage } from '../messages/made_messages';
 
 @Component({
-  selector: 'received-messages',
-  templateUrl: 'received_messages.html'
+  selector: 'received-intros',
+  templateUrl: 'received_intros.html'
 })
-export class ReceivedMessagesPage {
+export class ReceivedIntrosPage {
   page: number = 1;
-  section:string = '';
   listIntros: any = [];
   maxIntros: number = 0;
   quantity: number = 0;
@@ -34,7 +33,6 @@ export class ReceivedMessagesPage {
   }
 
   ionViewWillEnter(): void {
-    this.section = 'received';
     this.ready = false;
     this.page = 1;
     this.listIntros = [];
@@ -186,10 +184,13 @@ export class ReceivedMessagesPage {
   }
 
   public gotoDetail(intro:any): void {
-    this.app.getRootNav().push(DetailIntrosPage, { introId: intro.id });
+    this.navCtrl.push(DetailIntrosPage, { introId: intro.id });
   }
 
   public goMadeMessages(): void {
     this.navCtrl.pop(MadeMessagesPage);
+  }
+  public backAction(): void {
+    this.navCtrl.pop();
   }
 }

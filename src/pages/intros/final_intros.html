@@ -13,18 +13,18 @@
   <div class="list final-card">
     <div class="image top">
       <div class="image-container" *ngIf="final.user.image_loaded" [style.background-image]="final.user.image_profile" ></div>
-      <ion-spinner *ngIf="!final.user.image_loaded" name="circles"></ion-spinner>
+      <div class="image-container no-border" *ngIf="!final.user.image_loaded" >
+          <ion-spinner name="circles"></ion-spinner>
+      </div>
     </div>
     <div class="image left">
       <div class="image-container" [style.background-image]="final.friend_1.image_profile" ></div>
       <div class="green-icon"></div>
     </div>
-
     <div class="image right">
       <div class="image-container" [style.background-image]="final.friend_2.image_profile" ></div>
       <div class="green-icon"></div>
     </div>
-
     <div class="message">{{'MADE_INTRODUCTION_BETWEEN' | translate}}</div>
   </div>
 </ion-content>

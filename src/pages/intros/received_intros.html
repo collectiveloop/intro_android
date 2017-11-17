@@ -1,22 +1,14 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons left>
-      <div class="empty-back-button"></div>
+      <div class="empty-back-button center">
+        <ion-icon item-left name="md-arrow-back" (click)="backAction()"></ion-icon>
+      </div>
     </ion-buttons>
     <ion-title class="section">
-      {{'MESSAGES' | translate}}
+      {{'RECEIVED_INTROS' | translate}}
     </ion-title>
     <ion-buttons end></ion-buttons>
-  </ion-toolbar>
-  <ion-toolbar class="toolbar-segment">
-    <ion-segment [(ngModel)]="section">
-      <ion-segment-button value="made" (click)="goMadeMessages()">
-        {{'MADE' | translate}}
-      </ion-segment-button>
-      <ion-segment-button value="received">
-        {{'RECEIVED' | translate}}
-      </ion-segment-button>
-    </ion-segment>
   </ion-toolbar>
 </ion-header>
 <ion-content padding class="grace list-ios messages">
@@ -24,7 +16,7 @@
     <ion-item class="message-center center no-border" *ngIf="maxIntros==0 && ready==true">
       {{'NOT_MESSAGES_RECEIVED' | translate}}
     </ion-item>
-    <ion-item class="list-format" *ngFor="let intro of listIntros">
+    <ion-item class="list-format" *ngFor="let intro of listIntros" (click)="gotoDetail(intro)">
       <ion-thumbnail item-start class="image-join">
         <div class="image">
           <div class="image-container" *ngIf="intro.user_image_loaded" [style.background-image]="intro.user_image_profile"></div>
@@ -38,7 +30,6 @@
       <h3>{{intro.created_at}}</h3>
       <h2>{{intro.user_name}}</h2>
       <h2>{{intro.other_user_name}}</h2>
-      <ion-icon name="ios-information-circle-outline" (click)="gotoDetail(intro)"></ion-icon>
     </ion-item>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="moreMessages($event)">

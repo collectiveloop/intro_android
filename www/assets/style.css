@@ -43,13 +43,12 @@ h3 ion-icon {
 }
 
 .no-margin-top {
-  margin-top:0px !important;
+  margin-top: 0px !important;
 }
 
 .center {
   text-align: center;
 }
-
 
 .left {
   text-align: left;
@@ -73,15 +72,15 @@ h3 ion-icon {
   margin-top: 25px;
 }
 
-.list{
+.list {
   margin: 0px;
 }
 
-.contact{
+.contact {
   position: relative;
 }
 
-.contact .button-absolute{
+.contact .button-absolute {
   position: absolute;
   bottom: 0px;
   right: 0px;
@@ -115,7 +114,7 @@ h3 ion-icon {
 }
 
 .tabs .tabbar .tab-button[disabled] {
-  opacity:1 !important;
+  opacity: 1 !important;
 }
 
 .tabs .tabbar .tab-button[aria-selected=true] .tab-button-text {
@@ -222,26 +221,25 @@ ion-navbar.toolbar {
   border-bottom-color: #FF3F1D;
 }
 
-.searchbar-toolbar{
+.searchbar-toolbar {
   background-color: #EDEEF0 !important;
-    z-index: 4;
-    width: 100%;
+  z-index: 4;
+  width: 100%;
 }
 
-.searchbar-toolbar .searchbar-input-container{
+.searchbar-toolbar .searchbar-input-container {
   padding: 5px;
 }
 
-.searchbar input{
+.searchbar input {
   background: none;
   background-color: inherit !important;
   -webkit-box-shadow: none !important;
   box-shadow: none !important;
 }
 
-.searchbar .searchbar-search-icon{
+.searchbar .searchbar-search-icon {
   top: 15px;
-
 }
 
 .form-style .row .col {
@@ -443,17 +441,17 @@ ion-menu ion-list {
   padding: 8px;
 }
 
-ion-item-sliding .button-ios-danger, ion-item-sliding .button-md-danger, ion-item-sliding .button-danger{
-    background-color: #FD4D3E;
-    padding: 8px !important;
+ion-item-sliding .button-ios-danger, ion-item-sliding .button-md-danger, ion-item-sliding .button-danger {
+  background-color: #FD4D3E;
+  padding: 8px !important;
 }
 
-ion-item-sliding, ion-item-sliding .contact{
-    background-color: #EDEEF0 !important;
+ion-item-sliding, ion-item-sliding .contact {
+  background-color: #EDEEF0 !important;
 }
 
-ion-item-sliding ion-item-options .button ion-icon, ion-item-sliding ion-item-options .button .button-inner{
-    color: #ffffff;
+ion-item-sliding ion-item-options .button ion-icon, ion-item-sliding ion-item-options .button .button-inner {
+  color: #ffffff;
 }
 
 .grace {
@@ -463,15 +461,19 @@ ion-item-sliding ion-item-options .button ion-icon, ion-item-sliding ion-item-op
 /*dashboard*/
 
 /*AddContact*/
-.contact-device{
+
+.contact-device {
   background-color: #FF3F1D;
-  color:#FFFFFF;
+  color: #FFFFFF;
 }
 
-.contact-device ion-icon{
-  color:#FFFFFF;
+.contact-device ion-icon {
+  color: #FFFFFF;
   font-size: 50px;
+  font-size: 45px;
+  margin: auto;
 }
+
 /*Fin de AddContact*/
 
 .card {
@@ -533,12 +535,12 @@ ion-item-sliding ion-item-options .button ion-icon, ion-item-sliding ion-item-op
   margin: 0px 0px 0px 0px;
 }
 
-.list-format button.contact{
+.list-format button.contact {
   background-color: #0EA8F2 !important;
 }
 
-.profile{
-  margin-top:8px;
+.profile {
+  margin-top: 8px;
   display: inherit;
 }
 
@@ -547,10 +549,10 @@ ion-item-sliding ion-item-options .button ion-icon, ion-item-sliding ion-item-op
 }
 
 .profile .label {
-  color:#FF3F1D;
+  color: #FF3F1D;
 }
 
-.form-intros .label, .form-intros label{
+.form-intros .label, .form-intros label {
   color: #4C4C4C;
   font-size: 1.2rem;
   display: inline-grid;
@@ -560,11 +562,23 @@ ion-item-sliding ion-item-options .button ion-icon, ion-item-sliding ion-item-op
   margin-top: 20px !important;
 }
 
-.checkbox-item{
-  border-bottom:0px !important;
+.form-intros .text-input {
+  margin-top: 20px !important;
 }
 
-.intros::before{
+.checkbox-item {
+  border-bottom: 0px !important;
+}
+
+.checkbox-item .label {
+  margin: 13px 0px 13px 0px;
+}
+
+.detail-intros .text-input[disabled], .detail-intros .checkbox-disabled, .detail-intros .item.item-checkbox-disabled ion-label {
+  opacity: .8;
+}
+
+.intros::before {
   background: none;
 }
 
@@ -572,14 +586,14 @@ ion-item-sliding ion-item-options .button ion-icon, ion-item-sliding ion-item-op
   background: none;
   display: initial;
   height: 45px;
-  min-height:45px;
+  min-height: 45px;
 }
 
 .intros .button-intro {
   border-radius: 0px;
-  width:100%;
-  margin:0px;
-  padding:0px;
+  width: 100%;
+  margin: 0px;
+  padding: 0px;
   border-top: 1px solid #FF3F1D !important;
   background-color: #ffffff !important;
   height: 45px;
@@ -590,17 +604,17 @@ ion-item-sliding ion-item-options .button ion-icon, ion-item-sliding ion-item-op
   background-color: #FD4D3E !important;
 }
 
-.intros  .button-intro.activated .button-inner {
+.intros .button-intro.activated .button-inner {
   color: #ffffff !important;
 }
 
-.intros  .button-intro .button-inner {
+.intros .button-intro .button-inner {
   color: #FF3F1D !important;
   text-transform: initial;
-  font-size:18px;
+  font-size: 18px;
 }
 
-.loading-wrapper{
+.loading-wrapper {
   text-align: center;
 }
 
@@ -622,76 +636,121 @@ ion-item-sliding ion-item-options .button ion-icon, ion-item-sliding ion-item-op
   }
 }
 
-ion-alert .alert-title{
+ion-alert .alert-title {
   font-size: 14px !important;
 }
 
-ion-alert .delete{
+ion-alert .delete {
   background-color: #FD4D3E !important;
 }
 
-ion-alert .delete .button-inner{
+ion-alert .delete .button-inner {
   color: #ffffff !important;
 }
 
-.final-card{
-    position:relative;
-    margin: auto;
-    background-image: url("../assets/images/final.svg");
-    background-repeat: no-repeat;
-    background-size: 100% 100%;
-    margin-top: 0px;
-    width: 300px;
-    height: 350px;
+.final-card {
+  position: relative;
+  margin: auto;
+  background-image: url("../assets/images/final.svg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  margin-top: 0px;
+  width: 300px;
+  height: 350px;
 }
 
-.final-card .image{
-    position: absolute;
+.final-card .image {
+  position: absolute;
 }
 
-.final-card .image .image-container{
-    border: 2px solid #FF3F1D !important;
-    background-size: 100%;
-    background-position: center;
+.final-card .image .image-container {
+  border: 2px solid #FF3F1D !important;
+  background-size: 100%;
+  background-position: center;
 }
 
-.final-card .image.right{
-    top: 55%;
-    right: -5%;
+.final-card .image.right {
+  top: 55%;
+  right: -5%;
 }
 
-.final-card .image.left{
-    top: 55%;
-    left: -5%;
+.final-card .image.left {
+  top: 55%;
+  left: -5%;
 }
 
-.final-card .image.top{
-    top: 0;
-    left:25%;
+.final-card .image.top {
+  top: 0;
+  left: 25%;
 }
 
-.final-card .image.top .image-container{
-    width: 150px;
-    height: 150px;
+.final-card .image.top .image-container {
+  width: 150px;
+  height: 150px;
+  vertical-align: middle;
+  text-align: center;
+  background-color: #ffffff;
 }
 
-.final-card .image .green-icon{
-    border-radius: 50%;
-    background-color: #76FF03;
-    position: absolute;
-    bottom: 3px;
-    width: 12px;
-    height: 12px;
-    right: 6px;
+.final-card .image.top .image-container .spinner {
+  top: 45px;
 }
 
-.final-card .message{
-    bottom: 0px;
-    position: absolute;
-    text-align: center;
-    margin: auto;
-    width: 100%;
+.final-card .image .green-icon {
+  border-radius: 50%;
+  background-color: #76FF03;
+  position: absolute;
+  bottom: 3px;
+  width: 12px;
+  height: 12px;
+  right: 6px;
 }
+
+.final-card .message {
+  bottom: 0px;
+  position: absolute;
+  text-align: center;
+  margin: auto;
+  width: 100%;
+}
+
+.image-join {
+  display: flex;
+}
+
+.image-join .crop {
+  margin-left: -8px;
+}
+
+.messages h3 {
+  margin-top: 0px !important;
+  margin-left: 40px;
+  vertical-align: middle;
+  width: 100%;
+  color: #111111 !important;
+}
+
+.messages h2 {
+  margin-top: 0px !important;
+  margin-left: 40px;
+  vertical-align: middle;
+  font-size: inherit;
+  width: 100%;
+}
+
+.messages .list-format .label {
+    margin: 0px;
+}
+
+.messages .label .icon {
+  font-size: 25px;
+  position: absolute;
+  display: flex;
+  right: 15px;
+  top: 30%;
+  color: #FF3F1D !important;
+}
+
 
 @media (min-width: 360px) {
   .tabs .tabbar .tab-button .tab-button-text {
@@ -706,11 +765,10 @@ ion-alert .delete .button-inner{
 }
 
 @media (max-height: 568px) {
-    .final-card .image.right{
-        right: 0%;
-    }
-
-    .final-card .image.left{
-        left: 0%;
-    }
+  .final-card .image.right {
+    right: 0%;
+  }
+  .final-card .image.left {
+    left: 0%;
+  }
 }

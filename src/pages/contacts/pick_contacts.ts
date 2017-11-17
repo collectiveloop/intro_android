@@ -111,7 +111,7 @@ export class PickContactsPage implements OnInit {
     let img = new Image();
     /// set handler and url
     img.onload = this.onloadHandler.bind({ 'image': image });
-    img.onerror = this.onErrorHandler.bind({ 'image': image, 'config':this.configService });
+    img.onerror = this.onErrorHandler.bind({ 'image': image, 'config':this.configService, 'sanitizer':this.sanitizer });
     img.src = image.url;
   }
 

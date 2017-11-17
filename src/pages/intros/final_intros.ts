@@ -56,8 +56,16 @@ export class FinalIntrosPage{
     let img = new Image();
     /// set handler and url
     img.onload = this.onloadHandler.bind({'image':image});
+    img.onerror = this.onErrorHandler.bind({ 'image': image, 'config':this.configService, 'sanitizer':this.sanitizer });
     img.src = image.url;
   }
+
+  private onErrorHandler(data): void {
+      this['image'].image_loaded = true;
+      this['image'].image_profile = this.sanitizer.bypassSecurityTrustStyle('url('+this['config'].getProfileImage()+')');
+  }
+
+
   private onloadHandler(data):void{
     if(this['image']!==undefined)
       this['image'].image_loaded = true;

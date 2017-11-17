@@ -18,7 +18,6 @@ export class ProfileContactsPage {
   ready: boolean;
   errorProfile:string='';
   loadingMessage: string = '';
-  contactNotFound: any = {};
   imageProfile: string ='';
   firstName: string ='';
   lastName: string ='';
@@ -44,12 +43,6 @@ export class ProfileContactsPage {
     this.contactId = this.navParams.get('contactId');
     this.destiny = this.navParams.get('destiny') ;
     this.ready = false;
-
-    this.translateService.get('CONTACT_NOT_FOUND').subscribe(
-      value => {
-        this.contactNotFound = value;
-      }
-    );
 
     this.translateService.get('LOADING').subscribe(
       value => {

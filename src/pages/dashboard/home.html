@@ -10,33 +10,30 @@
   </ion-toolbar>
 </ion-header>
 <ion-content padding class="grace">
-
-  <ion-card>
+  <ion-card (click)="gotoMadeIntroDetail(dashboard.made)">
     <ion-card-header>
       {{'MADE_INTRODUCTIONS' | translate}}
     </ion-card-header>
     <ion-card-content *ngIf="dashboard.made.is!==undefined && dashboard.made.is!==null && dashboard.made.is==true">
       <ion-item>
         <div class="image">
-          <div class="image-container" *ngIf="dashboard.made.friend_1.imageLoaded" [style.background-image]="dashboard.made.friend_1_image_profile" ></div>
-          <ion-spinner *ngIf="!dashboard.made.friend_1.imageLoaded" name="circles"></ion-spinner>
+          <div class="image-container" *ngIf="dashboard.made.friend_1.image_loaded" [style.background-image]="dashboard.made.friend_1.image_profile"></div>
+          <ion-spinner *ngIf="!dashboard.made.friend_1.image_loaded" name="circles"></ion-spinner>
         </div>
-        <div>{{dashboard.made.friend_1_first_name}} {{dashboard.made.friend_1_last_name}}</div>
+        <div>{{dashboard.made.friend_1.first_name}} {{dashboard.made.friend_1.last_name}}</div>
       </ion-item>
-
       <ion-item>
         <div class="image">
-          <div class="image-container" *ngIf="dashboard.made.friend_2.imageLoaded" [style.background-image]="dashboard.made.friend_2_image_profile" ></div>
-          <ion-spinner *ngIf="!dashboard.made.friend_2.imageLoaded" name="circles"></ion-spinner>
+          <div class="image-container" *ngIf="dashboard.made.friend_2.image_loaded" [style.background-image]="dashboard.made.friend_2.image_profile"></div>
+          <ion-spinner *ngIf="!dashboard.made.friend_2.image_loaded" name="circles"></ion-spinner>
         </div>
-        <div>{{dashboard.made.friend_2_first_name}} {{dashboard.made.friend_2_last_name}}</div>
+        <div>{{dashboard.made.friend_2.first_name}} {{dashboard.made.friend_2.last_name}}</div>
       </ion-item>
-
       <ion-item class="reason">
         {{dashboard.made.reason}}
       </ion-item>
     </ion-card-content>
-    <ion-card-content class="center" *ngIf="dashboard.made.is!==undefined && dashboard.made.is!==null && dashboard.made.is==false">
+    <ion-card-content class="center" *ngIf="dashboard.made.is!==undefined && dashboard.made.is!==null && ready==true">
       {{'NOT_INTROS_RECEIVED' | translate}}
     </ion-card-content>
     <ion-item class="footer">
@@ -44,23 +41,23 @@
     </ion-item>
   </ion-card>
 
-  <ion-card>
+  <ion-card (click)="gotoReceivedIntroDetail(dashboard.made)">
     <ion-card-header>
       {{'INTRODUCTIONS_RECEIVED' | translate}}
     </ion-card-header>
     <ion-card-content *ngIf="dashboard.received.is!==undefined && dashboard.received.is!==null && dashboard.received.is==true">
       <ion-item class="full">
         <div class="image">
-          <div class="image-container" *ngIf="dashboard.received.friend.imageLoaded" [style.background-image]="dashboard.received.friend_image_profile" ></div>
-          <ion-spinner *ngIf="!dashboard.received.friend.imageLoaded" name="circles"></ion-spinner>
+          <div class="image-container" *ngIf="dashboard.received.friend.image_loaded" [style.background-image]="dashboard.received.friend.image_profile"></div>
+          <ion-spinner *ngIf="!dashboard.received.friend.image_loaded" name="circles"></ion-spinner>
         </div>
-        <div>{{dashboard.received.friend_first_name}} {{dashboard.received.friend_last_name}}</div>
+        <div>{{dashboard.received.friend.first_name}} {{dashboard.received.friend.last_name}}</div>
       </ion-item>
       <ion-item class="reason received">
         {{dashboard.received.reason}}
       </ion-item>
     </ion-card-content>
-    <ion-card-content class="center" *ngIf="dashboard.received.is!==undefined && dashboard.received.is!==null && dashboard.received.is==false">
+    <ion-card-content class="center" *ngIf="dashboard.received.is!==undefined && dashboard.received.is!==null && dashboard.received.is==false && ready==true">
       {{'NOT_INTROS_RECEIVED' | translate}}
     </ion-card-content>
     <ion-item class="footer">

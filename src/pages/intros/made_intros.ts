@@ -6,22 +6,20 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MessageService } from '../../lib/messages.service';
 import { ConfigService } from '../../lib/config.service';
 import { DetailIntrosPage } from '../intros/detail_intros';
-import { MadeMessagesPage } from '../messages/made_messages';
 
 @Component({
-  selector: 'received-messages',
-  templateUrl: 'received_messages.html'
+  selector: 'made-intros.html',
+  templateUrl: 'made_intros.html'
 })
-export class ReceivedMessagesPage {
+export class MadeIntrosPage {
   page: number = 1;
-  section:string = '';
   listIntros: any = [];
   maxIntros: number = 0;
   quantity: number = 0;
   infiniteScroll: any;
   loadingMessage: string = '';
-  route: string = '';
   ready:boolean = false;
+  route: string = '';
 
   constructor(public app: App, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public sanitizer: DomSanitizer, private httpService: HttpService, private navCtrl:NavController) {
     this.translateService.get('LOADING').subscribe(
@@ -34,10 +32,9 @@ export class ReceivedMessagesPage {
   }
 
   ionViewWillEnter(): void {
-    this.section = 'received';
-    this.ready = false;
     this.page = 1;
     this.listIntros = [];
+    this.ready = false;
     this.getCountIntros();
   }
 
@@ -49,7 +46,7 @@ export class ReceivedMessagesPage {
       url: 'intros',
       urlParams: [
         this.translateService.getDefaultLang(),
-        'received',
+        'made',
         'count'
       ],
       app: this.app,
@@ -61,7 +58,7 @@ export class ReceivedMessagesPage {
   private callBackCountIntros(response): void {
     this.maxIntros = response.data.intros_count;
     if (this.maxIntros != 0) {
-      this.getReceivedIntros();
+      this.getMadeIntros();
     } else {
       this.ready = true;
       this.disableScroll();
@@ -69,12 +66,12 @@ export class ReceivedMessagesPage {
     }
   }
 
-  private getReceivedIntros(): void {
+  private getMadeIntros(): void {
     this.httpService.get({
       url: 'intros',
       urlParams: [
         this.translateService.getDefaultLang(),
-        'received',
+        'made',
         { page: this.page },
         { quantity: this.quantity },
       ],
@@ -92,56 +89,36 @@ export class ReceivedMessagesPage {
     let id_user = response.data.id_user;
     let introsLength = intros.length;
     for (let i = 0; i < introsLength; i++) {
+      if (intros[i]['friend_1_image_profile'] !== undefined && intros[i]['friend_1_image_profile'] !== null && intros[i]['friend_1_image_profile'] !== '') {
+        intros[i]['friend_1_image_loaded'] = false;
+        if (intros[i]['friend_1_image_profile'].indexOf('http') === -1)
+          intros[i]['friend_1_image_profile'] = this.route + intros[i]['friend_1_image_profile'];
 
-      //el que hizo la intro
-      intros[i]['user_image_loaded'] = false;
-      if (intros[i]['user_image_profile'] !== undefined && intros[i]['user_image_profile'] !== null && intros[i]['user_image_profile'] !== '') {
-        if (intros[i]['user_image_profile'].indexOf('http') === -1)
-          intros[i]['user_image_profile'] = this.route + intros[i]['user_image_profile'];
-
-        intros[i]['user_url'] = intros[i]['user_image_profile'];
-        intros[i]['user_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url(' + intros[i]['user_image_profile'] + ')');
+        intros[i]['friend_1_url'] = intros[i]['friend_1_image_profile'];
+        intros[i]['friend_1_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url(' + intros[i]['friend_1_image_profile'] + ')');
       } else {
-        intros[i]['user_image_loaded'] = true;
-        intros[i]['user_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url(' + this.configService.getProfileImage() + ')');
+        intros[i]['friend_1_image_loaded'] = true;
+        intros[i]['friend_1_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url(' + this.configService.getProfileImage() + ')');
       }
-      if (intros[i]['user_image_loaded'] === false)
-        this.loadImage(intros[i], 'user');
+      if (intros[i]['friend_1_image_loaded'] === false)
+        this.loadImage(intros[i], 'friend_1');
 
-      intros[i]['user_name'] = intros[i]['user_user_name'];
 
-      //buscamos a la otra pérsona que invitaron a la intro, que no sea el usuario de la app
-      intros[i]['other_image_loaded'] = false;
-      if(id_user!=intros[i]['id_user_1']){
-        if (intros[i]['user_1_image_profile'] !== undefined && intros[i]['user_1_image_profile'] !== null && intros[i]['user_1_image_profile'] !== '') {
-          if (intros[i]['user_1_image_profile'].indexOf('http') === -1)
-            intros[i]['other_image_profile'] = this.route + intros[i]['user_1_image_profile'];
-          intros[i]['other_url'] = intros[i]['other_image_profile'];
-          intros[i]['other_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url(' + intros[i]['other_image_profile'] + ')');
-        } else {
-          intros[i]['other_image_loaded'] = true;
-          intros[i]['other_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url(' + this.configService.getProfileImage() + ')');
-        }
+      if (intros[i]['friend_2_image_profile'] !== undefined && intros[i]['friend_2_image_profile'] !== null && intros[i]['friend_2_image_profile'] !== '') {
+        intros[i]['friend_2_image_loaded'] = false;
+        if (intros[i]['friend_2_image_profile'].indexOf('http') === -1)
+          intros[i]['friend_2_image_profile'] = this.route + intros[i]['friend_2_image_profile'];
 
-        intros[i]['other_user_name'] = intros[i]['user_1_user_name'];
-      }else{
-        if (intros[i]['user_2_image_profile'] !== undefined && intros[i]['user_2_image_profile'] !== null && intros[i]['user_2_image_profile'] !== '') {
-          if (intros[i]['user_2_image_profile'].indexOf('http') === -1)
-            intros[i]['other_image_profile'] = this.route + intros[i]['user_2_image_profile'];
-
-          intros[i]['other_url'] = intros[i]['other_image_profile'];
-          intros[i]['other_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url(' + intros[i]['other_image_profile'] + ')');
-        } else {
-          intros[i]['other_image_loaded'] = true;
-          intros[i]['other_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url(' + this.configService.getProfileImage() + ')');
-        }
-        intros[i]['other_user_name'] = intros[i]['user_2_user_name'];
+        intros[i]['friend_2_url'] = intros[i]['friend_2_image_profile'];
+        intros[i]['friend_2_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url(' + intros[i]['friend_2_image_profile'] + ')');
+      } else {
+        intros[i]['friend_2_image_loaded'] = true;
+        intros[i]['friend_2_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url(' + this.configService.getProfileImage() + ')');
       }
-      if (intros[i]['other_image_loaded'] === false)
-        this.loadImage(intros[i], 'other');
-
+      intros[i]['friend_2_style']='crop';
       intros[i]['created_at']=intros[i]['created_at'].replace(' ',' / ');
-      intros[i]['style']='crop';
+      if (intros[i]['friend_2_image_loaded'] === false)
+        this.loadImage(intros[i], 'friend_2');
 
       this.listIntros.push(intros[i]);
     }
@@ -169,7 +146,7 @@ export class ReceivedMessagesPage {
   public moreMessages(infiniteScroll): void {
     this.infiniteScroll = infiniteScroll;
     if (((this.page - 1) * this.quantity) < this.maxIntros) {
-      this.getReceivedIntros();
+      this.getMadeIntros();
     } else {
       this.disableScroll();
     }
@@ -181,15 +158,16 @@ export class ReceivedMessagesPage {
   }
 
   private disableScroll(): void {
+    console.log("disabled");
     if (this.infiniteScroll !== undefined)
       this.infiniteScroll.enable(false);
   }
 
   public gotoDetail(intro:any): void {
-    this.app.getRootNav().push(DetailIntrosPage, { introId: intro.id });
+    this.navCtrl.push(DetailIntrosPage, { introId: intro.id});
   }
 
-  public goMadeMessages(): void {
-    this.navCtrl.pop(MadeMessagesPage);
+  public backAction(): void {
+    this.navCtrl.pop();
   }
 }

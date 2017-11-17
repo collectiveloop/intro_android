@@ -113,5 +113,10 @@
   "MADE_INTRODUCTION_BETWEEN":"You made the introduction between",
   "DONE":"Done",
   "MADE": "Made",
-  "RECEIVED": "Received"
+  "RECEIVED": "Received",
+  "NOT_MESSAGES_MADE": "The is not messages made",
+  "NOT_MESSAGES_RECEIVED": "The is not messages received",
+  "DETAIL_INTROS": "Detail intro",
+  "MADE_INTROS": "Made intros",
+  "RECEIVED_INTROS": "Received intros"
 }

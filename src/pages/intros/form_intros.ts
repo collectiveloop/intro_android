@@ -17,7 +17,7 @@ export class FormIntrosPage {
   introsForm: FormGroup;
   intros:any;
   optionClicked:boolean = false;
-  gainings:any;
+  gainings:any =[];
   submitted: boolean;
   errorForm: string;
   gainSelected:boolean = false;
@@ -31,6 +31,9 @@ export class FormIntrosPage {
     this.translateService.get('LOADING').subscribe(
       value=>{
         this.loadingMessage = value;
+        this.messages.showMessage({
+           content:this.loadingMessage
+        });
         this.getDataUser();
         this.initForm();
       }
@@ -38,9 +41,6 @@ export class FormIntrosPage {
   }
 
   public getDataUser():void{
-    this.messages.showMessage({
-       content:this.loadingMessage
-    });
     let params = {
         url:'user',
         urlParams:[
@@ -57,7 +57,8 @@ export class FormIntrosPage {
   }
 
   private callBackUser(response:any):void{
-    this.messages.closeMessage();
+    if(this.gainings.length>0)
+      this.messages.closeMessage();
     let user = response.data.user;
     this.intros['user']= {
       'id_user':user.id,
@@ -70,9 +71,6 @@ export class FormIntrosPage {
   }
 
   public initForm():void{
-    this.messages.showMessage({
-       content:this.loadingMessage
-    });
     let params = {
         url:'gainings',
         urlParams:[
@@ -88,7 +86,8 @@ export class FormIntrosPage {
   }
 
   private callBackGainings(response:any):void{
-    this.messages.closeMessage();
+    if(this.intros['user']!==undefined)
+      this.messages.closeMessage();
     this.gainings = response.data.gainings;
     let length = this.gainings.length;
     for(let i=0;i<length;i++){

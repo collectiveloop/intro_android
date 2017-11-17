@@ -114,5 +114,10 @@
   "MADE_INTRODUCTION_BETWEEN":"Tú Has hecho una introducción entre",
   "DONE":"Hecho",
   "MADE": "Hechos",
-  "RECEIVED": "Recibidos"
+  "RECEIVED": "Recibidos",
+  "NOT_MESSAGES_MADE": "No hay mensajes creados",
+  "NOT_MESSAGES_RECEIVED": "No hay mensajes recibidos",
+  "DETAIL_INTROS": "Detalle de la intro",
+  "MADE_INTROS": "Intros realizados",
+  "RECEIVED_INTROS": "Intros recibidos"
 }

@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons left>
+      <div class="empty-back-button center">
+        <ion-icon item-left name="md-arrow-back" (click)="backAction()"></ion-icon>
+      </div>
+    </ion-buttons>
+    <ion-title class="section">
+      {{'DETAIL_INTROS' | translate}}
+    </ion-title>
+    <ion-buttons end></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <content class="form-style form-intros detail-intros" >
+    <ion-row *ngIf="errorIntro!=null && errorIntro!='' && ready==true">
+      <ion-col col-12 class="center">
+        <span class="error center" [innerHTML]="errorIntro"></span>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="ready==true">
+      <ion-col offset-1 col-11 class="center">
+        <ion-item>
+          <ion-label stacked class="margin">{{'QUESTION_1_INTRO' | translate}} {{intro.friend_1_first_name}} {{intro.friend_1_last_name}}?</ion-label>
+          <ion-input md-input [(ngModel)]="intro.friend_1_info" type="text" disabled></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="ready==true">
+      <ion-col offset-1 col-11 class="center">
+        <ion-item>
+          <ion-label stacked class="margin">{{'QUESTION_2_INTRO' | translate}} {{intro.friend_2_first_name}} {{intro.friend_2_last_name}}?</ion-label>
+          <ion-input md-input [(ngModel)]="intro.friend_2_info" type="text" disabled></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="ready==true">
+      <ion-col offset-1 col-11 class="center">
+        <ion-item>
+          <ion-label stacked class="margin">{{'REASON_INTRO' | translate}}</ion-label>
+          <ion-input md-input [(ngModel)]="intro.reason" type="text" disabled></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col offset-1 col-10 class="center">
+        <ion-item class="checkbox-item">
+          <label class="margin">{{'GAIN_INTRO' | translate}}</label>
+          <ion-row>
+            <ion-col *ngFor="let gain of intro.gaining_intro" col-6 class="center">
+              <ion-item class="checkbox-item">
+                <ion-label>{{gain.option}}</ion-label>
+                <ion-checkbox [(ngModel)]="gain.value" [ngModelOptions]="{standalone:true}" disabled></ion-checkbox>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </content>
+</ion-content>
