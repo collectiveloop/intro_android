@@ -94,6 +94,9 @@
         <variable name="BRANCH_KEY" value="key_live_igERykWTo3tqRjil9POlKlikEAn1GuhY" />
         <variable name="URI_SCHEME" value="introapp" />
     </plugin>
+    <plugin name="com.synconset.imagepicker" spec="~2.1.8">
+        <variable name="PHOTO_LIBRARY_USAGE_DESCRIPTION" value="Image picker for Intro pro" />
+    </plugin>
     <plugin name="cordova-android-support-gradle-release" spec="^1.1.1">
         <variable name="ANDROID_SUPPORT_VERSION" value="25.+" />
     </plugin>
@@ -127,5 +130,6 @@
     <plugin name="cordova.plugins.diagnostic" spec="^3.7.1" />
     <plugin name="de.appplant.cordova.plugin.local-notification" spec="~0.8.5" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
+    <plugin name="onesignal-cordova-plugin" spec="^2.2.2" />
     <plugin name="phonegap-plugin-local-notification" spec="^1.0.1" />
 </widget>

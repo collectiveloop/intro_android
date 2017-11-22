@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons  left>
+      <div class="empty-back-button center">
+        <ion-icon item-left name="md-arrow-back" (click)="backAction()"></ion-icon>
+      </div>
+    </ion-buttons>
+    <ion-title class="section">
+      {{'MESSAGES' | translate}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding class="grace list-ios" #content>
+  <ion-refresher (ionRefresh)="moreMessages($event)" #scroll>
+    <ion-refresher-content refreshingSpinner="bubbles" pullingText="{{'LOADING' | translate}}"></ion-refresher-content>
+  </ion-refresher>
+  <div class="conversation" *ngIf="!noGranted">
+    <div class="conversation-container">
+      <ion-list class="no-margin-top">
+        <div class="center no-border" *ngIf="(noMessages && !requestSent) || noGranted">
+          {{'NOT_MESSAGES' | translate}}
+        </div>
+        <ion-item class="list-format" *ngFor="let message of listMessages">
+          <div class="image {{message.style}} small-image" *ngIf="message!=undefined">
+            <div class="image-container" *ngIf="members[message.id_user].imageLoaded" [style.background-image]="members[message.id_user].imageProfile"></div>
+            <ion-spinner *ngIf="!members[message.id_user].imageLoaded" name="circles"></ion-spinner>
+          </div>
+          <div class="message {{message.style}} {{message.style2}}" *ngIf="message!=undefined">
+            <div class="user-label">{{members[message.id_user].first_name}} {{members[message.id_user].last_name}}</div>
+            <div class="content">
+              {{message.message}}
+            </div>
+            <div class="time-label">{{message.date}}</div>
+          </div>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>
+<ion-footer *ngIf="!noGranted && myUser!=0" class="conversation">
+  <ion-toolbar>
+    <form [formGroup]="roomForm">
+      <div class="message-form">
+        <div class="{{classInput}}">
+          <ion-input md-input formControlName="message" type="text" placeholder="{{'WRITE_MESSAGE' | translate}}" [disabled]="requestSent" (keyup.enter)="sendMessage()" #message></ion-input>
+        </div>
+      </div>
+    </form>
+  </ion-toolbar>
+</ion-footer>

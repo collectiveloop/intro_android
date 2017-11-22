@@ -56,6 +56,13 @@ export class ConfigService {
     return CONFIG.GENERAL.GOOGLE_APIKEY;
   }
 
+  public getOneSignal(): any {
+    if (CONFIG.ONE_SIGNAL === undefined)
+      return '';
+
+    return CONFIG.ONE_SIGNAL;
+  }
+
   public getPlayList(): string {
     if (CONFIG.GENERAL.CURRENT_PLAY_LIST === undefined || typeof CONFIG.GENERAL.CURRENT_PLAY_LIST !== 'string')
       return '';
@@ -85,6 +92,13 @@ export class ConfigService {
       return false;
 
     return CONFIG.GENERAL[element];
+  }
+
+  public getChatInterval(): any {
+    if (CONFIG.GENERAL.CHAT_INTERVAL === undefined || CONFIG.GENERAL.CHAT_INTERVAL === null || isNaN(CONFIG.GENERAL.CHAT_INTERVAL) || CONFIG.GENERAL.CHAT_INTERVAL < 0)
+      return 0;
+
+    return CONFIG.GENERAL.CHAT_INTERVAL;
   }
 
   public getLogo(element: string): any {

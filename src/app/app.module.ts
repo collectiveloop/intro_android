@@ -14,7 +14,7 @@ import { LinkedIn } from '@ionic-native/linkedin';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { DatePicker } from '@ionic-native/date-picker';
 import { Contacts } from '@ionic-native/contacts';
-
+import { OneSignal } from '@ionic-native/onesignal';
 import { IonicStorageModule  } from '@ionic/storage';
 
 import { ConfigService }   from '../lib/config.service';
@@ -24,6 +24,8 @@ import { NavigationService }   from '../lib/navigation.service';
 import { HttpService }    from '../lib/http.service';
 import { SessionService }   from '../lib/session.service';
 import { ContactService } from '../lib/contacts.service';
+import { TimeService } from '../lib/time.service';
+import { PushNotificationService } from '../lib/pushNotification.service';
 import { TabService } from '../pages/tabs/tabs.service';
 
 import { MyApp } from './app.component';
@@ -41,11 +43,9 @@ import { ListContactsPage } from '../pages/contacts/list_contacts';
 import { PickContactsPage } from '../pages/contacts/pick_contacts';
 import { ProfileContactsPage } from '../pages/contacts/profile_contact';
 import { AddContactsPage } from '../pages/contacts/add_contacts';
-
 import { SearchContactsPage } from '../pages/contacts/search_contacts';
 import { ListContactsPendingPage } from '../pages/contacts/list_contacts_pending';
-import { MadeMessagesPage } from '../pages/messages/made_messages';
-import { ReceivedMessagesPage } from '../pages/messages/received_messages';
+
 import { ListIntrosPage } from '../pages/intros/list_intros';
 import { AddIntrosPage } from '../pages/intros/add_intros';
 import { FormIntrosPage } from '../pages/intros/form_intros';
@@ -53,6 +53,10 @@ import { FinalIntrosPage } from '../pages/intros/final_intros';
 import { DetailIntrosPage } from '../pages/intros/detail_intros';
 import { MadeIntrosPage } from '../pages/intros/made_intros';
 import { ReceivedIntrosPage } from '../pages/intros/received_intros';
+
+import { MadeMessagesPage } from '../pages/messages/made_messages';
+import { ReceivedMessagesPage } from '../pages/messages/received_messages';
+import { ChatMessagesPage } from '../pages/messages/chat_messages';
 
 @NgModule({
   declarations: [
@@ -69,8 +73,6 @@ import { ReceivedIntrosPage } from '../pages/intros/received_intros';
     ProfileContactsPage,
     AddContactsPage,
     SearchContactsPage,
-    MadeMessagesPage,
-    ReceivedMessagesPage,
     ListIntrosPage,
     AddIntrosPage,
     FormIntrosPage,
@@ -79,7 +81,10 @@ import { ReceivedIntrosPage } from '../pages/intros/received_intros';
     MadeIntrosPage,
     ReceivedIntrosPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    MadeMessagesPage,
+    ReceivedMessagesPage,
+    ChatMessagesPage,
   ],
   imports: [
     HttpModule,
@@ -119,8 +124,6 @@ import { ReceivedIntrosPage } from '../pages/intros/received_intros';
     ProfileContactsPage,
     AddContactsPage,
     SearchContactsPage,
-    MadeMessagesPage,
-    ReceivedMessagesPage,
     ListIntrosPage,
     AddIntrosPage,
     FormIntrosPage,
@@ -129,7 +132,10 @@ import { ReceivedIntrosPage } from '../pages/intros/received_intros';
     MadeIntrosPage,
     ReceivedIntrosPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    MadeMessagesPage,
+    ReceivedMessagesPage,
+    ChatMessagesPage,
   ],
   providers: [
     ConfigService,
@@ -140,6 +146,8 @@ import { ReceivedIntrosPage } from '../pages/intros/received_intros';
     HttpService,
     SessionService,
     ContactService,
+    TimeService,
+    PushNotificationService,
     StatusBar,
     SplashScreen,
     Globalization,
@@ -149,6 +157,7 @@ import { ReceivedIntrosPage } from '../pages/intros/received_intros';
     LocalNotifications,
     DatePicker,
     Contacts,
+    OneSignal,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

@@ -1,15 +1,17 @@
 import { Injectable } from '@angular/core';
+import { App } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { MessageService } from './messages.service';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { LinkedIn } from '@ionic-native/linkedin';
+import { HttpService } from './http.service';
 
 @Injectable()
 export class SessionService {
     ignoreSession:boolean = false;
     destiny:any = {};
-    constructor(private storage: Storage, private facebook: Facebook,public googlePlus: GooglePlus, public linkedin: LinkedIn, public messages: MessageService) {}
+    constructor(private storage: Storage, private facebook: Facebook,public googlePlus: GooglePlus, public linkedin: LinkedIn, public messages: MessageService, private httpService: HttpService, public app: App) {}
     //this.storage.set('name', 'Maddddx');
     //this.storage.remove('name');
     //this.storage.get('name');
@@ -224,6 +226,13 @@ export class SessionService {
 
     public closeSession(): void {
       this.messages.closeMessage();
+      this.httpService.get({
+        url: 'login/logout',
+        urlParams: [],
+        app: this.app,
+        success: ()=>{},
+        context: this,
+      });
       this.storage.remove('token');
       this.storage.remove('mode_facebook');
       this.storage.remove('mode_linkedin');

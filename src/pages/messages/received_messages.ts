@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { App,NavController } from 'ionic-angular';
+import { App, NavController, NavParams } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpService } from '../../lib/http.service';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -7,6 +7,8 @@ import { MessageService } from '../../lib/messages.service';
 import { ConfigService } from '../../lib/config.service';
 import { DetailIntrosPage } from '../intros/detail_intros';
 import { MadeMessagesPage } from '../messages/made_messages';
+import { ChatMessagesPage } from '../messages/chat_messages';
+import { SessionService } from '../../lib/session.service';
 
 @Component({
   selector: 'received-messages',
@@ -14,16 +16,17 @@ import { MadeMessagesPage } from '../messages/made_messages';
 })
 export class ReceivedMessagesPage {
   page: number = 1;
-  section:string = '';
+  section: string = '';
   listIntros: any = [];
   maxIntros: number = 0;
   quantity: number = 0;
   infiniteScroll: any;
   loadingMessage: string = '';
   route: string = '';
-  ready:boolean = false;
+  ready: boolean = false;
 
-  constructor(public app: App, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public sanitizer: DomSanitizer, private httpService: HttpService, private navCtrl:NavController) {
+  constructor(public app: App, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public sanitizer: DomSanitizer, private httpService: HttpService, private navCtrl: NavController, public navParams: NavParams, private sessionService: SessionService) {
+    console.log(this.navParams.get('introId'));
     this.translateService.get('LOADING').subscribe(
       value => {
         this.loadingMessage = value;
@@ -34,6 +37,13 @@ export class ReceivedMessagesPage {
   }
 
   ionViewWillEnter(): void {
+    let destiny = this.sessionService.getDestinySession();
+    this.sessionService.cleanDestinySession();
+    if (destiny.params !== undefined && destiny.params.index !== undefined && destiny.params.index !== null && destiny.params.introId !== undefined && destiny.params.introId !== null) {
+      console.log("redireccionando");
+      this.app.getRootNav().push(ChatMessagesPage, { introId: destiny.params.introId });
+    }
+
     this.section = 'received';
     this.ready = false;
     this.page = 1;
@@ -112,7 +122,7 @@ export class ReceivedMessagesPage {
 
       //buscamos a la otra pérsona que invitaron a la intro, que no sea el usuario de la app
       intros[i]['other_image_loaded'] = false;
-      if(id_user!=intros[i]['id_user_1']){
+      if (id_user != intros[i]['id_user_1']) {
         if (intros[i]['user_1_image_profile'] !== undefined && intros[i]['user_1_image_profile'] !== null && intros[i]['user_1_image_profile'] !== '') {
           if (intros[i]['user_1_image_profile'].indexOf('http') === -1)
             intros[i]['other_image_profile'] = this.route + intros[i]['user_1_image_profile'];
@@ -124,7 +134,7 @@ export class ReceivedMessagesPage {
         }
 
         intros[i]['other_user_name'] = intros[i]['user_1_user_name'];
-      }else{
+      } else {
         if (intros[i]['user_2_image_profile'] !== undefined && intros[i]['user_2_image_profile'] !== null && intros[i]['user_2_image_profile'] !== '') {
           if (intros[i]['user_2_image_profile'].indexOf('http') === -1)
             intros[i]['other_image_profile'] = this.route + intros[i]['user_2_image_profile'];
@@ -140,8 +150,7 @@ export class ReceivedMessagesPage {
       if (intros[i]['other_image_loaded'] === false)
         this.loadImage(intros[i], 'other');
 
-      intros[i]['created_at']=intros[i]['created_at'].replace(' ',' / ');
-      intros[i]['style']='crop';
+      intros[i]['created_at'] = intros[i]['created_at'].replace(' ', ' / ');
 
       this.listIntros.push(intros[i]);
     }
@@ -185,11 +194,17 @@ export class ReceivedMessagesPage {
       this.infiniteScroll.enable(false);
   }
 
-  public gotoDetail(intro:any): void {
+  public goDetail(event: Event, intro: any): void {
+    event.stopPropagation();
     this.app.getRootNav().push(DetailIntrosPage, { introId: intro.id });
   }
 
+  public goMessages(event: Event, intro: any): void {
+    event.stopPropagation();
+    this.app.getRootNav().push(ChatMessagesPage, { introId: intro.id });
+  }
+
   public goMadeMessages(): void {
-    this.navCtrl.pop(MadeMessagesPage);
+    this.navCtrl.push(MadeMessagesPage);
   }
 }

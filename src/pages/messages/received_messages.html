@@ -24,21 +24,28 @@
     <ion-item class="message-center center no-border" *ngIf="maxIntros==0 && ready==true">
       {{'NOT_MESSAGES_RECEIVED' | translate}}
     </ion-item>
-    <ion-item class="list-format" *ngFor="let intro of listIntros">
-      <ion-thumbnail item-start class="image-join">
-        <div class="image">
-          <div class="image-container" *ngIf="intro.user_image_loaded" [style.background-image]="intro.user_image_profile"></div>
-          <ion-spinner *ngIf="!intro.user_image_loaded" name="circles"></ion-spinner>
-        </div>
-        <div class="image {{intro.style}}">
-          <div class="image-container" *ngIf="intro.other_image_loaded" [style.background-image]="intro.other_image_profile"></div>
-          <ion-spinner *ngIf="!intro.other_image_loaded" name="circles"></ion-spinner>
-        </div>
-      </ion-thumbnail>
-      <h3>{{intro.created_at}}</h3>
-      <h2>{{intro.user_name}}</h2>
-      <h2>{{intro.other_user_name}}</h2>
-      <ion-icon name="ios-information-circle-outline" (click)="gotoDetail(intro)"></ion-icon>
+    <ion-item class="list-format" *ngFor="let intro of listIntros" (click)="goMessages($event,intro)">
+        <ion-thumbnail item-start class="image-join">
+          <div class="image">
+            <div class="image-container" *ngIf="intro.user_image_loaded" [style.background-image]="intro.user_image_profile"></div>
+            <ion-spinner *ngIf="!intro.user_image_loaded" name="circles"></ion-spinner>
+          </div>
+        </ion-thumbnail>
+        <ion-row>
+        <ion-col col-7>
+          <h3 class="no-margin-left">{{intro.created_at}}</h3>
+          <h2 class="no-margin-left">{{intro.user_name}} {{'INTROS_WITH_CONTACT' | translate}} {{intro.other_user_name}}</h2>
+        </ion-col>
+        <ion-col col-2>
+          <div class="image small-image">
+            <div class="image-container" *ngIf="intro.other_image_loaded" [style.background-image]="intro.other_image_profile"></div>
+            <ion-spinner *ngIf="!intro.other_image_loaded" name="circles"></ion-spinner>
+          </div>
+        </ion-col>
+        <ion-col col-3>
+          <ion-icon name="ios-information-circle-outline" (click)="goDetail($event,intro)"></ion-icon>
+        </ion-col>
+      </ion-row>
     </ion-item>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="moreMessages($event)">

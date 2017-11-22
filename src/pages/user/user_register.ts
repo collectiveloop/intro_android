@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, App } from 'ionic-angular';
+import { NavController, App, Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ConfigService }   from '../../lib/config.service';
 import { MessageService } from '../../lib/messages.service';
@@ -7,6 +7,7 @@ import { SessionService }   from '../../lib/session.service';
 import { HttpService }   from '../../lib/http.service';
 import { TranslateService } from '@ngx-translate/core';
 import { TabsPage } from '../tabs/tabs';
+import { OneSignal } from '@ionic-native/onesignal';
 
 @Component({
   selector: 'page-user-register',
@@ -27,9 +28,16 @@ export class RegisterUserPage {
   loader: any;
   loadingMessage:string = '';
   actionSheet: any;
+  pushId:string='';
 
-  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, private sessionService: SessionService, public messages: MessageService) {
+  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, private sessionService: SessionService, public messages: MessageService, public platform:Platform, public oneSignal: OneSignal) {
     this.buildValidations();
+    if (this.platform.is('cordova')) {
+      this.oneSignal.getIds().then((ids)=>{
+        console.log(ids);
+        this.pushId = ids.userId;
+      });
+    }
     this.translateService.get('LOADING').subscribe(
       value=>{
         this.loadingMessage = value;
@@ -75,7 +83,8 @@ export class RegisterUserPage {
       last_name : this.registerForm.value.last_name,
       email : this.registerForm.value.email.toLowerCase(),
       user_name : this.registerForm.value.user_name.toLowerCase(),
-      password : this.registerForm.value.password
+      password : this.registerForm.value.password,
+      push_id: this.pushId
     };
 
     this.messages.showMessage({

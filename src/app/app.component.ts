@@ -16,28 +16,29 @@ import { ChangePasswordPage } from '../pages/login/change_password';
 import { ProfileUserPage } from '../pages/user/user_profile';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ContactService } from '../lib/contacts.service';
+import { TimeService } from '../lib/time.service';
+import { PushNotificationService } from '../lib/pushNotification.service';
 
 @Component({
   templateUrl: 'app.html',
   providers: [SettingsProvider]
 })
 
-
-
 export class MyApp {
   @ViewChild('content') nav: NavController;
   rootPage: any;
   selectedTheme: String;
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private translateService: TranslateService, private globalization: Globalization, public configService: ConfigService, private sessionService: SessionService, private app: App, public menuCtrl: MenuController, private settings: SettingsProvider, public contacts: ContactService, private httpService:HttpService) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private translateService: TranslateService, private globalization: Globalization, public configService: ConfigService, public sessionService: SessionService, private app: App, public menuCtrl: MenuController, private settings: SettingsProvider, public contacts: ContactService, private httpService: HttpService, public timeService: TimeService, public pushNotificationService: PushNotificationService) {
     this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
     this.platform.ready().then(() => {
-        this.httpService.setLogin(LoginPage);
+      this.httpService.setLogin(LoginPage);
       //Language
       if (this.platform.is('cordova')) {
         this.globalization.getPreferredLanguage().then(result => {
           let language = result.value.split('-')[0];//evitamos cosas como -US
           this.translateService.setDefaultLang(language);
           this.contacts.getContacts();
+          this.pushNotifications();
           this.runDevice();
         });
       } else {
@@ -53,7 +54,21 @@ export class MyApp {
   }
 
   public profileUser(): void {
-    console.log("setting");
+    this.menuCtrl.close();
+    this.app.getRootNav().push(ProfileUserPage);
+  }
+
+  public contactUs(): void {
+    this.menuCtrl.close();
+    this.app.getRootNav().push(ProfileUserPage);
+  }
+
+  public termCondition(): void {
+    this.menuCtrl.close();
+    this.app.getRootNav().push(ProfileUserPage);
+  }
+
+  public politicPrivacy(): void {
     this.menuCtrl.close();
     this.app.getRootNav().push(ProfileUserPage);
   }
@@ -67,58 +82,56 @@ export class MyApp {
   public runDevice(): void {
     // Okay, so the platform is ready and our plugins are available.
     // Here you can do any higher level native things you might need.
-    if (this.platform.is('ios')){
+    if (this.platform.is('ios')) {
       this.settings.setActiveTheme('ios-theme');
       this.statusBar.styleDefault();
-    } else{
+    } else {
       this.settings.setActiveTheme('android-theme');
       this.statusBar.styleBlackOpaque();
     }
     this.splashScreen.hide();
     this.branchInit();
     this.loadPage(false);
-     // Branch initialization
-     this.platform.resume.subscribe(() => {
-
-         this.branchInit();
-         this.loadPage(true);
-
-     });
+    // Branch initialization
+    this.platform.resume.subscribe(() => {
+      this.branchInit();
+      this.loadPage(true);
+    });
   }
 
   // Branch initialization
-  public branchInit():void {
+  public branchInit(): void {
     // only on devices
     if (!this.platform.is('cordova')) {
       return;
     }
     const Branch = window['Branch'];
     Branch.initSession(data => {
-      let link:string ='';
-      if(data['+clicked_branch_link']!==undefined && data['+clicked_branch_link']!==null && data['+clicked_branch_link']!==false){
+      let link: string = '';
+      if (data['+clicked_branch_link'] !== undefined && data['+clicked_branch_link'] !== null && data['+clicked_branch_link'] !== false) {
         link = data['+clicked_branch_link'];
-      }else{
-        if(data['+non_branch_link']!==undefined && data['+non_branch_link']!==null && data['+non_branch_link']!==false)
+      } else {
+        if (data['+non_branch_link'] !== undefined && data['+non_branch_link'] !== null && data['+non_branch_link'] !== false)
           link = data['+non_branch_link'];
       }
       console.log(link);
-      if (link!=='') {
-        if(link.indexOf('intros')!==-1 || link.indexOf('intros-link')!==-1){
-          this.sessionService.setDestinySession(TabsPage,{});
-        }else{
-          if(link.indexOf('invitation-contact')!==-1 || link.indexOf('invitations-link')!==-1){
-            this.sessionService.setDestinySession(TabsPage,{section:ListContactsPendingPage,index:1});//el index es para el tab
-          }else{
+      if (link !== '') {
+        if (link.indexOf('intros') !== -1 || link.indexOf('intros-link') !== -1) {
+          this.sessionService.setDestinySession(TabsPage, {});
+        } else {
+          if (link.indexOf('invitation-contact') !== -1 || link.indexOf('invitations-link') !== -1) {
+            this.sessionService.setDestinySession(TabsPage, { section: ListContactsPendingPage, index: 1 });//el index es para el tab
+          } else {
             let verify = '/remember-link/';
-            let token:number;
+            let token: number;
             token = link.indexOf(verify);
-            if(token===-1){
+            if (token === -1) {
               verify = '/forgot-password/';
               token = link.indexOf(verify);
             }
 
-            if(token!==-1){
-              this.sessionService.setDestinySession(ResetPasswordPage,{token:link.substring(token+verify.length,link.length)});
+            if (token !== -1) {
+              this.sessionService.setDestinySession(ResetPasswordPage, { token: link.substring(token + verify.length, link.length) });
             }
           }
         }
@@ -126,26 +139,70 @@ export class MyApp {
     });
   }
 
-  public loadPage(isResume:boolean):void{
+  public pushNotifications(): void {
+    this.pushNotificationService.init({
+      received: (data) => {
+        // do something when notification is received
+        console.log(data);
+        let params = [];
+        this.timeService.cancelAll();
+        if (data.payload.additionalData.tabsIndex !== undefined) {
+          params['index'] = data.payload.additionalData.tabsIndex;
+          params['section'] = '';
+        }
+
+        if (data.payload.additionalData.introId !== undefined)
+          params['introId'] = data.payload.additionalData.introId;
+
+        this.sessionService.setDestinySession(TabsPage, params);
+        this.sessionService.setIgnoreSession(false);
+      },
+
+      opened: (data) => {
+        this.timeService.cancelAll();
+        // do something when a notification is opened
+        console.log('open', data);
+        let params = [];
+        if (data.notification.payload.additionalData.tabsIndex !== undefined) {
+          params['index'] = data.notification.payload.additionalData.tabsIndex;
+          params['section'] = '';
+        }
+
+        if (data.notification.payload.additionalData.introId !== undefined)
+          params['introId'] = data.notification.payload.additionalData.introId;
+
+        this.sessionService.setDestinySession(TabsPage, params);
+        let view = this.app.getRootNav().getActive();
+        this.sessionService.setIgnoreSession(false);
+        if (view.instance !== undefined && view.instance instanceof TabsPage) {
+          this.app.getRootNav().getActive().select(params['index']);
+        }
+      },
+      'focusDisplaying': 'Notification'
+    });
+  }
+
+  public loadPage(isResume: boolean): void {
     this.sessionService.getSessionStatus().then(function(result) {
       let destiny = this.sessionService.getDestinySession();
       if (result !== false) {
         console.log(destiny);
-        if(destiny.target!==undefined && destiny.target !==ResetPasswordPage)
+        if (destiny.target !== undefined && destiny.target !== ResetPasswordPage)
           this.rootPage = destiny.target;
         else
           this.rootPage = TabsPage;
       } else {
         console.log(destiny);
         //RESET PASSWORD O SECCIONES DONDE NO HAY SESION
-        if(result === false  && destiny.target!==undefined && destiny.target!==null && destiny.target ===ResetPasswordPage ){
+        if (result === false && destiny.target !== undefined && destiny.target !== null && destiny.target === ResetPasswordPage) {
           this.rootPage = destiny.target;
-        }else{
+        } else {
           this.rootPage = LoginPage;
         }
       }
 
-      if(isResume && this.sessionService.getIgnoreSession()===false){
+      console.log("este es la rootpage", isResume, this.rootPage);
+      if (isResume && this.sessionService.getIgnoreSession() === false) {
         this.sessionService.setIgnoreSession(true);
         this.nav.setRoot(this.rootPage);
       }

@@ -30,6 +30,7 @@ export class AddIntrosPage implements OnInit {
     this.intros['friend_1']= {
       'id_user':'',
       'email':'',
+      'push_id':'',
       'first_name':'',
       'last_name':'',
       'image_loaded' : true,
@@ -39,6 +40,7 @@ export class AddIntrosPage implements OnInit {
     this.intros['friend_2']= {
       'id_user':'',
       'email':'',
+      'push_id':'',
       'first_name':'',
       'last_name':'',
       'image_loaded' : true,

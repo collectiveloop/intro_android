@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, App } from 'ionic-angular';
+import { NavController, App, Platform } from 'ionic-angular';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Facebook } from '@ionic-native/facebook';
 import { GooglePlus } from '@ionic-native/google-plus';
@@ -13,6 +13,7 @@ import { ProfileUserPage } from '../user/user_profile';
 import { RegisterUserPage } from '../user/user_register';
 import { ForgotPasswordPage } from '../login/forgot_password';
 import { TranslateService } from '@ngx-translate/core';
+import { OneSignal } from '@ionic-native/onesignal';
 
 @Component({
   selector: 'page-login',
@@ -31,8 +32,9 @@ export class LoginPage {
   facebookLogo: string;
   loader: any;
   loadingMessage: string = '';
+  pushId:string='';
 
-  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public facebook: Facebook, private sessionService: SessionService, public messages: MessageService, public googlePlus: GooglePlus, public linkedin: LinkedIn) {
+  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public facebook: Facebook, private sessionService: SessionService, public messages: MessageService, public googlePlus: GooglePlus, public linkedin: LinkedIn, public platform:Platform,  public oneSignal: OneSignal) {
     this.buildValidations();
     this.submitted = false;
     this.errorLogin ='';
@@ -47,7 +49,12 @@ export class LoginPage {
   }
 
   public ionViewWillEnter():void{
-
+    if (this.platform.is('cordova')) {
+      this.oneSignal.getIds().then((ids)=>{
+        console.log(ids);
+        this.pushId = ids.userId;
+      });
+    }
   }
 
   private buildValidations() {
@@ -66,7 +73,8 @@ export class LoginPage {
     this.submitted = true;
     let data = {
       email: this.loginForm.value.user.toLowerCase(),
-      password: this.loginForm.value.password
+      password: this.loginForm.value.password,
+      push_id: this.pushId
     };
     this.messages.showMessage({
       content: this.loadingMessage
@@ -152,7 +160,8 @@ export class LoginPage {
           first_name: data.first_name,
           last_name: data.last_name,
           email: data.email,
-          platform: 'facebook'
+          platform: 'facebook',
+          push_id: this.pushId
         };
 
         if(data.id!==undefined)
@@ -244,7 +253,8 @@ export class LoginPage {
           first_name: data.firstName,
           last_name: data.lastName,
           email: data.emailAddress,
-          platform: 'linkedin'
+          platform: 'linkedin',
+          push_id: this.pushId
         };
         if (data.positions !== undefined && data.positions.values !== undefined && data.positions.values.length > 0) {
           if (data.positions.values[0].company !== undefined && data.positions.values[0].company.name !== undefined)
@@ -324,7 +334,8 @@ export class LoginPage {
           first_name: first_name,
           last_name: last_name,
           email: result.email,
-          platform: 'google_plus'
+          platform: 'google_plus',
+          push_id: this.pushId
         };
 
         //imagen
@@ -382,7 +393,7 @@ export class LoginPage {
 
   public navegateLogin(response:any):void{
     if(response.data.created!=undefined && response.data.created!==null && response.data.created!=='' && (response.data.created===true || response.data.created==='true') )
-      this.navCtrl.push(ProfileUserPage);
+      this.navCtrl.push(ProfileUserPage,{'from_signup':true});
     else
       this.navCtrl.push(TabsPage);
   }

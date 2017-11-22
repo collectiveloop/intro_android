@@ -21,7 +21,7 @@
         <ion-col offset-1 col-11 class="center">
           <ion-item>
             <ion-label stacked class="margin">{{'QUESTION_1_INTRO' | translate}} {{intros.friend_1.first_name}} {{intros.friend_1.last_name}}?</ion-label>
-            <ion-input md-input formControlName="question_friend_1" type="text" placeholder="{{'WRITE_YOUR_COMMENTS' | translate}}" (keyup.enter)="handleLogin('questionFriend2')" #questionFriend1></ion-input>
+            <ion-input md-input formControlName="question_friend_1" type="text" placeholder="{{'WRITE_YOUR_COMMENTS' | translate}}" (keyup.enter)="handleForm('questionFriend2')" #questionFriend1></ion-input>
           </ion-item>
           <span class="error" *ngIf="!introsForm.controls.question_friend_1.valid  && (introsForm.controls.question_friend_1.dirty || submitted)">
             {{'INVALID_QUESTION_INTRO' | translate}}
@@ -32,7 +32,7 @@
         <ion-col offset-1 col-11 class="center">
           <ion-item>
             <ion-label stacked class="margin">{{'QUESTION_2_INTRO' | translate}} {{intros.friend_2.first_name}} {{intros.friend_2.last_name}}?</ion-label>
-            <ion-input md-input formControlName="question_friend_2" type="text" placeholder="{{'WRITE_YOUR_COMMENTS' | translate}}" (keyup.enter)="handleLogin('reason')" #questionFriend2></ion-input>
+            <ion-input md-input formControlName="question_friend_2" type="text" placeholder="{{'WRITE_YOUR_COMMENTS' | translate}}" (keyup.enter)="handleForm('reason')" #questionFriend2></ion-input>
           </ion-item>
           <span class="error" *ngIf="!introsForm.controls.question_friend_2.valid  && (introsForm.controls.question_friend_2.dirty || submitted)">
             {{'INVALID_QUESTION_INTRO' | translate}}

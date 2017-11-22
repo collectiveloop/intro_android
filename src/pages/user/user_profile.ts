@@ -13,6 +13,7 @@ import { HttpService } from '../../lib/http.service';
 import { TranslateService } from '@ngx-translate/core';
 
 import { TabsPage } from '../tabs/tabs';
+import { OneSignal } from '@ionic-native/onesignal';
 
 @Component({
   selector: 'page-user-profile',
@@ -61,12 +62,19 @@ export class ProfileUserPage {
     targetHeight: 350
   };
   formInitialState:string = '';
+  pushId:string='';
 
-  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public navParams: NavParams, private platform: Platform, public messages: MessageService, private camera: Camera, public actionSheetCtrl: ActionSheetController, private imagePicker: ImagePicker, private file: File, public sanitizer: DomSanitizer) {
-    this.params = { 'show_signup': this.navParams.get('show_signup'), 'user_id': this.navParams.get('user_id') };
+  constructor(public navCtrl: NavController, public app: App, private formBuilder: FormBuilder, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public navParams: NavParams, private platform: Platform, public messages: MessageService, private camera: Camera, public actionSheetCtrl: ActionSheetController, private imagePicker: ImagePicker, private file: File, public sanitizer: DomSanitizer, public oneSignal: OneSignal) {
+    this.params = { 'from_signup': this.navParams.get('from_signup') };
     this.ready = false;
     this.buildValidations();
     this.imageDefault = this.configService.getProfileSize();
+    if (this.platform.is('cordova')) {
+      this.oneSignal.getIds().then((ids)=>{
+        console.log(ids);
+        this.pushId = ids.userId;
+      });
+    }
     //SI NO HAY VALORS POR DEFECTO PONEMOS ALGO
     if(this.imageDefault===false){
        this.imageDefault.WIDTH = 100;
@@ -348,7 +356,8 @@ export class ProfileUserPage {
       first_name: this.updateProfile.value.first_name,
       last_name: this.updateProfile.value.last_name,
       user_name: this.updateProfile.value.user_name.toLowerCase(),
-      email: this.updateProfile.value.email.toLowerCase()
+      email: this.updateProfile.value.email.toLowerCase(),
+      push_id: this.pushId
     };
 
     if(this.updateProfile.value.job_title!==null && this.updateProfile.value.job_title!=='')
@@ -437,8 +446,11 @@ export class ProfileUserPage {
   }
 
   public backHome(): void {
-    //this.updateProfile.reset();
-    this.navCtrl.pop(TabsPage);
+    this.updateProfile.reset();
+    if(this.navParams.get('from_signup')!==undefined && this.navParams.get('from_signup')!==null)
+      this.navCtrl.push(TabsPage);
+    else
+      this.navCtrl.pop();
   }
 
   private callBackError(response: any): void {

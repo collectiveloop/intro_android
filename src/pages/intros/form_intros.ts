@@ -11,8 +11,8 @@ import { FinalIntrosPage } from './final_intros';
   templateUrl: 'form_intros.html'
 })
 export class FormIntrosPage {
-  @ViewChild('question_friend_1') questionFriend1;
-  @ViewChild('question_friend_2') questionFriend2;
+  @ViewChild('questionFriend1') questionFriend1;
+  @ViewChild('questionFriend2') questionFriend2;
   @ViewChild('reason') reason;
   introsForm: FormGroup;
   intros:any;
@@ -63,6 +63,7 @@ export class FormIntrosPage {
     this.intros['user']= {
       'id_user':user.id,
       'email':user.email,
+      'push_id':user.push_id,
       'first_name':user.first_name,
       'last_name':user.last_name,
       'image_loaded' :false,

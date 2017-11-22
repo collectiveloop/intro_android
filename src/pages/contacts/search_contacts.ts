@@ -317,13 +317,11 @@ export class SearchContactsPage implements OnInit {
   }
 
   private disableScroll(): void {
-    console.log("disabled");
     if (this.infiniteScroll !== undefined)
       this.infiniteScroll.enable(false);
   }
 
   private enableScroll(): void {
-    console.log("disabled");
     if (this.infiniteScroll !== undefined)
       this.infiniteScroll.enable(true);
   }

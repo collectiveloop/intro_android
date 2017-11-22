@@ -7,6 +7,7 @@ import { MessageService } from '../../lib/messages.service';
 import { ConfigService } from '../../lib/config.service';
 import { DetailIntrosPage } from '../intros/detail_intros';
 import { ReceivedMessagesPage } from '../messages/received_messages';
+import { ChatMessagesPage } from '../messages/chat_messages';
 
 @Component({
   selector: 'made-messages',
@@ -166,12 +167,17 @@ export class MadeMessagesPage {
       this.infiniteScroll.enable(false);
   }
 
-  public gotoDetail(intro:any): void {
+  public gotoDetail(event:Event, intro:any): void {
+    event.stopPropagation();
     this.app.getRootNav().push(DetailIntrosPage, { introId: intro.id });
   }
 
-  public goReceivedMessages(): void {
-    this.navCtrl.push(ReceivedMessagesPage);
+  public goMessages(event:Event, intro:any): void {
+    event.stopPropagation();
+    this.app.getRootNav().push(ChatMessagesPage, { introId: intro.id });
   }
 
+  public goReceivedMessages(): void {
+    this.navCtrl.pop(ReceivedMessagesPage);
+  }
 }

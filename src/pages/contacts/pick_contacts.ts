@@ -139,6 +139,7 @@ export class PickContactsPage implements OnInit {
       'id_user':contact.id_user,
       'id_user_friend':contact.id_user_friend,
       'email':contact.email,
+      'push_id':contact.push_id,
       'first_name':contact.first_name,
       'last_name':contact.last_name,
       'image_loaded' : true,

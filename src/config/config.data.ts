@@ -1,7 +1,7 @@
 export const CONFIG = {
     ROUTES:{
-      DOMAIN_API:'http://10.0.0.3/intro_app/api/public',
-      FOLDER_IMAGES:'http://10.0.0.3/intro_app/api/public/images',
+      DOMAIN_API:'http://192.168.1.126/intro_app/api/public',
+      FOLDER_IMAGES:'http://192.168.1.126/intro_app/api/public/images',
       //DOMAIN_API:'http://www.intro.exchange/api/public/',
       //FOLDER_IMAGES:'http://www.intro.exchange/api/public/images'
     },
@@ -15,9 +15,14 @@ export const CONFIG = {
       SMALL:'assets/logos/intro_small.png',
       FACEBOOK_BUTTON:'assets/logos/facebook_button.png',
     },
+    ONE_SIGNAL:{
+      APP_ID:'7264059d-28b2-4ce8-8c35-a6b2a90c5a92',
+      GOOGLE_PROJECT_NUMBER:'1004760983227'
+    },
     ICONS:{},
     GENERAL:{
       QUANTITY:5,
+      CHAT_INTERVAL:10000,
       LANGUAGE:'en',
       FACEBOOK_ID:'1961950780725321',
       GOOGLE_APIKEY:'AIzaSyBz_QsRxbAr9SOf0djzPQSaK7HAfHs9o0I',
@@ -25,7 +30,8 @@ export const CONFIG = {
       CHANNEL: 'UCsfWVdGe5Gggv9U2YqXo5Dw',
       MAX_LETTERS:{
         titles:45,
-        descriptions:50
+        descriptions:50,
+        push_message:150
       },
     }
 }

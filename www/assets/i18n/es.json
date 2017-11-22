@@ -119,5 +119,15 @@
   "NOT_MESSAGES_RECEIVED": "No hay mensajes recibidos",
   "DETAIL_INTROS": "Detalle de la intro",
   "MADE_INTROS": "Intros realizados",
-  "RECEIVED_INTROS": "Intros recibidos"
+  "RECEIVED_INTROS": "Intros recibidos",
+  "INTROS_WITH_CONTACT": "te introdujo a",
+  "NOT_MESSAGES_SHOW": "No hay mensajes para mostrar",
+  "NOT_MESSAGES": "No hay más mensajes",
+  "WRITE_MESSAGE": "Escribe un mensaje",
+  "PUSH_INTRO_TITLE": " Intro Pro: Introducción recibida.",
+  "PUSH_INTRO_CONTENT": " Has recibido una nueva introducción.",
+  "PUSH_MESSAGE_TITLE": "Intro Pro: Mensaje de ",
+  "TERM_CONDITION": "TérmInos and condiciones",
+  "PRIVACY_POLICY": "Políticas de privacidad",
+  "CONTACT_US": "Contáctanos"
 }
