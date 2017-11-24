@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons left>
+      <ion-navbar></ion-navbar>
+    </ion-buttons>
+    <ion-title class="section">
+      {{'CONTACT_US' | translate}}
+    </ion-title>
+    <ion-buttons end></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <content class="form-style contact-us">
+    <form [formGroup]="contactUsForm">
+      <ion-row>
+        <ion-col col-12 class="center">
+          <span class="error center" [innerHTML]="errorMessage"></span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-1 col-10 class="center">
+          <span class='black'>{{'CONTACT_US_LABEL' | translate}}</span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col offset-1 col-11 class="center">
+          <ion-item class="no-border">
+            <ion-icon item-left name="ios-mail"></ion-icon>
+            <ion-textarea class="text-area" formControlName="message" placeholder="{{'WRITE_MESSAGE' | translate}}"></ion-textarea>
+          </ion-item>
+          <span class="error" *ngIf="!contactUsForm.controls.message.valid  && contactUsForm.controls.message.dirty && firstSubmitted">
+            {{'INVALID_MESSAGE' | translate}}
+          </span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12 class="center">
+          <button type="button" outline  ion-button class="button-form shadow" (click)="sendRequest()" [disabled]="!contactUsForm.valid || submitted">{{'SEND' | translate}}</button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </content>
+</ion-content>

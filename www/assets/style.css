@@ -824,6 +824,21 @@ ion-alert .delete .button-inner {
   height: 0;
   border-style: solid;
 }
+/*Contact us*/
+.contact-us .text-area{
+  height: 150px;
+  border: 1px solid #ed987e;
+}
+
+.contact-us .input-has-focus .text-area{
+  border: 1px solid #d53c0e;
+}
+
+.contact-us .input-has-focus ion-icon{
+  color: #d53c0e;
+}
+
+/*Fin d econtact us*/
 
 ion-footer.conversation .toolbar {
   min-height: initial;

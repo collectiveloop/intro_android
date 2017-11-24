@@ -77,7 +77,7 @@ export class HomePage implements OnInit {
           this.getDashBoard();
         }
       } else {
-        this.navCtrl.setRoot(LoginPage);
+        this.app.getRootNav().setRoot(LoginPage);
       }
     }.bind(this));
   }

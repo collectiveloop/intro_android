@@ -35,7 +35,7 @@
       <ion-item (click)="detailContact(contact)" class="contact list-format">
         <ion-thumbnail item-start>
           <div class="image">
-            <div class="image-container" *ngIf="contact.imageLoaded" [style.background-image]="contact.image_profile" ></div>
+            <div class="image-container" *ngIf="contact.imageLoaded" [style.background-image]="contact.image_profile"></div>
             <ion-spinner *ngIf="!contact.imageLoaded" name="circles"></ion-spinner>
           </div>
         </ion-thumbnail>
@@ -45,12 +45,12 @@
 
       </ion-item>
       <ion-item-options side="right">
-          <button class="button-absolute" (click)="confirmDelete($event,contact)" [disabled]="submitted" color="danger" ion-button>
+        <button class="button-absolute" (click)="confirmDelete($event,contact)" [disabled]="submitted" color="danger" ion-button>
               <ion-icon item-left name="ios-trash"></ion-icon>
               {{'DELETE' | translate}}
           </button>
       </ion-item-options>
-  </ion-item-sliding>
+    </ion-item-sliding>
   </ion-list>
 
   <ion-infinite-scroll (ionInfinite)="moreContacts($event)">

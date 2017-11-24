@@ -109,7 +109,7 @@
   "INVALID_GAIN": "You must select an option at teast",
   "TO_ACCEPT": "To Accept",
   "WRITE_YOUR_COMMENTS":"Write your comments",
-  "CONFIRM_DELETE_CONTACT":"Are you sure yo want to delete ",
+  "CONFIRM_DELETE_CONTACT":"Are you sure you want to delete ",
   "MADE_INTRODUCTION_BETWEEN":"You made the introduction between",
   "DONE":"Done",
   "MADE": "Made",
@@ -125,7 +125,14 @@
   "PUSH_INTRO_TITLE": "Intro Pro: Received intro.",
   "PUSH_INTRO_CONTENT": "You have received an Intro.",
   "PUSH_MESSAGE_TITLE": "Intro Pro: message from ",
-  "TERM_CONDITION": "Term and conditions",
-  "PRIVACY_POLICY": "Privacy Policy",
-  "CONTACT_US": "Contact us "
+  "TERMS_CONDITIONS": "Terms and conditions",
+  "PRIVACY_POLICIES": "Privacy Policy",
+  "CONTACT_US": "Contact us ",
+  "LEAVE": "Leave",
+  "CONFIRM_LEAVE_INTRO":"Are you sure you want to leave this intro? You will not be able to undo this change",
+  "LEAVE_ROOM":"The intro was abandoned",
+  "CONTACT_US":"Contact us",
+  "CONTACT_US_LABEL":"Send us your impressions and suggestions",
+  "CONTACT_US_SUCCESS":"Message sent successfully",
+  "INVALID_MESSAGE": "The message is required and should have at least 10 characters"
 }

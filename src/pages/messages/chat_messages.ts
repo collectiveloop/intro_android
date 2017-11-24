@@ -285,8 +285,8 @@ export class ChatMessagesPage {
         message['style'] = 'left';
       else
         message['style'] = 'right';
-
-      message['style2'] = this.members[messages[i]['id_user']]['style'];
+      if(this.members[messages[i]['id_user']]!==undefined)
+        message['style2'] = this.members[messages[i]['id_user']]['style'];
       if (this.typeAdd === 'normal') {
         this.listMessages[index] = message;
         index--;

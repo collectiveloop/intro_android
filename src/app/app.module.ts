@@ -58,6 +58,8 @@ import { MadeMessagesPage } from '../pages/messages/made_messages';
 import { ReceivedMessagesPage } from '../pages/messages/received_messages';
 import { ChatMessagesPage } from '../pages/messages/chat_messages';
 
+import { FormContactUsPage } from '../pages/contact_us/form_contact_us';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -85,6 +87,7 @@ import { ChatMessagesPage } from '../pages/messages/chat_messages';
     MadeMessagesPage,
     ReceivedMessagesPage,
     ChatMessagesPage,
+    FormContactUsPage
   ],
   imports: [
     HttpModule,
@@ -136,6 +139,7 @@ import { ChatMessagesPage } from '../pages/messages/chat_messages';
     MadeMessagesPage,
     ReceivedMessagesPage,
     ChatMessagesPage,
+    FormContactUsPage
   ],
   providers: [
     ConfigService,

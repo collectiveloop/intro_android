@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { App,NavController } from 'ionic-angular';
+import { App, NavController, AlertController } from 'ionic-angular';
 import { TranslateService } from '@ngx-translate/core';
 import { HttpService } from '../../lib/http.service';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -23,8 +23,14 @@ export class MadeMessagesPage {
   loadingMessage: string = '';
   route: string = '';
   ready:boolean = false;
+  leaveQuestion:string ='';
+  leave:string ='';
+  cancel:string ='';
+  leaveConfirmation:string ='';
+  submitted:boolean;
+  currentChoice:any;
 
-  constructor(public app: App, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public sanitizer: DomSanitizer, private httpService: HttpService, private navCtrl:NavController) {
+  constructor(public app: App, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public sanitizer: DomSanitizer, private httpService: HttpService, private navCtrl:NavController, private alertCtrl: AlertController) {
     this.translateService.get('LOADING').subscribe(
       value => {
         this.loadingMessage = value;
@@ -32,9 +38,34 @@ export class MadeMessagesPage {
         this.route = this.configService.getDomainImages() + '/profiles/';
       }
     );
+
+    this.translateService.get('LEAVE').subscribe(
+      value => {
+        this.leave = value;
+      }
+    );
+
+    this.translateService.get('CANCEL').subscribe(
+      value => {
+        this.cancel = value;
+      }
+    );
+
+    this.translateService.get('CONFIRM_LEAVE_INTRO').subscribe(
+      value => {
+        this.leaveQuestion = value;
+      }
+    );
+
+    this.translateService.get('LEAVE_ROOM').subscribe(
+      value => {
+        this.leaveConfirmation = value;
+      }
+    );
   }
 
   ionViewWillEnter(): void {
+    this.submitted = false;
     this.section = 'made';
     this.ready = false;
     this.page = 1;
@@ -156,6 +187,76 @@ export class MadeMessagesPage {
     }
   }
 
+  public leaveRoom(event:Event,intro:any):void {
+    event.stopPropagation();
+    let title = this.leaveQuestion;
+    let alert = this.alertCtrl.create({
+      title: title,
+      buttons: [
+        {
+          text: this.leave.toUpperCase(),
+          cssClass:'delete',
+          handler: () => {
+            this.sendLeaveRoom(intro);
+          }
+        },
+        {
+          text: this.cancel.toUpperCase(),
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  public sendLeaveRoom(intro:any):void{
+    this.currentChoice = intro;
+    this.submitted = true;
+
+    let params = {
+      url: 'messages',
+      urlParams: [
+        this.translateService.getDefaultLang(),
+        'leave',
+        intro.id
+      ],
+      app: this.app,
+      success: this.callBackLeave,
+      error: this.callBackError,
+      context: this,
+    };
+
+    this.messages.showMessage({
+      content: this.loadingMessage
+    });
+    this.httpService.delete(params);
+  }
+
+  private callBackLeave(response: any): void {
+    this.submitted = false;
+    this.messages.closeMessage();
+    if (response !== undefined && response.status !== undefined && response.status === 'error') {
+      this.messages.showMessage({
+        content: response.data.message,
+        spinner:false,
+        duration:3000
+      });
+    }else{
+      let index = this.listIntros.indexOf(this.currentChoice);
+      if(index > -1)
+      this.listIntros.splice(index, 1);
+      this.maxIntros--;
+      this.messages.showMessage({
+        content: this.leaveConfirmation,
+        spinner:false,
+        duration:3000
+      });
+    }
+  }
+
   private refreshScroll(): void {
     if (this.infiniteScroll !== undefined)
       this.infiniteScroll.complete();
@@ -179,5 +280,10 @@ export class MadeMessagesPage {
 
   public goReceivedMessages(): void {
     this.navCtrl.pop(ReceivedMessagesPage);
+  }
+
+  private callBackError(response: any): void {
+    this.submitted = false;
+    this.messages.closeMessage();
   }
 }

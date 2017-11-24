@@ -24,29 +24,37 @@
     <ion-item class="message-center center no-border" *ngIf="maxIntros==0 && ready==true">
       {{'NOT_MESSAGES_RECEIVED' | translate}}
     </ion-item>
-    <ion-item class="list-format" *ngFor="let intro of listIntros" (click)="goMessages($event,intro)">
-        <ion-thumbnail item-start class="image-join">
-          <div class="image">
-            <div class="image-container" *ngIf="intro.user_image_loaded" [style.background-image]="intro.user_image_profile"></div>
-            <ion-spinner *ngIf="!intro.user_image_loaded" name="circles"></ion-spinner>
-          </div>
-        </ion-thumbnail>
-        <ion-row>
-        <ion-col col-7>
-          <h3 class="no-margin-left">{{intro.created_at}}</h3>
-          <h2 class="no-margin-left">{{intro.user_name}} {{'INTROS_WITH_CONTACT' | translate}} {{intro.other_user_name}}</h2>
-        </ion-col>
-        <ion-col col-2>
-          <div class="image small-image">
-            <div class="image-container" *ngIf="intro.other_image_loaded" [style.background-image]="intro.other_image_profile"></div>
-            <ion-spinner *ngIf="!intro.other_image_loaded" name="circles"></ion-spinner>
-          </div>
-        </ion-col>
-        <ion-col col-3>
-          <ion-icon name="ios-information-circle-outline" (click)="goDetail($event,intro)"></ion-icon>
-        </ion-col>
-      </ion-row>
-    </ion-item>
+    <ion-item-sliding #item *ngFor="let intro of listIntros">
+      <ion-item class="contact list-format" (click)="goMessages($event,intro)">
+          <ion-thumbnail item-start class="image-join">
+            <div class="image">
+              <div class="image-container" *ngIf="intro.user_image_loaded" [style.background-image]="intro.user_image_profile"></div>
+              <ion-spinner *ngIf="!intro.user_image_loaded" name="circles"></ion-spinner>
+            </div>
+          </ion-thumbnail>
+          <ion-row>
+          <ion-col col-7>
+            <h3 class="no-margin-left">{{intro.created_at}}</h3>
+            <h2 class="no-margin-left">{{intro.user_name}} {{'INTROS_WITH_CONTACT' | translate}} {{intro.other_user_name}}</h2>
+          </ion-col>
+          <ion-col col-2>
+            <div class="image small-image">
+              <div class="image-container" *ngIf="intro.other_image_loaded" [style.background-image]="intro.other_image_profile"></div>
+              <ion-spinner *ngIf="!intro.other_image_loaded" name="circles"></ion-spinner>
+            </div>
+          </ion-col>
+          <ion-col col-3>
+            <ion-icon name="ios-information-circle-outline" (click)="goDetail($event,intro)"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+      <ion-item-options side="right">
+          <button class="button-absolute" (click)="leaveRoom($event,intro)" [disabled]="submitted" color="danger" ion-button>
+              <ion-icon item-left name="ios-trash"></ion-icon>
+              {{'LEAVE' | translate}}
+          </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="moreMessages($event)">
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="{{'LOADING' | translate}}"></ion-infinite-scroll-content>

@@ -76,8 +76,6 @@ export class ListContactsPage implements OnInit {
         this.deletedQuestion = value;
       }
     );
-
-
   }
 
   private getCountContacts(): void {
@@ -196,7 +194,7 @@ export class ListContactsPage implements OnInit {
       ]
     });
     alert.present();
-}
+  }
 
   public sendInvitation(contact:any):void{
     this.currentChoice = contact;

@@ -127,7 +127,14 @@
   "PUSH_INTRO_TITLE": " Intro Pro: Introducción recibida.",
   "PUSH_INTRO_CONTENT": " Has recibido una nueva introducción.",
   "PUSH_MESSAGE_TITLE": "Intro Pro: Mensaje de ",
-  "TERM_CONDITION": "TérmInos and condiciones",
-  "PRIVACY_POLICY": "Políticas de privacidad",
-  "CONTACT_US": "Contáctanos"
+  "TERMS_CONDITIONS": "Términos and condiciones",
+  "PRIVACY_POLICIES": "Políticas de privacidad",
+  "CONTACT_US": "Contáctanos",
+  "LEAVE": "Abandonar",
+  "CONFIRM_LEAVE_INTRO":"¿Estás seguro que deseas dejar esta intro? No podrás deshacer esta acción",
+  "LEAVE_ROOM":"The intro fue abandonada",
+  "CONTACT_US":"Contáctanos",
+  "CONTACT_US_LABEL":"Envíanos tus impresiones y sugerencias",
+  "CONTACT_US_SUCCESS":"Mensaje enviado con éxito",
+  "INVALID_MESSAGE": "El mensaje es requerido y debería tener la menos 10 caracteres"
 }

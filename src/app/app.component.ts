@@ -7,17 +7,20 @@ import { Globalization } from '@ionic-native/globalization';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../lib/config.service';
 import { SessionService } from '../lib/session.service';
+import { NavigationService } from '../lib/navigation.service';
 import { HttpService } from '../lib/http.service';
 import { SettingsProvider } from '../lib/settings';
+import { ContactService } from '../lib/contacts.service';
+import { TimeService } from '../lib/time.service';
+import { PushNotificationService } from '../lib/pushNotification.service';
 import { LoginPage } from '../pages/login/login';
 import { ResetPasswordPage } from '../pages/login/reset_password';
 import { ListContactsPendingPage } from '../pages/contacts/list_contacts_pending';
 import { ChangePasswordPage } from '../pages/login/change_password';
 import { ProfileUserPage } from '../pages/user/user_profile';
+import { FormContactUsPage } from '../pages/contact_us/form_contact_us';
+import { ChatMessagesPage } from '../pages/messages/chat_messages';
 import { TabsPage } from '../pages/tabs/tabs';
-import { ContactService } from '../lib/contacts.service';
-import { TimeService } from '../lib/time.service';
-import { PushNotificationService } from '../lib/pushNotification.service';
 
 @Component({
   templateUrl: 'app.html',
@@ -28,7 +31,8 @@ export class MyApp {
   @ViewChild('content') nav: NavController;
   rootPage: any;
   selectedTheme: String;
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private translateService: TranslateService, private globalization: Globalization, public configService: ConfigService, public sessionService: SessionService, private app: App, public menuCtrl: MenuController, private settings: SettingsProvider, public contacts: ContactService, private httpService: HttpService, public timeService: TimeService, public pushNotificationService: PushNotificationService) {
+
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private translateService: TranslateService, private globalization: Globalization, public configService: ConfigService, public sessionService: SessionService, private app: App, public menuCtrl: MenuController, private settings: SettingsProvider, public contacts: ContactService, private httpService: HttpService, public timeService: TimeService, public pushNotificationService: PushNotificationService, public navigationService:NavigationService) {
     this.settings.getActiveTheme().subscribe(val => this.selectedTheme = val);
     this.platform.ready().then(() => {
       this.httpService.setLogin(LoginPage);
@@ -60,17 +64,23 @@ export class MyApp {
 
   public contactUs(): void {
     this.menuCtrl.close();
-    this.app.getRootNav().push(ProfileUserPage);
+    this.app.getRootNav().push(FormContactUsPage);
   }
 
-  public termCondition(): void {
+  public termsConditions(): void {
     this.menuCtrl.close();
-    this.app.getRootNav().push(ProfileUserPage);
+    this.navigationService.navigateExternal({
+        'url': this.configService.getDomainAPI()+'/terms-conditions/'+this.translateService.getDefaultLang(),
+        'target':'_blank'
+    });
   }
 
-  public politicPrivacy(): void {
+  public politicsPrivacies(): void {
     this.menuCtrl.close();
-    this.app.getRootNav().push(ProfileUserPage);
+    this.navigationService.navigateExternal({
+        'url': this.configService.getDomainAPI()+'/politics-privacy/'+this.translateService.getDefaultLang(),
+        'target':'_blank'
+    });
   }
 
   public closeSession(): void {
@@ -144,38 +154,43 @@ export class MyApp {
       received: (data) => {
         // do something when notification is received
         console.log(data);
-        let params = [];
-        this.timeService.cancelAll();
-        if (data.payload.additionalData.tabsIndex !== undefined) {
-          params['index'] = data.payload.additionalData.tabsIndex;
-          params['section'] = '';
+        let view = this.app.getRootNav().getActive();
+        if(view ===undefined || view.instance === undefined || !(view.instance instanceof ChatMessagesPage)){
+          let params = [];
+          this.timeService.cancelAll();
+          if (data.payload.additionalData.tabsIndex !== undefined) {
+            params['index'] = data.payload.additionalData.tabsIndex;
+            params['section'] = '';
+          }
+
+          if (data.payload.additionalData.introId !== undefined)
+            params['introId'] = data.payload.additionalData.introId;
+
+          this.sessionService.setDestinySession(TabsPage, params);
+          this.sessionService.setIgnoreSession(false);
         }
-
-        if (data.payload.additionalData.introId !== undefined)
-          params['introId'] = data.payload.additionalData.introId;
-
-        this.sessionService.setDestinySession(TabsPage, params);
-        this.sessionService.setIgnoreSession(false);
       },
 
       opened: (data) => {
         this.timeService.cancelAll();
         // do something when a notification is opened
         console.log('open', data);
-        let params = [];
-        if (data.notification.payload.additionalData.tabsIndex !== undefined) {
-          params['index'] = data.notification.payload.additionalData.tabsIndex;
-          params['section'] = '';
-        }
-
-        if (data.notification.payload.additionalData.introId !== undefined)
-          params['introId'] = data.notification.payload.additionalData.introId;
-
-        this.sessionService.setDestinySession(TabsPage, params);
         let view = this.app.getRootNav().getActive();
-        this.sessionService.setIgnoreSession(false);
-        if (view.instance !== undefined && view.instance instanceof TabsPage) {
-          this.app.getRootNav().getActive().select(params['index']);
+        if(view ===undefined || view.instance === undefined || !(view.instance instanceof ChatMessagesPage)){
+          let params = [];
+          if (data.notification.payload.additionalData.tabsIndex !== undefined) {
+            params['index'] = data.notification.payload.additionalData.tabsIndex;
+            params['section'] = '';
+          }
+
+          if (data.notification.payload.additionalData.introId !== undefined)
+            params['introId'] = data.notification.payload.additionalData.introId;
+
+          this.sessionService.setDestinySession(TabsPage, params);
+          this.sessionService.setIgnoreSession(false);
+          if (view !==undefined && view.instance !== undefined && view.instance instanceof TabsPage) {
+            this.app.getRootNav().getActive().select(params['index']);
+          }
         }
       },
       'focusDisplaying': 'Notification'
