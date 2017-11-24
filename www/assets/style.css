@@ -812,7 +812,7 @@ ion-alert .delete .button-inner {
   word-wrap: break-word;
   white-space: normal;
   z-index: -1;
-  min-width: 110px;
+  /*min-width: 50px;*/
   max-width: 80%;
 }
 
@@ -838,7 +838,12 @@ ion-alert .delete .button-inner {
   color: #d53c0e;
 }
 
-/*Fin d econtact us*/
+/*Fin de contact us*/
+
+.message-info{
+  position: absolute;
+  right: 20px;
+}
 
 ion-footer.conversation .toolbar {
   min-height: initial;

@@ -7,6 +7,7 @@
     </ion-buttons>
     <ion-title class="section">
       {{'MESSAGES' | translate}}
+      <ion-icon class="message-info" item-right name="ios-information-circle-outline" (click)="gotoDetail()"></ion-icon>
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -25,13 +26,15 @@
             <div class="image-container" *ngIf="members[message.id_user].imageLoaded" [style.background-image]="members[message.id_user].imageProfile"></div>
             <ion-spinner *ngIf="!members[message.id_user].imageLoaded" name="circles"></ion-spinner>
           </div>
+          <div *ngIf="ios" class="user-label {{message.style}}">{{members[message.id_user].first_name}} {{members[message.id_user].last_name}}</div>
           <div class="message {{message.style}} {{message.style2}}" *ngIf="message!=undefined">
-            <div class="user-label">{{members[message.id_user].first_name}} {{members[message.id_user].last_name}}</div>
+            <div *ngIf="!ios" class="user-label">{{members[message.id_user].first_name}} {{members[message.id_user].last_name}}</div>
             <div class="content">
               {{message.message}}
             </div>
-            <div class="time-label">{{message.date}}</div>
+            <div *ngIf="!ios" class="time-label">{{message.date}}</div>
           </div>
+          <div *ngIf="ios" class="time-label {{message.style}}">{{message.date}}</div>
         </ion-item>
       </ion-list>
     </div>

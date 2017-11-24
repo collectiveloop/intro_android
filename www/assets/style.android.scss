@@ -413,11 +413,12 @@
     border-width: 0 0 10px 10px;
     border-color: transparent transparent transparent #FFFFFF;
     top: 0;
-    right: 30px;
+    right: 11px;
   }
 
   .message-form .message {
     width: 90%;
+    max-width: inherit;
     margin: 8px auto !important;
   }
 

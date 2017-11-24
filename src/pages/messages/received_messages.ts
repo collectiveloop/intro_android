@@ -152,7 +152,7 @@ export class ReceivedMessagesPage {
 
       //buscamos a la otra pérsona que invitaron a la intro, que no sea el usuario de la app
       intros[i]['other_image_loaded'] = false;
-      if (id_user != intros[i]['id_user_1']) {
+      if (id_user != Number(intros[i]['id_user_1'])) {
         if (intros[i]['user_1_image_profile'] !== undefined && intros[i]['user_1_image_profile'] !== null && intros[i]['user_1_image_profile'] !== '') {
           if (intros[i]['user_1_image_profile'].indexOf('http') === -1)
             intros[i]['other_image_profile'] = this.route + intros[i]['user_1_image_profile'];

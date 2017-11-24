@@ -321,40 +321,52 @@
     padding: 2px;
   }
 
-  .conversation .message .user-label {
+  .conversation .list-format .label {
+    margin: 4px 0px 4px 0px !important;
+  }
+
+  .conversation .user-label {
     text-transform: capitalize;
     width: 100%;
     position: absolute;
-    top: -12px;
+    top: 4px;
     padding: 0;
-    bottom: 0;
     line-height: normal;
-    font-size: 10px;
-    color: rgba(0, 0, 0, .35);
+    font-size: 9px;
+    color: rgba(0, 0, 0, 0.35);
   }
 
-  .conversation .message.left .user-label {
+  .conversation .user-label.left {
+    left: 55px;
     text-align: left;
   }
 
-  .conversation .message.right .user-label {
+  .conversation  .user-label.right {
     text-align: right;
-    right: 6px;
+    right: 55px;
   }
 
-  .conversation .message .time-label {
-    clear: both;
-    float: right;
+  .conversation .time-label {
     position: absolute;
     text-align: right;
     padding: 0;
     margin: 0;
     width: 100%;
-    right: 0;
-    bottom: -12px;
+    bottom: 8px;
     font-size: 10px;
-    color: rgba(0, 0, 0, .35);
+    color: rgba(0, 0, 0, 0.35);
   }
+
+  .conversation .time-label.right {
+    right: 55px;
+    text-align: right;
+  }
+
+  .conversation .time-label.left {
+    left: 55px;
+    text-align: left;
+  }
+
 
   .conversation .message:first-child {
     margin: 16px 0 8px;
@@ -429,14 +441,14 @@
   }
 
   .message-form .input-container {
-    width: 70%;
+    width: 90%;
     padding: 8px 0;
     margin: auto;
   }
 
   .message-form .input-container .text-input {
     background-color: #FFFFFF;
-    padding: 4px;
+    padding: 8px;
     width: 100%;
     margin: 0;
     border-radius: 5px;

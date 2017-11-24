@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../lib/config.service';
 import { TimeService } from '../../lib/time.service';
 import { PushNotificationService } from '../../lib/pushNotification.service';
+import { DetailIntrosPage } from '../intros/detail_intros';
 
 @Component({
   selector: 'chat-messages',
@@ -52,6 +53,7 @@ export class ChatMessagesPage {
       this.classInput = 'input-container';
       this.ios = true;
     } else {
+      this.ios = false;
       this.classInput = 'message';
     }
     this.buildValidations();
@@ -477,6 +479,11 @@ export class ChatMessagesPage {
   private disableScroll(): void {
     if (this.infiniteScroll !== undefined)
       this.infiniteScroll.enable(false);
+  }
+
+  public gotoDetail(): void {
+    console.log("dsafsdf");
+    this.app.getRootNav().push(DetailIntrosPage, { introId: this.introId });
   }
 
   public backAction(): void {

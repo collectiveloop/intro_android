@@ -110,10 +110,13 @@ export class ReceivedIntrosPage {
 
       //buscamos a la otra pérsona que invitaron a la intro, que no sea el usuario de la app
       intros[i]['other_image_loaded'] = false;
-      if(id_user!=intros[i]['id_user_1']){
+      console.log(id_user,Number(intros[i]['id_user_1']),Number(intros[i]['id_user_2']));
+      if(id_user!=Number(intros[i]['id_user_1'])){
         if (intros[i]['user_1_image_profile'] !== undefined && intros[i]['user_1_image_profile'] !== null && intros[i]['user_1_image_profile'] !== '') {
           if (intros[i]['user_1_image_profile'].indexOf('http') === -1)
             intros[i]['other_image_profile'] = this.route + intros[i]['user_1_image_profile'];
+          else
+            intros[i]['other_image_profile'] = intros[i]['user_1_image_profile'];
           intros[i]['other_url'] = intros[i]['other_image_profile'];
           intros[i]['other_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url(' + intros[i]['other_image_profile'] + ')');
         } else {
@@ -126,6 +129,8 @@ export class ReceivedIntrosPage {
         if (intros[i]['user_2_image_profile'] !== undefined && intros[i]['user_2_image_profile'] !== null && intros[i]['user_2_image_profile'] !== '') {
           if (intros[i]['user_2_image_profile'].indexOf('http') === -1)
             intros[i]['other_image_profile'] = this.route + intros[i]['user_2_image_profile'];
+          else
+            intros[i]['other_image_profile'] = intros[i]['user_2_image_profile'];
 
           intros[i]['other_url'] = intros[i]['other_image_profile'];
           intros[i]['other_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url(' + intros[i]['other_image_profile'] + ')');
