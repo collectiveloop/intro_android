@@ -72,7 +72,7 @@ export class HttpService {
   private app: App;
   private login:any;
 
-  constructor(private http: Http, private configService: ConfigService, private storage: Storage, public messages: MessageService) { }
+  constructor(private http: Http, private configService: ConfigService, private storage: Storage, public messages: MessageService){}
 
   public setParams(params: any): void {
     this.success = params.success;
@@ -143,18 +143,20 @@ export class HttpService {
       .map(response => response.json())
       .subscribe(this.successCallBack.bind(
         {
-          success: this.success.bind(this.context)
+          success: this.success.bind(this.context),
+          setToken:this.setToken.bind(this)
         }), this.errorCallBack.bind(
           {
             error: this.error.bind(this.context),
             app: this.app,
             storage: this.storage,
             messages: this.messages,
-            getLogin: this.getLogin.bind(this)
+            getLogin: this.getLogin.bind(this),
+            setToken:this.setToken.bind(this)
           }), this.finallyCallBack.bind(
-            {
-              finally: this.finally
-            })
+          {
+            finally: this.finally
+          })
       );
   }
 
@@ -194,14 +196,16 @@ export class HttpService {
       .map(response => response.json())
       .subscribe(this.successCallBack.bind(
         {
-          success: this.success.bind(this.context)
+          success: this.success.bind(this.context),
+          setToken:this.setToken.bind(this)
         }), this.errorCallBack.bind(
           {
             error: this.error.bind(this.context),
             app: this.app,
             storage: this.storage,
             messages: this.messages,
-            getLogin: this.getLogin.bind(this)
+            getLogin: this.getLogin.bind(this),
+            setToken:this.setToken.bind(this)
           }), this.finallyCallBack.bind(
             {
               finally: this.finally
@@ -246,14 +250,16 @@ export class HttpService {
       .map(response => response.json())
       .subscribe(this.successCallBack.bind(
         {
-          success: this.success.bind(this.context)
+          success: this.success.bind(this.context),
+          setToken:this.setToken.bind(this)
         }), this.errorCallBack.bind(
           {
             error: this.error.bind(this.context),
             app: this.app,
             storage: this.storage,
             messages: this.messages,
-            getLogin: this.getLogin.bind(this)
+            getLogin: this.getLogin.bind(this),
+            setToken:this.setToken.bind(this)
           }), this.finallyCallBack.bind(
             {
               finally: this.finally
@@ -300,14 +306,16 @@ export class HttpService {
       .map(response => response.json())
       .subscribe(this.successCallBack.bind(
         {
-          success: this.success.bind(this.context)
+          success: this.success.bind(this.context),
+          setToken:this.setToken.bind(this)
         }), this.errorCallBack.bind(
           {
             error: this.error.bind(this.context),
             app: this.app,
             storage: this.storage,
             messages: this.messages,
-            getLogin: this.getLogin.bind(this)
+            getLogin: this.getLogin.bind(this),
+            setToken:this.setToken.bind(this)
           }), this.finallyCallBack.bind(
             {
               finally: this.finally
@@ -364,6 +372,11 @@ export class HttpService {
 
   public setTokenProvider(token: string): void {
     this.tokenProvider = token;
+  }
+  //funciona que actuaiza el token, de uso generico
+  public setToken(token: string): void {
+    this.setTokenProvider(token);
+    this.storage.set('token', token);
   }
 
   public getTokenProvider(): string {

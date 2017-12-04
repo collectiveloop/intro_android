@@ -9,6 +9,7 @@ import { DetailIntrosPage } from '../intros/detail_intros';
 import { MadeMessagesPage } from '../messages/made_messages';
 import { ChatMessagesPage } from '../messages/chat_messages';
 import { SessionService } from '../../lib/session.service';
+import { UtilService } from '../../lib/utils.service';
 
 @Component({
   selector: 'received-messages',
@@ -31,8 +32,8 @@ export class ReceivedMessagesPage {
   submitted:boolean;
   currentChoice:any;
 
-  constructor(public app: App, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public sanitizer: DomSanitizer, private httpService: HttpService, private navCtrl: NavController, public navParams: NavParams, private sessionService: SessionService, private alertCtrl: AlertController) {
-    console.log(this.navParams.get('introId'));
+  constructor(public app: App, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public sanitizer: DomSanitizer, private httpService: HttpService, private navCtrl: NavController, public navParams: NavParams, private sessionService: SessionService, private alertCtrl: AlertController, private utilService: UtilService) {
+    this.sessionService.cleanDestinySession();
     this.translateService.get('LOADING').subscribe(
       value => {
         this.loadingMessage = value;
@@ -67,13 +68,7 @@ export class ReceivedMessagesPage {
 
   ionViewWillEnter(): void {
     this.submitted = false;
-    let destiny = this.sessionService.getDestinySession();
     this.sessionService.cleanDestinySession();
-    if (destiny.params !== undefined && destiny.params.index !== undefined && destiny.params.index !== null && destiny.params.introId !== undefined && destiny.params.introId !== null) {
-      console.log("redireccionando");
-      this.app.getRootNav().push(ChatMessagesPage, { introId: destiny.params.introId });
-    }
-
     this.section = 'received';
     this.ready = false;
     this.page = 1;
@@ -86,7 +81,7 @@ export class ReceivedMessagesPage {
       content: this.loadingMessage
     });
     this.httpService.get({
-      url: 'intros',
+      url: 'messages',
       urlParams: [
         this.translateService.getDefaultLang(),
         'received',
@@ -111,7 +106,7 @@ export class ReceivedMessagesPage {
 
   private getReceivedIntros(): void {
     this.httpService.get({
-      url: 'intros',
+      url: 'messages',
       urlParams: [
         this.translateService.getDefaultLang(),
         'received',
@@ -149,6 +144,8 @@ export class ReceivedMessagesPage {
         this.loadImage(intros[i], 'user');
 
       intros[i]['user_name'] = intros[i]['user_user_name'];
+      intros[i]['first_name'] = intros[i]['user_first_name'];
+      intros[i]['last_name'] = intros[i]['user_last_name'];
 
       //buscamos a la otra pérsona que invitaron a la intro, que no sea el usuario de la app
       intros[i]['other_image_loaded'] = false;
@@ -164,6 +161,8 @@ export class ReceivedMessagesPage {
         }
 
         intros[i]['other_user_name'] = intros[i]['user_1_user_name'];
+        intros[i]['other_first_name'] = intros[i]['user_1_first_name'];
+        intros[i]['other_last_name'] = intros[i]['user_1_last_name'];
       } else {
         if (intros[i]['user_2_image_profile'] !== undefined && intros[i]['user_2_image_profile'] !== null && intros[i]['user_2_image_profile'] !== '') {
           if (intros[i]['user_2_image_profile'].indexOf('http') === -1)
@@ -176,11 +175,13 @@ export class ReceivedMessagesPage {
           intros[i]['other_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url(' + this.configService.getProfileImage() + ')');
         }
         intros[i]['other_user_name'] = intros[i]['user_2_user_name'];
+        intros[i]['other_first_name'] = intros[i]['user_2_first_name'];
+        intros[i]['other_last_name'] = intros[i]['user_2_last_name'];
       }
       if (intros[i]['other_image_loaded'] === false)
         this.loadImage(intros[i], 'other');
 
-      intros[i]['created_at'] = intros[i]['created_at'].replace(' ', ' / ');
+      intros[i]['created_at'] = this.utilService.getDate(intros[i]['created_at']);
 
       this.listIntros.push(intros[i]);
     }
@@ -305,7 +306,7 @@ export class ReceivedMessagesPage {
   }
 
   public goMadeMessages(): void {
-    this.navCtrl.push(MadeMessagesPage);
+    this.navCtrl.pop();
   }
 
   private callBackError(response: any): void {

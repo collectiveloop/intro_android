@@ -7,6 +7,7 @@ import { MessageService } from '../../lib/messages.service';
 import { ConfigService } from '../../lib/config.service';
 import { DetailIntrosPage } from '../intros/detail_intros';
 import { MadeMessagesPage } from '../messages/made_messages';
+import { UtilService } from '../../lib/utils.service';
 
 @Component({
   selector: 'received-intros',
@@ -22,7 +23,7 @@ export class ReceivedIntrosPage {
   route: string = '';
   ready:boolean = false;
 
-  constructor(public app: App, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public sanitizer: DomSanitizer, private httpService: HttpService, private navCtrl:NavController) {
+  constructor(public app: App, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public sanitizer: DomSanitizer, private httpService: HttpService, private navCtrl:NavController, private utilService: UtilService) {
     this.translateService.get('LOADING').subscribe(
       value => {
         this.loadingMessage = value;
@@ -107,6 +108,8 @@ export class ReceivedIntrosPage {
         this.loadImage(intros[i], 'user');
 
       intros[i]['user_name'] = intros[i]['user_user_name'];
+      intros[i]['first_name'] = intros[i]['user_first_name'];
+      intros[i]['last_name'] = intros[i]['user_last_name'];
 
       //buscamos a la otra pérsona que invitaron a la intro, que no sea el usuario de la app
       intros[i]['other_image_loaded'] = false;
@@ -125,6 +128,8 @@ export class ReceivedIntrosPage {
         }
 
         intros[i]['other_user_name'] = intros[i]['user_1_user_name'];
+        intros[i]['other_first_name'] = intros[i]['user_1_first_name'];
+        intros[i]['other_last_name'] = intros[i]['user_1_last_name'];
       }else{
         if (intros[i]['user_2_image_profile'] !== undefined && intros[i]['user_2_image_profile'] !== null && intros[i]['user_2_image_profile'] !== '') {
           if (intros[i]['user_2_image_profile'].indexOf('http') === -1)
@@ -139,11 +144,13 @@ export class ReceivedIntrosPage {
           intros[i]['other_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url(' + this.configService.getProfileImage() + ')');
         }
         intros[i]['other_user_name'] = intros[i]['user_2_user_name'];
+        intros[i]['other_first_name'] = intros[i]['user_2_first_name'];
+        intros[i]['other_last_name'] = intros[i]['user_2_last_name'];
       }
       if (intros[i]['other_image_loaded'] === false)
         this.loadImage(intros[i], 'other');
 
-      intros[i]['created_at']=intros[i]['created_at'].replace(' ',' / ');
+      intros[i]['created_at']=this.utilService.getDate(intros[i]['created_at']);
       intros[i]['style']='crop';
 
       this.listIntros.push(intros[i]);

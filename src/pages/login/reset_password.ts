@@ -33,7 +33,7 @@ export class ResetPasswordPage {
     }.bind(this));
     let data = this.sessionService.getDestinySession();
     this.sessionService.cleanDestinySession();
-    if(data.params!==undefined && data.params.token!==undefined){
+    if(data.params!==undefined && data.params.token!==undefined && data.params.token!==''){
       this.token = data.params.token;
     }else{
       this.navCtrl.push(LoginPage);

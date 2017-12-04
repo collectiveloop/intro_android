@@ -5,6 +5,7 @@ import { HttpService } from '../../lib/http.service';
 import { MessageService } from '../../lib/messages.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfigService } from '../../lib/config.service';
+import { AddContactsPage } from './add_contacts';
 
 @Component({
   selector: 'pick-contacts',
@@ -148,6 +149,10 @@ export class PickContactsPage implements OnInit {
     };
 
     this.app.getRootNav().pop();
+  }
+
+  public addContact():void{
+    this.app.getRootNav().push(AddContactsPage,{ destiny:'add_intros', intros: this.intros, target:this.target });
   }
 
   private refreshScroll(): void {

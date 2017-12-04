@@ -16,6 +16,9 @@ import { DatePicker } from '@ionic-native/date-picker';
 import { Contacts } from '@ionic-native/contacts';
 import { OneSignal } from '@ionic-native/onesignal';
 import { IonicStorageModule  } from '@ionic/storage';
+import { ElasticModule } from 'angular2-elastic';
+import { Keyboard } from '@ionic-native/keyboard';
+import { Badge } from '@ionic-native/badge';
 
 import { ConfigService }   from '../lib/config.service';
 import { MessageService } from '../lib/messages.service';
@@ -40,6 +43,7 @@ import { RegisterUserPage } from '../pages/user/user_register';
 import { ProfileUserPage } from '../pages/user/user_profile';
 
 import { ListContactsPage } from '../pages/contacts/list_contacts';
+import { GooglePlusContactsPage } from '../pages/contacts/googleplus_contacts';
 import { PickContactsPage } from '../pages/contacts/pick_contacts';
 import { ProfileContactsPage } from '../pages/contacts/profile_contact';
 import { AddContactsPage } from '../pages/contacts/add_contacts';
@@ -71,6 +75,7 @@ import { FormContactUsPage } from '../pages/contact_us/form_contact_us';
     ProfileUserPage,
     ListContactsPendingPage,
     ListContactsPage,
+    GooglePlusContactsPage,
     PickContactsPage,
     ProfileContactsPage,
     AddContactsPage,
@@ -92,10 +97,11 @@ import { FormContactUsPage } from '../pages/contact_us/form_contact_us';
   imports: [
     HttpModule,
     BrowserModule,
+    ElasticModule,
     IonicModule.forRoot(MyApp,{
       tabsPlacement: 'bottom',
       scrollAssist: true,
-      autoFocusAssist: false,
+      autoFocusAssist: true,
       scrollPadding: false,
       platforms:{
         android:{tabsPlacement: 'bottom'},
@@ -123,6 +129,7 @@ import { FormContactUsPage } from '../pages/contact_us/form_contact_us';
     ProfileUserPage,
     ListContactsPendingPage,
     ListContactsPage,
+    GooglePlusContactsPage,
     PickContactsPage,
     ProfileContactsPage,
     AddContactsPage,
@@ -162,6 +169,8 @@ import { FormContactUsPage } from '../pages/contact_us/form_contact_us';
     DatePicker,
     Contacts,
     OneSignal,
+    Keyboard,
+    Badge,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

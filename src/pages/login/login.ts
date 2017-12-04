@@ -60,10 +60,10 @@ export class LoginPage {
   private buildValidations() {
     this.externalLogin = false;
     this.loginForm = this.formBuilder.group({
-      //user: ['renshocontact@gmail.com', Validators.compose([Validators.minLength(5), Validators.required])],
-      //password: ['12345678', Validators.compose([Validators.minLength(8), Validators.maxLength(15), Validators.required])],
-      user: ['', Validators.compose( [Validators.minLength(5), Validators.required]) ] ,
-      password: ['', Validators.compose([Validators.minLength(8),Validators.maxLength(15), Validators.required]) ]
+      user: ['renshocontact@gmail.com', Validators.compose([Validators.minLength(5), Validators.required])],
+      password: ['12345678', Validators.compose([Validators.minLength(8), Validators.maxLength(15), Validators.required])]
+      //user: ['', Validators.compose( [Validators.minLength(5), Validators.required]) ] ,
+      //password: ['', Validators.compose([Validators.minLength(8),Validators.maxLength(15), Validators.required]) ]
     });
   }
 
@@ -152,40 +152,40 @@ export class LoginPage {
     this.messages.showMessage({
       content: this.loadingMessage
     });
-    this.facebook.api('/me?fields=id,name,email,first_name,picture,last_name,gender', ['public_profile', 'email'])
-      .then(data => {
-        console.log(data);
-        let info = {
-          external_id: data.id,
-          first_name: data.first_name,
-          last_name: data.last_name,
-          email: data.email,
-          platform: 'facebook',
-          push_id: this.pushId
-        };
+    this.facebook.api('/me?fields=id,name,email,first_name,picture,last_name,gender', ['public_profile', 'email','user_friends'])
+    .then(data => {
+      console.log(data);
+      let info = {
+        external_id: data.id,
+        first_name: data.first_name,
+        last_name: data.last_name,
+        email: data.email,
+        platform: 'facebook',
+        push_id: this.pushId
+      };
 
-        if(data.id!==undefined)
-          info['image_profile'] = 'https://graph.facebook.com/'+data.id+'/picture?width=300&height=300';
-        this.httpService.post({
-          url: 'user',
-          urlParams: [
-            'external',
-            this.translateService.getDefaultLang()
-          ],
-          app: this.app,
-          inputs: info,
-          success: this.callBackFacebook,
-          error: this.errorCallBack,
-          context: this,
-        });
-      })
-      .catch(error => {
-        console.error(error);
-        this.submitted = false;
-        this.externalLogin = false;
-        //cerramos sesion en facebook y cerramos sesion en la app
-        this.sessionService.closeSession();
+      if(data.id!==undefined)
+        info['image_profile'] = 'https://graph.facebook.com/'+data.id+'/picture?width=300&height=300';
+      this.httpService.post({
+        url: 'user',
+        urlParams: [
+          'external',
+          this.translateService.getDefaultLang()
+        ],
+        app: this.app,
+        inputs: info,
+        success: this.callBackFacebook,
+        error: this.errorCallBack,
+        context: this,
       });
+    })
+    .catch(error => {
+      console.error(error);
+      this.submitted = false;
+      this.externalLogin = false;
+      //cerramos sesion en facebook y cerramos sesion en la app
+      this.sessionService.closeSession();
+    });
   }
 
   private errorCallBack(response: any): void {

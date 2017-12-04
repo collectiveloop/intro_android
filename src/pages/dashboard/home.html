@@ -33,14 +33,13 @@
         {{dashboard.made.reason}}
       </ion-item>
     </ion-card-content>
-    <ion-card-content class="center" *ngIf="dashboard.made.is!==undefined && dashboard.made.is!==null && ready==true">
-      {{'NOT_INTROS_RECEIVED' | translate}}
+    <ion-card-content class="center" *ngIf="dashboard.made.is!==undefined && dashboard.made.is!==null && dashboard.made.is==false && ready==true">
+      {{'NOT_INTROS_MADE_DASHBOARD' | translate}}
     </ion-card-content>
     <ion-item class="footer">
       {{dashboard.count_made}} {{'INTROS_MADE' | translate}}
     </ion-item>
   </ion-card>
-
   <ion-card (click)="gotoReceivedIntroDetail(dashboard.made)">
     <ion-card-header>
       {{'INTRODUCTIONS_RECEIVED' | translate}}
@@ -58,7 +57,7 @@
       </ion-item>
     </ion-card-content>
     <ion-card-content class="center" *ngIf="dashboard.received.is!==undefined && dashboard.received.is!==null && dashboard.received.is==false && ready==true">
-      {{'NOT_INTROS_RECEIVED' | translate}}
+      {{'NOT_INTROS_RECEIVED_DASHBOARD' | translate}}
     </ion-card-content>
     <ion-item class="footer">
       {{dashboard.count_received}} {{'INTROS_RECEIVED' | translate}}

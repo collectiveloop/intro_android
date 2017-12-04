@@ -36,7 +36,7 @@
   font-size: 14px;
 }
 
-h3 ion-icon {
+h5 ion-icon, h4 ion-icon, h3 ion-icon {
   margin: 0px 4px 0px 0px !important;
   padding: 0px;
   vertical-align: middle;
@@ -48,6 +48,10 @@ h3 ion-icon {
 
 .no-margin-left {
   margin-left: 0px !important;
+}
+
+.padding-right{
+  padding-right:8px;
 }
 
 .center {
@@ -195,10 +199,10 @@ ion-navbar.toolbar {
 
 .toolbar .bar-button {
   border-width: 0px;
-  margin-right: 20px;
 }
 
-.toolbar .bar-button ion-icon {
+.toolbar .bar-button .add-button{
+  margin-right: 20px;
   font-size: 30px !important;
 }
 
@@ -348,6 +352,11 @@ ion-navbar.toolbar {
   display: inline-block;
 }
 
+.big-size{
+  width: 65px;
+  height: 65px;
+}
+
 .form-style .login-facebook {
   margin-top: 20px;
   width: 65px;
@@ -462,6 +471,10 @@ ion-item-sliding ion-item-options .button ion-icon, ion-item-sliding ion-item-op
 
 /*dashboard*/
 
+
+.contact h4{
+  font-size: 12px;
+}
 /*AddContact*/
 
 .contact-device {
@@ -589,10 +602,16 @@ ion-item-sliding ion-item-options .button ion-icon, ion-item-sliding ion-item-op
 
 .checkbox-item {
   border-bottom: 0px !important;
+  width: 100% !important;
+}
+
+.checkbox-item .item-inner{
+  padding:0px !important;
 }
 
 .checkbox-item .label {
   margin: 13px 0px 13px 0px;
+  white-space: normal;
 }
 
 .detail-intros .text-input[disabled], .detail-intros .checkbox-disabled, .detail-intros .item.item-checkbox-disabled ion-label {
@@ -688,6 +707,7 @@ ion-alert .delete .button-inner {
   border: 2px solid #d53c0e !important;
   background-size: 100%;
   background-position: center;
+  background-color: #ffffff;
 }
 
 .final-card .image.right {
@@ -710,7 +730,6 @@ ion-alert .delete .button-inner {
   height: 150px;
   vertical-align: middle;
   text-align: center;
-  background-color: #ffffff;
 }
 
 .final-card .image.top .image-container .spinner {
@@ -763,8 +782,13 @@ ion-alert .delete .button-inner {
   vertical-align: middle;
   font-size: inherit;
   white-space: normal;
-  width: 100%;
+  width: auto;
 }
+
+.messages h2.mini {
+  width:72%;
+}
+
 
 .messages .list-format .label {
   margin: 0px;
@@ -780,7 +804,9 @@ ion-alert .delete .button-inner {
 }
 
 /*chat messages*/
-
+.conversation .toolbar{
+  contain:inherit;
+}
 .conversation .list-format .label {
   margin: 0px !important;
 }

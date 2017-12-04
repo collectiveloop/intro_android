@@ -2,7 +2,7 @@ import { Component, ViewChild, } from '@angular/core';
 import { TabService } from './tabs.service';
 import { HomePage } from '../dashboard/home';
 import { ListContactsPage } from '../contacts/list_contacts';
-import { ReceivedMessagesPage } from '../messages/received_messages';
+import { MadeMessagesPage } from '../messages/made_messages';
 import { AddIntrosPage } from '../intros/add_intros';
 import { LoginPage } from '../login/login';
 import { MenuController, NavController, NavParams } from 'ionic-angular';
@@ -18,13 +18,13 @@ export class TabsPage {
     HomePage,
     ListContactsPage,
     AddIntrosPage,
-    ReceivedMessagesPage
+    MadeMessagesPage
   ];
   defaultTabs: any = [
     HomePage,
     ListContactsPage,
     AddIntrosPage,
-    ReceivedMessagesPage
+    MadeMessagesPage
   ];
   currentTab: any = 0;
 

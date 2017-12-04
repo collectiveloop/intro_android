@@ -4,9 +4,8 @@
       <ion-navbar></ion-navbar>
     </ion-buttons>
     <ion-title class="section">
-      {{'SIGNUP' | translate}}
+      {{'INTROS' | translate}}
     </ion-title>
-    <ion-buttons end></ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -21,7 +20,7 @@
         <ion-col offset-1 col-11 class="center">
           <ion-item>
             <ion-label stacked class="margin">{{'QUESTION_1_INTRO' | translate}} {{intros.friend_1.first_name}} {{intros.friend_1.last_name}}?</ion-label>
-            <ion-input md-input formControlName="question_friend_1" type="text" placeholder="{{'WRITE_YOUR_COMMENTS' | translate}}" (keyup.enter)="handleForm('questionFriend2')" #questionFriend1></ion-input>
+            <ion-textarea fz-elastic class="text-area" rows="1" formControlName="question_friend_1" placeholder="{{'WRITE_YOUR_COMMENTS' | translate}}" (keyup.enter)="handleForm('questionFriend2')" #questionFriend1></ion-textarea>
           </ion-item>
           <span class="error" *ngIf="!introsForm.controls.question_friend_1.valid  && (introsForm.controls.question_friend_1.dirty || submitted)">
             {{'INVALID_QUESTION_INTRO' | translate}}
@@ -32,7 +31,7 @@
         <ion-col offset-1 col-11 class="center">
           <ion-item>
             <ion-label stacked class="margin">{{'QUESTION_2_INTRO' | translate}} {{intros.friend_2.first_name}} {{intros.friend_2.last_name}}?</ion-label>
-            <ion-input md-input formControlName="question_friend_2" type="text" placeholder="{{'WRITE_YOUR_COMMENTS' | translate}}" (keyup.enter)="handleForm('reason')" #questionFriend2></ion-input>
+            <ion-textarea fz-elastic class="text-area" rows="1" formControlName="question_friend_2" placeholder="{{'WRITE_YOUR_COMMENTS' | translate}}" (keyup.enter)="handleForm('reason')" #questionFriend2></ion-textarea>
           </ion-item>
           <span class="error" *ngIf="!introsForm.controls.question_friend_2.valid  && (introsForm.controls.question_friend_2.dirty || submitted)">
             {{'INVALID_QUESTION_INTRO' | translate}}
@@ -43,7 +42,7 @@
         <ion-col offset-1 col-11 class="center">
           <ion-item>
             <ion-label stacked class="margin">{{'REASON_INTRO' | translate}}</ion-label>
-            <ion-input md-input formControlName="reason" type="text" placeholder="{{'WRITE_YOUR_COMMENTS' | translate}}" #reason></ion-input>
+            <ion-textarea fz-elastic class="text-area" rows="1" formControlName="reason" placeholder="{{'WRITE_YOUR_COMMENTS' | translate}}" #reason></ion-textarea>
           </ion-item>
           <span class="error" *ngIf="!introsForm.controls.reason.valid  && (introsForm.controls.reason.dirty || submitted)">
             {{'INVALID_REASON_INTRO' | translate}}

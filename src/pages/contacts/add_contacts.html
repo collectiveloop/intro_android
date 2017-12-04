@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons  left>
+    <ion-buttons left>
       <div class="empty-back-button center">
         <ion-icon item-left name="md-arrow-back" (click)="backAction()"></ion-icon>
       </div>
@@ -12,7 +12,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <content class="form-style profile">
+  <content class="form-style profile no-margin-top">
     <form [formGroup]="contactForm">
       <ion-row *ngIf="!ios">
         <ion-col col-12 class="center image-setting">
@@ -26,15 +26,7 @@
           <span class="error center" [innerHTML]="errorProfile"></span>
         </ion-col>
       </ion-row>
-      <!--
-      <div *ngIf="ios" class="image-setting">
-        <div *ngIf="imageProfile==null || imageProfile== ''" class="no-photo">
-          <span>{{'PROFILE_PHOTO' | translate}}</span>
-        </div>
-        <img class="photo" *ngIf="imageLoaded && imageProfile!=null && imageProfile!= ''" [src]="imageProfile">
-        <ion-spinner *ngIf="!imageLoaded" name="circles"></ion-spinner>
-      </div>
-      -->
+
       <ion-row>
         <ion-col offset-1 col-11 class="center">
           <ion-item>
@@ -63,7 +55,10 @@
         </ion-col>
       </ion-row>
       <ion-fab right bottom>
-       <button type="button" (click)="getDeviceContact()" ion-fab class="contact-device"><ion-icon name="ios-contacts"></ion-icon></button>
+       <button type="button" (click)="getDeviceContact()" ion-fab class=" big-size contact-device"><ion-icon name="ios-contacts"></ion-icon></button>
+      </ion-fab>
+      <ion-fab left bottom *ngIf="isDevice">
+       <button type="button" ion-fab (click)="getFacebookContact()" class="login-facebook"><img src="assets/logos/facebook.svg" name="logo-facebook"/></button>
       </ion-fab>
     </form>
   </content>

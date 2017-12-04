@@ -14,7 +14,7 @@
 <ion-content padding class="grace list-ios messages">
   <ion-list class="no-margin-top">
     <ion-item class="message-center center no-border" *ngIf="maxIntros==0 && ready==true">
-      {{'NOT_MESSAGES_RECEIVED' | translate}}
+      {{'NOT_INTROS_RECEIVED' | translate}}
     </ion-item>
     <ion-item class="list-format" *ngFor="let intro of listIntros" (click)="gotoDetail(intro)">
       <ion-thumbnail item-start class="image-join">
@@ -28,8 +28,7 @@
         </div>
       </ion-thumbnail>
       <h3>{{intro.created_at}}</h3>
-      <h2>{{intro.user_name}}</h2>
-      <h2>{{intro.other_user_name}}</h2>
+      <h2 class="padding-right">{{intro.first_name}} {{intro.last_name}} {{'INTRODUCED_YOU' | translate}} {{'TO' | translate}} {{intro.other_first_name}} {{intro.other_last_name}}</h2>
     </ion-item>
   </ion-list>
   <ion-infinite-scroll (ionInfinite)="moreMessages($event)">

@@ -8,6 +8,8 @@ import { ConfigService } from '../../lib/config.service';
 import { DetailIntrosPage } from '../intros/detail_intros';
 import { ReceivedMessagesPage } from '../messages/received_messages';
 import { ChatMessagesPage } from '../messages/chat_messages';
+import { SessionService } from '../../lib/session.service';
+import { UtilService } from '../../lib/utils.service';
 
 @Component({
   selector: 'made-messages',
@@ -30,7 +32,7 @@ export class MadeMessagesPage {
   submitted:boolean;
   currentChoice:any;
 
-  constructor(public app: App, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public sanitizer: DomSanitizer, private httpService: HttpService, private navCtrl:NavController, private alertCtrl: AlertController) {
+  constructor(public app: App, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public sanitizer: DomSanitizer, private httpService: HttpService, private navCtrl:NavController, private alertCtrl: AlertController, private utilService: UtilService, private sessionService: SessionService) {
     this.translateService.get('LOADING').subscribe(
       value => {
         this.loadingMessage = value;
@@ -65,6 +67,7 @@ export class MadeMessagesPage {
   }
 
   ionViewWillEnter(): void {
+    this.sessionService.cleanDestinySession();
     this.submitted = false;
     this.section = 'made';
     this.ready = false;
@@ -78,7 +81,7 @@ export class MadeMessagesPage {
       content: this.loadingMessage
     });
     this.httpService.get({
-      url: 'intros',
+      url: 'messages',
       urlParams: [
         this.translateService.getDefaultLang(),
         'made',
@@ -103,7 +106,7 @@ export class MadeMessagesPage {
 
   private getMadeIntros(): void {
     this.httpService.get({
-      url: 'intros',
+      url: 'messages',
       urlParams: [
         this.translateService.getDefaultLang(),
         'made',
@@ -151,7 +154,8 @@ export class MadeMessagesPage {
         intros[i]['friend_2_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url(' + this.configService.getProfileImage() + ')');
       }
       intros[i]['friend_2_style']='crop';
-      intros[i]['created_at']=intros[i]['created_at'].replace(' ',' / ');
+      intros[i]['created_at']=this.utilService.getDate(intros[i]['created_at']);
+
       if (intros[i]['friend_2_image_loaded'] === false)
         this.loadImage(intros[i], 'friend_2');
 
@@ -279,7 +283,7 @@ export class MadeMessagesPage {
   }
 
   public goReceivedMessages(): void {
-    this.navCtrl.pop(ReceivedMessagesPage);
+    this.navCtrl.push(ReceivedMessagesPage);
   }
 
   private callBackError(response: any): void {

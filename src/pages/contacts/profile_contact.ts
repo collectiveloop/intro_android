@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, App, Platform } from 'ionic-angular';
-
+import { DomSanitizer } from '@angular/platform-browser';
 import { ConfigService } from '../../lib/config.service';
 import { MessageService } from '../../lib/messages.service';
 
@@ -18,7 +18,7 @@ export class ProfileContactsPage {
   ready: boolean;
   errorProfile:string='';
   loadingMessage: string = '';
-  imageProfile: string ='';
+  imageProfile: any;
   firstName: string ='';
   lastName: string ='';
   userName: string ='';
@@ -30,7 +30,7 @@ export class ProfileContactsPage {
   contactId:string='';
   ios: boolean = false;
 
-  constructor(public navCtrl: NavController, public app: App, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public navParams: NavParams, private platform: Platform, public messages: MessageService) {
+  constructor(public navCtrl: NavController, public app: App, private configService: ConfigService, private httpService: HttpService, private translateService: TranslateService, public navParams: NavParams, private platform: Platform, public messages: MessageService, public sanitizer: DomSanitizer) {
     if(this.navParams.get('contactId')===undefined || this.navParams.get('contactId')===null || this.navParams.get('contactId')==='' || this.navParams.get('destiny')===undefined || this.navParams.get('destiny')===null || this.navParams.get('destiny')==='')
       this.navCtrl.pop();
 
@@ -53,7 +53,6 @@ export class ProfileContactsPage {
         this.getContact();
       }
     );
-
   }
 
   private getContact() {
@@ -103,8 +102,11 @@ export class ProfileContactsPage {
       if (data.image_profile !== undefined && data.image_profile !== null && data.image_profile !== '') {
         if (data.image_profile.indexOf('http') !== -1)
           this.imageProfile = data.image_profile;
-        else
+        else{
           this.imageProfile = this.configService.getDomainImages() + '/profiles/' + data.image_profile;
+        }
+        if(this.ios)
+          this.imageProfile = this.sanitizer.bypassSecurityTrustStyle('url('+this.imageProfile+')');
       }
       this.ready = true;
     }

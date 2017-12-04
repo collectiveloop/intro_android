@@ -37,8 +37,7 @@
           </div>
         </ion-thumbnail>
         <h3>{{intro.created_at}}</h3>
-        <h2>{{intro.friend_1_user_name}}</h2>
-        <h2>{{intro.friend_2_user_name}}</h2>
+        <h2 class="mini">{{'YOU_INTRODUCED' | translate}} {{intro.friend_1_first_name}} {{intro.friend_1_last_name}} {{'AND' | translate}} {{intro.friend_2_first_name}} {{intro.friend_2_last_name}}</h2>
         <ion-icon name="ios-information-circle-outline" (click)="gotoDetail($event,intro)"></ion-icon>
       </ion-item>
       <ion-item-options side="right">

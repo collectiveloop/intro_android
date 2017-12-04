@@ -70,7 +70,11 @@ export class HomePage implements OnInit {
         //evaluamos a donde vamos a ir, si nos han pedido redireccion desde el app.component
         let destiny = this.sessionService.getDestinySession();
         if (destiny.params !== undefined && destiny.params.section !== undefined && destiny.params.section !== null && destiny.params.index !== undefined && destiny.params.index !== null) {
-          this.navCtrl.parent.select(destiny.params.index);
+          if(ReceivedIntrosPage===destiny.params.section){
+            this.gotoReceivedIntroDetail({id:''});
+          }else{
+            this.navCtrl.parent.select(destiny.params.index);
+          }
           return;
         } else {
           this.sessionService.cleanDestinySession();

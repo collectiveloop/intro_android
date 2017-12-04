@@ -1,29 +1,13 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons left>
-      <div class="empty-back-button"></div>
+      <div class="empty-back-button center">
+        <ion-icon item-left name="md-arrow-back" (click)="backAction()"></ion-icon>
+      </div>
     </ion-buttons>
     <ion-title class="section">
       {{'CONTACTS' | translate}}
     </ion-title>
-    <ion-buttons end>
-      <button type="button" outline class="button-form shadow" ion-button (click)="addContact()">
-        <ion-icon item-left name="md-add-circle" class="add-button"></ion-icon>
-      </button>
-    </ion-buttons>
-  </ion-toolbar>
-  <ion-toolbar class="toolbar-segment">
-    <ion-segment [(ngModel)]="section">
-      <ion-segment-button value="contacts">
-        {{'CONTACTS' | translate}}
-      </ion-segment-button>
-      <ion-segment-button value="invitations" (click)="goInvitations()">
-        {{'INVITATIONS' | translate}}
-      </ion-segment-button>
-      <ion-segment-button value="search" (click)="goSearch()">
-        {{'SEARCH' | translate}}
-      </ion-segment-button>
-    </ion-segment>
   </ion-toolbar>
 </ion-header>
 <ion-content padding class="grace list-ios">

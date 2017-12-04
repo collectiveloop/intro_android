@@ -100,6 +100,7 @@
     <plugin name="cordova-android-support-gradle-release" spec="^1.1.1">
         <variable name="ANDROID_SUPPORT_VERSION" value="25.+" />
     </plugin>
+    <plugin name="cordova-plugin-badge" spec="^0.8.5" />
     <plugin name="cordova-plugin-camera" spec="^2.4.1" />
     <plugin name="cordova-plugin-console" spec="^1.0.7" />
     <plugin name="cordova-plugin-contacts" spec="^2.3.1">

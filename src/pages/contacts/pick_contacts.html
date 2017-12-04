@@ -6,6 +6,11 @@
     <ion-title class="section">
       {{'CONTACTS' | translate}}
     </ion-title>
+    <ion-buttons end>
+      <button type="button" outline class="button-form shadow" ion-button (click)="addContact()">
+        <ion-icon item-left name="md-add-circle" class="add-button"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content padding class="grace list-ios">

@@ -17,6 +17,11 @@
     text-decoration: none;
   }
 
+  .back-button-icon-md {
+    font-size: 1.9rem;
+    font-weight: normal;
+  }
+
   .logo-main {
     margin-top: 20px;
     margin-bottom: 0;
@@ -147,6 +152,10 @@
     letter-spacing: 1px;
   }
 
+  .card-md .footer-intros .label {
+    font-size: 15px;
+  }
+
   .card-content-md {
     padding: 20px !important;
   }
@@ -207,7 +216,7 @@
   }
 
   .card-content-md .image .image-container {
-    background-size: 100%;
+    background-size: cover;
     background-position: center;
   }
   /*fin dashboard*/
@@ -407,19 +416,37 @@
     border-radius: 5px 0 5px 5px;
     position: initial;
     margin-right: 10px;
+    display: -webkit-inline-box;
   }
 
   .message-form .message:after {
     border-width: 0 0 10px 10px;
     border-color: transparent transparent transparent #FFFFFF;
     top: 0;
-    right: 11px;
+    margin-left: 6px;
+    margin-top: 8px;
   }
 
   .message-form .message {
-    width: 90%;
+    width: 75%;
     max-width: inherit;
-    margin: 8px auto !important;
+    margin: 8px 22px !important;
+  }
+
+  .message-form .send {
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    position: absolute;
+    bottom: 8px;
+    right: 0px;
+    margin-right: 20px;
+    vertical-align: middle;
+    background-color: #d53c0e;
+  }
+
+  .message-form .send ion-icon{
+    color: #ffffff;
   }
 
   .message-form .message.right:after {
@@ -430,6 +457,10 @@
     width: 100%;
     margin: 0;
     padding: 8px;
+    max-height:75px;
+    overflow: auto !important;
   }
+
+
   /*fin de chat messages*/
 }

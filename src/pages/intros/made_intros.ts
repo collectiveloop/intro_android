@@ -6,6 +6,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MessageService } from '../../lib/messages.service';
 import { ConfigService } from '../../lib/config.service';
 import { DetailIntrosPage } from '../intros/detail_intros';
+import { UtilService } from '../../lib/utils.service';
 
 @Component({
   selector: 'made-intros.html',
@@ -21,7 +22,7 @@ export class MadeIntrosPage {
   ready:boolean = false;
   route: string = '';
 
-  constructor(public app: App, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public sanitizer: DomSanitizer, private httpService: HttpService, private navCtrl:NavController) {
+  constructor(public app: App, private translateService: TranslateService, private configService: ConfigService, public messages: MessageService, public sanitizer: DomSanitizer, private httpService: HttpService, private navCtrl:NavController, private utilService: UtilService) {
     this.translateService.get('LOADING').subscribe(
       value => {
         this.loadingMessage = value;
@@ -116,7 +117,7 @@ export class MadeIntrosPage {
         intros[i]['friend_2_image_profile'] = this.sanitizer.bypassSecurityTrustStyle('url(' + this.configService.getProfileImage() + ')');
       }
       intros[i]['friend_2_style']='crop';
-      intros[i]['created_at']=intros[i]['created_at'].replace(' ',' / ');
+      intros[i]['created_at']=this.utilService.getDate(intros[i]['created_at']);
       if (intros[i]['friend_2_image_loaded'] === false)
         this.loadImage(intros[i], 'friend_2');
 

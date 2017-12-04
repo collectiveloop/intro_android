@@ -45,8 +45,9 @@
     <form [formGroup]="roomForm">
       <div class="message-form">
         <div class="{{classInput}}">
-          <ion-input md-input formControlName="message" type="text" placeholder="{{'WRITE_MESSAGE' | translate}}" [disabled]="requestSent" (keyup.enter)="sendMessage()" #message></ion-input>
+          <ion-textarea fz-elastic class="text-area" rows="1" formControlName="message" placeholder="{{'WRITE_MESSAGE' | translate}}" [disabled]="requestSent" (keyup.enter)="sendMessage()" #message></ion-textarea>
         </div>
+        <button type="button" class="send" (click)="sendMessage()"><ion-icon name="md-send"></ion-icon></button>
       </div>
     </form>
   </ion-toolbar>

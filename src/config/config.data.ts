@@ -1,9 +1,11 @@
 export const CONFIG = {
     ROUTES:{
-      //DOMAIN_API:'http://192.168.1.135/intro_app/api/public',
-      //FOLDER_IMAGES:'http://192.168.1.135/intro_app/api/public/images',
-      DOMAIN_API:'http://www.intro.exchange/api/public/',
-      FOLDER_IMAGES:'http://www.intro.exchange/api/public/images'
+      DOMAIN:'http://192.168.1.135/intro_app',
+      //DOMAIN:'http://www.intro.exchange',
+      DOMAIN_API:'/api/public',
+      FOLDER_IMAGES:'/api/public/images',
+      POLICY:'/policy',
+      TERMS:'/terms'
     },
     PROFILE_IMAGE:{
       DEFAULT_ICON:'assets/icon/person.svg',
@@ -21,11 +23,12 @@ export const CONFIG = {
     },
     ICONS:{},
     GENERAL:{
-      QUANTITY:5,
+      QUANTITY:6,
       CHAT_INTERVAL:10000,
       LANGUAGE:'en',
       FACEBOOK_ID:'1961950780725321',
-      GOOGLE_APIKEY:'AIzaSyBz_QsRxbAr9SOf0djzPQSaK7HAfHs9o0I',
+      GOOGLE_APIKEY:'AIzaSyCuEJyHaIV2KsntTsL_cJ2bJNxucZoY6xU',
+      GOOGLE_WEB_CLIENT_ID:'com.googleusercontent.apps.beqb80o5867005il5jgpp64h1cigp1cv-243179874931',
       CURRENT_PLAY_LIST: 'PLpOqH6AE0tNiPHU2BCm_ei3C2BmjN9IGt',
       CHANNEL: 'UCsfWVdGe5Gggv9U2YqXo5Dw',
       MAX_LETTERS:{

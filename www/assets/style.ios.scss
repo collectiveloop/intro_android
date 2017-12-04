@@ -10,6 +10,10 @@
     height: 64px !important;
   }
 
+  ion-header{
+    position:static !important;
+  }
+
   .toolbar {
     background-color: #ffffff;
     padding: 0;
@@ -17,6 +21,10 @@
 
   .message-center {
     padding-right: 16px;
+  }
+
+  .toolbar .back-button-text{
+    font-size: 12px !important;
   }
 
   .toolbar .back-button-text,
@@ -61,6 +69,10 @@
   }
 
   .form-style .item.item-block {}
+
+  .form-style .item.item-block.center {
+    width: 90%;
+  }
 
   .label {
     margin: 0;
@@ -154,7 +166,7 @@
   }
 
   .image-setting .image-container {
-    background-size: 100%;
+    background-size: cover;
     background-position: center;
   }
   /*dashboard*/
@@ -192,6 +204,10 @@
     letter-spacing: 1px;
     margin: 0;
     display: inline-block;
+  }
+
+  .card-ios .footer-intros .label {
+    font-size: 16px;
   }
 
   .card-content-ios {
@@ -251,7 +267,7 @@
   }
 
   .card-content-ios .image .image-container {
-    background-size: 100%;
+    background-size: cover;
     background-position: center;
   }
 
@@ -441,23 +457,44 @@
   }
 
   .message-form .input-container {
-    width: 90%;
+    width: 80%;
     padding: 8px 0;
-    margin: auto;
+    margin: 0px 0px 0px 16px;
   }
 
+  .message-form .send {
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    bottom: 8px;
+    right: 16px;
+    margin-right: 0px;
+    vertical-align: middle;
+    background-color: #FFFFFF;
+    font-size: 10px !important;
+  }
+
+
+  .message-form .send ion-icon{
+    font-size: 18px !important;
+  }
   .message-form .input-container .text-input {
     background-color: #FFFFFF;
     padding: 8px;
     width: 100%;
+    max-height:75px;
+    overflow: auto !important;
     margin: 0;
     border-radius: 5px;
   }
+
+
   /*fin de chat messages*/
   /*Fin de contacts*/
   @media (max-height: 667px) {
     .searchbar-list .scroll-content {
-      margin-bottom: 95px !important;
+      margin-bottom: 51px !important;
     }
 
     .form-intros .label-ios.margin {
@@ -486,11 +523,20 @@
     }
   }
   @media (max-width: 320px) {
+
     .header .toolbar {
       height: 44px !important;
     }
+    .header .toolbar .toolbar-title {
+        font-size: 1.7rem!important;
+    }
+
+    .message-form .send {
+
+      margin-right: 8px;
+    }
   }
-  @media (min-width: 320px) and (max-width: 374px) {
+  @media (min-width: 321px) and (max-width: 374px) {
     .header .toolbar .toolbar-title {
       font-size: 20px !important;
     }

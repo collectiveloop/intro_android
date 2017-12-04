@@ -18,7 +18,9 @@ export class PushNotificationService {
       let finalParams:any={
         include_player_ids:[],
         contents:params.contents,
-        data:params.data
+        data:params.data,
+        ios_badgeType:'Increase',
+        ios_badgeCount:1
       };
       let idsLength = params.include_player_ids.length;
       for(let i=0;i < idsLength;i++){

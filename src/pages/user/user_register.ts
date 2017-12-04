@@ -90,7 +90,7 @@ export class RegisterUserPage {
     this.messages.showMessage({
        content:this.loadingMessage
     });
-    let paramsPost = {
+    let params = {
         url:'user',
         urlParams:[
           this.translateService.getDefaultLang()
@@ -103,7 +103,7 @@ export class RegisterUserPage {
     };
 
     //number_phones : this.registerForm.value.number_phones,
-    this.httpService.post(paramsPost);
+    this.httpService.post(params);
   }
 
   private callBackRegister(response:any):void{
